@@ -20,8 +20,8 @@ body {
   font-family: var(--font-body);
   font-size: 16px;
   line-height: 1.65;
-  color: var(--dark);
-  background: var(--white);
+  color: var(--text-body);
+  background: var(--dark);
   -webkit-font-smoothing: antialiased;
   overflow-x: clip;
 }
@@ -69,6 +69,7 @@ h5 {
   letter-spacing: -0.02em;
   font-weight: 700;
   text-wrap: balance;
+  color: var(--white);
 }
 
 h1 {
@@ -143,6 +144,8 @@ p {
 
 .section {
   padding-block: clamp(64px, 9vw, 110px);
+  /* Background B — black with subtle blue atmospheric depth */
+  background: radial-gradient(circle at 18% 12%, rgba(20, 70, 100, 0.14), transparent 42%), var(--dark);
 }
 
 .section--tight {
@@ -150,17 +153,22 @@ p {
 }
 
 .section--dark {
-  background: var(--dark);
+  /* Background C — black with a subtle Thrive-green glow */
+  background: radial-gradient(circle at 82% 26%, rgba(67, 183, 73, 0.12), transparent 38%), var(--dark);
   color: var(--white);
 }
 
 .section--dark-2 {
-  background: var(--dark-2);
+  /* Background D — deep blue-black atmosphere */
+  background: radial-gradient(circle at 20% 18%, rgba(20, 70, 100, 0.2), transparent 46%), var(--blue-4);
   color: var(--white);
 }
 
 .section--light {
-  background: var(--light-background);
+  /* Dark-blue rhythm section (never plain white) */
+  background: radial-gradient(circle at 22% 16%, rgba(20, 70, 100, 0.22), transparent 46%),
+    radial-gradient(circle at 84% 80%, rgba(67, 183, 73, 0.07), transparent 40%), var(--blue-2);
+  color: var(--white);
 }
 
 .grid {
@@ -214,7 +222,7 @@ p {
   z-index: 200;
   padding: 10px 18px;
   background: var(--primary-green);
-  color: var(--white);
+  color: var(--dark);
   border-radius: var(--r-sm);
   font-weight: 700;
   transition: top var(--t-fast);

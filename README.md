@@ -82,6 +82,17 @@ npm run typecheck  # strict TS check
 3. Set DB env vars on the host when the MySQL phase begins; implement the
    marked TODOs in `public/api/lib.php`.
 
+## Dark theme (visual refinement pass)
+
+The whole site runs on one continuous dark environment — BLACK + Thrive GREEN + subtle BLUE atmosphere:
+
+- **Environment:** `--dark #0A0B0B` body; sections layer CSS-only radial gradients (blue depth `#07111A–#0B1D2A`, green glow) — no large white backgrounds anywhere, no alternating black/white rhythm.
+- **Surfaces:** cards `#111719` / `#111A1D` / `#0E1518` with `rgba(255,255,255,.10)` borders, hover lift + green accents.
+- **Content:** white headings; body `rgba(255,255,255,.72)`; muted `.62`; faint `.50` — all ≥ 4.5:1 on dark (≈10:1 / 7.3:1 / 5:1).
+- **Brand:** `#43B749` green is accent-only (CTAs, active states, numbers, icons, borders); `--green-deep #86db8c` is the bright green text token for on-dark labels (≈11.8:1). FutureX uses neon `#36FF00` + grid/glow, never replacing primary green.
+- **Override layer:** `src/styles/dark-theme.css` is imported last in `main.tsx` and recolors buttons, chips, selects, inputs, modals (dark glass + blur), pagination, and text on top of untouched component structure — no architecture/routing/data changes.
+- Intentionally white: event date chips, outline-button hover, dark text on green badges/flags.
+
 ## Final QA & audit pass
 
 - **Contrast system:** brand green `#43B749` carries near-black text (8:1) on
