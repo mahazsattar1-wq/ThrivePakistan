@@ -316,6 +316,86 @@
   }
 }
 
+@media (max-width: 520px) {
+  .fx__facts {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Responsive 4-column bands (stats / benefit grids) */
+.band--4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1024px) {
+  .band--4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 620px) {
+  .band--4 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- What-we-do pillar strip ---------- */
+.pillar-strip {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: clamp(22px, 3vw, 34px) 0;
+}
+
+.pillar-strip__list {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: clamp(14px, 2vw, 24px);
+}
+
+.pillar-strip__list li {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.pillar-strip__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: var(--r-md);
+  background: var(--green-soft);
+  color: var(--green-deep);
+}
+
+.pillar-strip__list strong {
+  display: block;
+  font-size: 0.9rem;
+  line-height: 1.3;
+}
+
+.pillar-strip__list em {
+  font-style: normal;
+  font-size: 0.76rem;
+  color: var(--muted-text);
+  line-height: 1.45;
+  display: block;
+}
+
+@media (max-width: 1024px) {
+  .pillar-strip__list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 620px) {
+  .pillar-strip__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 /* ---------- Home misc ---------- */
 .home-programs {
   background: var(--white);
@@ -432,13 +512,13 @@
   height: 12px;
   border-radius: 50%;
   background: var(--white);
-  border: 3px solid var(--primary-green);
+  border: 3px solid var(--green-dark);
 }
 
 .agenda-list time {
   font-family: var(--font-display);
   font-weight: 700;
-  color: var(--green-dark);
+  color: var(--green-deep);
   font-variant-numeric: tabular-nums;
 }
 
@@ -469,9 +549,15 @@
 }
 
 .highlights-list svg {
-  color: var(--primary-green);
+  color: var(--green-deep);
   flex-shrink: 0;
   margin-top: 2px;
+}
+
+/* On light sections the list cards need a surface of their own. */
+.section--light .highlights-list li {
+  background: var(--white);
+  border: 1px solid var(--border);
 }
 
 .sponsors-row {
@@ -701,7 +787,7 @@
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--green-dark);
+  color: var(--green-deep);
 }
 
 .partner-tile__tier {
@@ -779,6 +865,12 @@
   color: var(--muted-text);
 }
 
+.section--light .benefit-card__icon,
+.benefit-card--light .benefit-card__icon {
+  background: var(--green-soft);
+  color: var(--green-deep);
+}
+
 .tiers-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -824,7 +916,7 @@
   padding: 5px 14px;
   border-radius: var(--r-pill);
   background: var(--primary-green);
-  color: var(--white);
+  color: var(--dark);
   font-size: 0.68rem;
   font-weight: 800;
   letter-spacing: 0.1em;
@@ -856,6 +948,37 @@
   color: var(--primary-green);
   flex-shrink: 0;
   margin-top: 3px;
+}
+
+/* ---------- Impact quote card ---------- */
+.impact-quote {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 18px 20px;
+  border-radius: var(--r-lg);
+  background: var(--green-soft);
+  border: 1px solid rgba(67, 183, 73, 0.35);
+}
+
+.impact-quote svg {
+  color: var(--green-deep);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.impact-quote strong {
+  display: block;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--green-deep);
+  margin-bottom: 4px;
+}
+
+.impact-quote p {
+  font-size: 0.92rem;
+  color: var(--green-deep);
 }
 
 /* ---------- Timeline ---------- */
@@ -891,7 +1014,7 @@
 .timeline__year {
   font-family: var(--font-display);
   font-weight: 700;
-  color: var(--green-dark);
+  color: var(--green-deep);
   font-size: 1.06rem;
 }
 
@@ -1157,7 +1280,7 @@
 }
 
 .info-card a:hover {
-  color: var(--green-dark);
+  color: var(--green-deep);
   text-decoration: underline;
 }
 
@@ -1400,7 +1523,7 @@
 }
 
 .popular-list a:hover {
-  color: var(--green-dark);
+  color: var(--green-deep);
 }
 
 .popular-list span {
@@ -1461,7 +1584,7 @@
   height: 52px;
   border-radius: 50%;
   background: var(--primary-green);
-  color: var(--white);
+  color: var(--dark);
   display: grid;
   place-items: center;
   font-weight: 800;
@@ -1735,7 +1858,7 @@
 }
 
 .role-chips svg {
-  color: var(--primary-green);
+  color: var(--green-deep);
 }
 
 /* ---------- Two-column form sections ---------- */

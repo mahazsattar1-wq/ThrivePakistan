@@ -15,6 +15,18 @@ export default function SpeakerDetail() {
   useSeo({
     title: speaker ? speaker.name : 'Speaker',
     description: speaker?.bio,
+    jsonLd: speaker
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'Person',
+          name: speaker.name,
+          jobTitle: speaker.title,
+          worksFor: { '@type': 'Organization', name: speaker.organization },
+          knowsAbout: speaker.topics,
+          description: speaker.bio,
+          additionalNote: 'Fictional mock profile for frontend prototype.',
+        }
+      : null,
   });
 
   useEffect(() => {

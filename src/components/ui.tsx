@@ -140,7 +140,7 @@ export function Button({
 
 /* ================= Badge / chips ================= */
 
-export function Badge({ children, tone = 'green', className = '' }: { children: ReactNode; tone?: 'green' | 'dark' | 'light' | 'outline' | 'neon'; className?: string }) {
+export function Badge({ children, tone = 'green', className = '' }: { children: ReactNode; tone?: 'green' | 'light' | 'outline' | 'neon'; className?: string }) {
   return <span className={`badge badge--${tone} ${className}`.trim()}>{children}</span>;
 }
 

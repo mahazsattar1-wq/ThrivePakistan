@@ -34,6 +34,18 @@ export default function Gallery() {
     setOpenIndex((openIndex + dir + items.length) % items.length);
   };
 
+  /* Lightbox keyboard navigation: arrows + escape handled by Modal. */
+  useEffect(() => {
+    if (openIndex === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') step(1);
+      if (e.key === 'ArrowLeft') step(-1);
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [openIndex, items]);
+
   return (
     <>
       <PageHero

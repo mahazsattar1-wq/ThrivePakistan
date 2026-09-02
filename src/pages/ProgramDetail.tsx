@@ -74,12 +74,28 @@ export default function ProgramDetail() {
           </Reveal>
           <Reveal delay={100}>
             <div className="event-block">
-              <h3>What participants get</h3>
+              <h3>Objectives — what participants get</h3>
               <ul className="highlights-list">
                 {program.outcomes.map((o) => (
                   <li key={o}><Icon name="check" size={17} /> {o}</li>
                 ))}
               </ul>
+
+              <h3 style={{ marginTop: 26 }}>Who it's for</h3>
+              <ul className="role-chips">
+                {program.audience.map((a) => (
+                  <li key={a}><Icon name="users" size={15} /> {a}</li>
+                ))}
+              </ul>
+
+              <div className="impact-quote" style={{ marginTop: 26 }}>
+                <Icon name="trend" size={20} />
+                <div>
+                  <strong>Impact (demo figure)</strong>
+                  <p>{program.impact}</p>
+                </div>
+              </div>
+
               <div style={{ marginTop: 18, display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                 <Button to="/events" icon="arrow-right">See related events</Button>
                 <Button to="/contact" variant="outline">Bring this program to us</Button>

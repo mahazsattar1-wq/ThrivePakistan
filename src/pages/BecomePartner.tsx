@@ -69,6 +69,65 @@ export default function BecomePartner() {
         ]}
       />
 
+      {/* Audience & reach */}
+      <section className="section section--tight">
+        <div className="container">
+          <Reveal>
+            <SectionHeader
+              eyebrow="Audience & reach"
+              title="Who your partnership actually reaches."
+              lead="Demo figures from the prototype dataset — the production dashboard will publish verified reach metrics per season."
+            />
+          </Reveal>
+          <div className="stats-band band--4">
+            {[
+              { v: '15,000+', l: 'Participants per year', d: 'Students, professionals, founders' },
+              { v: '25+', l: 'Universities engaged', d: 'Via tour stops & society grants' },
+              { v: '10+', l: 'Cities activated', d: 'Including secondary-city chapters' },
+              { v: '90K+', l: 'Digital reads & views', d: 'Newsroom, video channel, newsletter' },
+            ].map((f, i) => (
+              <Reveal key={f.l} delay={i * 70}>
+                <div className="stat">
+                  <span className="stat__value">{f.v}</span>
+                  <span className="stat__label">{f.l}</span>
+                  <span className="stat__desc">{f.d}</span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Partnership opportunities */}
+      <section className="section section--light">
+        <div className="container">
+          <Reveal>
+            <SectionHeader
+              eyebrow="Partnership opportunities"
+              title="Six ways to put your organization in the room."
+            />
+          </Reveal>
+          <div className="benefits-grid">
+            {[
+              { icon: 'trophy' as IconName, t: 'Flagship Sponsorship', d: 'Title or category ownership of FutureX and seasonal flagships — stage, screen and story.' },
+              { icon: 'chip' as IconName, t: 'Track Ownership', d: 'Power a full track (AI, climate, fintech, design) with curation input and branded sessions.' },
+              { icon: 'campus' as IconName, t: 'Campus Tour Partnership', d: 'Your brand on the Campus Innovation Tour: demo floors, hack sprints and career desks.' },
+              { icon: 'briefcase' as IconName, t: 'Talent & Internship Desk', d: 'Interview on-site, hire from hackathons and portfolio clinics with pre-vetted candidates.' },
+              { icon: 'mic' as IconName, t: 'Co-branded Content Series', d: 'Filmed sessions, playbooks and newsletter series that keep your name in between events.' },
+              { icon: 'heart' as IconName, t: 'Community Chapter Support', d: 'Back city chapters and volunteer programs for deep, local, measurable CSR presence.' },
+            ].map((o, i) => (
+              <Reveal key={o.t} delay={(i % 3) * 70}>
+                <div className="benefit-card benefit-card--light">
+                  <span className="benefit-card__icon"><Icon name={o.icon} size={20} /></span>
+                  <h3>{o.t}</h3>
+                  <p style={{ color: 'var(--muted-text)' }}>{o.d}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Benefits */}
       <section className="section section--dark">
         <div className="container">
@@ -116,6 +175,27 @@ export default function BecomePartner() {
                       <li key={b}><Icon name="check" size={16} /> {b}</li>
                     ))}
                   </ul>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Thought leadership / community impact / strategic collaboration */}
+      <section className="section">
+        <div className="container">
+          <div className="grid grid--3">
+            {[
+              { icon: 'bulb' as IconName, t: 'Thought Leadership', d: 'Co-publish research, playbooks and opinion platforms with our newsroom — your experts positioned as practitioners, not advertisers.' },
+              { icon: 'leaf' as IconName, t: 'Community Impact', d: 'Volunteer programs, women\'s circles and campus grants generate measurable impact stories ready for CSR and sustainability reporting.' },
+              { icon: 'handshake' as IconName, t: 'Strategic Collaboration', d: 'Ecosystem partners take an advisory seat in program design — shaping formats, cities and outcomes before the season is announced.' },
+            ].map((c, i) => (
+              <Reveal key={c.t} delay={i * 90}>
+                <div className="mission-card mission-card--dark" style={{ height: '100%' }}>
+                  <span className="benefit-card__icon"><Icon name={c.icon} size={20} /></span>
+                  <h3>{c.t}</h3>
+                  <p style={{ color: 'var(--muted-on-dark)', fontSize: '0.92rem' }}>{c.d}</p>
                 </div>
               </Reveal>
             ))}

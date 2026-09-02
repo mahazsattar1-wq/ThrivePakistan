@@ -82,6 +82,31 @@ npm run typecheck  # strict TS check
 3. Set DB env vars on the host when the MySQL phase begins; implement the
    marked TODOs in `public/api/lib.php`.
 
+## Final QA & audit pass
+
+- **Contrast system:** brand green `#43B749` carries near-black text (8:1) on
+  buttons/badges/pills; small green text on light surfaces uses
+  `--green-deep` (8:1); dark surfaces use `--primary-green` (7.6:1). Focus
+  outlines switch per surface to always meet WCAG 3:1 for non-text contrast.
+- **Structured data:** static Organization JSON-LD in `index.html`; per-route
+  `Event`, `BlogPosting` and `Person` JSON-LD via `useSeo({ jsonLd })`, each
+  carrying an explicit mock/demo note.
+- **Accessibility:** modal focus restore on close, lightbox arrow-key
+  navigation, ESC handling, scroll locking, skip link, reduced-motion support.
+- **Responsive:** 4-column bands use the responsive `.band--4` modifier
+  (4 → 2 → 1) instead of inline grids; audited down to 320px.
+- **Homepage storytelling:** hero + six-pillar "what we do" strip + partner
+  marquee communicate the organization's scope in the first scroll.
+- **Enriched pages:** program details (objectives, audience, impact),
+  partnership proposition (reach stats, six opportunity models, thought
+  leadership / community impact / strategic collaboration), speaker
+  invitation (who we invite, what we ask), volunteer responsibilities.
+- **Honesty guards:** team/impact/program mock content is labelled as demo
+  data in-page and in structured data.
+- **PHP hardening:** `X-Content-Type-Options`, `X-Frame-Options`,
+  `Referrer-Policy`, method guards, 422 validation responses; no credentials
+  anywhere (env-var driven when MySQL arrives).
+
 ## QA notes
 
 - Every card navigates; filters/search/pagination/lightbox/countdown/counters

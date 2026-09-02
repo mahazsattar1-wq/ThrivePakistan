@@ -19,11 +19,14 @@ export interface SeoOptions {
   description?: string;
   image?: string;
   type?: string;
+  /** JSON-LD structured data for this route (Event, Article, Person…). */
+  jsonLd?: Record<string, unknown> | null;
 }
 
-/** Per-page SEO: title, description, Open Graph, Twitter card and canonical. */
-export function useSeo({ title, description, image, type }: SeoOptions = {}): void {
+/** Per-page SEO: title, description, Open Graph, Twitter card, canonical, JSON-LD. */
+export function useSeo({ title, description, image, type, jsonLd }: SeoOptions = {}): void {
   const { pathname } = useLocation();
+  const ld = jsonLd ? JSON.stringify(jsonLd) : null;
   useEffect(() => {
     const full = title ? `${title} | Thrive Pakistan` : 'Thrive Pakistan — Connect. Learn. Lead. Thrive.';
     const desc = description ?? DEFAULT_DESCRIPTION;
@@ -45,7 +48,21 @@ export function useSeo({ title, description, image, type }: SeoOptions = {}): vo
       document.head.appendChild(link);
     }
     link.href = window.location.origin + pathname;
-  }, [title, description, image, type, pathname]);
+
+    const LD_ID = 'tp-jsonld';
+    let script = document.getElementById(LD_ID) as HTMLScriptElement | null;
+    if (ld) {
+      if (!script) {
+        script = document.createElement('script');
+        script.id = LD_ID;
+        script.type = 'application/ld+json';
+        document.head.appendChild(script);
+      }
+      script.textContent = ld;
+    } else if (script) {
+      script.remove();
+    }
+  }, [title, description, image, type, ld, pathname]);
 }
 
 /** Observe when an element enters the viewport (once). */

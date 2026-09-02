@@ -81,6 +81,30 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ============ WHAT WE DO PILLARS ============ */}
+      <section className="pillar-strip" aria-label="What Thrive Pakistan does">
+        <div className="container">
+          <ul className="pillar-strip__list">
+            {[
+              { icon: 'calendar' as const, label: 'National Events', text: 'Conferences, summits & meetups' },
+              { icon: 'compass' as const, label: 'Leadership Development', text: 'Summits, roundtables & playbooks' },
+              { icon: 'spark' as const, label: 'Youth Empowerment', text: 'Skills labs & career clinics' },
+              { icon: 'campus' as const, label: 'University Engagement', text: 'Campus tour & society grants' },
+              { icon: 'chip' as const, label: 'Technology & Innovation', text: 'FutureX, hackathons & expos' },
+              { icon: 'handshake' as const, label: 'Partnerships', text: 'Corporate & community alliances' },
+            ].map((p, i) => (
+              <Reveal as="li" key={p.label} delay={i * 60}>
+                <span className="pillar-strip__icon"><Icon name={p.icon} size={19} /></span>
+                <span>
+                  <strong>{p.label}</strong>
+                  <em>{p.text}</em>
+                </span>
+              </Reveal>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       {/* ============ PARTNER MARQUEE ============ */}
       <div className="partners-strip">
         <p className="partners-strip__label">Trusted by partners across the ecosystem</p>

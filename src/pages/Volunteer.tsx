@@ -87,7 +87,7 @@ export default function Volunteer() {
           <Reveal>
             <SectionHeader eyebrow="Why volunteer" title="What you actually get." />
           </Reveal>
-          <div className="benefits-grid" style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
+          <div className="benefits-grid band--4">
             {VOLUNTEER_BENEFITS.map((b, i) => (
               <Reveal key={b.title} delay={i * 70}>
                 <div className="benefit-card benefit-card--light">
@@ -143,6 +143,20 @@ export default function Volunteer() {
               Tell us your city, skills and the area you want to try first. The community lead onboards new
               volunteers in weekly cohorts — you'll shadow one event before owning a role.
             </p>
+            <div className="event-block">
+              <h4 style={{ marginBottom: 10 }}>What we ask of volunteers</h4>
+              <ul className="highlights-list">
+                <li><Icon name="check" size={15} /> Show up for your assigned shifts — the desk never runs short</li>
+                <li><Icon name="check" size={15} /> One onboarding and one debrief per event cycle</li>
+                <li><Icon name="check" size={15} /> Represent the community code of conduct on and off site</li>
+                <li><Icon name="check" size={15} /> Flag conflicts early so cohorts can rebalance</li>
+              </ul>
+            </div>
+            <ul className="role-chips">
+              <li><Icon name="users" size={15} /> 300+ volunteers</li>
+              <li><Icon name="pin" size={15} /> 10 city chapters</li>
+              <li><Icon name="clock" size={15} /> Weekly onboarding cohorts</li>
+            </ul>
             <figure className="testimonial-card" style={{ marginTop: 8 }}>
               <Icon name="quote" size={20} className="testimonial-card__quote" />
               <blockquote>{TESTIMONIALS[5].quote}</blockquote>

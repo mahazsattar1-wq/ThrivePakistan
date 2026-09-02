@@ -13,6 +13,8 @@ export const PROGRAMS: Program[] = [
     details:
       'From FutureX to ThriveHack, this portfolio creates the rooms where engineers, researchers and founders meet: expo floors, pitch stages, research-to-product tracks and overnight build sprints with senior mentor benches.',
     outcomes: ['Flagship tech convenings', 'Hackathons with mentor benches', 'Product showcase floors'],
+    audience: ['Engineers & researchers', 'Startup teams', 'Students & societies', 'Investors & corporates'],
+    impact: 'Mock impact: 3 startups incorporated and 14 prototypes shipped from a single hackathon season.',
     image: img('eventsA', 0),
     eventSlugs: ['futurex-2026', 'thrivehack-2025'],
   },
@@ -26,6 +28,8 @@ export const PROGRAMS: Program[] = [
     details:
       'The Leadership Summit, hosted roundtables and the open Leadership Playbook give young managers access to the decision-making experience of executives — structured, candid and repeatable.',
     outcomes: ['Annual Leadership Summit', 'Hosted executive roundtables', 'Open leadership playbook'],
+    audience: ['Young managers', 'Society presidents', 'Founders & team leads', 'Public-sector officers'],
+    impact: 'Mock impact: leadership playbook downloaded 9,000+ times by practitioners in 10 cities.',
     image: img('eventsA', 1),
     eventSlugs: ['thrive-leadership-summit-2026', 'thrive-leadership-summit-2025'],
   },
@@ -39,6 +43,8 @@ export const PROGRAMS: Program[] = [
     details:
       'Skills workshops, career clinics and mentor circles target the gap between campus and career: communication, applied AI tools, portfolio craft and first-job readiness.',
     outcomes: ['Skills workshops', 'Career & portfolio clinics', 'Mentor circles'],
+    audience: ['Students & fresh graduates', 'Career switchers', 'Out-of-school youth programs', 'Volunteers seeking skills'],
+    impact: 'Mock impact: 400 portfolio reviews completed in one workshop season.',
     image: img('eventsA', 4),
     eventSlugs: ['youth-skills-workshop-2026'],
   },
@@ -52,6 +58,8 @@ export const PROGRAMS: Program[] = [
     details:
       'Women Thrive combines summit-stage visibility with real mechanisms: pre-matched mentorship circles, grant and capital access sessions and a founders\' marketplace with buying partners.',
     outcomes: ['Women Thrive summit', 'Mentorship circles', 'Capital access sessions'],
+    audience: ['Women founders & professionals', 'Students & researchers', 'Allies & mentors', 'Capital providers'],
+    impact: 'Mock impact: 700+ mentorship circle seats filled across six cities.',
     image: img('eventsA', 2),
     eventSlugs: ['women-thrive-2026', 'women-thrive-2025'],
   },
@@ -65,6 +73,8 @@ export const PROGRAMS: Program[] = [
     details:
       'The Campus Innovation Tour visits eight cities a season with demo floors, hack sprints, society partnerships and on-site internship desks, plus year-round society support grants.',
     outcomes: ['Campus Innovation Tour', 'Society partnership grants', 'On-campus internship desks'],
+    audience: ['Student societies', 'Faculty & deans', 'Campus career offices', 'City sponsors'],
+    impact: 'Mock impact: 120 internship placements made through on-campus desks in one spring.',
     image: img('eventsA', 3),
     eventSlugs: ['campus-innovation-tour-fall-2026', 'campus-innovation-tour-spring-2026'],
   },
@@ -78,6 +88,8 @@ export const PROGRAMS: Program[] = [
     details:
       'Meetups, investor rooms and founder firesides create a continuous pipeline: pitch practice today, investor introductions next quarter, and a peer network that survives the hard months.',
     outcomes: ['Founder meetups', 'Investor rooms', 'Pitch practice labs'],
+    audience: ['Pre-seed founders', 'Operators joining startups', 'Investors & angels', 'Family businesses digitizing'],
+    impact: 'Mock impact: 5 meetup pitches progressed to investor second meetings.',
     image: img('mediaA', 2),
     eventSlugs: ['tech-entrepreneurship-meetup-2026'],
   },
@@ -91,6 +103,8 @@ export const PROGRAMS: Program[] = [
     details:
       'Every training format ends with reviewed work: lab outputs, portfolio critiques or certified assessments — so participants leave with evidence, not just attendance.',
     outcomes: ['Practitioner-led labs', 'Certified assessments', 'Portfolio reviews'],
+    audience: ['Professionals upskilling', 'Societies hosting labs', 'Corporate L&D teams', 'Trainers & coaches'],
+    impact: 'Mock impact: 92% of lab participants left with reviewed, certified output.',
     image: img('eventsB', 3),
     eventSlugs: ['youth-skills-workshop-2026'],
   },
@@ -104,6 +118,8 @@ export const PROGRAMS: Program[] = [
     details:
       'From northern-valley leadership expeditions to institutional study visits, tours pair challenging environments with facilitated reflection and team missions.',
     outcomes: ['Leadership expeditions', 'Institutional study visits', 'Field team missions'],
+    audience: ['Emerging leaders', 'University societies', 'Corporate teams', 'Community organizers'],
+    impact: 'Mock impact: 6 expeditions run with 100% team-mission completion rate.',
     image: img('eventsB', 2),
     eventSlugs: [],
   },

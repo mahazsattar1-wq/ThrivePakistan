@@ -66,7 +66,7 @@ export default function BecomeSpeaker() {
       />
 
       <section className="section section--tight">
-        <div className="container benefits-grid" style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
+        <div className="container benefits-grid band--4">
           {WHY.map((w, i) => (
             <Reveal key={w.title} delay={i * 70}>
               <div className="benefit-card benefit-card--light">
@@ -76,6 +76,42 @@ export default function BecomeSpeaker() {
               </div>
             </Reveal>
           ))}
+        </div>
+      </section>
+
+      {/* Who we invite + what we ask */}
+      <section className="section section--light">
+        <div className="container grid grid--2" style={{ alignItems: 'start', gap: 'clamp(26px,4vw,54px)' }}>
+          <Reveal>
+            <div className="event-block">
+              <h3>Who we invite</h3>
+              <ul className="role-chips">
+                {[
+                  { icon: 'briefcase' as const, l: 'CEOs & executives' },
+                  { icon: 'rocket' as const, l: 'Founders & co-founders' },
+                  { icon: 'chip' as const, l: 'Technology leaders' },
+                  { icon: 'campus' as const, l: 'Academics & researchers' },
+                  { icon: 'trend' as const, l: 'Entrepreneurs & operators' },
+                  { icon: 'shield' as const, l: 'Government & institutional reps' },
+                  { icon: 'star' as const, l: 'Industry experts' },
+                  { icon: 'tools' as const, l: 'Trainers & coaches' },
+                ].map((x) => (
+                  <li key={x.l}><Icon name={x.icon} size={15} /> {x.l}</li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+          <Reveal delay={100}>
+            <div className="event-block">
+              <h3>What we ask speakers</h3>
+              <ul className="highlights-list">
+                <li><Icon name="check" size={16} /> Evidence over endorsement: decisions, data, failures and playbooks</li>
+                <li><Icon name="check" size={16} /> No sales pitches from the main stage — product stories belong in the expo</li>
+                <li><Icon name="check" size={16} /> Stay for Q&A and hallway conversations; that is where impact happens</li>
+                <li><Icon name="check" size={16} /> Consent to professional recording for the Thrive video channel</li>
+              </ul>
+            </div>
+          </Reveal>
         </div>
       </section>
 

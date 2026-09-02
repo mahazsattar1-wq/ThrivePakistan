@@ -31,6 +31,22 @@ export default function EventDetail() {
   useSeo({
     title: event ? event.title : 'Event',
     description: event?.description,
+    jsonLd: event
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'Event',
+          name: event.title,
+          description: event.description,
+          startDate: event.date,
+          eventStatus: event.status === 'upcoming' ? 'https://schema.org/EventScheduled' : 'https://schema.org/EventPast',
+          eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+          location: { '@type': 'Place', name: event.location, address: event.city + ', Pakistan' },
+          organizer: { '@type': 'Organization', name: 'Thrive Pakistan' },
+          image: '/img/hero-futurex.jpg',
+          isAccessibleForFree: false,
+          additionalNote: 'Frontend prototype: event details are mock data.',
+        }
+      : null,
   });
 
   useEffect(() => {

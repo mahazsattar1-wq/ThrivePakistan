@@ -24,6 +24,7 @@ export default function Impact() {
         title="Measured in people, not press releases."
         lead="The numbers below are frontend mock figures for the prototype; the production dashboard will publish verified impact data."
         crumbs={[{ label: 'Impact' }]}
+        meta={[{ icon: 'shield', label: 'All figures on this page are demo mock data' }]}
       />
 
       <section className="section section--tight">

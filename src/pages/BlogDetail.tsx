@@ -17,6 +17,20 @@ export default function BlogDetail() {
     title: post ? post.title : 'Article',
     description: post?.excerpt,
     type: 'article',
+    jsonLd: post
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'BlogPosting',
+          headline: post.title,
+          description: post.excerpt,
+          datePublished: post.date,
+          timeRequired: `PT${post.readingTime}M`,
+          author: { '@type': 'Person', name: post.author, description: post.authorRole, additionalNote: 'Mock author (prototype)' },
+          publisher: { '@type': 'Organization', name: 'Thrive Pakistan' },
+          articleSection: post.category,
+          keywords: post.tags.join(', '),
+        }
+      : null,
   });
 
   useEffect(() => {

@@ -443,18 +443,6 @@
   color: var(--white);
 }
 
-.breadcrumbs--light ol {
-  color: var(--muted-text);
-}
-
-.breadcrumbs--light a {
-  color: var(--muted-text);
-}
-
-.breadcrumbs--light [aria-current='page'] {
-  color: var(--dark);
-}
-
 /* ---------- Footer ---------- */
 .footer {
   background: var(--dark);

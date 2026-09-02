@@ -20,6 +20,7 @@ export default function Team() {
         meta={[
           { icon: 'users', label: '6 core roles' },
           { icon: 'heart', label: '300+ volunteer community' },
+          { icon: 'shield', label: 'Demo profiles — fictional mock data' },
         ]}
       />
 

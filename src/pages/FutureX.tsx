@@ -72,7 +72,7 @@ export default function FutureX() {
       {/* Facts band */}
       <section className="section section--tight">
         <div className="container">
-          <div className="stats-band" style={{ gridTemplateColumns: 'repeat(4, 1fr)' }}>
+          <div className="stats-band band--4">
             {[
               { v: '5,000+', l: 'Expected attendees' },
               { v: '40+', l: 'Speakers & mentors' },

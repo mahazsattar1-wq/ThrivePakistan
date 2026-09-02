@@ -7,13 +7,7 @@ import { Icon } from '../components/ui';
 import type { IconName } from '../components/ui';
 import { EmptyState } from '../components/ui';
 
-interface GroupDef {
-  key: keyof Omit<SearchResults, 'query' | 'total'>;
-  label: string;
-  icon: IconName;
-  to: (slug: string) => string;
-  meta: (item: never) => string;
-}
+type ResultKey = keyof Omit<SearchResults, 'query' | 'total'>;
 
 export default function Search() {
   useSeo({
@@ -45,7 +39,7 @@ export default function Search() {
     };
   }, [q]);
 
-  const groups: { key: GroupDef['key']; label: string; icon: IconName }[] = [
+  const groups: { key: ResultKey; label: string; icon: IconName }[] = [
     { key: 'events', label: 'Events', icon: 'calendar' },
     { key: 'speakers', label: 'Speakers', icon: 'mic' },
     { key: 'programs', label: 'Programs', icon: 'compass' },
@@ -53,7 +47,7 @@ export default function Search() {
     { key: 'videos', label: 'Videos', icon: 'play' },
   ];
 
-  const toFor = (key: GroupDef['key'], slug: string): string => {
+  const toFor = (key: ResultKey, slug: string): string => {
     switch (key) {
       case 'events': return `/events/${slug}`;
       case 'speakers': return `/speakers/${slug}`;
@@ -63,7 +57,7 @@ export default function Search() {
     }
   };
 
-  const metaFor = (key: GroupDef['key'], item: Record<string, unknown>): string => {
+  const metaFor = (key: ResultKey, item: Record<string, unknown>): string => {
     switch (key) {
       case 'events': return `${item.category} · ${item.city}`;
       case 'speakers': return `${item.title} · ${item.organization}`;

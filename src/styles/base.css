@@ -94,9 +94,22 @@ p {
 }
 
 :focus-visible {
-  outline: 2px solid var(--primary-green);
+  outline: 2px solid var(--green-dark);
   outline-offset: 3px;
   border-radius: 4px;
+}
+
+/* On dark surfaces the bright brand green has the stronger contrast. */
+.section--dark :focus-visible,
+.section--dark-2 :focus-visible,
+.nav :focus-visible,
+.footer :focus-visible,
+.page-hero :focus-visible,
+.hero :focus-visible,
+.nf :focus-visible,
+.cta-band :focus-visible,
+.modal:focus-visible {
+  outline-color: var(--primary-green);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -148,11 +161,6 @@ p {
 
 .section--light {
   background: var(--light-background);
-}
-
-.section--green {
-  background: linear-gradient(135deg, var(--green-deep), var(--primary-green));
-  color: var(--white);
 }
 
 .grid {

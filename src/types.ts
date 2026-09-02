@@ -118,7 +118,12 @@ export interface Program {
   icon: ProgramIcon;
   description: string;
   details: string;
+  /** Objectives — what the program sets out to achieve. */
   outcomes: string[];
+  /** Who the program is designed for. */
+  audience: string[];
+  /** One-line impact statement (mock, backend-swappable). */
+  impact: string;
   image: ImageRef;
   eventSlugs: string[];
 }

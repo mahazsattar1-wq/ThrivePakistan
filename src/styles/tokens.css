@@ -6,8 +6,9 @@
 :root {
   /* Brand */
   --primary-green: #43b749;
+  --green-hover: #52c258;
   --green-dark: #2f8f36;
-  --green-deep: #1d5c23;
+  --green-deep: #1d5c23; /* accessible green for small text on light backgrounds */
   --green-soft: #e8f5e9;
   --green-bright: #36ff00; /* FutureX accent — used sparingly */
 
