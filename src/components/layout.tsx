@@ -3,6 +3,7 @@ import type { FormEvent } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { BRAND } from '../brand';
 import { NAV_ITEMS, SOCIAL_LINKS } from '../nav';
+import type { NavItem } from '../nav';
 import { useBodyLock, useScrolled } from '../hooks';
 import { submitForm, emailRule, validate } from '../services/formService';
 import type { Errors } from '../services/formService';
@@ -29,6 +30,15 @@ export function Navbar() {
   const [mobileSection, setMobileSection] = useState<string | null>(null);
   const location = useLocation();
   useBodyLock(mobileOpen);
+
+  /** A dropdown parent is highlighted when one of its children matches the route. */
+  const parentActive = (item: NavItem): boolean => {
+    const path = location.pathname;
+    return (item.children ?? []).some((c) => {
+      const base = c.to.split('?')[0];
+      return path === base || path.startsWith(`${base}/`);
+    });
+  };
 
   useEffect(() => {
     setOpenDrop(null);
@@ -70,7 +80,7 @@ export function Navbar() {
                   <>
                     <button
                       type="button"
-                      className="nav__link nav__link--parent"
+                      className={`nav__link nav__link--parent ${parentActive(item) ? 'nav__link--active' : ''}`}
                       aria-expanded={openDrop === item.label}
                       aria-haspopup="true"
                       onClick={() => setOpenDrop(openDrop === item.label ? null : item.label)}
@@ -236,6 +246,21 @@ export function Footer() {
               connecting students and emerging talent with practical learning, industry and opportunity.
             </p>
             <p className="footer__tagline">{BRAND.tagline}</p>
+            <ul className="footer__contact">
+              <li>
+                <a href="mailto:partnerships@thrivepakistan.com">
+                  <Icon name="mail" size={15} /> partnerships@thrivepakistan.com
+                </a>
+              </li>
+              <li>
+                <a href="https://www.thrivepakistan.com" target="_blank" rel="noopener noreferrer">
+                  <Icon name="globe" size={15} /> thrivepakistan.com
+                </a>
+              </li>
+              <li>
+                <span><Icon name="pin" size={15} /> Hazara, Khyber Pakhtunkhwa, Pakistan</span>
+              </li>
+            </ul>
             <ul className="footer__socials">
               {SOCIAL_LINKS.map((s) => (
                 <li key={s.id}>

@@ -14,7 +14,7 @@ import futurexBlack from '../assets/futureX logo black.png';
 
 export const BRAND = {
   name: 'Thrive Pakistan',
-  tagline: 'Connect. Learn. Lead. Thrive.',
+  tagline: 'Build here. Think global. Together, we thrive.',
   logoBlack,
   logoWhite,
   futurexColor,

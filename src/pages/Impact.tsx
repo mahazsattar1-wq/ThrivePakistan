@@ -54,7 +54,7 @@ export default function Impact() {
               lead="Our first documented large-scale platform — 12–14 December 2025 at Hazara University, Mansehra."
             />
           </Reveal>
-          <div className="stats-band">
+          <div className="stats-band band--4">
             {[
               { v: '5,000+', l: 'Attendees' },
               { v: '50+', l: 'Speakers' },

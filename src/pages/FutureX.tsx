@@ -114,8 +114,8 @@ export default function FutureX() {
           <div className="grid grid--4">
             {PILLARS.map((p, i) => (
               <Reveal key={p.title} delay={i * 70}>
-                <div className="value-card">
-                  <span className="value-card__icon" style={{ fontFamily: 'var(--font-display)', fontWeight: 700 }}>{p.title}</span>
+                <div className="value-card pillar-card">
+                  <span className="pillar-tag">{p.title}</span>
                   <h3 className="sr-only">{p.title}</h3>
                   <p>{p.text}</p>
                 </div>

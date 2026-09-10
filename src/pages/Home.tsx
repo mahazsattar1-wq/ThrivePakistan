@@ -77,6 +77,9 @@ export default function Home() {
                 <li><Icon name="calendar" size={15} /> {featuredEvent.dateLabel}</li>
                 <li><Icon name="pin" size={15} /> {featuredEvent.location}</li>
               </ul>
+              <div className="hero__card-countdown">
+                <Countdown targetIso={featuredEvent.date} compact />
+              </div>
               <Button to="/futurex" icon="arrow-right">Explore FutureX</Button>
             </aside>
           )}

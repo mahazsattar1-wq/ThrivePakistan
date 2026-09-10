@@ -111,7 +111,7 @@ export default function Partners() {
             </p>
             <div className="cta-band__ctas">
               <Button to="/become-a-partner" icon="arrow-right">Become a Partner</Button>
-              <Button href="mailto:partnerships@thrivepakistan.com" variant="outline-light">partnerships@thrivepakistan.com</Button>
+              <Button href="mailto:partnerships@thrivepakistan.com" variant="outline-light">Email the Partnerships Team</Button>
             </div>
           </Reveal>
         </div>
