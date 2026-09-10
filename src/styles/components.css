@@ -14,14 +14,6 @@
   color: var(--green-dark);
 }
 
-.eyebrow::before {
-  content: '';
-  width: 26px;
-  height: 2px;
-  background: currentColor;
-  border-radius: 2px;
-}
-
 .section-head--dark .eyebrow {
   color: var(--primary-green);
 }
