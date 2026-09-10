@@ -1,7 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { getPublishedMessages, resolveMessagePerson } from '../data/leadershipMessages';
+import {
+  getPublishedMessages,
+  parseMessage,
+  resolveMessagePerson,
+} from '../data/leadershipMessages';
 import type { LeadershipMessage } from '../data/leadershipMessages';
 import type { LeadershipSectionConfig } from '../data/home';
+import { imageSrc, isPhotoRef, spriteStyle } from '../media';
 import { MonogramAvatar } from './cards';
 import { Button, Icon, Reveal, SectionHeader } from './ui';
 
@@ -152,6 +157,7 @@ function MessageTrack({ messages }: { messages: LeadershipMessage[] }) {
 
 function MessageSlide({ message: m, index, count }: { message: LeadershipMessage; index: number; count: number }) {
   const person = resolveMessagePerson(m);
+  const blocks = parseMessage(m.message);
   return (
     <article
       className="msg-slide"
@@ -163,7 +169,22 @@ function MessageSlide({ message: m, index, count }: { message: LeadershipMessage
         <span className="eyebrow">{m.label}</span>
         <h3 className="msg-slide__name">{person.name}</h3>
         <p className="msg-slide__role">{person.role}</p>
-        <p className="msg-slide__text">{m.message}</p>
+        <div className="msg-slide__text">
+          {blocks.map((block, i) => (
+            <p
+              key={i}
+              className={
+                block.type === 'paragraph'
+                  ? undefined
+                  : block.type === 'signature-name'
+                    ? 'msg-signature__name'
+                    : 'msg-signature__role'
+              }
+            >
+              {block.text}
+            </p>
+          ))}
+        </div>
         {m.ctaLabel && m.ctaTo && (
           <Button to={m.ctaTo} variant="green-ghost" size="sm" icon="arrow-right">
             {m.ctaLabel}
@@ -172,24 +193,35 @@ function MessageSlide({ message: m, index, count }: { message: LeadershipMessage
       </div>
       <div className="msg-slide__visual" aria-hidden={false}>
         <div className="msg-frame">
-          {m.image ? (
+          {/* Approved photograph of the real person, resolved via the media registry. */}
+          {m.image && isPhotoRef(m.image) ? (
+            <img
+              className="msg-frame__img msg-frame__img--photo"
+              src={imageSrc(m.image)}
+              alt={m.imageAlt ?? `${person.name}, ${person.role}`}
+              loading="lazy"
+              decoding="async"
+            />
+          ) : m.image ? (
             <div
               className="msg-frame__img sprite"
-              style={{ backgroundImage: 'url(/img/hero-futurex.jpg)' }}
+              style={spriteStyle(m.image)}
               role="img"
               aria-label={m.imageAlt ?? person.name}
             />
           ) : (
-            /* No approved photographs yet — intentional monogram identity treatment. */
+            /* No approved photograph for this entry — neutral monogram identity treatment. */
             <MonogramAvatar name={person.name} className="msg-frame__mono" />
           )}
           <span className="msg-frame__corner msg-frame__corner--tl" aria-hidden="true" />
           <span className="msg-frame__corner msg-frame__corner--br" aria-hidden="true" />
           <span className="msg-frame__glow" aria-hidden="true" />
         </div>
-        <span className="msg-frame__caption">
-          <Icon name="badge" size={13} /> Official photograph to be published
-        </span>
+        {!m.image && (
+          <span className="msg-frame__caption">
+            <Icon name="badge" size={13} /> Official photograph to be published
+          </span>
+        )}
       </div>
     </article>
   );

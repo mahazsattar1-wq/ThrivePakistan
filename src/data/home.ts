@@ -140,8 +140,7 @@ export const HOME_PAGE = {
     eyebrow: 'Leadership',
     title: 'Messages from Thrive Pakistan Leadership',
     lead: 'The people accountable for the platform — on what Thrive Pakistan is building and why.',
-    footnote:
-      'Messages are drawn from Thrive Pakistan\u2019s official organizational statements; approved personal messages are published as they become available.',
+    footnote: 'Leadership messages are published as they are approved by Thrive Pakistan.',
   } satisfies LeadershipSectionConfig,
 
   talent: {

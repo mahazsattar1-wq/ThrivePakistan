@@ -17,6 +17,24 @@ export interface ImageRef {
   cell: number;
 }
 
+/**
+ * Identifiers for approved standalone photographs of real people.
+ *
+ * These are real images shipped in the repository `assets/` folder and
+ * registered in `src/media.ts` (PORTRAITS). Add an id there — never inline an
+ * image path in a component — so the future admin panel can swap a photograph
+ * by changing a single data value.
+ */
+export type PortraitId = 'hassan-sajjad' | 'faraz-khan-sulemani';
+
+/** A reference to an approved standalone photograph (not a sprite cell). */
+export interface PhotoRef {
+  photo: PortraitId;
+}
+
+/** Anything the UI can render as an image: a sprite cell or an approved photo. */
+export type AnyImageRef = ImageRef | PhotoRef;
+
 export interface AgendaItem {
   time: string;
   title: string;

@@ -22,9 +22,11 @@ Rules enforced across the codebase:
   Government Post Graduate College Mansehra (MoC signed 6 August 2026).
   Its final agenda, speakers, sponsors, ticketing and registration are
   labelled as *developing / subject to confirmation* until announced.
-- **No AI-generated people.** Portrait sprite sheets were removed; the
-  leadership roster uses neutral monogram avatars until approved
-  photographs are available.
+- **No AI-generated people.** Portrait sprite sheets were removed. Only
+  verified photographs of real people are shown — currently the CEO and
+  Managing Director portraits, imported from `assets/` and registered in
+  `src/media.ts` (`PORTRAITS`); everyone else still uses a neutral monogram
+  avatar until an approved photograph exists.
 - Speakers, videos and partners sections ship with professional empty
   states and populate automatically from `/api/*.php` once the backend
   provides confirmed data.
@@ -51,6 +53,8 @@ Brand colours were sampled from the official logo artwork:
 Illustrative artwork (event covers, gallery, hero) lives in `public/img/` as
 sprite sheets — one request per sheet, displayed per-card via CSS
 background-position. People-portrait sheets were intentionally removed.
+Approved photographs of real people are imported from `assets/` and resolved
+through the media registry (`src/media.ts`), never hardcoded in components.
 
 ## Mock data & future backend
 
