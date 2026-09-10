@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
-import { PARTNER_BENEFITS, PARTNER_TIERS } from '../data/partners';
+import { COLLABORATION_VALUES, ENGAGEMENT_MODELS } from '../data/partners';
 import { ORGANIZATION_TYPES, PARTNERSHIP_INTERESTS } from '../data/site';
 import { useSeo } from '../hooks';
 import { PageHero } from '../components/page-hero';
 import { FieldShell, FormSuccess, Select, SubmitButton, TextArea, TextInput } from '../components/forms';
 import { emailRule, minWords, phoneRule, required, submitForm, validate } from '../services/formService';
 import type { Errors } from '../services/formService';
-import { Button, Icon, Reveal, SectionHeader } from '../components/ui';
+import { Icon, Reveal, SectionHeader } from '../components/ui';
 import type { IconName } from '../components/ui';
 import { useToast } from '../components/feedback';
 
@@ -21,10 +21,25 @@ const INITIAL = {
   message: '',
 };
 
+/**
+ * Sponsorship activation options — propositions from the organizational
+ * profile's sponsors section. They describe what collaboration CAN include,
+ * not packages that are already sold.
+ */
+const ACTIVATIONS = [
+  { icon: 'trophy' as IconName, t: 'Presenting or strategic partnership', d: 'A visible leadership role in a platform, with agreed deliverables and reporting.' },
+  { icon: 'chip' as IconName, t: 'Zone ownership', d: 'Own the AI Lab, Finance Lab, Learning Lab, Career Hub or another relevant zone.' },
+  { icon: 'bulb' as IconName, t: 'Challenges & awards', d: 'Back a student innovation challenge, award, scholarship or startup pitch support.' },
+  { icon: 'briefcase' as IconName, t: 'Employer activations', d: 'Employer meet & hire, career speed networking or portfolio review sessions.' },
+  { icon: 'mic' as IconName, t: 'Expert sessions', d: 'Panel participation, expert sessions or practical workshops where subject fit is strong.' },
+  { icon: 'eye' as IconName, t: 'Demonstrations & content', d: 'Technology demonstrations, booth experiences and digital campaign integration.' },
+];
+
 export default function BecomePartner() {
   useSeo({
     title: 'Become a Partner',
-    description: 'Partner with Thrive Pakistan: brand visibility, audience access, speaking opportunities, talent pipelines and measurable community impact across a national event calendar.',
+    description:
+      'Partner with Thrive Pakistan — co-build access across education, technology, careers and entrepreneurship in Hazara and Khyber Pakhtunkhwa. Partnerships@thrivepakistan.com.',
   });
 
   const [values, setValues] = useState(INITIAL);
@@ -59,38 +74,33 @@ export default function BecomePartner() {
     <>
       <PageHero
         eyebrow="Partnership"
-        title="Why partner with Thrive Pakistan?"
-        lead="Because your brand meets the exact rooms you need: builders, decision-makers, students and communities — in person, at national scale, with measurable outcomes."
+        title="Co-build access with us."
+        lead="Partnership with Thrive Pakistan means translating your institutional goals into visible activities — labs, workshops, challenges, mentorship, recruitment and research — with defined ownership and follow-up."
         crumbs={[{ label: 'Partners', to: '/partners' }, { label: 'Become a Partner' }]}
         meta={[
-          { icon: 'users', label: '15,000+ participants / year' },
-          { icon: 'calendar', label: 'Season-long visibility' },
-          { icon: 'trend', label: 'Impact & CSR reporting' },
+          { icon: 'pin', label: 'Hazara & northern Pakistan' },
+          { icon: 'users', label: 'Students · Institutions · Founders · Communities' },
+          { icon: 'shield', label: 'Purposeful activation, measurable outcomes' },
         ]}
       />
 
-      {/* Audience & reach */}
+      {/* Why partner */}
       <section className="section section--tight">
         <div className="container">
           <Reveal>
             <SectionHeader
-              eyebrow="Audience & reach"
-              title="Who your partnership actually reaches."
-              lead="Demo figures from the prototype dataset — the production dashboard will publish verified reach metrics per season."
+              eyebrow="Why partnership creates value"
+              title="What collaboration with Thrive Pakistan offers."
+              lead="We design collaboration as strategic co-building and measurable activation — not passive logo placement."
             />
           </Reveal>
-          <div className="stats-band band--4">
-            {[
-              { v: '15,000+', l: 'Participants per year', d: 'Students, professionals, founders' },
-              { v: '25+', l: 'Universities engaged', d: 'Via tour stops & society grants' },
-              { v: '10+', l: 'Cities activated', d: 'Including secondary-city chapters' },
-              { v: '90K+', l: 'Digital reads & views', d: 'Newsroom, video channel, newsletter' },
-            ].map((f, i) => (
-              <Reveal key={f.l} delay={i * 70}>
-                <div className="stat">
-                  <span className="stat__value">{f.v}</span>
-                  <span className="stat__label">{f.l}</span>
-                  <span className="stat__desc">{f.d}</span>
+          <div className="grid grid--4">
+            {COLLABORATION_VALUES.map((v, i) => (
+              <Reveal key={v.title} delay={i * 70}>
+                <div className="benefit-card benefit-card--light" style={{ height: '100%' }}>
+                  <span className="benefit-card__icon"><Icon name={v.icon as IconName} size={20} /></span>
+                  <h3>{v.title}</h3>
+                  <p style={{ color: 'var(--muted-text)' }}>{v.text}</p>
                 </div>
               </Reveal>
             ))}
@@ -98,29 +108,22 @@ export default function BecomePartner() {
         </div>
       </section>
 
-      {/* Partnership opportunities */}
+      {/* Engagement models */}
       <section className="section section--light">
         <div className="container">
           <Reveal>
             <SectionHeader
-              eyebrow="Partnership opportunities"
-              title="Six ways to put your organization in the room."
+              eyebrow="Ways partners engage"
+              title="Pick the layer where you create the most value."
             />
           </Reveal>
           <div className="benefits-grid">
-            {[
-              { icon: 'trophy' as IconName, t: 'Flagship Sponsorship', d: 'Title or category ownership of FutureX and seasonal flagships — stage, screen and story.' },
-              { icon: 'chip' as IconName, t: 'Track Ownership', d: 'Power a full track (AI, climate, fintech, design) with curation input and branded sessions.' },
-              { icon: 'campus' as IconName, t: 'Campus Tour Partnership', d: 'Your brand on the Campus Innovation Tour: demo floors, hack sprints and career desks.' },
-              { icon: 'briefcase' as IconName, t: 'Talent & Internship Desk', d: 'Interview on-site, hire from hackathons and portfolio clinics with pre-vetted candidates.' },
-              { icon: 'mic' as IconName, t: 'Co-branded Content Series', d: 'Filmed sessions, playbooks and newsletter series that keep your name in between events.' },
-              { icon: 'heart' as IconName, t: 'Community Chapter Support', d: 'Back city chapters and volunteer programs for deep, local, measurable CSR presence.' },
-            ].map((o, i) => (
-              <Reveal key={o.t} delay={(i % 3) * 70}>
-                <div className="benefit-card benefit-card--light">
-                  <span className="benefit-card__icon"><Icon name={o.icon} size={20} /></span>
-                  <h3>{o.t}</h3>
-                  <p style={{ color: 'var(--muted-text)' }}>{o.d}</p>
+            {ENGAGEMENT_MODELS.map((m, i) => (
+              <Reveal key={m.id} delay={(i % 3) * 70}>
+                <div className="benefit-card" style={{ height: '100%' }}>
+                  <span className="benefit-card__icon"><Icon name="handshake" size={20} /></span>
+                  <h3>{m.name}</h3>
+                  <p>{m.text}</p>
                 </div>
               </Reveal>
             ))}
@@ -128,23 +131,24 @@ export default function BecomePartner() {
         </div>
       </section>
 
-      {/* Benefits */}
+      {/* Sponsorship activations */}
       <section className="section section--dark">
         <div className="container">
           <Reveal>
             <SectionHeader
               dark
-              eyebrow="What we offer partners"
-              title="Nine ways partnership pays for itself."
+              eyebrow="FutureX 2026 activations"
+              title="What sponsorship can include."
+              lead="Activation directions for FutureX 2026 — final structures are agreed in writing with each partner."
             />
           </Reveal>
           <div className="benefits-grid">
-            {PARTNER_BENEFITS.map((b, i) => (
-              <Reveal key={b.title} delay={(i % 3) * 70}>
-                <div className="benefit-card">
-                  <span className="benefit-card__icon"><Icon name={b.icon as IconName} size={20} /></span>
-                  <h3>{b.title}</h3>
-                  <p>{b.text}</p>
+            {ACTIVATIONS.map((o, i) => (
+              <Reveal key={o.t} delay={(i % 3) * 70}>
+                <div className="benefit-card" style={{ height: '100%' }}>
+                  <span className="benefit-card__icon"><Icon name={o.icon} size={20} /></span>
+                  <h3>{o.t}</h3>
+                  <p>{o.d}</p>
                 </div>
               </Reveal>
             ))}
@@ -152,54 +156,26 @@ export default function BecomePartner() {
         </div>
       </section>
 
-      {/* Tiers */}
+      {/* How collaboration works */}
       <section className="section">
-        <div className="container">
+        <div className="container container--narrow">
           <Reveal>
             <SectionHeader
               center
-              eyebrow="Partnership tiers"
-              title="Three ways to stand with us."
-              lead="Tiers are examples for conversation — every partnership is shaped around your goals. No public pricing by design."
+              eyebrow="How collaboration works"
+              title="Professional collaboration begins with clarity — and ends with evidence."
             />
           </Reveal>
-          <div className="tiers-grid">
-            {PARTNER_TIERS.map((t, i) => (
-              <Reveal key={t.id} delay={i * 90}>
-                <div className={`tier-card ${t.highlight ? 'tier-card--highlight' : ''}`}>
-                  {t.highlight && <span className="tier-card__flag">Most chosen</span>}
-                  <h3>{t.name}</h3>
-                  <p className="tier-card__desc">{t.description}</p>
-                  <ul className="tier-card__benefits">
-                    {t.benefits.map((b) => (
-                      <li key={b}><Icon name="check" size={16} /> {b}</li>
-                    ))}
-                  </ul>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Thought leadership / community impact / strategic collaboration */}
-      <section className="section">
-        <div className="container">
-          <div className="grid grid--3">
-            {[
-              { icon: 'bulb' as IconName, t: 'Thought Leadership', d: 'Co-publish research, playbooks and opinion platforms with our newsroom — your experts positioned as practitioners, not advertisers.' },
-              { icon: 'leaf' as IconName, t: 'Community Impact', d: 'Volunteer programs, women\'s circles and campus grants generate measurable impact stories ready for CSR and sustainability reporting.' },
-              { icon: 'handshake' as IconName, t: 'Strategic Collaboration', d: 'Ecosystem partners take an advisory seat in program design — shaping formats, cities and outcomes before the season is announced.' },
-            ].map((c, i) => (
-              <Reveal key={c.t} delay={i * 90}>
-                <div className="mission-card mission-card--dark" style={{ height: '100%' }}>
-                  <span className="benefit-card__icon"><Icon name={c.icon} size={20} /></span>
-                  <h3>{c.t}</h3>
-                  <p style={{ color: 'var(--muted-on-dark)', fontSize: '0.92rem' }}>{c.d}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          <Reveal delay={90}>
+            <ol className="approach-list" style={{ gridTemplateColumns: '1fr', marginTop: 18 }}>
+              <li><strong>Discover</strong><p>Understand the organization, audience, need and desired outcome.</p></li>
+              <li><strong>Fit</strong><p>Identify the right programme, role, activation or collaboration model.</p></li>
+              <li><strong>Scope</strong><p>Agree ownership, resources, deliverables, timeline and approvals.</p></li>
+              <li><strong>Delivery</strong><p>Execute through accountable teams and official communication channels.</p></li>
+              <li><strong>Evidence</strong><p>Document outputs, participation, visibility, learning and follow-up actions.</p></li>
+              <li><strong>Continuity</strong><p>Decide together what should continue, scale, improve or stop.</p></li>
+            </ol>
+          </Reveal>
         </div>
       </section>
 
@@ -210,11 +186,11 @@ export default function BecomePartner() {
             <span className="eyebrow">Start a partnership conversation</span>
             <h2>Tell us what you're building toward.</h2>
             <p style={{ color: 'var(--muted-text)' }}>
-              Share your goals and our partnerships lead will come back with a shaped proposal —
-              visibility plan, talent access, impact metrics and the events where your brand does its best work.
+              Share your goals and our partnerships lead will come back with a scoped proposal —
+              clear contribution, defined ownership and agreed outcomes.
             </p>
             <ul className="highlights-list">
-              <li><Icon name="clock" size={16} /> Replies within two working days</li>
+              <li><Icon name="mail" size={16} /> <a href="mailto:partnerships@thrivepakistan.com">partnerships@thrivepakistan.com</a></li>
               <li><Icon name="shield" size={16} /> Your details stay with the partnerships team</li>
               <li><Icon name="handshake" size={16} /> No obligation — conversations first</li>
             </ul>
@@ -247,27 +223,13 @@ export default function BecomePartner() {
                     </FieldShell>
                     <div className="field--full">
                       <FieldShell id="p-message" label="Message" required error={errors.message} hint="What outcomes matter to you? (min 10 words)">
-                        <TextArea id="p-message" value={values.message} error={!!errors.message} placeholder="We want to reach engineering students across Punjab and support women founders…" onChange={(e) => set('message')(e.target.value)} />
+                        <TextArea id="p-message" value={values.message} error={!!errors.message} placeholder="We want to support AI skills for students in Hazara…" onChange={(e) => set('message')(e.target.value)} />
                       </FieldShell>
                     </div>
                   </div>
                   <SubmitButton loading={state === 'loading'}>Start a Partnership Conversation</SubmitButton>
                 </form>
               )}
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="section cta-band">
-        <span className="cta-band__glow" aria-hidden="true" />
-        <div className="container cta-band__inner">
-          <Reveal>
-            <h2>Prefer to talk first?</h2>
-            <p style={{ marginTop: 10 }}>Book a call with the partnerships team through the contact page.</p>
-            <div className="cta-band__ctas">
-              <Button to="/contact" icon="arrow-right">Contact us</Button>
-              <Button to="/partners" variant="outline-light">Meet current partners</Button>
             </div>
           </Reveal>
         </div>

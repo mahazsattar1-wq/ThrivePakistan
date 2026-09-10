@@ -9,14 +9,7 @@
 export type EventStatus = 'upcoming' | 'past';
 
 /** Sprite-sheet / image identifiers available in `public/img`. */
-export type SheetId =
-  | 'portraitsA'
-  | 'portraitsB'
-  | 'eventsA'
-  | 'eventsB'
-  | 'galleryA'
-  | 'mediaA'
-  | 'hero';
+export type SheetId = 'eventsA' | 'eventsB' | 'galleryA' | 'mediaA' | 'hero';
 
 /** A reference to one cell of a sprite sheet (or a standalone image). */
 export interface ImageRef {
@@ -51,10 +44,19 @@ export interface ThriveEvent {
   image: ImageRef;
   featured?: boolean;
   status: EventStatus;
+  /** True only when the date is officially confirmed by the organization. */
+  dateConfirmed: boolean;
+  /** True only when the venue is officially confirmed by the organization. */
+  venueConfirmed: boolean;
   attendees?: string;
   tags: string[];
   speakerSlugs: string[];
   agenda: AgendaItem[];
+  /**
+   * Programme directions being developed for the event. These are NOT
+   * confirmed final sessions and must be labelled as such in the UI.
+   */
+  programmeComponents?: string[];
   highlights: string[];
   sponsorIds: string[];
   faqs: Faq[];
@@ -83,7 +85,8 @@ export interface Speaker {
   organization: string;
   expertise: Expertise[];
   eventSlugs: string[];
-  portrait: ImageRef;
+  /** Optional — no invented portraits. Render a neutral monogram when absent. */
+  portrait?: ImageRef;
   bio: string;
   topics: string[];
   socials: SocialLinks;
@@ -97,7 +100,10 @@ export interface TeamMember {
   role: string;
   focus: string;
   bio: string;
-  portrait: ImageRef;
+  /** Optional — no invented portraits. Render a neutral monogram when absent. */
+  portrait?: ImageRef;
+  /** 'executive' | 'functional' grouping used on the team page. */
+  group?: 'executive' | 'functional';
 }
 
 export type ProgramIcon =
@@ -188,19 +194,11 @@ export interface GalleryItem {
   eventSlug?: string;
 }
 
-export interface Testimonial {
+/** Qualitative impact statement (replaces fabricated numeric statistics). */
+export interface ImpactStatement {
   id: string;
-  quote: string;
-  name: string;
-  role: string;
-  event: string;
-}
-
-export interface Statistic {
-  id: string;
-  label: string;
-  value: number;
-  suffix: string;
+  icon: string;
+  title: string;
   description: string;
 }
 

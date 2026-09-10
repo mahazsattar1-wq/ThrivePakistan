@@ -15,7 +15,7 @@ import { Modal } from '../components/feedback';
 export default function Videos() {
   useSeo({
     title: 'Videos',
-    description: 'The Thrive Pakistan video channel — announcement films, keynotes, panels, workshops, event highlights and community stories.',
+    description: 'Official Thrive Pakistan videos — event films and session recordings will be published here as platforms are delivered.',
   });
 
   const [params, setParams] = useSearchParams();
@@ -58,12 +58,12 @@ export default function Videos() {
     <>
       <PageHero
         eyebrow="Video channel"
-        title="Watch the ecosystem think out loud."
-        lead="Keynotes, panels, workshops, highlight films and community stories — recorded at Thrive platforms across the country."
+        title="Official films & recordings."
+        lead="Event films, session recordings and interviews will be published here as Thrive Pakistan platforms are delivered."
         crumbs={[{ label: 'Videos' }]}
         meta={[
-          { icon: 'play', label: '10 published films & sessions' },
-          { icon: 'eye', label: '170K+ total views' },
+          { icon: 'play', label: 'Publishing soon' },
+          { icon: 'spark', label: 'Starting with FutureX 2026' },
         ]}
       />
 
@@ -144,10 +144,10 @@ export default function Videos() {
             </div>
           ) : videos.length === 0 ? (
             <EmptyState
-              title="No videos match your filters."
-              message="Try another category or event — new films land after every flagship."
-              actionLabel="Clear filters"
-              onAction={() => setParams(new URLSearchParams(), { replace: true })}
+              title="No videos published yet."
+              message="Official event films and session recordings will be published here as Thrive Pakistan platforms are delivered — starting with FutureX 2026."
+              actionLabel={category !== 'all' || event !== 'all' || query ? 'Clear filters' : undefined}
+              onAction={category !== 'all' || event !== 'all' || query ? () => setParams(new URLSearchParams(), { replace: true }) : undefined}
               icon="play"
             />
           ) : (

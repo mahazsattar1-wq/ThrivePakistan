@@ -1,8 +1,8 @@
 import type { CSSProperties, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { useCountdown, useCountUp, useInView } from '../hooks';
+import { useCountdown, useInView } from '../hooks';
 import { spriteStyle } from '../media';
-import type { ImageRef, Partner, Statistic } from '../types';
+import type { ImageRef, Partner } from '../types';
 
 /* ================= Icons ================= */
 
@@ -207,23 +207,6 @@ export function SpriteBox({
   );
 }
 
-/* ================= Stat counter ================= */
-
-export function StatCounter({ stat, dark }: { stat: Statistic; dark?: boolean }) {
-  const { ref, inView } = useInView<HTMLDivElement>(0.4);
-  const value = useCountUp(stat.value, inView);
-  return (
-    <div ref={ref} className={`stat ${dark ? 'stat--dark' : ''}`.trim()}>
-      <span className="stat__value">
-        {value.toLocaleString('en-US')}
-        <em>{stat.suffix}</em>
-      </span>
-      <span className="stat__label">{stat.label}</span>
-      <span className="stat__desc">{stat.description}</span>
-    </div>
-  );
-}
-
 /* ================= Countdown ================= */
 
 export function Countdown({ targetIso, compact }: { targetIso: string; compact?: boolean }) {
@@ -354,7 +337,7 @@ const GLYPH_SHAPES = ['M12 3l8 18H4z', 'M12 3l9 9-9 9-9-9z', 'M4 4h16v16H4z', 'M
 export function PartnerMark({ partner, index, dark }: { partner: Partner; index: number; dark?: boolean }) {
   const initials = partner.name.split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase();
   return (
-    <div className={`partner-mark ${dark ? 'partner-mark--dark' : ''}`} title={`${partner.name} — ${partner.category} partner (mock)`}>
+    <div className={`partner-mark ${dark ? 'partner-mark--dark' : ''}`} title={`${partner.name} — ${partner.category} partner`}>
       <svg viewBox="0 0 24 24" className="partner-mark__glyph" aria-hidden="true">
         <path d={GLYPH_SHAPES[index % GLYPH_SHAPES.length]} />
         <text x="12" y="15.5" textAnchor="middle">{initials}</text>

@@ -12,7 +12,7 @@ type ResultKey = keyof Omit<SearchResults, 'query' | 'total'>;
 export default function Search() {
   useSeo({
     title: 'Search',
-    description: 'Search Thrive Pakistan — events, speakers, programs, articles and videos in one place.',
+    description: 'Search Thrive Pakistan — events, focus areas, articles and videos in one place.',
   });
 
   const [params, setParams] = useSearchParams();

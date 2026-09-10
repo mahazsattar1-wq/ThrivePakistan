@@ -23,16 +23,15 @@ export const NAV_ITEMS: NavItem[] = [
     ],
   },
   {
-    label: 'Programs',
+    label: 'Focus Areas',
     to: '/programs',
     children: [
-      { label: 'Technology & Innovation', to: '/programs/technology-innovation' },
-      { label: 'Leadership', to: '/programs/leadership-development' },
-      { label: 'Youth Empowerment', to: '/programs/youth-empowerment' },
-      { label: 'Women Empowerment', to: '/programs/women-empowerment' },
-      { label: 'University Programs', to: '/programs/university-engagement' },
-      { label: 'Workshops', to: '/programs/training-experiences' },
-      { label: 'Training & Tours', to: '/programs/leadership-tours' },
+      { label: 'Technology & Digital Skills', to: '/programs/technology-digital-skills' },
+      { label: 'Entrepreneurship', to: '/programs/entrepreneurship' },
+      { label: 'Industry Exposure', to: '/programs/industry-exposure' },
+      { label: 'Education & Campus Engagement', to: '/programs/education-campus-engagement' },
+      { label: 'Youth Development', to: '/programs/youth-development' },
+      { label: 'Women & Female Participation', to: '/programs/women-participation' },
     ],
   },
   { label: 'FutureX', to: '/futurex' },
@@ -58,10 +57,12 @@ export const NAV_ITEMS: NavItem[] = [
   },
 ];
 
+/**
+ * Official online presence. Social handles are NOT invented: only the
+ * website and the handle printed in the organizational documents
+ * (@ThrivePakistan) are listed.
+ */
 export const SOCIAL_LINKS = [
-  { id: 'facebook', label: 'Facebook', href: 'https://facebook.com' },
-  { id: 'instagram', label: 'Instagram', href: 'https://instagram.com' },
-  { id: 'linkedin', label: 'LinkedIn', href: 'https://linkedin.com' },
-  { id: 'youtube', label: 'YouTube', href: 'https://youtube.com' },
-  { id: 'tiktok', label: 'TikTok', href: 'https://tiktok.com' },
+  { id: 'globe', label: 'Website', href: 'https://www.thrivepakistan.com' },
+  { id: 'mail', label: 'Email', href: 'mailto:partnerships@thrivepakistan.com' },
 ] as const;

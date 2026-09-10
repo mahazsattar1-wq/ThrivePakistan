@@ -13,16 +13,16 @@ import { useToast } from '../components/feedback';
 const INITIAL = { name: '', email: '', organization: '', expertise: '', interest: '', profile: '' };
 
 const WHY = [
-  { icon: 'mic' as const, title: 'Rooms that listen', text: 'Our audiences arrive to learn and hire — speakers report their best conversations happen in the hallway after.' },
-  { icon: 'trend' as const, title: 'National reach', text: 'Sessions are filmed, cut and published across the Thrive video channel and newsletter.' },
-  { icon: 'users' as const, title: 'Peer bench', text: 'Join a speaker community of 100+ practitioners who swap notes, referrals and collaborations year-round.' },
-  { icon: 'shield' as const, title: 'Curated, not sold', text: 'Slots are chosen by practitioner chairs for evidence and craft — never sold to the highest bidder.' },
+  { icon: 'mic' as const, title: 'An audience rarely reached', text: 'Reach students and early professionals outside the country\u2019s usual conference circuit — people making real education and career decisions.' },
+  { icon: 'users' as const, title: 'One regional ecosystem', text: 'Meet educators, founders, employers, public officials and other practitioners within a single regional platform.' },
+  { icon: 'bulb' as const, title: 'Practical thought leadership', text: 'Turn expertise into practical guidance — through keynotes, panels, talks, workshops, interviews and mentoring.' },
+  { icon: 'shield' as const, title: 'Practitioners first', text: 'We prioritize people who build, hire, research, lead and solve — practical insight grounded in real work.' },
 ];
 
 export default function BecomeSpeaker() {
   useSeo({
     title: 'Become a Speaker',
-    description: 'Apply to speak at Thrive Pakistan platforms — FutureX, leadership summits, Women Thrive, campus tours and workshops. Sessions are curated by practitioner chairs.',
+    description: 'Express interest in speaking at Thrive Pakistan platforms — including FutureX 2026. Sessions are curated for practical insight grounded in real work.',
   });
 
   const [values, setValues] = useState(INITIAL);
@@ -56,12 +56,12 @@ export default function BecomeSpeaker() {
     <>
       <PageHero
         eyebrow="Speak at Thrive"
-        title="Take a stage that works as hard as you do."
-        lead="We curate speakers who share practice — decisions, data, failures and playbooks — not slideware."
+        title="Share practice, not platitudes."
+        lead="Thrive Pakistan stages exist so practitioners can turn expertise into practical guidance for people making real decisions. Speaker announcements are shared as programmes are confirmed."
         crumbs={[{ label: 'Become a Speaker' }]}
         meta={[
-          { icon: 'mic', label: '100+ speakers hosted' },
-          { icon: 'spark', label: '6 platforms to speak on' },
+          { icon: 'mic', label: 'FutureX 2026 · programme in development' },
+          { icon: 'spark', label: 'Keynotes · panels · workshops · mentoring' },
         ]}
       />
 
@@ -87,14 +87,14 @@ export default function BecomeSpeaker() {
               <h3>Who we invite</h3>
               <ul className="role-chips">
                 {[
-                  { icon: 'briefcase' as const, l: 'CEOs & executives' },
-                  { icon: 'rocket' as const, l: 'Founders & co-founders' },
-                  { icon: 'chip' as const, l: 'Technology leaders' },
+                  { icon: 'chip' as const, l: 'Technologists & AI practitioners' },
+                  { icon: 'shield' as const, l: 'Cybersecurity & digital-trust experts' },
+                  { icon: 'rocket' as const, l: 'Founders & entrepreneurs' },
+                  { icon: 'briefcase' as const, l: 'Employers & recruiters' },
                   { icon: 'campus' as const, l: 'Academics & researchers' },
-                  { icon: 'trend' as const, l: 'Entrepreneurs & operators' },
-                  { icon: 'shield' as const, l: 'Government & institutional reps' },
-                  { icon: 'star' as const, l: 'Industry experts' },
-                  { icon: 'tools' as const, l: 'Trainers & coaches' },
+                  { icon: 'trend' as const, l: 'Finance & fintech practitioners' },
+                  { icon: 'women' as const, l: 'Women leading in tech & enterprise' },
+                  { icon: 'compass' as const, l: 'Leadership & communication experts' },
                 ].map((x) => (
                   <li key={x.l}><Icon name={x.icon} size={15} /> {x.l}</li>
                 ))}
@@ -103,12 +103,13 @@ export default function BecomeSpeaker() {
           </Reveal>
           <Reveal delay={100}>
             <div className="event-block">
-              <h3>What we ask speakers</h3>
+              <h3>What a strong contribution looks like</h3>
               <ul className="highlights-list">
-                <li><Icon name="check" size={16} /> Evidence over endorsement: decisions, data, failures and playbooks</li>
-                <li><Icon name="check" size={16} /> No sales pitches from the main stage — product stories belong in the expo</li>
-                <li><Icon name="check" size={16} /> Stay for Q&A and hallway conversations; that is where impact happens</li>
-                <li><Icon name="check" size={16} /> Consent to professional recording for the Thrive video channel</li>
+                <li><Icon name="check" size={16} /> Practical insight grounded in work, research or lived experience</li>
+                <li><Icon name="check" size={16} /> Clear examples and honest trade-offs — not recycled motivational language</li>
+                <li><Icon name="check" size={16} /> Actionable next steps participants can use after the session</li>
+                <li><Icon name="check" size={16} /> Willingness to engage beyond the stage — Q&amp;A, mentoring or networking</li>
+                <li><Icon name="check" size={16} /> Confirm availability, topic and requirements early; respect the schedule and host institution</li>
               </ul>
             </div>
           </Reveal>
@@ -121,13 +122,13 @@ export default function BecomeSpeaker() {
             <span className="eyebrow">Speaker submission</span>
             <h2>Tell us what you'd teach the room.</h2>
             <p style={{ color: 'var(--muted-on-dark)' }}>
-              Share your expertise and the session you'd run. The program team reviews submissions before
-              every event cycle and replies with next steps — usually a 20-minute format conversation.
+              Share your expertise and the session you'd propose. The programme team reviews submissions
+              and replies with next steps as platforms are confirmed.
             </p>
             <ul className="highlights-list">
-              <li><Icon name="check" size={16} /> Keynotes, panels, workshops & labs</li>
-              <li><Icon name="check" size={16} /> Travel support for out-of-city speakers</li>
-              <li><Icon name="check" size={16} /> Professional session recording provided</li>
+              <li><Icon name="check" size={16} /> Keynotes, panels, fireside conversations & workshops</li>
+              <li><Icon name="check" size={16} /> Session details confirmed in advance</li>
+              <li><Icon name="check" size={16} /> Relevant, evidence-aware sessions — free from undisclosed sales pitches</li>
             </ul>
           </Reveal>
 

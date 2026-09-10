@@ -1,83 +1,150 @@
-import type { Statistic, Testimonial, TimelineEntry, ValueItem } from '../types';
+import type { ImpactStatement, TimelineEntry, ValueItem } from '../types';
 
 /**
- * MOCK DATA — impact figures for the frontend prototype. Values are
- * illustrative placeholders; the admin dashboard will own real numbers later.
+ * IMPACT — qualitative statements only.
+ *
+ * Thrive Pakistan does not publish verified lifetime statistics beyond the
+ * documented Hazara Tech Fiesta 2025 figures, so this section uses
+ * qualitative impact statements instead of invented numbers. Do NOT add
+ * numeric statistics that the organizational documents do not confirm.
  */
-export const STATS: Statistic[] = [
-  { id: 'st-01', label: 'Events Produced', value: 50, suffix: '+', description: 'Conferences, summits, tours, workshops & meetups' },
-  { id: 'st-02', label: 'Participants', value: 15000, suffix: '+', description: 'Attendees across campuses, cities & stages' },
-  { id: 'st-03', label: 'Speakers Hosted', value: 100, suffix: '+', description: 'Founders, executives, researchers & creators' },
-  { id: 'st-04', label: 'Partner Organizations', value: 30, suffix: '+', description: 'Technology, education, media & corporate allies' },
-  { id: 'st-05', label: 'Universities Reached', value: 25, suffix: '+', description: 'Through the Campus Innovation Tour & societies' },
-  { id: 'st-06', label: 'Cities Activated', value: 10, suffix: '+', description: 'From Karachi to the northern valleys' },
-];
-
-/** MOCK DATA — community voices (fictional quotes for prototype). */
-export const TESTIMONIALS: Testimonial[] = [
+export const IMPACT_STATEMENTS: ImpactStatement[] = [
   {
-    id: 'ts-01',
-    quote: 'I came to a Thrive meetup with a half-built idea and left with a mentor, two hires and a deadline. Eighteen months later we are a funded company.',
-    name: 'Fatima Noor',
-    role: 'Co-founder, logistics startup',
-    event: 'Tech & Entrepreneurship Meetup',
+    id: 'im-connect',
+    icon: 'users',
+    title: 'Connecting',
+    description: 'Students with practitioners, employers and networks.',
   },
   {
-    id: 'ts-02',
-    quote: 'The roundtables are the only leadership room I have been in where people brought real decisions instead of slides. I use the playbook weekly.',
-    name: 'Danish Iqbal',
-    role: 'Engineering Manager',
-    event: 'Thrive Leadership Summit 2025',
+    id: 'im-learn',
+    icon: 'bulb',
+    title: 'Learning',
+    description: 'Creating access to practical conversations around technology and opportunity.',
   },
   {
-    id: 'ts-03',
-    quote: 'As a student from Faisalabad I assumed the ecosystem happened somewhere else. The Tour proved it can happen in our own hall.',
-    name: 'Hassan Raza',
-    role: 'Final-year student, GCU Faisalabad',
-    event: 'Campus Innovation Tour',
+    id: 'im-collab',
+    icon: 'handshake',
+    title: 'Collaboration',
+    description: 'Bringing education, industry, government and communities together.',
   },
   {
-    id: 'ts-04',
-    quote: 'The mentorship circle matched me with two mentors and eleven peers who still meet monthly. That is the real product of Women Thrive.',
-    name: 'Kinza Waheed',
-    role: 'Product Designer',
-    event: 'Women Thrive 2025',
-  },
-  {
-    id: 'ts-05',
-    quote: 'We sponsored expecting logo placement. We stayed for the talent desk — four of our best engineers came through a Thrive hackathon.',
-    name: 'Partner Lead',
-    role: 'Technology partner (name withheld in mock data)',
-    event: 'ThriveHack 2025',
-  },
-  {
-    id: 'ts-06',
-    quote: 'Volunteering at the registration desk taught me more about operations than my degree. Now I run the desk.',
-    name: 'Abdullah Sheikh',
-    role: 'Volunteer City Chapter Lead',
-    event: 'Volunteer Community',
+    id: 'im-opportunity',
+    icon: 'door',
+    title: 'Opportunity',
+    description: 'Creating pathways toward meaningful professional exposure.',
   },
 ];
 
 /**
- * MOCK TIMELINE — illustrative journey for the prototype. These dates are
- * frontend content, not verified organizational history.
+ * ORGANIZATIONAL TIMELINE — verified milestones only.
+ * Sources: Thrive Pakistan Organizational Profile (August 2026).
  */
 export const TIMELINE: TimelineEntry[] = [
-  { year: '2022', title: 'Thrive Pakistan begins', description: 'A small team produces its first university events with one belief: Pakistani youth deserve world-class platforms.' },
-  { year: '2023', title: 'University outreach expands', description: 'The Campus Innovation Tour format is born, connecting student societies with mentors and sponsors.' },
-  { year: '2024', title: 'Leadership programs grow', description: 'The first Leadership Summit and hosted roundtables establish the "practical craft" format.' },
-  { year: '2025', title: 'National partnerships', description: 'Technology, education and media partners join a season-long ecosystem model; Women Thrive launches.' },
-  { year: '2026', title: 'FutureX launches', description: 'The flagship technology & innovation experience debuts — Pakistan\'s boldest gathering of builders.' },
+  {
+    year: '2025',
+    title: 'Thrive Pakistan begins',
+    description:
+      'A youth-led team moves from conversations about the opportunity gap to visible ecosystem building — rooted in Hazara, where talent is abundant but access to industry networks is uneven.',
+  },
+  {
+    year: '2025',
+    title: 'Hazara Tech Fiesta 2025',
+    description:
+      'The documented public journey begins with a three-day regional technology festival at Hazara University, Mansehra — 5,000+ attendees, 50+ speakers, 15+ exhibitors and a 24-hour hackathon.',
+  },
+  {
+    year: '2026',
+    title: 'Institutional foundation with GPGC Mansehra',
+    description:
+      'On 6 August 2026, Thrive Pakistan and Government Post Graduate College Mansehra sign a Memorandum of Collaboration, creating the institutional foundation for joint programming and the delivery of FutureX 2026.',
+  },
+  {
+    year: '2026',
+    title: 'FutureX 2026',
+    description:
+      'Thrive Pakistan\u2019s flagship youth, technology and innovation platform is planned for 24 September 2026 at Government Post Graduate College, Mansehra — around AI, work, finance and leadership.',
+  },
 ];
 
+/**
+ * WORKING PRINCIPLES — the six principles stated in the organizational
+ * profile's "Identity & Direction" section.
+ */
 export const VALUES: ValueItem[] = [
-  { icon: 'bulb', title: 'Innovation', description: 'We back builders and reward evidence over polish.' },
-  { icon: 'compass', title: 'Leadership', description: 'Leadership is practice, not position — we create rooms to practice in.' },
-  { icon: 'users', title: 'Inclusion', description: 'Every city, campus and background belongs in the room.' },
-  { icon: 'handshake', title: 'Collaboration', description: 'Partners, societies and volunteers co-build every platform.' },
-  { icon: 'trend', title: 'Growth', description: 'Every experience must leave you more capable than it found you.' },
-  { icon: 'target', title: 'Impact', description: 'We measure placements, prototypes and policy — not attendance alone.' },
-  { icon: 'shield', title: 'Integrity', description: 'Honest numbers, honest stages, honest conversations.' },
-  { icon: 'door', title: 'Opportunity', description: 'We open doors that stay open after the event ends.' },
+  {
+    icon: 'door',
+    title: 'Access before applause',
+    description: 'A program is useful only when participants leave closer to knowledge, people or opportunity.',
+  },
+  {
+    icon: 'mic',
+    title: 'Practitioners over personalities',
+    description: 'We prioritize people who build, hire, research, lead and solve — not only those with public visibility.',
+  },
+  {
+    icon: 'map',
+    title: 'Regional ownership',
+    description: 'Programs are designed with local institutions and communities, not copied into the region as an outside campaign.',
+  },
+  {
+    icon: 'women',
+    title: 'Inclusion by design',
+    description: 'Women, students from less-connected institutions and first-time participants are supported deliberately.',
+  },
+  {
+    icon: 'handshake',
+    title: 'Partnership with purpose',
+    description: 'Every collaboration should create a meaningful role, activation or outcome — not simply another logo.',
+  },
+  {
+    icon: 'shield',
+    title: 'Execution with accountability',
+    description: 'Every major task has one accountable owner, a deadline, a status and a reporting line.',
+  },
 ];
+
+/**
+ * STRATEGIC GOALS — the eight goals listed in the organizational profile.
+ */
+export const STRATEGIC_GOALS = [
+  {
+    id: 'sg-01',
+    title: 'Democratize access',
+    text: 'Bring national-level experts, employers, founders and institutions closer to regional youth.',
+  },
+  {
+    id: 'sg-02',
+    title: 'Build future-ready capability',
+    text: 'Create practical exposure to AI, digital work, cybersecurity, entrepreneurship, finance, communication and leadership.',
+  },
+  {
+    id: 'sg-03',
+    title: 'Strengthen academia–industry links',
+    text: 'Help educational institutions move beyond ceremonial partnerships toward workshops, talent pipelines, challenges and applied collaboration.',
+  },
+  {
+    id: 'sg-04',
+    title: 'Create pathways to work',
+    text: 'Support internships, entry-level hiring, freelancing, remote work, mentorship and portfolio development.',
+  },
+  {
+    id: 'sg-05',
+    title: 'Support founders and innovators',
+    text: 'Give students and early-stage entrepreneurs places to demonstrate, test, pitch and improve ideas.',
+  },
+  {
+    id: 'sg-06',
+    title: 'Grow inclusive leadership',
+    text: 'Increase meaningful participation by women and by young people who have not previously had access to such platforms.',
+  },
+  {
+    id: 'sg-07',
+    title: 'Build a durable ecosystem',
+    text: 'Connect events, campus teams, digital communities, partners and follow-up programs into one continuing network.',
+  },
+  {
+    id: 'sg-08',
+    title: 'Represent regional talent nationally',
+    text: 'Position Hazara and northern Pakistan as a source of technology, creativity, enterprise and leadership — not merely as an audience market.',
+  },
+] as const;

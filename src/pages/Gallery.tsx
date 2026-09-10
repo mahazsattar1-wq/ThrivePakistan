@@ -12,7 +12,7 @@ import { Modal } from '../components/feedback';
 export default function Gallery() {
   useSeo({
     title: 'Gallery',
-    description: 'Event gallery — moments from FutureX, leadership summits, university events, Women Thrive, workshops and community tours across Pakistan.',
+    description: 'Thrive Pakistan visual identity — illustrative platform artwork. Genuine event photography will be added as platforms are delivered.',
   });
 
   const [category, setCategory] = useState('all');
@@ -50,8 +50,8 @@ export default function Gallery() {
     <>
       <PageHero
         eyebrow="Gallery"
-        title="The moments behind the movement."
-        lead="Stages, desks, expeditions and confetti — browse by event family. Click any frame for the lightbox."
+        title="Platform visuals."
+        lead="Illustrative artwork for Thrive Pakistan platforms — genuine event photography will replace these as FutureX 2026 and future platforms are delivered."
         crumbs={[{ label: 'Gallery' }]}
         meta={[
           { icon: 'eye', label: '18 curated moments' },

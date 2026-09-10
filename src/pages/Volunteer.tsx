@@ -9,7 +9,6 @@ import type { Errors } from '../services/formService';
 import { Button, Icon, Reveal, SectionHeader } from '../components/ui';
 import type { IconName } from '../components/ui';
 import { useToast } from '../components/feedback';
-import { TESTIMONIALS } from '../data/stats';
 
 const INITIAL = { name: '', email: '', phone: '', city: '', skills: '', area: '' };
 
@@ -17,21 +16,21 @@ const EVENT_ROLES = [
   'Stage & session runners',
   'Registration desk hosts',
   'Speaker liaisons',
-  'Expo floor coordinators',
+  'Participant flow coordination',
 ];
 
 const COMMUNITY_ROLES = [
-  'City chapter leads',
-  'Society partnership scouts',
-  'Mentor-circle coordinators',
-  'Community moderators',
+  'Campus society coordination',
+  'Outreach & registrations support',
+  'Participant support',
+  'Community moderation',
 ];
 
 const MEDIA_ROLES = [
   'Event photographers',
   'Short-form video editors',
   'Live social coverage',
-  'Story writers & diarists',
+  'Story writers',
 ];
 
 export default function Volunteer() {
@@ -70,14 +69,14 @@ export default function Volunteer() {
   return (
     <>
       <PageHero
-        eyebrow="Volunteer community"
-        title="Join the Thrive Pakistan volunteer community."
-        lead="300+ volunteers across 10 cities run our stages, desks, cameras and community rooms. This is where operations skills, friendships and careers begin."
+        eyebrow="Volunteer"
+        title="Build the platform with us."
+        lead="Thrive Pakistan platforms are run by young people — stages, registration, media, outreach and operations. Volunteering is where responsibility, skills and professional relationships begin."
         crumbs={[{ label: 'Volunteers' }]}
         meta={[
-          { icon: 'users', label: '300+ active volunteers' },
-          { icon: 'badge', label: 'Certified experience' },
-          { icon: 'door', label: 'First access to roles' },
+          { icon: 'users', label: 'Student & community teams' },
+          { icon: 'badge', label: 'Real operational roles' },
+          { icon: 'door', label: 'Pathways into team leadership' },
         ]}
       />
 
@@ -105,7 +104,7 @@ export default function Volunteer() {
       <section className="section section--dark">
         <div className="container">
           <Reveal>
-            <SectionHeader dark eyebrow="Where you can plug in" title="Areas & roles open right now." />
+            <SectionHeader dark eyebrow="Where you can plug in" title="Areas & example roles." />
           </Reveal>
           <ul className="role-chips" style={{ marginBottom: 30 }}>
             {VOLUNTEER_AREAS.map((a) => (
@@ -140,8 +139,9 @@ export default function Volunteer() {
             <span className="eyebrow">Registration</span>
             <h2>Raise your hand.</h2>
             <p style={{ color: 'var(--muted-text)' }}>
-              Tell us your city, skills and the area you want to try first. The community lead onboards new
-              volunteers in weekly cohorts — you'll shadow one event before owning a role.
+              Tell us your city, skills and the area you want to try first. Volunteers are onboarded
+              through the People &amp; HR function and attached to a functional owner — not left in an
+              unstructured group.
             </p>
             <div className="event-block">
               <h4 style={{ marginBottom: 10 }}>What we ask of volunteers</h4>
@@ -153,18 +153,10 @@ export default function Volunteer() {
               </ul>
             </div>
             <ul className="role-chips">
-              <li><Icon name="users" size={15} /> 300+ volunteers</li>
-              <li><Icon name="pin" size={15} /> 10 city chapters</li>
-              <li><Icon name="clock" size={15} /> Weekly onboarding cohorts</li>
+              <li><Icon name="users" size={15} /> Attached to a functional owner</li>
+              <li><Icon name="badge" size={15} /> Work credited and documented</li>
+              <li><Icon name="trend" size={15} /> Feedback on output, deadlines & conduct</li>
             </ul>
-            <figure className="testimonial-card" style={{ marginTop: 8 }}>
-              <Icon name="quote" size={20} className="testimonial-card__quote" />
-              <blockquote>{TESTIMONIALS[5].quote}</blockquote>
-              <figcaption>
-                <strong>{TESTIMONIALS[5].name}</strong>
-                <span>{TESTIMONIALS[5].role}</span>
-              </figcaption>
-            </figure>
           </Reveal>
 
           <Reveal delay={100}>

@@ -35,7 +35,7 @@ export default function ProgramDetail() {
     return (
       <section className="section">
         <div className="container">
-          <EmptyState title="Program not found." message="The program may have been renamed or the link is incorrect." icon="compass" />
+          <EmptyState title="Focus area not found." message="The area may have been renamed or the link is incorrect." icon="compass" />
           <p style={{ textAlign: 'center', marginTop: 16 }}>
             <Link to="/programs" className="btn btn--primary">All programs</Link>
           </p>
@@ -56,8 +56,8 @@ export default function ProgramDetail() {
         title={program.title}
         lead={program.description}
         meta={[
-          { icon: 'spark', label: `${program.outcomes.length} core outcomes` },
-          { icon: 'calendar', label: `${events.length} linked events this cycle` },
+          { icon: 'spark', label: 'Focus area' },
+          { icon: 'calendar', label: events.length > 0 ? `${events.length} linked platform${events.length === 1 ? '' : 's'}` : 'Platform programme directions' },
         ]}
       />
 
@@ -65,7 +65,7 @@ export default function ProgramDetail() {
         <div className="container grid grid--2" style={{ alignItems: 'start', gap: 'clamp(26px,4vw,54px)' }}>
           <Reveal>
             <div className="event-block">
-              <h3>How the program works</h3>
+              <h3>What this area covers</h3>
               <p style={{ color: 'var(--muted-text)', lineHeight: 1.8 }}>{program.details}</p>
               <div style={{ marginTop: 20, position: 'relative', borderRadius: 'var(--r-lg)', overflow: 'hidden', aspectRatio: '16/9' }}>
                 <SpriteBox image={program.image} label={`${program.title} artwork`} style={{ position: 'absolute', inset: 0 }} />
@@ -74,7 +74,7 @@ export default function ProgramDetail() {
           </Reveal>
           <Reveal delay={100}>
             <div className="event-block">
-              <h3>Objectives — what participants get</h3>
+              <h3>Focus areas</h3>
               <ul className="highlights-list">
                 {program.outcomes.map((o) => (
                   <li key={o}><Icon name="check" size={17} /> {o}</li>
@@ -91,14 +91,14 @@ export default function ProgramDetail() {
               <div className="impact-quote" style={{ marginTop: 26 }}>
                 <Icon name="trend" size={20} />
                 <div>
-                  <strong>Impact (demo figure)</strong>
+                  <strong>Why it matters</strong>
                   <p>{program.impact}</p>
                 </div>
               </div>
 
               <div style={{ marginTop: 18, display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                 <Button to="/events" icon="arrow-right">See related events</Button>
-                <Button to="/contact" variant="outline">Bring this program to us</Button>
+                <Button to="/contact" variant="outline">Collaborate with us</Button>
               </div>
             </div>
           </Reveal>
@@ -109,7 +109,7 @@ export default function ProgramDetail() {
         <section className="section section--light">
           <div className="container">
             <Reveal>
-              <SectionHeader eyebrow="Linked events" title="Where this program shows up." />
+              <SectionHeader eyebrow="Linked platforms" title="Where this area shows up." />
             </Reveal>
             <div className="grid grid--3">
               {events.map((e, i) => (
@@ -125,7 +125,7 @@ export default function ProgramDetail() {
       <section className="section">
         <div className="container">
           <Reveal>
-            <SectionHeader eyebrow="Keep exploring" title="Other programs" />
+            <SectionHeader eyebrow="Keep exploring" title="Other focus areas" />
           </Reveal>
           <div className="grid grid--3">
             {others.map((p, i) => (

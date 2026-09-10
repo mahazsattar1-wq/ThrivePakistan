@@ -14,7 +14,7 @@ const PAGE_SIZE = 6;
 export default function Blog() {
   useSeo({
     title: 'Blog & News',
-    description: 'The Thrive Pakistan newsroom — field notes, playbooks and stories on technology, leadership, entrepreneurship, youth, women and community.',
+    description: 'The Thrive Pakistan newsroom — organizational notes and perspectives on technology, opportunity, education and ecosystem building in Hazara and Khyber Pakhtunkhwa.',
   });
 
   const [params, setParams] = useSearchParams();
@@ -66,12 +66,12 @@ export default function Blog() {
     <>
       <PageHero
         eyebrow="Newsroom"
-        title="Stories & playbooks from the field."
-        lead="Written by practitioners — event directors, investors, volunteers and community leads — not by a marketing bot."
+        title="Notes from the build."
+        lead="Organizational notes and perspectives — grounded in what we actually know, do and are building."
         crumbs={[{ label: 'Blog' }]}
         meta={[
-          { icon: 'spark', label: '8 categories' },
-          { icon: 'eye', label: '90K+ reads' },
+          { icon: 'spark', label: 'Organization · FutureX · Perspectives' },
+          { icon: 'shield', label: 'No invented facts — only the documented record' },
         ]}
       />
 

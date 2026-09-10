@@ -44,7 +44,7 @@ export default function EventDetail() {
           organizer: { '@type': 'Organization', name: 'Thrive Pakistan' },
           image: '/img/hero-futurex.jpg',
           isAccessibleForFree: false,
-          additionalNote: 'Frontend prototype: event details are mock data.',
+          additionalNote: 'Date and venue as confirmed by Thrive Pakistan. Programme details are subject to confirmation.',
         }
       : null,
   });
@@ -107,7 +107,7 @@ export default function EventDetail() {
 
   const upcoming = event.status === 'upcoming';
   const visibleTabs = TABS.filter((t) => {
-    if (t === 'Agenda') return event.agenda.length > 0;
+    if (t === 'Agenda') return event.agenda.length > 0 || (event.programmeComponents?.length ?? 0) > 0;
     if (t === 'Speakers') return speakers.length > 0;
     if (t === 'Gallery') return gallery.length > 0;
     if (t === 'FAQs') return event.faqs.length > 0;
@@ -186,17 +186,31 @@ export default function EventDetail() {
             {tab === 'Agenda' && (
               <div className="event-block" role="tabpanel">
                 <h3>Programme</h3>
-                <ol className="agenda-list">
-                  {event.agenda.map((a) => (
-                    <li key={a.time + a.title}>
-                      <time>{a.time}</time>
-                      <div>
-                        <strong>{a.title}</strong>
-                        {a.detail && <span>{a.detail}</span>}
-                      </div>
-                    </li>
-                  ))}
-                </ol>
+                {event.agenda.length > 0 ? (
+                  <ol className="agenda-list">
+                    {event.agenda.map((a) => (
+                      <li key={a.time + a.title}>
+                        <time>{a.time}</time>
+                        <div>
+                          <strong>{a.title}</strong>
+                          {a.detail && <span>{a.detail}</span>}
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                ) : (
+                  <>
+                    <p className="muted" style={{ marginBottom: 14 }}>
+                      The final agenda has not been confirmed. Below are the programme components being
+                      developed — subject to confirmation.
+                    </p>
+                    <ul className="highlights-list">
+                      {(event.programmeComponents ?? []).map((c) => (
+                        <li key={c}><Icon name="check" size={17} /> {c}</li>
+                      ))}
+                    </ul>
+                  </>
+                )}
               </div>
             )}
 
@@ -233,7 +247,7 @@ export default function EventDetail() {
           {/* ---------- Sticky aside ---------- */}
           <aside className="event-aside">
             <div className="aside-card aside-card--dark">
-              <h4>{upcoming ? 'Reserve your seat' : 'Event recap'}</h4>
+              <h4>{upcoming ? 'Event details' : 'Event recap'}</h4>
               <ul className="aside-card__rows">
                 <li><Icon name="calendar" size={16} /><span>{event.dateLabel}<br /><span className="muted">{event.time}</span></span></li>
                 <li><Icon name="pin" size={16} /><span>{event.location}</span></li>

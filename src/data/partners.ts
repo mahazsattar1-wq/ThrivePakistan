@@ -1,69 +1,81 @@
-import type { Partner, PartnerTier } from '../types';
+import type { Partner } from '../types';
 
 /**
- * MOCK DATA — fictional partner brands (no real company logos or marks).
- * Partner "logos" are rendered as generated typographic marks in the UI.
+ * PARTNER DATA.
+ *
+ * Thrive Pakistan has no confirmed current partners to display, so the
+ * partner wall is intentionally empty. Organizations named in the
+ * organizational documents appear on the Partners page only as text
+ * references to *previous* ecosystem engagement — never as logo marks or
+ * current partnerships.
+ *
+ * Partnership models below describe how organizations CAN collaborate —
+ * they are propositions drawn from the organizational profile, not
+ * claimed existing agreements.
  */
-export const PARTNERS: Partner[] = [
-  { id: 'novatech', name: 'NovaTech', category: 'Technology', tier: 'Ecosystem Partner', blurb: 'Platform engineering & cloud infrastructure' },
-  { id: 'vertex-labs', name: 'Vertex Labs', category: 'Technology', tier: 'Strategic Partner', blurb: 'Systems research & developer tools' },
-  { id: 'greengrid', name: 'GreenGrid', category: 'Technology', tier: 'Community Partner', blurb: 'Climate tech & smart energy systems' },
-  { id: 'orbitpay', name: 'OrbitPay', category: 'Corporate', tier: 'Strategic Partner', blurb: 'Digital payments & financial inclusion' },
-  { id: 'futureworks', name: 'FutureWorks', category: 'Corporate', tier: 'Ecosystem Partner', blurb: 'Early-stage venture capital' },
-  { id: 'edusphere', name: 'EduSphere', category: 'Education', tier: 'Ecosystem Partner', blurb: 'University network & learning platforms' },
-  { id: 'campuslink', name: 'CampusLink', category: 'Education', tier: 'Community Partner', blurb: 'Student society & campus event platform' },
-  { id: 'mediapulse', name: 'MediaPulse', category: 'Media', tier: 'Strategic Partner', blurb: 'Digital media & event broadcasting' },
-  { id: 'daily-spark', name: 'The Daily Spark', category: 'Media', tier: 'Community Partner', blurb: 'Independent technology journalism' },
-  { id: 'roshan-communities', name: 'Roshan Communities', category: 'Community', tier: 'Community Partner', blurb: 'Neighbourhood development networks' },
-  { id: 'youthcircle', name: 'YouthCircle', category: 'Community', tier: 'Strategic Partner', blurb: 'National youth volunteering network' },
-  { id: 'skyline-mobility', name: 'Skyline Mobility', category: 'Corporate', tier: 'Community Partner', blurb: 'Inter-city travel & event logistics' },
-];
+export const PARTNERS: Partner[] = [];
 
-export const PARTNER_CATEGORIES = ['Technology', 'Education', 'Media', 'Corporate', 'Community'] as const;
-
-/** Mock partnership tiers — no pricing published by design. */
-export const PARTNER_TIERS: PartnerTier[] = [
+/**
+ * Ways organizations can engage with Thrive Pakistan — grounded in the
+ * "why work with us: partners & sponsors" sections of the organizational
+ * profile.
+ */
+export const ENGAGEMENT_MODELS = [
   {
-    id: 'community',
-    name: 'Community Partner',
-    description: 'For organizations embedding themselves in the community layer: societies, city chapters and cause networks.',
-    benefits: ['Logo on event community wall', 'Volunteer pipeline access', 'Co-hosted city activities', 'Newsletter mentions'],
+    id: 'education',
+    name: 'Education & Future Skills',
+    text: 'Co-develop education and future-skills programming with institutions — from campus collaborations to practical learning experiences.',
   },
   {
-    id: 'strategic',
-    name: 'Strategic Partner',
-    description: 'For brands seeking sustained visibility and talent access across a season of Thrive platforms.',
-    benefits: [
-      'Branding across a season of events',
-      'Speaking & panel slots',
-      'Booth at flagship events',
-      'Talent & internship desk access',
-      'Co-branded content series',
-    ],
-    highlight: true,
+    id: 'labs',
+    name: 'Technology & Innovation Labs',
+    text: 'Support AI, cybersecurity and innovation labs, demonstrations and challenges where technology meets learners.',
   },
   {
-    id: 'ecosystem',
-    name: 'Ecosystem Partner',
-    description: 'For institutions co-building the ecosystem itself — programs, research, capital and national initiatives.',
-    benefits: [
-      'Named program partnership',
-      'Advisory seat on program design',
-      'Year-round executive access',
-      'First look at new city launches',
-      'Impact reporting & CSR narrative',
-    ],
+    id: 'careers',
+    name: 'Careers & Recruitment',
+    text: 'Connect with regional talent through career pathways, internships, employer interaction and portfolio exposure.',
   },
-];
+  {
+    id: 'entrepreneurship',
+    name: 'Entrepreneurship & Mentors',
+    text: 'Back founders and innovators with mentor support, startup showcases and practical entrepreneurship programming.',
+  },
+  {
+    id: 'inclusion',
+    name: 'Financial Literacy & Inclusion',
+    text: 'Partner on financial literacy, fintech awareness and inclusion programming for young people entering the digital economy.',
+  },
+  {
+    id: 'media',
+    name: 'Media & Outreach',
+    text: 'Collaborate on media, outreach, production and community initiatives that extend the reach of regional platforms.',
+  },
+] as const;
 
-export const PARTNER_BENEFITS = [
-  { icon: 'eye', title: 'Brand Visibility', text: 'Stage, screen, signage and digital placement across a national event calendar.' },
-  { icon: 'users', title: 'Audience Access', text: 'Direct, consented access to students, professionals and founders who show up.' },
-  { icon: 'mic', title: 'Speaking Opportunities', text: 'Keynotes, panels and workshops that position your leaders as practitioners.' },
-  { icon: 'badge', title: 'Event Branding', text: 'Category ownership — power a track, a lab or an award in your name.' },
-  { icon: 'globe', title: 'Digital Exposure', text: 'Newsletter, video channel and social reach beyond the event floor.' },
-  { icon: 'heart', title: 'Community Engagement', text: 'Volunteer programs and city chapters that carry your brand into communities.' },
-  { icon: 'briefcase', title: 'Talent Access', text: 'Internship desks, hackathon hiring floors and portfolio clinics.' },
-  { icon: 'bulb', title: 'Thought Leadership', text: 'Co-published research, playbooks and opinion platforms.' },
-  { icon: 'leaf', title: 'CSR & Impact', text: 'Measurable impact stories for sustainability and CSR reporting.' },
+/**
+ * What collaboration with Thrive Pakistan offers — paraphrased from the
+ * organizational profile (partners & sponsors sections).
+ */
+export const COLLABORATION_VALUES = [
+  {
+    icon: 'users',
+    title: 'A credible regional network',
+    text: 'Reach a locally rooted youth and innovation network in Hazara and northern Pakistan.',
+  },
+  {
+    icon: 'target',
+    title: 'Purposeful activation',
+    text: 'Every collaboration is designed to create a meaningful role, activation or outcome — not simply another logo.',
+  },
+  {
+    icon: 'briefcase',
+    title: 'Talent access',
+    text: 'A trusted route to students, graduates and emerging professionals, ideas and communities.',
+  },
+  {
+    icon: 'shield',
+    title: 'Ownership & follow-through',
+    text: 'Clearer coordination, documentation and post-programme follow-up, with accountable ownership.',
+  },
 ] as const;

@@ -1,76 +1,47 @@
-import { useEffect, useState } from 'react';
-import { PARTNER_CATEGORIES } from '../data/partners';
+import { COLLABORATION_VALUES, ENGAGEMENT_MODELS } from '../data/partners';
+import { PRIOR_ECOSYSTEM_NAMES, PRIOR_ECOSYSTEM_NOTE } from '../data/org';
 import { useSeo } from '../hooks';
-import type { Partner } from '../types';
-import { partnersService } from '../services/partnersService';
 import { PageHero } from '../components/page-hero';
-import { Button, PartnerMark, Reveal } from '../components/ui';
+import { Button, Icon, Reveal, SectionHeader } from '../components/ui';
+import type { IconName } from '../components/ui';
 
 export default function Partners() {
   useSeo({
-    title: 'Partners & Sponsors',
-    description: 'The organizations powering Thrive Pakistan platforms — technology, education, media, corporate and community partners. (Mock brands on this prototype.)',
+    title: 'Partners & Collaboration',
+    description:
+      'Thrive Pakistan works to develop collaboration across educational institutions, industry, government, technology practitioners, founders and community organizations.',
   });
-
-  const [category, setCategory] = useState('all');
-  const [partners, setPartners] = useState<Partner[] | null>(null);
-
-  useEffect(() => {
-    let alive = true;
-    setPartners(null);
-    partnersService.list(category).then((p) => alive && setPartners(p));
-    return () => {
-      alive = false;
-    };
-  }, [category]);
 
   return (
     <>
       <PageHero
-        eyebrow="Partners & sponsors"
-        title="The ecosystem backs the ecosystem."
-        lead="Technology, education, media, corporate and community organizations co-build every Thrive platform. (All partner brands here are fictional mock data.)"
+        eyebrow="Partnership"
+        title="Built through collaboration."
+        lead="Partnership with Thrive Pakistan means co-building access — not attaching a name to an activity after the important decisions are made."
         crumbs={[{ label: 'Partners' }]}
         meta={[
-          { icon: 'handshake', label: '30+ partner organizations' },
-          { icon: 'trend', label: '3 partnership tiers' },
+          { icon: 'handshake', label: 'Institutions · Industry · Government · Communities' },
+          { icon: 'shield', label: 'Purposeful activation, not logo placement' },
         ]}
       />
 
+      {/* Why collaborate */}
       <section className="section section--tight">
         <div className="container">
-          <div className="filter-bar" role="group" aria-label="Partner categories">
-            <div className="filter-bar__chips">
-              <button
-                type="button"
-                className={`chip ${category === 'all' ? 'chip--active' : ''}`}
-                onClick={() => setCategory('all')}
-                aria-pressed={category === 'all'}
-              >
-                All partners
-              </button>
-              {PARTNER_CATEGORIES.map((c) => (
-                <button
-                  key={c}
-                  type="button"
-                  className={`chip ${category === c ? 'chip--active' : ''}`}
-                  onClick={() => setCategory(c)}
-                  aria-pressed={category === c}
-                >
-                  {c}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="partner-grid">
-            {(partners ?? []).map((p, i) => (
-              <Reveal key={p.id} delay={(i % 4) * 70}>
-                <div className="partner-tile">
-                  <PartnerMark partner={p} index={i} />
-                  <span className="partner-tile__cat">{p.category}</span>
-                  <span className="partner-tile__tier">{p.tier}</span>
-                  <span className="partner-tile__blurb">{p.blurb}</span>
+          <Reveal>
+            <SectionHeader
+              eyebrow="Why collaborate"
+              title="What partnership creates."
+              lead="Thrive Pakistan has no partner logo wall to show yet — because we only display collaborations that are real. Here is what working together is designed to produce."
+            />
+          </Reveal>
+          <div className="grid grid--4">
+            {COLLABORATION_VALUES.map((v, i) => (
+              <Reveal key={v.title} delay={i * 70}>
+                <div className="value-card" style={{ height: '100%' }}>
+                  <span className="value-card__icon"><Icon name={v.icon as IconName} size={20} /></span>
+                  <h3>{v.title}</h3>
+                  <p>{v.text}</p>
                 </div>
               </Reveal>
             ))}
@@ -78,16 +49,69 @@ export default function Partners() {
         </div>
       </section>
 
+      {/* Ways to engage */}
+      <section className="section section--dark">
+        <div className="container">
+          <Reveal>
+            <SectionHeader
+              dark
+              eyebrow="Ways to engage"
+              title="Where organizations plug in."
+              lead="Engagement models shaped by the focus areas of our platforms — each collaboration is scoped around a meaningful role and outcome."
+            />
+          </Reveal>
+          <div className="grid grid--3">
+            {ENGAGEMENT_MODELS.map((m, i) => (
+              <Reveal key={m.id} delay={(i % 3) * 80}>
+                <article className="event-block" style={{ height: '100%' }}>
+                  <h3>{m.name}</h3>
+                  <p style={{ marginTop: 8, color: 'var(--muted-on-dark)', lineHeight: 1.65 }}>{m.text}</p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Prior engagement */}
+      <section className="section">
+        <div className="container container--narrow">
+          <Reveal>
+            <SectionHeader
+              center
+              eyebrow="Previous ecosystem engagement"
+              title="Organizations we have worked alongside."
+              lead="Participation, collaboration or support named in our organizational record from Hazara Tech Fiesta 2025 and related work."
+            />
+          </Reveal>
+          <Reveal delay={90}>
+            <ul className="track-chips" style={{ justifyContent: 'center', marginTop: 8 }}>
+              {PRIOR_ECOSYSTEM_NAMES.map((n) => (
+                <li key={n}>{n}</li>
+              ))}
+            </ul>
+          </Reveal>
+          <Reveal delay={130}>
+            <p style={{ marginTop: 18, fontSize: '0.8rem', color: 'var(--muted-text)', textAlign: 'center' }}>
+              {PRIOR_ECOSYSTEM_NOTE}
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* CTA */}
       <section className="section cta-band">
         <span className="cta-band__glow" aria-hidden="true" />
         <div className="container cta-band__inner">
           <Reveal>
-            <h2>Your organization belongs on this wall.</h2>
+            <h2>Explore partnership opportunities.</h2>
             <p style={{ marginTop: 10 }}>
-              Explore what partnership includes — visibility, talent, thought leadership and measurable impact.
+              Educational institutions, companies, public departments, media and community organizations —
+              tell us what you want to build, and we will scope a meaningful role together.
             </p>
             <div className="cta-band__ctas">
-              <Button to="/become-a-partner" icon="arrow-right">Become a Strategic Partner</Button>
+              <Button to="/become-a-partner" icon="arrow-right">Become a Partner</Button>
+              <Button href="mailto:partnerships@thrivepakistan.com" variant="outline-light">partnerships@thrivepakistan.com</Button>
             </div>
           </Reveal>
         </div>

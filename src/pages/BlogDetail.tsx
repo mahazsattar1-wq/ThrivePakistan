@@ -25,7 +25,7 @@ export default function BlogDetail() {
           description: post.excerpt,
           datePublished: post.date,
           timeRequired: `PT${post.readingTime}M`,
-          author: { '@type': 'Person', name: post.author, description: post.authorRole, additionalNote: 'Mock author (prototype)' },
+          author: { '@type': 'Organization', name: post.author, description: post.authorRole },
           publisher: { '@type': 'Organization', name: 'Thrive Pakistan' },
           articleSection: post.category,
           keywords: post.tags.join(', '),
@@ -83,8 +83,12 @@ export default function BlogDetail() {
           <span>{formatDate(post.date)}</span>
           <span aria-hidden="true">·</span>
           <span>{post.readingTime} min read</span>
-          <span aria-hidden="true">·</span>
-          <span>{formatViews(post.views)} views</span>
+          {post.views > 0 && (
+            <>
+              <span aria-hidden="true">·</span>
+              <span>{formatViews(post.views)} views</span>
+            </>
+          )}
         </div>
       </PageHero>
 

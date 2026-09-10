@@ -7,10 +7,12 @@ import type { ImageRef, SheetId } from './types';
  * Photography-style artwork is stored as sprite sheets (one request per sheet
  * instead of one per card) plus a single cinematic hero image. The percentage
  * background-position technique displays any cell of a sheet crisply.
+ *
+ * Note: people-portrait sheets were removed — Thrive Pakistan does not display
+ * AI-generated or fictional faces for real people. Team/leadership entries use
+ * neutral monogram avatars until approved photographs are available.
  */
 export const SHEETS: Record<SheetId, { src: string; cols: number; rows: number }> = {
-  portraitsA: { src: '/img/sprites/portraits-a.jpg', cols: 3, rows: 3 },
-  portraitsB: { src: '/img/sprites/portraits-b.jpg', cols: 3, rows: 3 },
   eventsA: { src: '/img/sprites/events-a.jpg', cols: 3, rows: 2 },
   eventsB: { src: '/img/sprites/events-b.jpg', cols: 3, rows: 2 },
   galleryA: { src: '/img/sprites/gallery-a.jpg', cols: 3, rows: 3 },

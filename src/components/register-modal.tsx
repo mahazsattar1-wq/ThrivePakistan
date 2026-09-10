@@ -36,7 +36,7 @@ export function RegisterModal({
     const res = await submitForm('registration', { ...values, event: eventName });
     setMessage(res.message);
     setState('done');
-    push({ title: 'Registration interest recorded', message: `We saved your seat request for ${eventName}.`, tone: 'success' });
+    push({ title: 'Registration interest recorded', message: `We’ve recorded your interest in ${eventName} and will contact you as details are confirmed.`, tone: 'success' });
   };
 
   const reset = () => {
@@ -62,7 +62,7 @@ export function RegisterModal({
             <span className="eyebrow">Registration</span>
             <h3 style={{ marginTop: 8 }}>{eventName}</h3>
             <p style={{ color: 'var(--muted-text)', fontSize: '0.92rem', marginTop: 6 }}>
-              Passes open in waves. Register interest and we'll email your wave-one code first.
+              Registration details are not announced yet. Register your interest and we’ll contact you as details are confirmed.
             </p>
           </div>
           <FieldShell id="reg-name" label="Full name" required error={errors.name}>

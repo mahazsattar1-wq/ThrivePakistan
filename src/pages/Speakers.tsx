@@ -12,7 +12,8 @@ import { Button, CardSkeleton, EmptyState, Icon, Reveal } from '../components/ui
 export default function Speakers() {
   useSeo({
     title: 'Speakers',
-    description: 'The Thrive Pakistan speaker directory — founders, researchers, executives and creators sharing practice across technology, leadership, education and more.',
+    description:
+      'Thrive Pakistan speaker announcements — confirmed FutureX speakers and practitioners will be announced here as the programme is confirmed.',
   });
 
   const [params, setParams] = useSearchParams();
@@ -50,13 +51,13 @@ export default function Speakers() {
   return (
     <>
       <PageHero
-        eyebrow="Speaker directory"
-        title="The people who move our rooms."
-        lead="Search by name or topic, filter by expertise and event — every profile opens a full page with sessions and talking points."
+        eyebrow="Speakers"
+        title="Practitioners over personalities."
+        lead="We prioritize people who build, hire, research, lead and solve. Confirmed speakers will be announced here as the FutureX programme is finalized."
         crumbs={[{ label: 'Speakers' }]}
         meta={[
-          { icon: 'mic', label: '100+ speakers hosted' },
-          { icon: 'users', label: '7 expertise areas' },
+          { icon: 'mic', label: 'Announcements to come' },
+          { icon: 'spark', label: 'FutureX 2026 · 24 September 2026' },
         ]}
       />
 
@@ -115,7 +116,7 @@ export default function Speakers() {
 
           <div className="listing-head">
             <p className="listing-count" role="status">
-              {speakers === null ? 'Loading speakers…' : `${speakers.length} speaker${speakers.length === 1 ? '' : 's'} found`}
+              {speakers === null ? 'Loading speakers…' : `${speakers.length} speaker${speakers.length === 1 ? '' : 's'}`}
             </p>
             <Button variant="ghost" size="sm" to="/become-a-speaker">Become a speaker</Button>
           </div>
@@ -128,10 +129,10 @@ export default function Speakers() {
             </div>
           ) : speakers.length === 0 ? (
             <EmptyState
-              title="No speakers match your search."
-              message="Try another expertise, clear the event filter, or search a different topic."
-              actionLabel="Clear all filters"
-              onAction={reset}
+              title="No speakers announced yet."
+              message="Speaker announcements will be shared as the FutureX programme is confirmed. No unconfirmed names are published here."
+              actionLabel={query || expertise !== 'all' || event !== 'all' ? 'Clear all filters' : undefined}
+              onAction={query || expertise !== 'all' || event !== 'all' ? reset : undefined}
               icon="mic"
             />
           ) : (

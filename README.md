@@ -1,10 +1,33 @@
 # Thrive Pakistan — Frontend Platform
 
-> **Connect. Learn. Lead. Thrive.**
-> Complete frontend prototype for Thrive Pakistan — an events, leadership,
-> technology, youth-development, education, networking and community
-> organization. Built to be replaced piece-by-piece by a PHP + MySQL backend
-> and admin dashboard without redesigning the UI.
+> **Talent exists everywhere. Opportunity does not.**
+> Frontend platform for Thrive Pakistan — a youth-led technology and
+> ecosystem-development platform based in Hazara, Khyber Pakhtunkhwa
+> (founded 2025). Built to be replaced piece-by-piece by a PHP + MySQL
+> backend and admin dashboard without redesigning the UI.
+
+## Content accuracy
+
+All organizational content (description, mission, vision, leadership roster,
+previous work, FutureX 2026 details, contact channels) is grounded in the
+official Thrive Pakistan Organizational Profile (August 2026) and the
+FutureX 2026 documents — see `src/data/org.ts` as the single source of
+verified facts.
+
+Rules enforced across the codebase:
+
+- **No invented facts.** Statistics, speakers, sponsors, partners, venues,
+  dates and achievements appear only when confirmed by official documents.
+- **FutureX 2026** is published as confirmed for 24 September 2026 at
+  Government Post Graduate College Mansehra (MoC signed 6 August 2026).
+  Its final agenda, speakers, sponsors, ticketing and registration are
+  labelled as *developing / subject to confirmation* until announced.
+- **No AI-generated people.** Portrait sprite sheets were removed; the
+  leadership roster uses neutral monogram avatars until approved
+  photographs are available.
+- Speakers, videos and partners sections ship with professional empty
+  states and populate automatically from `/api/*.php` once the backend
+  provides confirmed data.
 
 ## Stack
 
@@ -25,15 +48,15 @@ Brand colours were sampled from the official logo artwork:
 | `--green-bright`  | `#36FF00` | FutureX "X" accent (used rarely)|
 | `--dark`          | `#0A0B0B` | FutureX black logo base         |
 
-Illustrative artwork (event covers, portraits, gallery, hero) lives in
-`public/img/` as sprite sheets — one request per sheet, displayed per-card via
-CSS background-position.
+Illustrative artwork (event covers, gallery, hero) lives in `public/img/` as
+sprite sheets — one request per sheet, displayed per-card via CSS
+background-position. People-portrait sheets were intentionally removed.
 
 ## Mock data & future backend
 
 All content implements the interfaces in `src/types.ts` and lives in
-`src/data/*` (events, speakers, team, programs, partners, blogs, videos,
-gallery, testimonials, stats, site). Services in `src/services/*` are the only
+`src/data/*` (org facts, events, speakers, team, programs, partners, blogs,
+videos, gallery, stats, site). Services in `src/services/*` are the only
 layer that reads data:
 
 ```
@@ -52,8 +75,10 @@ data; POST endpoints validate and acknowledge submissions. When DB credentials
 exist in server env vars (`TP_DB_HOST/NAME/USER/PASS`), `lib.php::tp_db_ready()`
 flips and the TODO sections become the only code to implement.
 
-> All people, partners, statistics, dates and articles are **fictional mock
-> data** for the prototype unless verified by the organization.
+> Speakers, videos and partners collections are intentionally empty until
+> officially confirmed content exists; the UI ships honest empty states for
+> each. Events currently list only the documented record: FutureX 2026
+> (upcoming) and Hazara Tech Fiesta 2025 (past).
 
 ## Routes
 

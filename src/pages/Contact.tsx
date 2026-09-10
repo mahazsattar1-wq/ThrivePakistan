@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { CONTACT_INFO } from '../data/site';
+import { ORG } from '../data/org';
 import { useSeo } from '../hooks';
 import { PageHero } from '../components/page-hero';
 import { FieldShell, FormSuccess, SubmitButton, TextArea, TextInput } from '../components/forms';
@@ -11,10 +12,41 @@ import { useToast } from '../components/feedback';
 
 const INITIAL = { name: '', email: '', phone: '', subject: '', message: '' };
 
+/** Direct official channels — verified against the organizational documents. */
+const DIRECT_CHANNELS = [
+  {
+    icon: 'handshake' as const,
+    title: 'Partnerships',
+    detail: 'Institutions, industry, sponsors & collaborators',
+    email: CONTACT_INFO.email,
+  },
+  {
+    icon: 'globe' as const,
+    title: 'Marketing & Media',
+    detail: 'Campaigns, press & media collaboration',
+    email: CONTACT_INFO.emailMarketing,
+  },
+  {
+    icon: 'briefcase' as const,
+    title: 'Managing Director',
+    detail: 'MD-level communication',
+    email: CONTACT_INFO.emailMd,
+    phone: CONTACT_INFO.phoneMd,
+  },
+  {
+    icon: 'spark' as const,
+    title: 'Chief Executive Officer',
+    detail: 'CEO-level correspondence',
+    email: CONTACT_INFO.emailCeo,
+    phone: CONTACT_INFO.phoneCeo,
+  },
+];
+
 export default function Contact() {
   useSeo({
     title: 'Contact',
-    description: 'Contact Thrive Pakistan — partnerships, media, volunteering, campus programs and event questions. We reply within two working days.',
+    description:
+      'Contact Thrive Pakistan — partnerships, marketing & media, and direct channels to the Managing Director and CEO. Based in Hazara, Khyber Pakhtunkhwa.',
   });
 
   const [values, setValues] = useState(INITIAL);
@@ -40,7 +72,7 @@ export default function Contact() {
     const res = await submitForm('contact', values);
     setMessage(res.message);
     setState('done');
-    push({ title: 'Message sent', message: 'We reply within two working days.', tone: 'success' });
+    push({ title: 'Message sent', message: 'Thank you for reaching out — the relevant team will follow up.', tone: 'success' });
   };
 
   return (
@@ -48,50 +80,66 @@ export default function Contact() {
       <PageHero
         eyebrow="Contact"
         title="Let's talk about what you're building."
-        lead="Partnerships, media, campus programs, volunteering or a question about an event — one form, one inbox, real humans."
+        lead="Partnerships, media, campus collaboration, volunteering or a question about FutureX 2026 — reach the right team directly."
         crumbs={[{ label: 'Contact' }]}
       />
 
+      {/* Direct channels */}
       <section className="section section--tight">
+        <div className="container">
+          <div className="grid grid--4">
+            {DIRECT_CHANNELS.map((c, i) => (
+              <Reveal key={c.title} delay={i * 70}>
+                <div className="info-card" style={{ height: '100%', flexDirection: 'column', alignItems: 'flex-start', gap: 10 }}>
+                  <span className="info-card__icon"><Icon name={c.icon} size={20} /></span>
+                  <div>
+                    <strong>{c.title}</strong>
+                    <p style={{ fontSize: '0.8rem', color: 'var(--muted-text)', marginTop: 4 }}>{c.detail}</p>
+                    <a href={`mailto:${c.email}`} style={{ display: 'inline-block', marginTop: 8, fontSize: '0.86rem' }}>{c.email}</a>
+                    {c.phone && (
+                      <a href={`tel:${c.phone.replace(/\s/g, '')}`} style={{ display: 'block', marginTop: 4, fontSize: '0.86rem' }}>
+                        {c.phone}
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Org info + form */}
+      <section className="section">
         <div className="container contact-grid">
           <Reveal>
             <div className="info-cards">
               <div className="info-card">
-                <span className="info-card__icon"><Icon name="mail" size={20} /></span>
-                <div>
-                  <strong>Email</strong>
-                  <a href={`mailto:${CONTACT_INFO.email}`}>{CONTACT_INFO.email}</a>
-                </div>
-              </div>
-              <div className="info-card">
-                <span className="info-card__icon"><Icon name="phone" size={20} /></span>
-                <div>
-                  <strong>Phone</strong>
-                  <a href={`tel:${CONTACT_INFO.phone.replace(/\s/g, '')}`}>{CONTACT_INFO.phone}</a>
-                </div>
-              </div>
-              <div className="info-card">
                 <span className="info-card__icon"><Icon name="pin" size={20} /></span>
                 <div>
-                  <strong>Office</strong>
-                  <p>{CONTACT_INFO.address}</p>
+                  <strong>Base</strong>
+                  <p>{ORG.name} is based in {CONTACT_INFO.base}.</p>
                 </div>
               </div>
               <div className="info-card">
-                <span className="info-card__icon"><Icon name="clock" size={20} /></span>
+                <span className="info-card__icon"><Icon name="globe" size={20} /></span>
                 <div>
-                  <strong>Hours</strong>
-                  <p>{CONTACT_INFO.hours}</p>
+                  <strong>Website</strong>
+                  <a href={CONTACT_INFO.website} target="_blank" rel="noopener noreferrer">{CONTACT_INFO.website.replace('https://', '')}</a>
+                </div>
+              </div>
+              <div className="info-card">
+                <span className="info-card__icon"><Icon name="users" size={20} /></span>
+                <div>
+                  <strong>Social</strong>
+                  <p>{CONTACT_INFO.social}</p>
                 </div>
               </div>
               <div className="map-box">
                 <span className="map-box__grid" aria-hidden="true" />
                 <span className="map-box__pin">
                   <Icon name="pin" size={30} />
-                  Islamabad, Pakistan
-                  <span style={{ fontSize: '0.76rem', color: 'var(--muted-on-dark)' }}>
-                    (Contact details are mock data on this prototype)
-                  </span>
+                  Hazara, Khyber Pakhtunkhwa, Pakistan
                 </span>
               </div>
             </div>

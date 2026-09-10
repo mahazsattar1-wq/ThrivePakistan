@@ -6,20 +6,20 @@ import { Button, Reveal } from '../components/ui';
 
 export default function Programs() {
   useSeo({
-    title: 'Programs & Initiatives',
-    description: 'Thrive Pakistan programs: technology & innovation, leadership development, youth and women empowerment, university engagement, entrepreneurship, training and leadership tours.',
+    title: 'Focus Areas',
+    description: 'What Thrive Pakistan works on — technology & digital skills, entrepreneurship, industry exposure, education & campus engagement, youth development and women\u2019s participation.',
   });
 
   return (
     <>
       <PageHero
-        eyebrow="Programs & initiatives"
-        title="Eight engines of the ecosystem."
-        lead="Every Thrive platform belongs to a program with its own outcomes, partners and community — explore each one."
+        eyebrow="Focus areas"
+        title="Six areas where we open access."
+        lead="Programme directions rooted in our strategic goals — shaping the platforms we build and the collaborations we pursue."
         crumbs={[{ label: 'Programs' }]}
         meta={[
-          { icon: 'spark', label: '8 active programs' },
-          { icon: 'pin', label: 'Running in 10+ cities' },
+          { icon: 'spark', label: '6 focus areas' },
+          { icon: 'pin', label: 'Hazara · Khyber Pakhtunkhwa' },
         ]}
       />
 
@@ -39,9 +39,9 @@ export default function Programs() {
         <span className="cta-band__glow" aria-hidden="true" />
         <div className="container cta-band__inner">
           <Reveal>
-            <h2>Want a program on your campus or in your city?</h2>
+            <h2>Want to collaborate on a focus area?</h2>
             <p style={{ marginTop: 10 }}>
-              We co-design stops with universities, societies and city partners every season.
+              We work with universities, colleges, institutions and community organizations across Hazara and Khyber Pakhtunkhwa.
             </p>
             <div className="cta-band__ctas">
               <Button to="/contact" icon="arrow-right">Start a conversation</Button>

@@ -18,7 +18,7 @@ const STATUS_OPTIONS = [
 export default function Events() {
   useSeo({
     title: 'Events',
-    description: 'Explore upcoming and past Thrive Pakistan events — conferences, summits, campus tours, workshops and meetups across the country.',
+    description: 'Thrive Pakistan events — FutureX 2026 and the documented record of Hazara Tech Fiesta 2025. Only confirmed events are published here.',
   });
 
   const [params, setParams] = useSearchParams();
@@ -52,13 +52,12 @@ export default function Events() {
     <>
       <PageHero
         eyebrow="Events"
-        title="Every room where Pakistan's builders meet."
-        lead="Filter by status, category or city — every card opens a full event experience with agenda, speakers, sponsors and FAQs."
+        title="Platforms, festivals and convenings."
+        lead="Only events confirmed in our organizational record are published here — with details as confirmed, and nothing invented."
         crumbs={[{ label: 'Events' }]}
         meta={[
-          { icon: 'calendar', label: 'Season 2026 live now' },
-          { icon: 'pin', label: '10+ cities' },
-          { icon: 'users', label: '15,000+ participants to date' },
+          { icon: 'calendar', label: 'FutureX 2026 · 24 September 2026' },
+          { icon: 'pin', label: 'Mansehra, Khyber Pakhtunkhwa' },
         ]}
       />
 
@@ -122,7 +121,7 @@ export default function Events() {
           ) : events.length === 0 ? (
             <EmptyState
               title="No events match your filters."
-              message="Try a different category or city — or browse everything we've produced so far."
+              message="Try a different category or status — FutureX 2026 and Hazara Tech Fiesta 2025 are currently listed."
               actionLabel="Reset filters"
               onAction={reset}
               icon="calendar"

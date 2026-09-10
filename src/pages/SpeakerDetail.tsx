@@ -6,6 +6,7 @@ import type { Speaker, ThriveEvent } from '../types';
 import { EVENTS } from '../data/events';
 import { PageHero } from '../components/page-hero';
 import { Badge, Button, EmptyState, Icon, Reveal, SectionHeader, SpriteBox } from '../components/ui';
+import { MonogramAvatar } from '../components/cards';
 import { EventCard } from '../components/cards';
 
 export default function SpeakerDetail() {
@@ -24,7 +25,7 @@ export default function SpeakerDetail() {
           worksFor: { '@type': 'Organization', name: speaker.organization },
           knowsAbout: speaker.topics,
           description: speaker.bio,
-          additionalNote: 'Fictional mock profile for frontend prototype.',
+          additionalNote: 'Speaker profile published by Thrive Pakistan.',
         }
       : null,
   });
@@ -61,7 +62,9 @@ export default function SpeakerDetail() {
     <>
       <PageHero crumbs={[{ label: 'Speakers', to: '/speakers' }, { label: speaker.name }]}>
         <div className="person-hero__grid">
-          <SpriteBox image={speaker.portrait} label={`Illustrated portrait of ${speaker.name}`} className="person-hero__photo" />
+          {speaker.portrait
+              ? <SpriteBox image={speaker.portrait} label={`Portrait of ${speaker.name}`} className="person-hero__photo" />
+              : <MonogramAvatar name={speaker.name} className="person-hero__photo" />}
           <div className="person-hero__info">
             <span className="eyebrow">Speaker</span>
             <h1>{speaker.name}</h1>

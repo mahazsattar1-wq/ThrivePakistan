@@ -232,15 +232,15 @@ export function Footer() {
               <img src={BRAND.logoWhite} alt="Thrive Pakistan" width={176} height={40} />
             </Link>
             <p>
-              Thrive Pakistan creates events, experiences, learning opportunities and networks that connect
-              young people, professionals, innovators, leaders and organizations across the country.
+              A youth-led technology and ecosystem-development platform based in Hazara, Khyber Pakhtunkhwa —
+              connecting students and emerging talent with practical learning, industry and opportunity.
             </p>
             <p className="footer__tagline">{BRAND.tagline}</p>
             <ul className="footer__socials">
               {SOCIAL_LINKS.map((s) => (
                 <li key={s.id}>
                   <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`Thrive Pakistan on ${s.label}`}>
-                    <Icon name={s.id as 'facebook' | 'instagram' | 'linkedin' | 'youtube' | 'tiktok'} size={16} />
+                    <Icon name={s.id as 'globe' | 'mail'} size={16} />
                   </a>
                 </li>
               ))}
@@ -252,7 +252,7 @@ export function Footer() {
             <ul className="footer__links">
               <li><Link to="/about">About</Link></li>
               <li><Link to="/events">Events</Link></li>
-              <li><Link to="/programs">Programs</Link></li>
+              <li><Link to="/programs">Focus Areas</Link></li>
               <li><Link to="/futurex">FutureX 2026</Link></li>
               <li><Link to="/speakers">Speakers</Link></li>
               <li><Link to="/team">Team</Link></li>

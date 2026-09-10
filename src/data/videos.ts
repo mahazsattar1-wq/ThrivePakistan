@@ -1,127 +1,15 @@
 import type { VideoItem } from '../types';
-import { img } from '../media';
 
 /**
- * MOCK DATA — video library entries. No external video files are embedded;
- * cards open a safe in-page preview dialog (thumbnail + description).
+ * VIDEO LIBRARY.
+ *
+ * No official Thrive Pakistan videos are published yet, so the library is
+ * intentionally empty. When official event films and session recordings
+ * exist they will be added here (or served by `/api/videos.php`) and the
+ * page will pick them up automatically.
+ *
+ * Never publish invented view counts, dates or event footage.
  */
-export const VIDEOS: VideoItem[] = [
-  {
-    id: 'vd-01',
-    title: 'FutureX 2026 — Official Announcement Film',
-    category: 'FutureX',
-    eventSlug: 'futurex-2026',
-    duration: '2:41',
-    views: 48200,
-    date: '2026-06-01',
-    thumb: img('eventsA', 0),
-    description: 'The flagship returns: two days of technology, ideas and opportunity in Islamabad.',
-  },
-  {
-    id: 'vd-02',
-    title: 'Opening Keynote: The Decade of Pakistani Innovation',
-    category: 'Leadership',
-    eventSlug: 'thrive-leadership-summit-2025',
-    duration: '18:24',
-    views: 21500,
-    date: '2025-12-14',
-    thumb: img('eventsA', 1),
-    description: 'Why the next decade of innovation will be built in Pakistan — and who is building it.',
-  },
-  {
-    id: 'vd-03',
-    title: 'Panel: Women Leading Pakistan\'s Digital Economy',
-    category: 'Interviews',
-    eventSlug: 'women-thrive-2025',
-    duration: '24:10',
-    views: 15800,
-    date: '2025-03-08',
-    thumb: img('eventsA', 2),
-    description: 'Four leaders on ownership, capital access and building products for everyone.',
-  },
-  {
-    id: 'vd-04',
-    title: 'ThriveHack 2025 — Highlights',
-    category: 'Event Highlights',
-    eventSlug: 'thrivehack-2025',
-    duration: '6:48',
-    views: 19300,
-    date: '2025-08-17',
-    thumb: img('eventsB', 1),
-    description: '36 hours, 180 hackers, 14 prototypes — the fast cut of our first overnight hackathon.',
-  },
-  {
-    id: 'vd-05',
-    title: 'Workshop: Pitching to Investors in Five Minutes',
-    category: 'Workshops',
-    eventSlug: 'tech-entrepreneurship-meetup-2026',
-    duration: '32:05',
-    views: 12700,
-    date: '2026-05-14',
-    thumb: img('eventsB', 3),
-    description: 'A live workshop: structure, evidence and the four mistakes that kill decks.',
-  },
-  {
-    id: 'vd-06',
-    title: 'Campus Innovation Tour: Faisalabad Diaries',
-    category: 'Community Stories',
-    eventSlug: 'campus-innovation-tour-spring-2026',
-    duration: '8:12',
-    views: 9800,
-    date: '2026-04-20',
-    thumb: img('eventsA', 3),
-    description: 'Students, societies and a hack sprint — one campus stop in eight minutes.',
-  },
-  {
-    id: 'vd-07',
-    title: 'Interview: From Lahore Garage to Global SaaS',
-    category: 'Interviews',
-    eventSlug: 'tech-entrepreneurship-meetup-2026',
-    duration: '15:47',
-    views: 17600,
-    date: '2026-03-05',
-    thumb: img('mediaA', 2),
-    description: 'A founder conversation on pivots, pricing and selling abroad from Pakistan.',
-  },
-  {
-    id: 'vd-08',
-    title: 'AI in Pakistan: From Research to Product',
-    category: 'Technology',
-    eventSlug: 'futurex-2026',
-    duration: '21:33',
-    views: 14100,
-    date: '2026-07-02',
-    thumb: img('mediaA', 0),
-    description: 'Researchers and product leaders on shipping applied AI in local contexts.',
-  },
-  {
-    id: 'vd-09',
-    title: 'Volunteer Stories: The People Behind the Stage',
-    category: 'Community Stories',
-    duration: '4:56',
-    views: 8600,
-    date: '2026-02-10',
-    thumb: img('galleryA', 6),
-    description: 'Six volunteers on queues, printers, friendships and why they keep coming back.',
-  },
-  {
-    id: 'vd-10',
-    title: 'Leadership Tour Hunza: Lessons from the Mountains',
-    category: 'Leadership',
-    duration: '12:20',
-    views: 11200,
-    date: '2025-09-28',
-    thumb: img('eventsB', 2),
-    description: 'A leadership expedition film: teams, weather windows and decisions at altitude.',
-  },
-];
+export const VIDEOS: VideoItem[] = [];
 
-export const VIDEO_CATEGORIES = [
-  'FutureX',
-  'Leadership',
-  'Technology',
-  'Interviews',
-  'Event Highlights',
-  'Workshops',
-  'Community Stories',
-] as const;
+export const VIDEO_CATEGORIES = ['FutureX', 'Sessions', 'Interviews', 'Event Highlights'] as const;

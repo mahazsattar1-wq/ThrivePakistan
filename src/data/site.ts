@@ -1,4 +1,6 @@
-/** Site-wide mock content: volunteer roles, contact details, FAQ defaults. */
+/** Site-wide content: volunteer options, contact details, form option lists. */
+
+import { CONTACT_EMAILS, CONTACT_PHONES, ORG } from './org';
 
 export const VOLUNTEER_AREAS = [
   'Event Management',
@@ -11,33 +13,41 @@ export const VOLUNTEER_AREAS = [
 ] as const;
 
 export const VOLUNTEER_BENEFITS = [
-  { icon: 'badge', title: 'Certified Experience', text: 'Verified volunteer certificates and reference letters for every event cycle.' },
-  { icon: 'users', title: 'National Network', text: '300+ volunteers across 10 cities — friends, mentors and future colleagues.' },
-  { icon: 'trend', title: 'Skill Growth', text: 'Real operations, media and community roles with practitioner feedback.' },
-  { icon: 'door', title: 'First Access', text: 'Early passes, backstage access and priority for paid event roles.' },
+  { icon: 'badge', title: 'Hands-on Experience', text: 'Work inside live platforms — stages, registration, media, outreach and operations.' },
+  { icon: 'users', title: 'Real Networks', text: 'Work alongside organizers, institutions, practitioners and peers from across the region.' },
+  { icon: 'trend', title: 'Skill Growth', text: 'Operations, media and community roles with feedback from functional leads.' },
+  { icon: 'door', title: 'Growth Pathways', text: 'Volunteer roles can progress into team leadership and longer-term responsibilities.' },
 ] as const;
 
+/** Official contact channels — verified against the organizational documents. */
 export const CONTACT_INFO = {
-  email: 'hello@thrivepakistan.example',
-  phone: '+92 300 000 0000',
-  address: 'Thrive Pakistan House, Street 12, F-7 Markaz, Islamabad, Pakistan',
-  hours: 'Monday – Saturday, 10:00 – 18:00 (PKT)',
+  email: CONTACT_EMAILS.partnerships,
+  emailMarketing: CONTACT_EMAILS.marketing,
+  emailMd: CONTACT_EMAILS.managingDirector,
+  emailCeo: CONTACT_EMAILS.ceo,
+  phoneMd: CONTACT_PHONES.managingDirector,
+  phoneCeo: CONTACT_PHONES.ceo,
+  website: ORG.website,
+  social: ORG.socialHandle,
+  base: 'Hazara, Khyber Pakhtunkhwa, Pakistan',
 } as const;
 
 export const SPEAKING_INTERESTS = [
-  'FutureX 2026',
-  'Thrive Leadership Summit 2026',
-  'Women Thrive 2026',
-  'Campus Innovation Tour',
-  'Youth Skills Workshop',
-  'Any Thrive platform',
+  'AI and the future of work',
+  'Cybersecurity, privacy and digital trust',
+  'Digital entrepreneurship and freelancing',
+  'Gender, opportunity and technology',
+  'Education and industry collaboration',
+  'Any FutureX 2026 platform',
 ] as const;
 
 export const PARTNERSHIP_INTERESTS = [
-  'Community Partner',
-  'Strategic Partner',
-  'Ecosystem Partner',
-  'Not sure yet — let\'s talk',
+  'Education & future-skills programming',
+  'Technology, AI & innovation labs',
+  'Career, recruitment & internship pathways',
+  'Entrepreneurship & mentor support',
+  'Media, outreach & production',
+  'Not sure yet — let\u2019s talk',
 ] as const;
 
 export const ORGANIZATION_TYPES = [

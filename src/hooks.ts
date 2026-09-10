@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const DEFAULT_DESCRIPTION =
-  'Thrive Pakistan creates events, experiences, learning opportunities and networks that connect young people, professionals, innovators, leaders and organizations across Pakistan.';
+  'Thrive Pakistan is a youth-centered platform founded in 2025 that connects students and emerging talent with practical learning, technology, entrepreneurship, industry exposure and meaningful opportunities — with particular relevance to Hazara and Khyber Pakhtunkhwa.';
 
 function setMeta(attr: 'name' | 'property', key: string, content: string): void {
   let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);

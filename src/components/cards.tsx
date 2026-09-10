@@ -1,8 +1,28 @@
 import { Link } from 'react-router-dom';
-import type { BlogPost, GalleryItem, Program, Speaker, TeamMember, Testimonial, ThriveEvent, VideoItem } from '../types';
+import type { BlogPost, GalleryItem, Program, Speaker, TeamMember, ThriveEvent, VideoItem } from '../types';
 import { dateParts, formatDate, formatViews } from '../utils';
 import { Icon, Badge, SpriteBox } from './ui';
 import type { IconName } from './ui';
+
+/** Initials monogram for people without an approved photograph. */
+function initialsOf(name: string): string {
+  return name
+    .replace(/^Dr\.\s*/, '')
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((w) => w[0])
+    .slice(0, 2)
+    .join('')
+    .toUpperCase();
+}
+
+export function MonogramAvatar({ name, className = '' }: { name: string; className?: string }) {
+  return (
+    <span className={`avatar-mono ${className}`.trim()} role="img" aria-label={`${name} — official photograph to be added`}>
+      {initialsOf(name)}
+    </span>
+  );
+}
 
 /* ================= Event card ================= */
 
@@ -46,7 +66,11 @@ export function SpeakerCard({ speaker }: { speaker: Speaker }) {
   return (
     <article className="speaker-card">
       <Link to={`/speakers/${speaker.slug}`} className="speaker-card__link" aria-label={`View speaker profile: ${speaker.name}`}>
-        <SpriteBox image={speaker.portrait} label={`Illustrated portrait of ${speaker.name}`} className="speaker-card__photo" />
+        {speaker.portrait ? (
+          <SpriteBox image={speaker.portrait} label={`Portrait of ${speaker.name}`} className="speaker-card__photo" />
+        ) : (
+          <MonogramAvatar name={speaker.name} className="speaker-card__photo" />
+        )}
         <div className="speaker-card__body">
           <h3 className="speaker-card__name">{speaker.name}</h3>
           <p className="speaker-card__role">{speaker.title}</p>
@@ -89,7 +113,11 @@ export function SpeakerCard({ speaker }: { speaker: Speaker }) {
 export function TeamCard({ member }: { member: TeamMember }) {
   return (
     <article className="team-card">
-      <SpriteBox image={member.portrait} label={`Illustrated portrait of ${member.name}`} className="team-card__photo" />
+      {member.portrait ? (
+        <SpriteBox image={member.portrait} label={`Portrait of ${member.name}`} className="team-card__photo" />
+      ) : (
+        <MonogramAvatar name={member.name} className="team-card__photo team-card__photo--mono" />
+      )}
       <div className="team-card__body">
         <h3>{member.name}</h3>
         <p className="team-card__role">{member.role}</p>
@@ -140,7 +168,7 @@ export function BlogCard({ post, featured }: { post: BlogPost; featured?: boolea
           <div className="blog-card__foot">
             <span className="blog-card__author">{post.author}</span>
             <span className="blog-card__meta">
-              {formatDate(post.date)} · {post.readingTime} min read · {formatViews(post.views)} views
+              {formatDate(post.date)} · {post.readingTime} min read{post.views > 0 ? ` · ${formatViews(post.views)} views` : ''}
             </span>
           </div>
         </div>
@@ -167,22 +195,6 @@ export function VideoCard({ video, onPlay }: { video: VideoItem; onPlay: (v: Vid
         </div>
         </button>
     </article>
-  );
-}
-
-/* ================= Testimonial card ================= */
-
-export function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
-  return (
-    <figure className="testimonial-card">
-      <Icon name="quote" size={22} className="testimonial-card__quote" />
-      <blockquote>{testimonial.quote}</blockquote>
-      <figcaption>
-        <strong>{testimonial.name}</strong>
-        <span>{testimonial.role}</span>
-        <em>{testimonial.event}</em>
-      </figcaption>
-    </figure>
   );
 }
 
