@@ -1,0 +1,264 @@
+/* ============================================================
+   Dark environment override layer.
+   Imported last: completes the BLACK + GREEN + subtle BLUE system
+   on top of the component styles without touching their structure.
+   WHITE = content · BLACK = environment · GREEN = brand · BLUE = depth
+   ============================================================ */
+
+/* ---------- Typography on dark ---------- */
+.stat__value {
+  color: var(--white);
+}
+
+.event-about p:first-child,
+.article__content p:first-child {
+  color: var(--white);
+}
+
+.article__content {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.prose {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.faq-item__q,
+.result-item__title,
+.agenda-list strong,
+.approach-list strong,
+.award-list strong,
+.info-card strong,
+.testimonial-card figcaption strong,
+.pillar-strip__list strong {
+  color: var(--white);
+}
+
+.tier-card__benefits li {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.testimonial-card blockquote {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.blog-card__author,
+.popular-list a {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.partner-mark__name {
+  color: var(--white);
+}
+
+/* ---------- Buttons / badges / chips ---------- */
+.btn--outline {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: var(--white);
+}
+
+.btn--outline:hover {
+  background: var(--white);
+  color: var(--dark);
+}
+
+.btn--ghost {
+  color: var(--green-deep);
+}
+
+.badge--outline {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.16);
+  color: var(--text-body);
+}
+
+.chip {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: var(--text-muted);
+}
+
+.chip:hover {
+  border-color: var(--primary-green);
+  color: var(--white);
+}
+
+.chip--active,
+.chip--active:hover {
+  background: var(--primary-green);
+  border-color: var(--primary-green);
+  color: var(--dark);
+}
+
+.pagination__btn {
+  border-color: rgba(255, 255, 255, 0.14);
+  color: var(--text-body);
+}
+
+.pagination__btn:hover:not(:disabled) {
+  border-color: var(--primary-green);
+  color: var(--white);
+}
+
+.pagination__btn--active,
+.pagination__btn--active:hover {
+  background: var(--primary-green);
+  border-color: var(--primary-green);
+  color: var(--dark);
+}
+
+/* ---------- Forms ---------- */
+.field__label {
+  color: var(--white);
+}
+
+.field__hint {
+  color: var(--text-faint);
+}
+
+.field__error {
+  color: #ff8a8a;
+}
+
+.field__input {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--white);
+}
+
+.field__input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.field__select {
+  background: rgba(255, 255, 255, 0.05)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a8b2ab' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")
+    no-repeat right 14px center;
+  color: var(--white);
+}
+
+.field__select option {
+  color: var(--dark);
+}
+
+.filter-select {
+  background: rgba(255, 255, 255, 0.06)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a8b2ab' stroke-width='2.4' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")
+    no-repeat right 13px center;
+  border-color: rgba(255, 255, 255, 0.14);
+  color: var(--white);
+}
+
+.filter-select option {
+  color: var(--dark);
+}
+
+.searchbar__input {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--white);
+}
+
+.searchbar__input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.searchbar__icon {
+  color: var(--text-faint);
+}
+
+.searchbar__clear {
+  color: var(--text-muted);
+}
+
+.searchbar__clear:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+}
+
+.form-panel {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ---------- Modals: dark glass ---------- */
+.modal {
+  background: linear-gradient(165deg, rgba(14, 22, 27, 0.94), rgba(7, 12, 15, 0.97));
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--white);
+}
+
+.modal__close {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ---------- Cards & surfaces ---------- */
+.highlights-list li {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.role-chips li {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: var(--text-body);
+}
+
+.role-chips li:hover {
+  background: var(--green-soft);
+  border-color: var(--primary-green);
+  color: var(--white);
+}
+
+.partner-tile {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.tier-card--highlight {
+  background: linear-gradient(180deg, rgba(67, 183, 73, 0.16), rgba(17, 23, 25, 0.7));
+}
+
+.gallery-tile {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.video-feature {
+  box-shadow: var(--glow-blue);
+}
+
+/* ---------- Section surface tweaks ---------- */
+.pillar-strip {
+  background: linear-gradient(180deg, var(--blue-1), var(--dark));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.partners-strip {
+  background: var(--dark);
+  border-block-color: rgba(255, 255, 255, 0.08);
+}
+
+.home-programs {
+  background: transparent;
+}
+
+/* ---------- Micro fixes ---------- */
+.tab:hover {
+  color: var(--white);
+}
+
+.person__socials a:hover,
+.program-card:hover .program-card__icon {
+  color: var(--dark);
+}
+
+.agenda-list li::before {
+  background: var(--dark);
+  border-color: var(--primary-green);
+}

@@ -1,0 +1,174 @@
+import { useState } from 'react';
+import type { FormEvent } from 'react';
+import { SPEAKING_INTERESTS } from '../data/site';
+import { EXPERTISE_FILTERS } from '../data/speakers';
+import { useSeo } from '../hooks';
+import { PageHero } from '../components/page-hero';
+import { FieldShell, FormSuccess, Select, SubmitButton, TextArea, TextInput } from '../components/forms';
+import { emailRule, minWords, required, submitForm, validate } from '../services/formService';
+import type { Errors } from '../services/formService';
+import { Icon, Reveal } from '../components/ui';
+import { useToast } from '../components/feedback';
+
+const INITIAL = { name: '', email: '', organization: '', expertise: '', interest: '', profile: '' };
+
+const WHY = [
+  { icon: 'mic' as const, title: 'An audience rarely reached', text: 'Reach students and early professionals outside the country\u2019s usual conference circuit — people making real education and career decisions.' },
+  { icon: 'users' as const, title: 'One regional ecosystem', text: 'Meet educators, founders, employers, public officials and other practitioners within a single regional platform.' },
+  { icon: 'bulb' as const, title: 'Practical thought leadership', text: 'Turn expertise into practical guidance — through keynotes, panels, talks, workshops, interviews and mentoring.' },
+  { icon: 'shield' as const, title: 'Practitioners first', text: 'We prioritize people who build, hire, research, lead and solve — practical insight grounded in real work.' },
+];
+
+export default function BecomeSpeaker() {
+  useSeo({
+    title: 'Become a Speaker',
+    description: 'Express interest in speaking at Thrive Pakistan platforms — including FutureX 2026. Sessions are curated for practical insight grounded in real work.',
+  });
+
+  const [values, setValues] = useState(INITIAL);
+  const [errors, setErrors] = useState<Errors>({});
+  const [state, setState] = useState<'idle' | 'loading' | 'done'>('idle');
+  const [message, setMessage] = useState('');
+  const { push } = useToast();
+
+  const set = (key: keyof typeof INITIAL) => (v: string) => setValues((p) => ({ ...p, [key]: v }));
+
+  const onSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    const errs = validate(values, {
+      name: required('Name'),
+      email: emailRule,
+      organization: required('Organization'),
+      expertise: required('Expertise'),
+      interest: required('Event interest'),
+      profile: minWords('Profile', 15),
+    });
+    setErrors(errs);
+    if (Object.keys(errs).length > 0) return;
+    setState('loading');
+    const res = await submitForm('speaker', values);
+    setMessage(res.message);
+    setState('done');
+    push({ title: 'Speaker profile submitted', message: 'The program team reviews every submission.', tone: 'success' });
+  };
+
+  return (
+    <>
+      <PageHero
+        eyebrow="Speak at Thrive"
+        title="Share practice, not platitudes."
+        lead="Thrive Pakistan stages exist so practitioners can turn expertise into practical guidance for people making real decisions. Speaker announcements are shared as programmes are confirmed."
+        crumbs={[{ label: 'Become a Speaker' }]}
+        meta={[
+          { icon: 'mic', label: 'FutureX 2026 · programme in development' },
+          { icon: 'spark', label: 'Keynotes · panels · workshops · mentoring' },
+        ]}
+      />
+
+      <section className="section section--tight">
+        <div className="container benefits-grid band--4">
+          {WHY.map((w, i) => (
+            <Reveal key={w.title} delay={i * 70}>
+              <div className="benefit-card benefit-card--light">
+                <span className="benefit-card__icon"><Icon name={w.icon} size={20} /></span>
+                <h3>{w.title}</h3>
+                <p>{w.text}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* Who we invite + what we ask */}
+      <section className="section section--light">
+        <div className="container grid grid--2" style={{ alignItems: 'start', gap: 'clamp(26px,4vw,54px)' }}>
+          <Reveal>
+            <div className="event-block">
+              <h3>Who we invite</h3>
+              <ul className="role-chips">
+                {[
+                  { icon: 'chip' as const, l: 'Technologists & AI practitioners' },
+                  { icon: 'shield' as const, l: 'Cybersecurity & digital-trust experts' },
+                  { icon: 'rocket' as const, l: 'Founders & entrepreneurs' },
+                  { icon: 'briefcase' as const, l: 'Employers & recruiters' },
+                  { icon: 'campus' as const, l: 'Academics & researchers' },
+                  { icon: 'trend' as const, l: 'Finance & fintech practitioners' },
+                  { icon: 'women' as const, l: 'Women leading in tech & enterprise' },
+                  { icon: 'compass' as const, l: 'Leadership & communication experts' },
+                ].map((x) => (
+                  <li key={x.l}><Icon name={x.icon} size={15} /> {x.l}</li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+          <Reveal delay={100}>
+            <div className="event-block">
+              <h3>What a strong contribution looks like</h3>
+              <ul className="highlights-list">
+                <li><Icon name="check" size={16} /> Practical insight grounded in work, research or lived experience</li>
+                <li><Icon name="check" size={16} /> Clear examples and honest trade-offs — not recycled motivational language</li>
+                <li><Icon name="check" size={16} /> Actionable next steps participants can use after the session</li>
+                <li><Icon name="check" size={16} /> Willingness to engage beyond the stage — Q&amp;A, mentoring or networking</li>
+                <li><Icon name="check" size={16} /> Confirm availability, topic and requirements early; respect the schedule and host institution</li>
+              </ul>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="section section--dark">
+        <div className="container form-split">
+          <Reveal className="form-split__intro">
+            <span className="eyebrow">Speaker submission</span>
+            <h2>Tell us what you'd teach the room.</h2>
+            <p style={{ color: 'var(--muted-on-dark)' }}>
+              Share your expertise and the session you'd propose. The programme team reviews submissions
+              and replies with next steps as platforms are confirmed.
+            </p>
+            <ul className="highlights-list">
+              <li><Icon name="check" size={16} /> Keynotes, panels, fireside conversations & workshops</li>
+              <li><Icon name="check" size={16} /> Session details confirmed in advance</li>
+              <li><Icon name="check" size={16} /> Relevant, evidence-aware sessions — free from undisclosed sales pitches</li>
+            </ul>
+          </Reveal>
+
+          <Reveal delay={100}>
+            <div className="form-panel form-panel--dark">
+              {state === 'done' ? (
+                <FormSuccess title="Profile received!" message={message} onReset={() => { setValues(INITIAL); setState('idle'); }} />
+              ) : (
+                <form className="form" onSubmit={onSubmit} noValidate>
+                  <div className="form__grid">
+                    <FieldShell id="s-name" label="Name" required error={errors.name}>
+                      <TextInput id="s-name" value={values.name} error={!!errors.name} autoComplete="name" placeholder="Your full name" onChange={(e) => set('name')(e.target.value)} />
+                    </FieldShell>
+                    <FieldShell id="s-email" label="Email" required error={errors.email}>
+                      <TextInput id="s-email" type="email" value={values.email} error={!!errors.email} autoComplete="email" placeholder="you@example.com" onChange={(e) => set('email')(e.target.value)} />
+                    </FieldShell>
+                    <FieldShell id="s-org" label="Organization" required error={errors.organization}>
+                      <TextInput id="s-org" value={values.organization} error={!!errors.organization} placeholder="Company, lab or institution" onChange={(e) => set('organization')(e.target.value)} />
+                    </FieldShell>
+                    <FieldShell id="s-exp" label="Expertise" required error={errors.expertise}>
+                      <Select id="s-exp" value={values.expertise} error={!!errors.expertise} options={EXPERTISE_FILTERS} onChange={(e) => set('expertise')(e.target.value)} />
+                    </FieldShell>
+                    <div className="field--full">
+                      <FieldShell id="s-interest" label="Event interest" required error={errors.interest}>
+                        <Select id="s-interest" value={values.interest} error={!!errors.interest} options={SPEAKING_INTERESTS} onChange={(e) => set('interest')(e.target.value)} />
+                      </FieldShell>
+                    </div>
+                    <div className="field--full">
+                      <FieldShell id="s-profile" label="Profile & session idea" required error={errors.profile} hint="Who you are, what you've built, and the session you'd run (min 15 words)">
+                        <TextArea id="s-profile" value={values.profile} error={!!errors.profile} placeholder="I lead payments infrastructure at… I'd run a workshop on…" onChange={(e) => set('profile')(e.target.value)} />
+                      </FieldShell>
+                    </div>
+                  </div>
+                  <SubmitButton loading={state === 'loading'}>Submit speaker profile</SubmitButton>
+                </form>
+              )}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+    </>
+  );
+}

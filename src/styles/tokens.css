@@ -1,0 +1,75 @@
+/* ============================================================
+   Thrive Pakistan — design tokens (dark environment edition)
+   Brand colours sampled from the official logo artwork:
+   green #43B749 · FutureX accent #36FF00 · ink #0A0B0B
+   Environment: BLACK = canvas · BLUE = atmosphere · GREEN = brand
+   ============================================================ */
+:root {
+  /* Brand */
+  --primary-green: #43b749;
+  --green-hover: #52c258;
+  --green-dark: #2f8f36;
+  --green-deep: #86db8c; /* accessible green text on dark surfaces */
+  --green-soft: rgba(67, 183, 73, 0.14);
+  --green-bright: #36ff00; /* FutureX accent — used sparingly */
+
+  /* Dark environment */
+  --dark: #0a0b0b; /* Background A — pure dark */
+  --dark-2: #0e1518;
+  --dark-3: #121a1e;
+  --surface: #111719; /* card surface, slightly lighter than page */
+  --surface-2: #111a1d;
+  --surface-3: #0e1518;
+
+  /* Atmospheric blues (texture/depth only — never a brand colour) */
+  --blue-1: #07111a;
+  --blue-2: #081722;
+  --blue-3: #0a1620;
+  --blue-4: #0b1d2a;
+
+  /* Content colours (WHITE = content) */
+  --white: #ffffff;
+  --text-body: rgba(255, 255, 255, 0.72);
+  --text-muted: rgba(255, 255, 255, 0.62);
+  --text-faint: rgba(255, 255, 255, 0.5);
+  --light-background: rgba(255, 255, 255, 0.05);
+  --light-2: #161d20;
+  --border: rgba(255, 255, 255, 0.1);
+  --border-dark: rgba(255, 255, 255, 0.12);
+  --muted-text: rgba(255, 255, 255, 0.62);
+  --muted-on-dark: rgba(255, 255, 255, 0.62);
+
+  /* Type */
+  --font-body: 'Manrope', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Space Grotesk', 'Manrope', ui-sans-serif, system-ui, sans-serif;
+
+  /* Radii */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 22px;
+  --r-pill: 999px;
+
+  /* Elevation */
+  --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.45);
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.55);
+  --glow-green: 0 0 0 1px rgba(67, 183, 73, 0.35), 0 12px 40px rgba(67, 183, 73, 0.18);
+  --glow-blue: 0 24px 70px rgba(7, 17, 26, 0.6);
+
+  /* Layout */
+  --container: 1200px;
+  --container-wide: 1320px;
+  --nav-h: 76px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --t-fast: 160ms var(--ease);
+  --t-med: 320ms var(--ease);
+
+  /* Z-index */
+  --z-nav: 60;
+  --z-drawer: 70;
+  --z-modal: 90;
+  --z-toast: 100;
+}
