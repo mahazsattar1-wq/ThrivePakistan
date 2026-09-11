@@ -83,8 +83,6 @@ export const LEADERSHIP_MESSAGES: LeadershipMessage[] = [
     published: true,
     featured: true,
     isPlaceholderCopy: false,
-    ctaLabel: 'Meet the leadership',
-    ctaTo: '/team',
   },
   {
     id: 'lm-md',

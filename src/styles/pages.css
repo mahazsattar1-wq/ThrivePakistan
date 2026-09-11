@@ -2476,6 +2476,7 @@
 
 .msg-experience {
   position: relative;
+  overflow: hidden;
 }
 
 .msg-controls {
@@ -2528,12 +2529,15 @@
 .msg-track {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: min(100%, 1020px);
-  gap: clamp(18px, 3vw, 32px);
+  grid-auto-columns: 100%;
+  gap: 0;
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  padding: 6px 4px 22px;
+  overscroll-behavior-x: contain;
+  scroll-padding: 0;
+  padding: 6px 0 22px;
   margin-inline: auto;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
@@ -2544,7 +2548,10 @@
 }
 
 .msg-slide {
-  scroll-snap-align: center;
+  scroll-snap-align: start;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
   gap: clamp(24px, 4vw, 52px);
@@ -2560,21 +2567,10 @@
 
 .msg-slide__content {
   display: grid;
-  gap: 12px;
+  gap: 14px;
   justify-items: start;
   align-content: center;
-}
-
-.msg-slide__name {
-  font-size: clamp(1.45rem, 2.6vw, 2rem);
-  margin-top: 2px;
-}
-
-.msg-slide__role {
-  color: var(--green-deep);
-  font-weight: 700;
-  font-size: 0.95rem;
-  margin-top: -6px;
+  min-width: 0;
 }
 
 .msg-slide__text {
@@ -2584,7 +2580,7 @@
   max-width: 56ch;
   border-left: 3px solid rgba(67, 183, 73, 0.5);
   padding-left: 18px;
-  margin-top: 4px;
+  margin-top: 2px;
   display: grid;
   gap: 0.9em;
 }
@@ -2593,7 +2589,7 @@
   margin: 0;
 }
 
-/* Verbatim sign-off carried inside the approved message text. */
+/* Verbatim sign-off carried inside the approved message text — appears at the END of the message. */
 .msg-signature__name {
   font-family: var(--font-display);
   font-size: 1.05rem;
@@ -2606,10 +2602,6 @@
   font-size: 0.86rem;
   font-weight: 700;
   color: var(--green-deep);
-}
-
-.msg-slide__content .btn {
-  margin-top: 8px;
 }
 
 .msg-slide__visual {

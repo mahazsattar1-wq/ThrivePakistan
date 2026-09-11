@@ -8,7 +8,7 @@ import type { LeadershipMessage } from '../data/leadershipMessages';
 import type { LeadershipSectionConfig } from '../data/home';
 import { imageSrc, isPhotoRef, spriteStyle } from '../media';
 import { MonogramAvatar } from './cards';
-import { Button, Icon, Reveal, SectionHeader } from './ui';
+import { Icon, Reveal, SectionHeader } from './ui';
 
 /**
  * LEADERSHIP MESSAGES — editorial horizontal message experience.
@@ -22,6 +22,11 @@ import { Button, Icon, Reveal, SectionHeader } from './ui';
  * friendly, zero dependencies), with keyboard-accessible prev/next buttons
  * and dots. Controls hide entirely when there is only one message. No
  * auto-advance — the user stays in control.
+ *
+ * Viewport: single-slide presentation — 100% one message at a time,
+ * no peek of the next card. Slide width is 100% of the track viewport
+ * with overflow hidden, scroll snap ensures only one complete message
+ * is visible until navigation.
  */
 export function LeadershipMessages({ config }: { config: LeadershipSectionConfig }) {
   const messages = getPublishedMessages();
@@ -155,20 +160,49 @@ function MessageTrack({ messages }: { messages: LeadershipMessage[] }) {
   );
 }
 
+/**
+ * Derive a short role abbreviation for the heading.
+ * e.g. "CEO, Thrive Pakistan" → "CEO", "Managing Director, Thrive Pakistan" → "MD"
+ * Uses data-driven role string, not hardcoded per person.
+ */
+function shortRole(role: string): string {
+  const base = role.split(',')[0].trim();
+  const lower = base.toLowerCase();
+  if (lower === 'ceo' || lower.includes('chief executive')) return 'CEO';
+  if (lower.includes('managing director')) return 'MD';
+  if (lower.includes('chief operating')) return 'COO';
+  if (lower.includes('chief strategy')) return 'CSO';
+  if (lower.includes('chief human')) return 'CHRO';
+  if (lower.includes('chief logistic')) return 'CLO';
+  if (lower.includes('chief marketing')) return 'CMO';
+  if (lower.includes('chief media')) return 'CMO';
+  if (lower.includes('chief event')) return 'CEvO';
+  // Fallback: acronym from words (ignore connectors)
+  const words = base.split(/\s+/).filter((w) => !/^(and|&|of|the)$/i.test(w));
+  const acronym = words.map((w) => w[0]?.toUpperCase() ?? '').join('');
+  if (acronym.length >= 2 && acronym.length <= 4) return acronym;
+  if (acronym.length > 4) return acronym.slice(0, 4);
+  return base;
+}
+
+export function headingForRole(role: string): string {
+  const abbr = shortRole(role);
+  return `Message from ${abbr}`;
+}
+
 function MessageSlide({ message: m, index, count }: { message: LeadershipMessage; index: number; count: number }) {
   const person = resolveMessagePerson(m);
   const blocks = parseMessage(m.message);
+  const heading = headingForRole(person.role);
   return (
     <article
       className="msg-slide"
       role="group"
       aria-roledescription="message"
-      aria-label={`Message ${index + 1} of ${count}: ${m.label}`}
+      aria-label={`Message ${index + 1} of ${count}: ${heading} — ${person.name}`}
     >
       <div className="msg-slide__content">
-        <span className="eyebrow">{m.label}</span>
-        <h3 className="msg-slide__name">{person.name}</h3>
-        <p className="msg-slide__role">{person.role}</p>
+        <span className="eyebrow">{heading}</span>
         <div className="msg-slide__text">
           {blocks.map((block, i) => (
             <p
@@ -185,11 +219,6 @@ function MessageSlide({ message: m, index, count }: { message: LeadershipMessage
             </p>
           ))}
         </div>
-        {m.ctaLabel && m.ctaTo && (
-          <Button to={m.ctaTo} variant="green-ghost" size="sm" icon="arrow-right">
-            {m.ctaLabel}
-          </Button>
-        )}
       </div>
       <div className="msg-slide__visual" aria-hidden={false}>
         <div className="msg-frame">
