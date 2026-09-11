@@ -191,7 +191,16 @@ export default function FutureX() {
         <div className="container">
           <div className="venue-card">
             <div className="venue-card__img">
-              <div className="sprite" style={{ backgroundImage: 'url(/img/hero-futurex.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }} role="img" aria-label="FutureX stage visualization" />
+              <div
+                className="sprite"
+                style={{
+                  backgroundImage: `image-set(url("/img/hero-futurex.avif") type("image/avif"), url("/img/hero-futurex.webp") type("image/webp"), url("/img/hero-futurex.jpg") type("image/jpeg"))`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+                role="img"
+                aria-label="FutureX stage visualization"
+              />
             </div>
             <Reveal className="venue-card__body">
               <span className="eyebrow">The venue — confirmed</span>

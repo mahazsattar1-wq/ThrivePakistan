@@ -17,5 +17,12 @@ export default defineConfig({
     target: 'es2020',
     assetsInlineLimit: 4096,
     chunkSizeWarningLimit: 700,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+        },
+      },
+    },
   },
 });

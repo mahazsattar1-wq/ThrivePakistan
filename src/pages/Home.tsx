@@ -72,7 +72,15 @@ export default function Home() {
       {/* ============ 2 · MAIN INTRO / HERO ============ */}
       {cfg.hero.visible && (
         <section className="hero hero--intro" id={cfg.hero.id}>
-          <div className="hero__bg" style={{ backgroundImage: `url(${HERO_IMAGE})`, backgroundSize: 'cover', backgroundPosition: 'center' }} aria-hidden="true" />
+          <div
+            className="hero__bg"
+            style={{
+              backgroundImage: `image-set(url("/img/hero-futurex.avif") type("image/avif"), url("/img/hero-futurex.webp") type("image/webp"), url("${HERO_IMAGE}") type("image/jpeg"))`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+            aria-hidden="true"
+          />
           <span className="hero__shape hero__shape--1" aria-hidden="true" />
           <span className="hero__shape hero__shape--2" aria-hidden="true" />
           <span className="hero__shape hero__shape--3" aria-hidden="true" />

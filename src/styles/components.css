@@ -109,6 +109,22 @@
   flex-shrink: 0;
 }
 
+/* Global button consistency — equal heights inside any CTA group */
+.cta-band__ctas .btn,
+.hero__ctas .btn,
+.feat-ev__ctas .btn,
+.filter-bar__chips .chip {
+  min-height: 44px;
+}
+
+/* On mobile, ensure buttons stack without overflow */
+@media (max-width: 520px) {
+  .btn {
+    white-space: normal;
+    text-wrap: balance;
+  }
+}
+
 /* ---------- Badges ---------- */
 .badge {
   display: inline-flex;

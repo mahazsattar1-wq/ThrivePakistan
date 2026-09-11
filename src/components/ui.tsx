@@ -190,19 +190,40 @@ export function Reveal({
 /* ================= Sprite image box ================= */
 
 export function SpriteBox({
-  image, label, className = '', style,
+  image,
+  label,
+  className = '',
+  style,
+  eager = false,
 }: {
   image: ImageRef;
   label: string;
   className?: string;
   style?: CSSProperties;
+  eager?: boolean;
 }) {
+  const { ref, inView } = useInView<HTMLDivElement>(0.12);
+  const shouldLoad = eager || inView;
+  const bgStyle: CSSProperties = shouldLoad ? spriteStyle(image) : { backgroundColor: 'var(--dark-3)' };
+  // Contain layout shift via CSS aspect-ratio (handled by parent) + placeholder color
   return (
     <div
+      ref={ref as never}
       role="img"
       aria-label={label}
       className={`sprite ${className}`.trim()}
-      style={{ ...spriteStyle(image), ...style }}
+      style={{ ...bgStyle, ...style, contentVisibility: 'auto' as unknown as string } as CSSProperties}
+    />
+  );
+}
+
+/** Lightweight LQIP placeholder for image containers — solid + subtle shimmer */
+export function ImagePlaceholder({ className = '', aspectRatio = '16 / 9' }: { className?: string; aspectRatio?: string }) {
+  return (
+    <div
+      className={`img-placeholder ${className}`.trim()}
+      aria-hidden="true"
+      style={{ aspectRatio, background: 'linear-gradient(90deg, var(--dark-3) 25%, #1d272b 50%, var(--dark-3) 75%)', backgroundSize: '800px 100%' } as CSSProperties}
     />
   );
 }

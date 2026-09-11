@@ -31,6 +31,18 @@ svg,
 video {
   display: block;
   max-width: 100%;
+  height: auto;
+}
+
+/* Prevent horizontal overflow from any element — critical for 320px mobile */
+html, body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+* {
+  min-width: 0;
+  overflow-wrap: break-word;
 }
 
 button,
@@ -200,6 +212,40 @@ p {
   .grid--3,
   .grid--2 {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- Mobile typography & spacing — clarity pass ---------- */
+@media (max-width: 380px) {
+  .container {
+    padding-inline: 16px;
+  }
+  .section {
+    padding-block: clamp(42px, 10vw, 64px);
+  }
+  h1 {
+    font-size: clamp(1.85rem, 8vw, 2.2rem);
+    line-height: 1.1;
+  }
+  h2 {
+    font-size: clamp(1.45rem, 6.5vw, 1.9rem);
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    padding-inline: 14px;
+  }
+}
+
+/* Ensure touch targets are minimum 44px on mobile */
+@media (max-width: 640px) {
+  .btn {
+    min-height: 46px;
+  }
+  .chip,
+  .filter-select {
+    min-height: 40px;
   }
 }
 

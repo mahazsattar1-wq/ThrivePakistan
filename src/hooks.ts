@@ -149,14 +149,23 @@ export function useDebouncedValue<T>(value: T, ms = 250): T {
   return debounced;
 }
 
-/** Lock body scroll while drawers/modals are open. */
+/** Lock body scroll while drawers/modals are open — robust for iOS & desktop. */
 export function useBodyLock(locked: boolean): void {
   useEffect(() => {
     if (!locked) return;
-    const prev = document.body.style.overflow;
+    const prevOverflow = document.body.style.overflow;
+    const prevPaddingRight = document.body.style.paddingRight;
+    const scrollbarW = window.innerWidth - document.documentElement.clientWidth;
     document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+    if (scrollbarW > 0) document.body.style.paddingRight = `${scrollbarW}px`;
+    // Prevent overscroll chaining on mobile
+    document.body.style.overscrollBehavior = 'contain';
     return () => {
-      document.body.style.overflow = prev;
+      document.body.style.overflow = prevOverflow;
+      document.body.style.paddingRight = prevPaddingRight;
+      document.documentElement.style.overflow = '';
+      document.body.style.overscrollBehavior = '';
     };
   }, [locked]);
 }

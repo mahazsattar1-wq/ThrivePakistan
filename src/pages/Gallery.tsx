@@ -112,7 +112,7 @@ export default function Gallery() {
       <Modal open={current !== null} onClose={() => setOpenIndex(null)} label="Gallery lightbox" size="lg">
         {current && (
           <>
-            <div className="lightbox__img sprite" style={spriteStyle(current.image)} role="img" aria-label={current.caption} />
+            <div className="lightbox__img sprite" style={{ ...spriteStyle(current.image), backgroundColor: 'var(--dark-3)' }} role="img" aria-label={current.caption} />
             <div className="lightbox__cap">
               <strong>{current.caption}</strong>
               <span>{current.category}</span>

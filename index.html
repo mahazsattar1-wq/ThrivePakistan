@@ -25,7 +25,24 @@
     />
     <meta name="twitter:image" content="/img/hero-futurex.jpg" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preload" as="image" href="/img/hero-futurex.jpg" fetchpriority="high" />
+    <!-- LCP hero — responsive preload: browser picks smallest sufficient source (AVIF/WebP/JPG) -->
+    <link
+      rel="preload"
+      as="image"
+      href="/img/hero-futurex.jpg"
+      imagesrcset="/img/hero-futurex-640.jpg 640w, /img/hero-futurex-1024.jpg 1024w, /img/hero-futurex-1280.jpg 1280w, /img/hero-futurex.jpg 1672w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="/img/hero-futurex.webp"
+      type="image/webp"
+      imagesrcset="/img/hero-futurex-640.webp 640w, /img/hero-futurex-1024.webp 1024w, /img/hero-futurex-1280.webp 1280w, /img/hero-futurex.webp 1672w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",

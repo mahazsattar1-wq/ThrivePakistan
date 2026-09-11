@@ -6,7 +6,7 @@ import {
 } from '../data/leadershipMessages';
 import type { LeadershipMessage } from '../data/leadershipMessages';
 import type { LeadershipSectionConfig } from '../data/home';
-import { imageSrc, isPhotoRef, spriteStyle } from '../media';
+import { PORTRAIT_RESPONSIVE, imageSrc, isPhotoRef, spriteStyle } from '../media';
 import { MonogramAvatar } from './cards';
 import { Icon, Reveal, SectionHeader } from './ui';
 
@@ -222,14 +222,40 @@ function MessageSlide({ message: m, index, count }: { message: LeadershipMessage
       </div>
       <div className="msg-slide__visual" aria-hidden={false}>
         <div className="msg-frame">
-          {/* Approved photograph of the real person, resolved via the media registry. */}
-          {m.image && isPhotoRef(m.image) ? (
+          {/* Approved photograph — responsive AVIF → WebP → JPEG with srcSet/sizes, eager for first slide, lazy for others */}
+          {m.image && isPhotoRef(m.image) && PORTRAIT_RESPONSIVE[m.image.photo] ? (
+            (() => {
+              const pr = PORTRAIT_RESPONSIVE[m.image.photo];
+              const eager = index === 0;
+              return (
+                <picture>
+                  <source type="image/avif" srcSet={pr.avifSrcSet} sizes={pr.sizes} />
+                  <source type="image/webp" srcSet={pr.webpSrcSet} sizes={pr.sizes} />
+                  <img
+                    className="msg-frame__img msg-frame__img--photo"
+                    src={pr.fallback}
+                    srcSet={pr.jpgSrcSet}
+                    sizes={pr.sizes}
+                    alt={m.imageAlt ?? `${person.name}, ${person.role}`}
+                    loading={eager ? 'eager' : 'lazy'}
+                    decoding="async"
+                    fetchPriority={eager ? 'high' : 'auto'}
+                    width={400}
+                    height={500}
+                  />
+                </picture>
+              );
+            })()
+          ) : m.image && isPhotoRef(m.image) ? (
             <img
               className="msg-frame__img msg-frame__img--photo"
               src={imageSrc(m.image)}
               alt={m.imageAlt ?? `${person.name}, ${person.role}`}
-              loading="lazy"
+              loading={index === 0 ? 'eager' : 'lazy'}
               decoding="async"
+              fetchPriority={index === 0 ? 'high' : 'auto'}
+              width={400}
+              height={500}
             />
           ) : m.image ? (
             <div

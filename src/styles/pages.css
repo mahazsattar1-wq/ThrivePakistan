@@ -2808,3 +2808,144 @@
 .vm-card--dark .eyebrow {
   color: rgba(255, 255, 255, 0.8);
 }
+
+/* ============================================================
+   Phase 5 — Global responsive & mobile clarity polish
+   ============================================================ */
+
+/* Prevent any section from creating horizontal overflow */
+.hero, .feat-ev, .section, .page-hero, .cta-band {
+  overflow-x: clip;
+}
+
+/* Gallery progressive loading — thumbnails use the same sprite sheet but
+   the container aspect-ratio prevents layout shift; lightbox loads on demand */
+.gallery-tile {
+  background-color: var(--dark-3);
+  content-visibility: auto;
+  contain-intrinsic-size: 300px 225px;
+}
+
+/* Ensure cards never overflow narrow viewports — 320px safety */
+@media (max-width: 414px) {
+  .vm-card {
+    min-height: 0;
+    padding: 22px 18px;
+  }
+  .vm-card p {
+    font-size: 0.96rem;
+  }
+  .msg-slide {
+    padding: 20px 16px;
+  }
+  .msg-slide__text {
+    font-size: 0.94rem;
+    line-height: 1.7;
+  }
+  .feat-ev__pillars {
+    font-size: clamp(1rem, 5vw, 1.3rem);
+    letter-spacing: 0.1em;
+  }
+}
+
+@media (max-width: 375px) {
+  .hero__title {
+    font-size: clamp(1.75rem, 9vw, 2rem);
+  }
+  .talent__title {
+    font-size: clamp(1.7rem, 8vw, 2.2rem);
+  }
+  .countdown {
+    gap: 6px;
+  }
+  .countdown__cell {
+    min-width: 56px;
+    padding: 10px 6px 8px;
+  }
+  .btn--lg {
+    padding: 12px 20px;
+    font-size: 0.92rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .nav__inner {
+    gap: 12px;
+  }
+  .hero__points {
+    font-size: 0.8rem;
+    gap: 8px 14px;
+  }
+  .gallery-grid {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 320px) {
+  .container {
+    padding-inline: 12px;
+  }
+  .msg-frame {
+    width: 92%;
+  }
+}
+
+/* Tablet 768px — balanced grids */
+@media (min-width: 641px) and (max-width: 900px) {
+  .grid--3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid--4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Ensure buttons inside a group stack cleanly on very narrow screens */
+@media (max-width: 520px) {
+  .hero__ctas,
+  .feat-ev__ctas,
+  .cta-band__ctas {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero__ctas .btn,
+  .feat-ev__ctas .btn,
+  .cta-band__ctas .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Fix potential text overflow inside cards */
+.event-card__body,
+.blog-card__body,
+.program-card__body,
+.team-card__body {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+.event-card__title,
+.blog-card__title,
+.team-card__body h3 {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+/* Image placeholders — LQIP feel while real sprite loads */
+.img-placeholder {
+  border-radius: var(--r-lg);
+  animation: tp-shimmer 1.4s infinite linear;
+}
+
+/* Reduce hero decorative shapes on small to avoid large blank areas */
+@media (max-width: 640px) {
+  .hero__shape--1,
+  .hero__shape--2 {
+    opacity: 0.35;
+    transform: scale(0.7);
+  }
+  .page-hero__glow,
+  .feat-ev__glow {
+    opacity: 0.5;
+  }
+}
