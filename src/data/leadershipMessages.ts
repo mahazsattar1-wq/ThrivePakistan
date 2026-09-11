@@ -53,7 +53,7 @@ export interface LeadershipMessage {
 
 /** Hassan Sajjad — CEO, Thrive Pakistan. Approved message (verbatim). */
 const CEO_MESSAGE = [
-  'Thrive Pakistan was built on a simple belief: young people should not have to leave their region to find serious opportunities.',
+  'Thrive Pakistan was built on a simple belief that young people should not have to leave their region to find serious opportunities.',
   'We are creating platforms that bring industry, technology, leadership, and real-world exposure closer to the people who are ready to grow. Our work is about opening doors, building stronger networks, and giving regional talent a place in conversations that usually happen somewhere else.',
   'We want the next generation to think bigger, move faster, and build with confidence.',
   'Hassan Sajjad',
