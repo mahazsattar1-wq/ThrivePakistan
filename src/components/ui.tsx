@@ -296,20 +296,8 @@ export function CardSkeleton({ dark }: { dark?: boolean }) {
 
 /* ================= Breadcrumbs ================= */
 
-export function Breadcrumbs({ items }: { items: { label: string; to?: string }[] }) {
-  return (
-    <nav aria-label="Breadcrumb" className="breadcrumbs">
-      <ol>
-        <li><Link to="/">Home</Link></li>
-        {items.map((item, i) => (
-          <li key={`${item.label}-${i}`}>
-            <span className="breadcrumbs__sep" aria-hidden="true">/</span>
-            {item.to ? <Link to={item.to}>{item.label}</Link> : <span aria-current="page">{item.label}</span>}
-          </li>
-        ))}
-      </ol>
-    </nav>
-  );
+export function Breadcrumbs({ items: _items }: { items?: { label: string; to?: string }[] }) {
+  return null;
 }
 
 /* ================= Pagination ================= */
