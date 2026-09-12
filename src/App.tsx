@@ -52,6 +52,10 @@ export default function App() {
             <Route path="/events" element={<Events mode="overview" />} />
             <Route path="/events/upcoming" element={<Events mode="upcoming" />} />
             <Route path="/events/past" element={<Events mode="past" />} />
+            <Route path="/events/seminars" element={<Events mode="seminars" />} />
+            <Route path="/events/workshops" element={<Events mode="workshops" />} />
+            <Route path="/events/tours-trips" element={<Events mode="tours-trips" />} />
+            <Route path="/events/tours" element={<Events mode="tours-trips" />} />
             <Route path="/events/:slug" element={<EventDetail />} />
             <Route path="/programs" element={<Programs />} />
             <Route path="/programs/:slug" element={<ProgramDetail />} />
@@ -64,6 +68,7 @@ export default function App() {
             <Route path="/become-a-speaker" element={<BecomeSpeaker />} />
             <Route path="/volunteer" element={<Volunteer />} />
             <Route path="/gallery" element={<Gallery />} />
+            <Route path="/gallery/:slug" element={<Gallery />} />
             <Route path="/videos" element={<Videos />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogDetail />} />

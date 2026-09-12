@@ -6,6 +6,7 @@ import { apiGet, delay } from './api';
 export interface EventFilters {
   status?: 'all' | 'upcoming' | 'past';
   category?: string;
+  type?: 'all' | 'upcoming' | 'past' | 'seminars' | 'workshops' | 'tours-trips';
   city?: string;
   query?: string;
 }
@@ -15,8 +16,28 @@ export const eventsService = {
     const remote = await apiGet<ThriveEvent>('events.php');
     let source = remote?.data ?? EVENTS;
     await delay();
-    const { status = 'all', category = 'all', city = 'all', query = '' } = filters;
+    const { status = 'all', category = 'all', type = 'all', city = 'all', query = '' } = filters;
     let out = source.map((e) => ({ ...e, status: getEventStatus(e) }));
+
+    if (type !== 'all') {
+      if (type === 'upcoming') {
+        out = out.filter((e) => e.status === 'upcoming');
+      } else if (type === 'past') {
+        out = out.filter((e) => e.status === 'past');
+      } else if (type === 'seminars') {
+        out = out.filter((e) => e.category.toLowerCase().includes('seminar') || e.tags.some((t) => t.toLowerCase().includes('seminar')));
+      } else if (type === 'workshops') {
+        out = out.filter((e) => e.category.toLowerCase().includes('workshop') || e.tags.some((t) => t.toLowerCase().includes('workshop')));
+      } else if (type === 'tours-trips') {
+        out = out.filter(
+          (e) =>
+            e.category.toLowerCase().includes('tour') ||
+            e.category.toLowerCase().includes('trip') ||
+            e.tags.some((t) => t.toLowerCase().includes('tour') || t.toLowerCase().includes('trip')),
+        );
+      }
+    }
+
     if (status !== 'all') out = out.filter((e) => e.status === status);
     if (category !== 'all') out = out.filter((e) => e.category === category);
     if (city !== 'all') out = out.filter((e) => e.city === city);
@@ -24,10 +45,11 @@ export const eventsService = {
       const q = query.trim().toLowerCase();
       out = out.filter((e) => `${e.title} ${e.category} ${e.city} ${e.description}`.toLowerCase().includes(q));
     }
+
     // Sorting:
     // Past events: most recently completed first (descending by end date)
     // Upcoming / all events: nearest upcoming date first (ascending by start date)
-    if (status === 'past') {
+    if (status === 'past' || type === 'past') {
       return [...out].sort((a, b) => +getEventEndDate(b) - +getEventEndDate(a));
     }
     return [...out].sort((a, b) => +new Date(a.date) - +new Date(b.date));

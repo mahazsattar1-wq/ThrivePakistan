@@ -19,6 +19,15 @@ export interface WhyEventsMatterPoint {
   text: string;
 }
 
+export interface CategoryCardConfig {
+  kicker: string;
+  title: string;
+  description: string;
+  ctaLabel: string;
+  ctaTo: string;
+  image: ReturnType<typeof img>;
+}
+
 export interface EventsPageConfig {
   hero: {
     eyebrow: string;
@@ -26,22 +35,11 @@ export interface EventsPageConfig {
     lead: string;
   };
   categories: {
-    upcoming: {
-      kicker: string;
-      title: string;
-      description: string;
-      ctaLabel: string;
-      ctaTo: string;
-      image: ReturnType<typeof img>;
-    };
-    past: {
-      kicker: string;
-      title: string;
-      description: string;
-      ctaLabel: string;
-      ctaTo: string;
-      image: ReturnType<typeof img>;
-    };
+    upcoming: CategoryCardConfig;
+    past: CategoryCardConfig;
+    seminars: CategoryCardConfig;
+    workshops: CategoryCardConfig;
+    toursTrips: CategoryCardConfig;
   };
   process: {
     eyebrow: string;
@@ -60,11 +58,6 @@ export interface EventsPageConfig {
     title: string;
     lead: string;
     points: WhyEventsMatterPoint[];
-  };
-  previousWorkSection: {
-    eyebrow: string;
-    title: string;
-    lead: string;
   };
 }
 
@@ -90,6 +83,30 @@ export const EVENTS_PAGE_CONFIG: EventsPageConfig = {
       ctaLabel: 'Explore Past Events',
       ctaTo: '/events/past',
       image: img('eventsA', 5),
+    },
+    seminars: {
+      kicker: 'Subject-Matter Sessions',
+      title: 'Seminars',
+      description: 'Focused seminar convenings, masterclasses, and expert talks addressing AI, career pathways, and leadership.',
+      ctaLabel: 'Explore Seminars',
+      ctaTo: '/events/seminars',
+      image: img('mediaA', 0),
+    },
+    workshops: {
+      kicker: 'Applied Learning',
+      title: 'Workshops',
+      description: 'Hands-on learning environments, live demonstrations, and interactive technical skill-building labs.',
+      ctaLabel: 'Explore Workshops',
+      ctaTo: '/events/workshops',
+      image: img('galleryA', 2),
+    },
+    toursTrips: {
+      kicker: 'Industry Exposure',
+      title: 'Tours & Trips',
+      description: 'Guided educational exposure visits connecting students and emerging talent with technology hubs and institutions.',
+      ctaLabel: 'Explore Tours & Trips',
+      ctaTo: '/events/tours-trips',
+      image: img('galleryA', 4),
     },
   },
   process: {
@@ -226,10 +243,5 @@ export const EVENTS_PAGE_CONFIG: EventsPageConfig = {
         text: 'Bridge the gap between regional campus communities and national innovation networks.',
       },
     ],
-  },
-  previousWorkSection: {
-    eyebrow: 'Documented Previous Work',
-    title: 'Where the Journey Began',
-    lead: 'Verified past work and ecosystem engagement documented in our organizational record.',
   },
 };

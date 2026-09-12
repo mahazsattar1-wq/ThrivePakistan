@@ -19,6 +19,9 @@ export const NAV_ITEMS: NavItem[] = [
     children: [
       { label: 'Upcoming Events', to: '/events/upcoming' },
       { label: 'Past Events', to: '/events/past' },
+      { label: 'Seminars', to: '/events/seminars' },
+      { label: 'Workshops', to: '/events/workshops' },
+      { label: 'Tours & Trips', to: '/events/tours-trips' },
     ],
   },
   { label: 'FutureX', to: '/futurex' },

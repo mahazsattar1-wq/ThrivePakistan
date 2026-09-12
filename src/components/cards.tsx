@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import type { BlogPost, GalleryItem, Program, Speaker, TeamMember, ThriveEvent, VideoItem } from '../types';
 import { dateParts, formatDate, formatViews } from '../utils';
-import { Icon, Badge, SpriteBox } from './ui';
+import { Icon, Badge, SpriteBox, Button } from './ui';
 import type { IconName } from './ui';
 
 /** Initials monogram for people without an approved photograph. */
@@ -30,32 +30,43 @@ export function EventCard({ event, dark }: { event: ThriveEvent; dark?: boolean 
   const d = dateParts(event.date);
   return (
     <article className={`event-card ${dark ? 'event-card--dark' : ''}`}>
-      <Link to={`/events/${event.slug}`} className="event-card__link" aria-label={`View event: ${event.title}`}>
-        <div className="event-card__media">
-          <SpriteBox image={event.image} label={`${event.title} event artwork`} className="event-card__img" />
-          <span className="event-card__datechip" aria-hidden="true">
-            <strong>{d.day}</strong>
-            <span>{d.month}</span>
-            <span>{d.year}</span>
-          </span>
-          <span className={`event-card__status event-card__status--${event.status}`}>
-            {event.status === 'upcoming' ? 'Upcoming' : 'Past'}
-          </span>
-        </div>
+      <div className="event-card__inner">
+        <Link to={`/events/${event.slug}`} className="event-card__media-link" aria-label={`View event: ${event.title}`}>
+          <div className="event-card__media">
+            <SpriteBox image={event.image} label={`${event.title} event artwork`} className="event-card__img" />
+            <span className="event-card__datechip" aria-hidden="true">
+              <strong>{d.day}</strong>
+              <span>{d.month}</span>
+              <span>{d.year}</span>
+            </span>
+            <span className={`event-card__status event-card__status--${event.status}`}>
+              {event.status === 'upcoming' ? 'Upcoming' : 'Past'}
+            </span>
+          </div>
+        </Link>
         <div className="event-card__body">
           <span className="event-card__cat">{event.category}</span>
-          <h3 className="event-card__title">{event.title}</h3>
+          <h3 className="event-card__title">
+            <Link to={`/events/${event.slug}`}>{event.title}</Link>
+          </h3>
           <ul className="event-card__meta">
             <li><Icon name="calendar" size={15} /> {event.dateLabel}</li>
             <li><Icon name="pin" size={15} /> {event.city}</li>
             <li><Icon name="clock" size={15} /> {event.time}</li>
           </ul>
           <p className="event-card__desc">{event.description}</p>
-          <span className="event-card__cta">
-            View Event <Icon name="arrow-right" size={15} />
-          </span>
+          <div className="event-card__actions" style={{ marginTop: 'auto', paddingTop: 14, display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            <Button to={`/events/${event.slug}`} size="sm" variant={dark ? 'primary' : 'primary'} icon="arrow-right">
+              View Event
+            </Button>
+            {event.gallerySlug && (
+              <Button to={`/gallery?collection=${event.gallerySlug}`} size="sm" variant={dark ? 'outline-light' : 'outline'} icon="eye">
+                View Gallery
+              </Button>
+            )}
+          </div>
         </div>
-      </Link>
+      </div>
     </article>
   );
 }

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
-import { EVENTS_PAGE_CONFIG } from '../data/eventsPage';
-import { PREVIOUS_WORK, PRIOR_ECOSYSTEM_NAMES, PRIOR_ECOSYSTEM_NOTE } from '../data/org';
+import { EVENTS_PAGE_CONFIG, CategoryCardConfig } from '../data/eventsPage';
 import { useSeo } from '../hooks';
 import { eventsService } from '../services/eventsService';
 import type { ThriveEvent } from '../types';
@@ -9,8 +8,10 @@ import { PageHero } from '../components/page-hero';
 import { EventCard } from '../components/cards';
 import { Button, CardSkeleton, EmptyState, Icon, Reveal, SectionHeader } from '../components/ui';
 
+export type EventsMode = 'overview' | 'upcoming' | 'past' | 'seminars' | 'workshops' | 'tours-trips';
+
 export interface EventsProps {
-  mode?: 'overview' | 'upcoming' | 'past';
+  mode?: EventsMode;
 }
 
 export default function Events({ mode }: EventsProps) {
@@ -18,27 +19,36 @@ export default function Events({ mode }: EventsProps) {
   const navigate = useNavigate();
   const [params] = useSearchParams();
 
-  const activeMode = (() => {
+  const activeMode: EventsMode = (() => {
     if (mode) return mode;
-    if (location.pathname.endsWith('/upcoming')) return 'upcoming';
-    if (location.pathname.endsWith('/past')) return 'past';
-    const statusParam = params.get('status');
-    if (statusParam === 'upcoming') return 'upcoming';
-    if (statusParam === 'past') return 'past';
+    const path = location.pathname;
+    if (path.endsWith('/upcoming')) return 'upcoming';
+    if (path.endsWith('/past')) return 'past';
+    if (path.endsWith('/seminars')) return 'seminars';
+    if (path.endsWith('/workshops')) return 'workshops';
+    if (path.endsWith('/tours-trips') || path.endsWith('/tours')) return 'tours-trips';
+    const typeParam = params.get('type') || params.get('category') || params.get('status');
+    if (typeParam === 'upcoming') return 'upcoming';
+    if (typeParam === 'past') return 'past';
+    if (typeParam === 'seminars') return 'seminars';
+    if (typeParam === 'workshops') return 'workshops';
+    if (typeParam === 'tours-trips' || typeParam === 'tours') return 'tours-trips';
     return 'overview';
   })();
 
   const [upcomingEvents, setUpcomingEvents] = useState<ThriveEvent[] | null>(null);
   const [pastEvents, setPastEvents] = useState<ThriveEvent[] | null>(null);
+  const [seminarEvents, setSeminarEvents] = useState<ThriveEvent[] | null>(null);
+  const [workshopEvents, setWorkshopEvents] = useState<ThriveEvent[] | null>(null);
+  const [tourEvents, setTourEvents] = useState<ThriveEvent[] | null>(null);
 
   useEffect(() => {
     let alive = true;
-    eventsService.list({ status: 'upcoming' }).then((list) => {
-      if (alive) setUpcomingEvents(list);
-    });
-    eventsService.list({ status: 'past' }).then((list) => {
-      if (alive) setPastEvents(list);
-    });
+    eventsService.list({ type: 'upcoming' }).then((list) => alive && setUpcomingEvents(list));
+    eventsService.list({ type: 'past' }).then((list) => alive && setPastEvents(list));
+    eventsService.list({ type: 'seminars' }).then((list) => alive && setSeminarEvents(list));
+    eventsService.list({ type: 'workshops' }).then((list) => alive && setWorkshopEvents(list));
+    eventsService.list({ type: 'tours-trips' }).then((list) => alive && setTourEvents(list));
     return () => {
       alive = false;
     };
@@ -48,8 +58,13 @@ export default function Events({ mode }: EventsProps) {
 
   if (activeMode === 'upcoming') {
     return (
-      <UpcomingEventsView
+      <CategoryListingView
+        title="Upcoming Events"
+        eyebrow="Scheduled Platforms"
+        lead="Confirmed platforms and convenings scheduled and open for interest. Details are published as confirmed."
         events={upcomingEvents}
+        emptyTitle="No upcoming events at the moment."
+        emptyMessage="New platform dates and convenings will be announced here as details are confirmed. Explore our past events in the interim."
         onExplorePast={() => navigate('/events/past')}
       />
     );
@@ -57,9 +72,56 @@ export default function Events({ mode }: EventsProps) {
 
   if (activeMode === 'past') {
     return (
-      <PastEventsView
+      <CategoryListingView
+        title="Past Events"
+        eyebrow="Documented Record"
+        lead="Completed events and regional technology festivals delivered by Thrive Pakistan. Our documented record reflects real experience and verified outcomes."
         events={pastEvents}
-        onExploreUpcoming={() => navigate('/events/upcoming')}
+        emptyTitle="No past events documented yet."
+        emptyMessage="Our documented public record will expand as new platforms are delivered."
+        onExplorePast={() => navigate('/events/upcoming')}
+      />
+    );
+  }
+
+  if (activeMode === 'seminars') {
+    return (
+      <CategoryListingView
+        title="Seminars & Masterclasses"
+        eyebrow="Subject-Matter Sessions"
+        lead="Focused seminar convenings, expert talks, and masterclasses addressing AI, technology, career pathways, digital trust, and leadership."
+        events={seminarEvents}
+        emptyTitle="No seminars scheduled at the moment."
+        emptyMessage="Upcoming seminars and masterclasses will be published here as session topics, speakers, and dates are finalized."
+        onExplorePast={() => navigate('/events')}
+      />
+    );
+  }
+
+  if (activeMode === 'workshops') {
+    return (
+      <CategoryListingView
+        title="Workshops & Practical Labs"
+        eyebrow="Applied Learning"
+        lead="Hands-on learning environments, live demonstrations, and interactive technical skill-building labs."
+        events={workshopEvents}
+        emptyTitle="No workshops scheduled at the moment."
+        emptyMessage="Practical workshops and skill-building labs will be announced here as schedule details are confirmed."
+        onExplorePast={() => navigate('/events')}
+      />
+    );
+  }
+
+  if (activeMode === 'tours-trips') {
+    return (
+      <CategoryListingView
+        title="Educational & Exposure Tours"
+        eyebrow="Industry Exposure"
+        lead="Guided exposure visits connecting students and emerging talent with companies, technology hubs, and academic institutions."
+        events={tourEvents}
+        emptyTitle="No educational or exposure tours scheduled at the moment."
+        emptyMessage="Industry exposure and learning visits will be posted here as details are finalized."
+        onExplorePast={() => navigate('/events')}
       />
     );
   }
@@ -69,6 +131,10 @@ export default function Events({ mode }: EventsProps) {
       cfg={cfg}
       upcomingCount={upcomingEvents ? upcomingEvents.length : 0}
       pastCount={pastEvents ? pastEvents.length : 0}
+      seminarsCount={seminarEvents ? seminarEvents.length : 0}
+      workshopsCount={workshopEvents ? workshopEvents.length : 0}
+      toursCount={tourEvents ? tourEvents.length : 0}
+      allEvents={[...(upcomingEvents ?? []), ...(pastEvents ?? [])]}
     />
   );
 }
@@ -79,15 +145,31 @@ function EventsOverviewView({
   cfg,
   upcomingCount,
   pastCount,
+  seminarsCount,
+  workshopsCount,
+  toursCount,
+  allEvents,
 }: {
   cfg: typeof EVENTS_PAGE_CONFIG;
   upcomingCount: number;
   pastCount: number;
+  seminarsCount: number;
+  workshopsCount: number;
+  toursCount: number;
+  allEvents: ThriveEvent[];
 }) {
   useSeo({
     title: 'Events',
     description: cfg.hero.lead,
   });
+
+  const categoriesList: { key: string; config: CategoryCardConfig; count: number }[] = [
+    { key: 'upcoming', config: cfg.categories.upcoming, count: upcomingCount },
+    { key: 'past', config: cfg.categories.past, count: pastCount },
+    { key: 'seminars', config: cfg.categories.seminars, count: seminarsCount },
+    { key: 'workshops', config: cfg.categories.workshops, count: workshopsCount },
+    { key: 'toursTrips', config: cfg.categories.toursTrips, count: toursCount },
+  ];
 
   return (
     <>
@@ -101,61 +183,70 @@ function EventsOverviewView({
         ]}
       />
 
-      {/* Two Primary Event Categories Entry Points */}
+      {/* 5 Primary Event Categories Entry Points */}
       <section className="section section--tight">
         <div className="container">
-          <div className="grid grid--2">
-            <Reveal>
-              <div className="event-cat-card">
-                <div>
-                  <span className="eyebrow" style={{ color: 'var(--primary-green)' }}>
-                    {cfg.categories.upcoming.kicker}
-                  </span>
-                  <h3 className="event-cat-card__title">{cfg.categories.upcoming.title}</h3>
-                  <p className="event-cat-card__desc">{cfg.categories.upcoming.description}</p>
-                  <p className="event-cat-card__count">
-                    <Icon name="calendar" size={15} />
-                    <span>
-                      {upcomingCount} scheduled platform{upcomingCount === 1 ? '' : 's'}
+          <Reveal>
+            <SectionHeader
+              eyebrow="Event Ecosystem"
+              title="Explore Event Categories"
+              lead="Browse Thrive Pakistan's event convenings by format and purpose."
+            />
+          </Reveal>
+          <div className="grid grid--3" style={{ gap: '20px' }}>
+            {categoriesList.map((cat, i) => (
+              <Reveal key={cat.key} delay={(i % 3) * 70}>
+                <div className="event-cat-card">
+                  <div>
+                    <span className="eyebrow" style={{ color: 'var(--primary-green)' }}>
+                      {cat.config.kicker}
                     </span>
-                  </p>
+                    <h3 className="event-cat-card__title">{cat.config.title}</h3>
+                    <p className="event-cat-card__desc">{cat.config.description}</p>
+                    <p className="event-cat-card__count">
+                      <Icon name="calendar" size={15} />
+                      <span>
+                        {cat.count} published {cat.count === 1 ? 'item' : 'items'}
+                      </span>
+                    </p>
+                  </div>
+                  <div style={{ marginTop: 22 }}>
+                    <Button to={cat.config.ctaTo} variant="primary" size="sm" icon="arrow-right" className="btn--block">
+                      {cat.config.ctaLabel}
+                    </Button>
+                  </div>
                 </div>
-                <div style={{ marginTop: 22 }}>
-                  <Button to={cfg.categories.upcoming.ctaTo} variant="primary" icon="arrow-right">
-                    {cfg.categories.upcoming.ctaLabel}
-                  </Button>
-                </div>
-              </div>
-            </Reveal>
-
-            <Reveal delay={90}>
-              <div className="event-cat-card event-cat-card--dark">
-                <div>
-                  <span className="eyebrow" style={{ color: 'var(--primary-green)' }}>
-                    {cfg.categories.past.kicker}
-                  </span>
-                  <h3 className="event-cat-card__title">{cfg.categories.past.title}</h3>
-                  <p className="event-cat-card__desc">{cfg.categories.past.description}</p>
-                  <p className="event-cat-card__count">
-                    <Icon name="check" size={15} />
-                    <span>
-                      {pastCount} documented past platform{pastCount === 1 ? '' : 's'}
-                    </span>
-                  </p>
-                </div>
-                <div style={{ marginTop: 22 }}>
-                  <Button to={cfg.categories.past.ctaTo} variant="outline-light" icon="arrow-right">
-                    {cfg.categories.past.ctaLabel}
-                  </Button>
-                </div>
-              </div>
-            </Reveal>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
 
+      {/* FEATURED & DOCUMENTED PLATFORMS */}
+      {allEvents.length > 0 && (
+        <section className="section section--dark">
+          <div className="container">
+            <Reveal>
+              <SectionHeader
+                dark
+                eyebrow="Featured Platforms"
+                title="Active & Documented Convenings"
+                lead="Each event features a short summary and direct connection to its central media gallery collection."
+              />
+            </Reveal>
+            <div className="grid grid--2" style={{ gap: '24px' }}>
+              {allEvents.map((e, i) => (
+                <Reveal key={e.id} delay={i * 90}>
+                  <EventCard event={e} dark />
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* HOW WE CONDUCT OUR EVENTS */}
-      <section className="section section--dark">
+      <section className="section">
         <div className="container">
           <Reveal>
             <SectionHeader
@@ -231,91 +322,47 @@ function EventsOverviewView({
           </div>
         </div>
       </section>
-
-      {/* PREVIOUS WORK / EVENT JOURNEY */}
-      <section className="section section--dark">
-        <div className="container">
-          <Reveal>
-            <SectionHeader
-              dark
-              eyebrow={cfg.previousWorkSection.eyebrow}
-              title={cfg.previousWorkSection.title}
-              lead={cfg.previousWorkSection.lead}
-            />
-          </Reveal>
-          <div className="grid grid--3">
-            {PREVIOUS_WORK.map((w, i) => (
-              <Reveal key={w.id} delay={i * 90}>
-                <article className="event-block work-card">
-                  <span className="eyebrow" style={{ color: 'var(--primary-green)' }}>
-                    {i === 0
-                      ? '2025 · Hazara University, Mansehra'
-                      : i === 1
-                      ? '2026 · Institutional collaboration'
-                      : 'Regional ecosystem'}
-                  </span>
-                  <h3 style={{ marginTop: 10 }}>{w.title}</h3>
-                  <p style={{ marginTop: 8, color: 'var(--muted-on-dark)' }}>{w.detail}</p>
-                  {w.id === 'hazara-tech-fiesta' && (
-                    <ul className="highlights-list" style={{ marginTop: 14 }}>
-                      <li>
-                        <Icon name="users" size={16} /> 5,000+ attendees
-                      </li>
-                      <li>
-                        <Icon name="mic" size={16} /> 50+ speakers · 15+ exhibitors
-                      </li>
-                      <li>
-                        <Icon name="clock" size={16} /> 24-hour hackathon
-                      </li>
-                      <li>
-                        <Icon name="calendar" size={16} /> 12–14 December 2025
-                      </li>
-                    </ul>
-                  )}
-                </article>
-              </Reveal>
-            ))}
-          </div>
-          <Reveal delay={120}>
-            <p className="home-eco__note">
-              Ecosystem engagement has included {PRIOR_ECOSYSTEM_NAMES.slice(0, 5).join(', ')} and
-              others. {PRIOR_ECOSYSTEM_NOTE}
-            </p>
-          </Reveal>
-        </div>
-      </section>
     </>
   );
 }
 
-/* ================= Upcoming Events View ================= */
+/* ================= Category Listing View ================= */
 
-function UpcomingEventsView({
+function CategoryListingView({
+  title,
+  eyebrow,
+  lead,
   events,
+  emptyTitle,
+  emptyMessage,
   onExplorePast,
 }: {
+  title: string;
+  eyebrow: string;
+  lead: string;
   events: ThriveEvent[] | null;
+  emptyTitle: string;
+  emptyMessage: string;
   onExplorePast: () => void;
 }) {
   useSeo({
-    title: 'Upcoming Events',
-    description:
-      'Upcoming Thrive Pakistan events: confirmed platforms and convenings scheduled in Hazara and Khyber Pakhtunkhwa.',
+    title,
+    description: lead,
   });
 
   return (
     <>
       <PageHero
-        eyebrow="Scheduled Platforms"
-        title="Upcoming Events"
-        lead="Confirmed platforms and convenings scheduled and open for interest. Details are published as confirmed."
+        eyebrow={eyebrow}
+        title={title}
+        lead={lead}
         meta={[
           {
             icon: 'calendar',
             label:
               events === null
-                ? 'Loading upcoming events…'
-                : `${events.length} upcoming platform${events.length === 1 ? '' : 's'}`,
+                ? 'Loading platform items…'
+                : `${events.length} item${events.length === 1 ? '' : 's'} available`,
           },
         ]}
       />
@@ -325,8 +372,8 @@ function UpcomingEventsView({
           <div className="listing-head" style={{ marginBottom: 24 }}>
             <p className="listing-count" role="status">
               {events === null
-                ? 'Loading upcoming events…'
-                : `${events.length} upcoming event${events.length === 1 ? '' : 's'} scheduled`}
+                ? 'Loading items…'
+                : `${events.length} ${title.toLowerCase()} item${events.length === 1 ? '' : 's'} published`}
             </p>
             <Button variant="ghost" size="sm" to="/events">
               All Events Overview
@@ -341,84 +388,10 @@ function UpcomingEventsView({
             </div>
           ) : events.length === 0 ? (
             <EmptyState
-              title="No upcoming events at the moment."
-              message="New platform dates and convenings will be announced here as details are confirmed. Explore our past events in the interim."
-              actionLabel="Explore Past Events"
+              title={emptyTitle}
+              message={emptyMessage}
+              actionLabel="All Events Overview"
               onAction={onExplorePast}
-              icon="calendar"
-            />
-          ) : (
-            <div className="grid grid--3">
-              {events.map((e, i) => (
-                <Reveal key={e.id} delay={i * 80}>
-                  <EventCard event={e} />
-                </Reveal>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
-    </>
-  );
-}
-
-/* ================= Past Events View ================= */
-
-function PastEventsView({
-  events,
-  onExploreUpcoming,
-}: {
-  events: ThriveEvent[] | null;
-  onExploreUpcoming: () => void;
-}) {
-  useSeo({
-    title: 'Past Events',
-    description:
-      'Documented record of past Thrive Pakistan events, technology festivals, and institutional convenings.',
-  });
-
-  return (
-    <>
-      <PageHero
-        eyebrow="Documented Record"
-        title="Past Events"
-        lead="Completed events and regional technology festivals delivered by Thrive Pakistan. Our documented record reflects real experience and verified outcomes."
-        meta={[
-          {
-            icon: 'calendar',
-            label:
-              events === null
-                ? 'Loading past events…'
-                : `${events.length} documented past platform${events.length === 1 ? '' : 's'}`,
-          },
-        ]}
-      />
-
-      <section className="section section--tight">
-        <div className="container">
-          <div className="listing-head" style={{ marginBottom: 24 }}>
-            <p className="listing-count" role="status">
-              {events === null
-                ? 'Loading past events…'
-                : `${events.length} past event${events.length === 1 ? '' : 's'} documented`}
-            </p>
-            <Button variant="ghost" size="sm" to="/events">
-              All Events Overview
-            </Button>
-          </div>
-
-          {events === null ? (
-            <div className="grid grid--3">
-              {[0, 1].map((i) => (
-                <CardSkeleton key={i} />
-              ))}
-            </div>
-          ) : events.length === 0 ? (
-            <EmptyState
-              title="No past events documented yet."
-              message="Our documented public record will expand as new platforms are delivered."
-              actionLabel="View Upcoming Events"
-              onAction={onExploreUpcoming}
               icon="calendar"
             />
           ) : (

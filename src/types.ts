@@ -46,6 +46,28 @@ export interface Faq {
   a: string;
 }
 
+export interface GalleryMediaItem {
+  id: string;
+  image: ImageRef;
+  caption: string;
+}
+
+export interface GalleryCollection {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  coverImage: ImageRef;
+  mediaItems: GalleryMediaItem[];
+  relatedContentId?: string;
+  relatedContentType?: 'event' | 'seminar' | 'workshop' | 'tour';
+  published: boolean;
+  featured?: boolean;
+  displayOrder?: number;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
 export interface ThriveEvent {
   id: string;
   slug: string;
@@ -65,6 +87,8 @@ export interface ThriveEvent {
   featured?: boolean;
   /** Dynamically derived from event end date vs current time. */
   status?: EventStatus;
+  /** Associated central gallery collection slug (if available). */
+  gallerySlug?: string;
   /** True only when the date is officially confirmed by the organization. */
   dateConfirmed: boolean;
   /** True only when the venue is officially confirmed by the organization. */
