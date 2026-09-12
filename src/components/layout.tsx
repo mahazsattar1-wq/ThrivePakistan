@@ -33,6 +33,7 @@ export function Navbar() {
   const burgerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
+  const arrowRefs = useRef<Record<string, HTMLButtonElement | null>>({});
   useBodyLock(mobileOpen);
 
   /** A dropdown parent is highlighted when one of its children matches the route. */
@@ -59,8 +60,10 @@ export function Navbar() {
         if (mobileOpen) {
           closeMobile();
           burgerRef.current?.focus();
-        } else {
+        } else if (openDrop) {
+          const prev = openDrop;
           setOpenDrop(null);
+          arrowRefs.current[prev]?.focus();
         }
       }
     };
@@ -73,7 +76,7 @@ export function Navbar() {
       document.removeEventListener('keydown', onKey);
       document.removeEventListener('click', onClick);
     };
-  }, [mobileOpen, closeMobile]);
+  }, [mobileOpen, openDrop, closeMobile]);
 
   // Focus management for mobile drawer: focus close button on open, trap Tab
   useEffect(() => {
@@ -130,30 +133,71 @@ export function Navbar() {
                 <li
                   key={item.label}
                   className={`nav__item ${openDrop === item.label ? 'nav__item--open' : ''}`}
-                  onMouseEnter={() => item.children && setOpenDrop(item.label)}
-                  onMouseLeave={() => item.children && setOpenDrop(null)}
                 >
-                  {item.children ? (
+                  {item.children && item.children.length > 0 ? (
                     <>
+                      {item.to ? (
+                        <NavLink
+                          to={item.to}
+                          className={({ isActive }) =>
+                            `nav__link ${isActive || parentActive(item) ? 'nav__link--active' : ''}`
+                          }
+                          onClick={() => setOpenDrop(null)}
+                        >
+                          {item.label}
+                        </NavLink>
+                      ) : (
+                        <span
+                          className={`nav__link ${parentActive(item) ? 'nav__link--active' : ''}`}
+                        >
+                          {item.label}
+                        </span>
+                      )}
                       <button
+                        ref={(el) => {
+                          arrowRefs.current[item.label] = el;
+                        }}
                         type="button"
-                        className={`nav__link nav__link--parent ${parentActive(item) ? 'nav__link--active' : ''}`}
+                        className={`nav__caret-btn ${openDrop === item.label ? 'nav__caret-btn--active' : ''}`}
+                        aria-label={`Toggle ${item.label} dropdown menu`}
                         aria-expanded={openDrop === item.label}
                         aria-haspopup="true"
                         aria-controls={`drop-${item.label}`}
-                        onClick={() => setOpenDrop(openDrop === item.label ? null : item.label)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setOpenDrop((prev) => (prev === item.label ? null : item.label));
+                        }}
                       >
-                        {item.label}
-                        <Icon name="chevron-down" size={14} className="nav__caret" />
+                        <Icon
+                          name="chevron-down"
+                          size={13}
+                          className={`nav__caret ${openDrop === item.label ? 'nav__caret--open' : ''}`}
+                        />
                       </button>
-                      <div id={`drop-${item.label}`} className="nav__drop" role="menu" aria-label={`${item.label} submenu`}>
+                      <div
+                        id={`drop-${item.label}`}
+                        className="nav__drop"
+                        role="menu"
+                        aria-label={`${item.label} submenu`}
+                      >
                         {item.to && (
-                          <Link className="nav__drop-link nav__drop-link--head" to={item.to} role="menuitem">
+                          <Link
+                            className="nav__drop-link nav__drop-link--head"
+                            to={item.to}
+                            role="menuitem"
+                            onClick={() => setOpenDrop(null)}
+                          >
                             All {item.label}
                           </Link>
                         )}
                         {item.children.map((child) => (
-                          <Link key={child.to + child.label} className="nav__drop-link" to={child.to} role="menuitem">
+                          <Link
+                            key={child.to + child.label}
+                            className="nav__drop-link"
+                            to={child.to}
+                            role="menuitem"
+                            onClick={() => setOpenDrop(null)}
+                          >
                             {child.label}
                           </Link>
                         ))}
@@ -164,6 +208,7 @@ export function Navbar() {
                       to={item.to ?? '/'}
                       className={({ isActive }) => `nav__link ${isActive ? 'nav__link--active' : ''}`}
                       end={item.to === '/'}
+                      onClick={() => setOpenDrop(null)}
                     >
                       {item.label}
                     </NavLink>
