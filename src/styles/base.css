@@ -177,10 +177,28 @@ p {
 }
 
 .section--light {
-  /* Dark-blue rhythm section (never plain white) */
-  background: radial-gradient(circle at 22% 16%, rgba(20, 70, 100, 0.22), transparent 46%),
-    radial-gradient(circle at 84% 80%, rgba(67, 183, 73, 0.07), transparent 40%), var(--blue-2);
-  color: var(--white);
+  /* Refined light green surface for visual breathing room */
+  background: #f2f9f3;
+  color: var(--dark);
+}
+
+.section--white {
+  /* Pure white surface */
+  background: #ffffff;
+  color: var(--dark);
+}
+
+.section--light h1, .section--light h2, .section--light h3, .section--light h4,
+.section--white h1, .section--white h2, .section--white h3, .section--white h4 {
+  color: var(--dark);
+}
+
+.section--light p, .section--white p {
+  color: #38423a;
+}
+
+.section--light .eyebrow, .section--white .eyebrow {
+  color: var(--green-dark);
 }
 
 .grid {

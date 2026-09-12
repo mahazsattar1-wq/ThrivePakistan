@@ -7,7 +7,7 @@
   position: sticky;
   top: 0;
   z-index: var(--z-nav);
-  background: rgba(10, 11, 11, 0.72);
+  background: rgba(10, 11, 11, 0.78);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid transparent;
@@ -15,15 +15,23 @@
 }
 
 .nav--scrolled {
-  background: rgba(10, 11, 11, 0.94);
+  background: rgba(10, 11, 11, 0.95);
   border-bottom-color: var(--border-dark);
 }
 
 .nav__inner {
   display: flex;
   align-items: center;
-  gap: 20px;
+  justify-content: space-between;
+  width: 100%;
+  gap: 28px;
   height: var(--nav-h);
+}
+
+.nav__logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .nav__logo img {
@@ -32,7 +40,9 @@
 }
 
 .nav__links {
-  margin-left: auto;
+  display: flex;
+  align-items: center;
+  margin-left: 0;
 }
 
 .nav__links ul {
@@ -51,7 +61,7 @@
   gap: 6px;
   padding: 9px 12px;
   border-radius: var(--r-pill);
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(255, 255, 255, 0.85);
   font-size: 0.92rem;
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -136,12 +146,13 @@
 .nav__actions {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-left: 8px;
+  gap: 12px;
+  margin-left: auto;
+  flex-shrink: 0;
 }
 
 .nav__links + .nav__actions {
-  margin-left: 0;
+  margin-left: auto;
 }
 
 .nav__search {
@@ -158,7 +169,7 @@
 
 .nav__search:hover {
   background: var(--primary-green);
-  color: var(--white);
+  color: var(--dark);
   border-color: var(--primary-green);
 }
 
@@ -166,8 +177,8 @@
   display: none;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
   border-radius: var(--r-sm);
   color: var(--white);
   border: 1px solid var(--border-dark);
@@ -188,9 +199,10 @@
   .nav__cta {
     display: none !important;
   }
-  .nav__actions {
-    margin-left: auto;
-    gap: 10px;
+  .nav__actions,
+  .nav__links + .nav__actions {
+    margin-left: auto !important;
+    gap: 8px;
   }
   .nav__search {
     width: 38px;
@@ -244,7 +256,7 @@
     height: 23px;
   }
   .nav__actions {
-    gap: 8px;
+    gap: 6px;
   }
 }
 
