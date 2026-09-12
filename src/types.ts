@@ -192,6 +192,8 @@ export interface BlogPost {
   views: number;
   image: ImageRef;
   featured?: boolean;
+  published?: boolean;
+  displayOrder?: number;
   tags: string[];
 }
 

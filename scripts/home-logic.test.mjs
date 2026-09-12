@@ -17,9 +17,10 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 // esbuild resolves plain absolute fs paths (file:// URLs are not module specifiers)
 const entry = `
   import { EVENTS } from '${join(root, 'src/data/events.ts')}';
-  import { getFeaturedUpcomingEvent } from '${join(root, 'src/data/home.ts')}';
+  import { HOME_PAGE, getFeaturedUpcomingEvent } from '${join(root, 'src/data/home.ts')}';
   import { LEADERSHIP_MESSAGES, getPublishedMessages, parseMessage } from '${join(root, 'src/data/leadershipMessages.ts')}';
-  export { EVENTS, getFeaturedUpcomingEvent, LEADERSHIP_MESSAGES, getPublishedMessages, parseMessage };
+  import { NAV_ITEMS } from '${join(root, 'src/nav.ts')}';
+  export { EVENTS, HOME_PAGE, getFeaturedUpcomingEvent, LEADERSHIP_MESSAGES, getPublishedMessages, parseMessage, NAV_ITEMS };
 `;
 
 const outDir = mkdtempSync(join(tmpdir(), 'tp-home-test-'));
@@ -178,6 +179,16 @@ check(
   'MD name/role resolved from team data',
   md && slugOf(md) === 'faraz-khan-sulemani',
 );
+
+/* ---------- Scenario H — Phase 12 Content Architecture & Navigation ---------- */
+console.log('\nScenario H — Phase 12 Content Architecture & Navigation');
+const { HOME_PAGE, NAV_ITEMS } = await import(pathToFileURL(outFile));
+check('Blogs section exists on Home config', HOME_PAGE.blogs !== undefined && HOME_PAGE.blogs.visible === true);
+check('Hero title is Connecting Young Talent...', HOME_PAGE.hero.title === 'Connecting Young Talent With Knowledge, Industry & Opportunity');
+const futurexNavItem = NAV_ITEMS.find((n) => n.label === 'FutureX');
+check('FutureX navigation item exists', futurexNavItem !== undefined);
+check('FutureX navigation label is exactly FutureX', futurexNavItem?.label === 'FutureX');
+check('FutureX route is /futurex', futurexNavItem?.to === '/futurex');
 
 console.log(failures === 0 ? '\nAll homepage logic scenarios passed.\n' : `\n${failures} scenario(s) FAILED.\n`);
 process.exit(failures === 0 ? 0 : 1);

@@ -21,6 +21,7 @@ export const NAV_ITEMS: NavItem[] = [
       { label: 'Past Events', to: '/events?status=past' },
     ],
   },
+  { label: 'FutureX', to: '/futurex' },
   {
     label: 'Focus Areas',
     to: '/programs',

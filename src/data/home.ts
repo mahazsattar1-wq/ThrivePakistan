@@ -222,13 +222,23 @@ export const HOME_PAGE = {
     cta: { id: 'p-explore', label: 'Explore Partnership Opportunities', to: '/become-a-partner', variant: 'primary', size: 'lg', icon: 'arrow-right' },
   } satisfies HomeSectionConfig & { body: string; cta: HomeCta },
 
-  newsroom: {
-    id: 'newsroom',
+  blogs: {
+    id: 'blogs',
     visible: true,
-    eyebrow: 'Newsroom',
+    eyebrow: 'Blogs & Perspectives',
     title: 'Notes from the build.',
-    lead: 'Organizational notes and perspectives — grounded in what we actually know and do.',
-    cta: { id: 'n-all', label: 'Visit the blog', to: '/blog', variant: 'ghost', icon: 'arrow-right' },
+    lead: 'Articles, insights and organizational perspectives from Thrive Pakistan.',
+    cta: { id: 'b-all', label: 'Visit the blog', to: '/blog', variant: 'ghost', icon: 'arrow-right' },
+    emptyBehavior: 'hide' as const,
+  } satisfies CardGridSectionConfig,
+
+  newsroom: {
+    id: 'blogs',
+    visible: true,
+    eyebrow: 'Blogs & Perspectives',
+    title: 'Notes from the build.',
+    lead: 'Articles, insights and organizational perspectives from Thrive Pakistan.',
+    cta: { id: 'b-all', label: 'Visit the blog', to: '/blog', variant: 'ghost', icon: 'arrow-right' },
   } satisfies CardGridSectionConfig,
 
   finalCta: {

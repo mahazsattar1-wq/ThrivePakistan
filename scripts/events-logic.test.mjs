@@ -40,7 +40,8 @@ console.log('\n--- Phase 7 Events Architecture Tests ---');
 // 1. Navigation structure
 console.log('\n1. Header Navigation');
 const futurexTopNav = NAV_ITEMS.find((item) => item.label === 'FutureX');
-check('Top-level FutureX nav item removed', futurexTopNav === undefined);
+check('Top-level FutureX nav item exists with label FutureX', futurexTopNav !== undefined && futurexTopNav.label === 'FutureX');
+check('FutureX nav target is /futurex', futurexTopNav?.to === '/futurex');
 
 const eventsNav = NAV_ITEMS.find((item) => item.label === 'Events');
 const eventsSubmenu = eventsNav?.children ?? [];

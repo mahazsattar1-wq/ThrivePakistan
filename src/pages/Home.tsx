@@ -55,10 +55,11 @@ export default function Home() {
    * featured. When none exists the section is not rendered at all: no empty
    * card, no placeholder, no blank space.
    */
-  const featuredEvent = getFeaturedUpcomingEvent(EVENTS);
+  const eventList = upcoming ?? EVENTS;
+  const featuredEvent = getFeaturedUpcomingEvent(eventList);
 
   /** Upcoming events section excludes the featured one (already showcased above). */
-  const otherUpcoming = (upcoming ?? EVENTS).filter(
+  const otherUpcoming = eventList.filter(
     (e) => isEventUpcoming(e) && e.slug !== featuredEvent?.slug,
   );
   const cfg = HOME_PAGE;
@@ -287,26 +288,33 @@ export default function Home() {
         </section>
       )}
 
-      {/* ============ 11 · NEWSROOM ============ */}
-      {cfg.newsroom.visible && (
-        <section className="section" id={cfg.newsroom.id} aria-label={cfg.newsroom.title}>
+      {/* ============ 11 · BLOGS ============ */}
+      {cfg.blogs?.visible && (
+        <section className="section" id={cfg.blogs.id} aria-label={cfg.blogs.title}>
           <div className="container">
             <Reveal>
               <SectionHeader
-                eyebrow={cfg.newsroom.eyebrow}
-                title={cfg.newsroom.title}
-                lead={cfg.newsroom.lead}
-                action={cfg.newsroom.cta && <Cta cta={cfg.newsroom.cta} />}
+                eyebrow={cfg.blogs.eyebrow}
+                title={cfg.blogs.title}
+                lead={cfg.blogs.lead}
+                action={cfg.blogs.cta && <Cta cta={cfg.blogs.cta} />}
               />
             </Reveal>
             <div className="grid grid--3">
-              {blogs === null
-                ? [0, 1, 2].map((i) => <CardSkeleton key={i} />)
-                : blogs.map((b, i) => (
-                    <Reveal key={b.id} delay={i * 90}>
-                      <BlogCard post={b} />
-                    </Reveal>
-                  ))}
+              {blogs === null ? (
+                [0, 1, 2].map((i) => <CardSkeleton key={i} />)
+              ) : blogs.length > 0 ? (
+                blogs.map((b, i) => (
+                  <Reveal key={b.id} delay={i * 90}>
+                    <BlogCard post={b} />
+                  </Reveal>
+                ))
+              ) : (
+                <div className="empty" style={{ gridColumn: '1 / -1' }}>
+                  <h3>No blog posts available yet</h3>
+                  <p>Articles and insights will appear here as they are published.</p>
+                </div>
+              )}
             </div>
           </div>
         </section>
@@ -359,12 +367,18 @@ function FeaturedEventBanner({ event }: { event: ThriveEvent }) {
           </ul>
           <div className="feat-ev__ctas">
             {cfg.ctas.map((c) => (
-              <Cta key={c.id} cta={c} />
+              <Cta
+                key={c.id}
+                cta={{
+                  ...c,
+                  to: c.to ? c.to.replace(/\/events\/[a-z0-9-]+/, `/events/${event.slug}`) : undefined,
+                }}
+              />
             ))}
           </div>
         </div>
         <div className="feat-ev__count anim-fade-up" style={{ animationDelay: '160ms' }}>
-          <h4>{cfg.countdownLabel}</h4>
+          <h4>{event.dateLabel} · {event.city}</h4>
           <Countdown targetIso={event.date} />
           <p className="feat-ev__note">{cfg.note}</p>
         </div>
