@@ -18,17 +18,17 @@ export const ORG = {
   description:
     'Thrive Pakistan is a youth-led technology and ecosystem-development platform based in Hazara, Khyber Pakhtunkhwa. It connects young people with the people, institutions and opportunities shaping Pakistan\u2019s digital economy.',
   shortDescription:
-    'A youth-centered platform founded in 2025 that connects students and emerging talent with practical learning, technology, entrepreneurship, industry exposure and meaningful opportunities \u2014 with particular relevance to Hazara and Khyber Pakhtunkhwa.',
+    'A youth-centered platform founded in 2025 that connects students and emerging talent with practical learning, technology, entrepreneurship, industry exposure, and meaningful opportunities, with particular relevance to Hazara and Khyber Pakhtunkhwa.',
   vision:
     'A Pakistan where a young person\u2019s location does not determine the quality of opportunity, exposure or professional network available to them.',
   mission:
     'To connect regional youth with technology, industry, entrepreneurship, finance, leadership and public institutions through platforms that produce practical learning and lasting relationships.',
   purpose:
-    'To turn local potential into visible capability \u2014 and visible capability into education, employment, enterprise, leadership and public value.',
+    'To turn local potential into visible capability, and visible capability into education, employment, enterprise, leadership, and public value.',
   corePromise:
     'We create access with structure: the right people in the same room, the right experiences around them, and a pathway that continues after the event.',
   whyWeExist:
-    'Students and early-career professionals in regional cities can have ambition and ability without regular access to mentors, employers, innovators, decision-makers and professional environments. Thrive Pakistan exists to help narrow that distance \u2014 through programmes, convenings, collaborations, skills initiatives and long-term ecosystem building.',
+    'Students and early-career professionals in regional cities can have ambition and ability without regular access to mentors, employers, innovators, decision-makers and professional environments. Thrive Pakistan exists to help narrow that distance through programmes, convenings, collaborations, skills initiatives, and long-term ecosystem building.',
   website: 'https://www.thrivepakistan.com',
   socialHandle: '@ThrivePakistan',
 } as const;

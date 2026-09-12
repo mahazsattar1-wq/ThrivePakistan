@@ -18,7 +18,7 @@ function initialsOf(name: string): string {
 
 export function MonogramAvatar({ name, className = '' }: { name: string; className?: string }) {
   return (
-    <span className={`avatar-mono ${className}`.trim()} role="img" aria-label={`${name} — official photograph to be added`}>
+    <span className={`avatar-mono ${className}`.trim()} role="img" aria-label={`${name}, official photograph to be added`}>
       {initialsOf(name)}
     </span>
   );

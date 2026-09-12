@@ -12,7 +12,7 @@ import { Modal } from '../components/feedback';
 export default function Gallery() {
   useSeo({
     title: 'Gallery',
-    description: 'Thrive Pakistan visual identity — illustrative platform artwork. Genuine event photography will be added as platforms are delivered.',
+    description: 'Thrive Pakistan visual identity: illustrative platform artwork. Genuine event photography will be added as platforms are delivered.',
   });
 
   const [category, setCategory] = useState('all');
@@ -51,7 +51,7 @@ export default function Gallery() {
       <PageHero
         eyebrow="Gallery"
         title="Platform visuals."
-        lead="Illustrative artwork for Thrive Pakistan platforms — genuine event photography will replace these as FutureX 2026 and future platforms are delivered."
+        lead="Illustrative artwork for Thrive Pakistan platforms, where genuine event photography will replace these as FutureX 2026 and future platforms are delivered."
         crumbs={[{ label: 'Gallery' }]}
         meta={[
           { icon: 'eye', label: '18 curated moments' },
@@ -94,7 +94,7 @@ export default function Gallery() {
           ) : items.length === 0 ? (
             <EmptyState
               title="No images in this category yet."
-              message="Our media team uploads after every event — try another category."
+              message="Our media team uploads after every event, try another category."
               actionLabel="Show all moments"
               onAction={() => setCategory('all')}
               icon="eye"
@@ -130,7 +130,7 @@ export default function Gallery() {
         <div className="container cta-band__inner">
           <Reveal>
             <h2>Want your lens on our stages?</h2>
-            <p style={{ marginTop: 10 }}>The media volunteer team shoots every flagship — join as a photographer.</p>
+            <p style={{ marginTop: 10 }}>The media volunteer team shoots every flagship, so join as a photographer.</p>
             <div className="cta-band__ctas">
               <Button to="/volunteer" icon="arrow-right">Volunteer with media</Button>
               <Button to="/videos" variant="outline-light">Watch the films</Button>

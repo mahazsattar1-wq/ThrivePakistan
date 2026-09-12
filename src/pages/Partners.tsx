@@ -17,7 +17,7 @@ export default function Partners() {
       <PageHero
         eyebrow="Partnership"
         title="Built through collaboration."
-        lead="Partnership with Thrive Pakistan means co-building access — not attaching a name to an activity after the important decisions are made."
+        lead="Partnership with Thrive Pakistan means co-building access, not attaching a name to an activity after the important decisions are made."
         crumbs={[{ label: 'Partners' }]}
         meta={[
           { icon: 'handshake', label: 'Institutions · Industry · Government · Communities' },
@@ -32,7 +32,7 @@ export default function Partners() {
             <SectionHeader
               eyebrow="Why collaborate"
               title="What partnership creates."
-              lead="Thrive Pakistan has no partner logo wall to show yet — because we only display collaborations that are real. Here is what working together is designed to produce."
+              lead="Thrive Pakistan has no partner logo wall to show yet because we only display collaborations that are real. Here is what working together is designed to produce."
             />
           </Reveal>
           <div className="grid grid--4">
@@ -57,7 +57,7 @@ export default function Partners() {
               dark
               eyebrow="Ways to engage"
               title="Where organizations plug in."
-              lead="Engagement models shaped by the focus areas of our platforms — each collaboration is scoped around a meaningful role and outcome."
+              lead="Engagement models shaped by the focus areas of our platforms, where each collaboration is scoped around a meaningful role and outcome."
             />
           </Reveal>
           <div className="grid grid--3">
@@ -106,7 +106,7 @@ export default function Partners() {
           <Reveal>
             <h2>Explore partnership opportunities.</h2>
             <p style={{ marginTop: 10 }}>
-              Educational institutions, companies, public departments, media and community organizations —
+              Educational institutions, companies, public departments, media, and community organizations:
               tell us what you want to build, and we will scope a meaningful role together.
             </p>
             <div className="cta-band__ctas">

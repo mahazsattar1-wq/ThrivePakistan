@@ -19,7 +19,7 @@ export const PROGRAMS: Program[] = [
     description:
       'Practical exposure to artificial intelligence, cybersecurity, digital skills, technology careers and the changing nature of employment.',
     details:
-      'Technology moves faster than curricula. This focus area brings learners face to face with applied AI, cybersecurity awareness and digital work — through demonstrations, labs, expert sessions and conversations with people who build and secure real systems.',
+      'Technology moves faster than curricula. This focus area brings learners face to face with applied AI, cybersecurity awareness, and digital work through demonstrations, labs, expert sessions, and conversations with people who build and secure real systems.',
     outcomes: [
       'Practical exposure to AI and emerging technology',
       'Cybersecurity, privacy and digital-trust awareness',
@@ -39,7 +39,7 @@ export const PROGRAMS: Program[] = [
     description:
       'Digital entrepreneurship, emerging income pathways and connections to founders and practitioners.',
     details:
-      'Young people in regional cities need to see entrepreneurship as a real route — and meet the people already walking it. This area focuses on digital entrepreneurship, emerging income pathways, startup showcases and direct connection to founders and practitioners.',
+      'Young people in regional cities need to see entrepreneurship as a real route and meet the people already walking it. This area focuses on digital entrepreneurship, emerging income pathways, startup showcases, and direct connection to founders and practitioners.',
     outcomes: [
       'Exposure to digital entrepreneurship and emerging income pathways',
       'Spaces to demonstrate, test and pitch ideas',
@@ -66,7 +66,7 @@ export const PROGRAMS: Program[] = [
       'Professional networks that continue beyond the event',
     ],
     audience: ['Students & fresh graduates', 'Jobseekers', 'Employers & recruiters', 'Industry practitioners'],
-    impact: 'The operating model\u2019s first layer — exposure before everything else.',
+    impact: 'The operating model\u2019s first layer, exposure before everything else.',
     image: img('eventsA', 3),
     eventSlugs: ['futurex-2026'],
   },
@@ -79,7 +79,7 @@ export const PROGRAMS: Program[] = [
     description:
       'Working with educational institutions to strengthen the connection between classroom learning and industry.',
     details:
-      'Universities, companies and public departments often operate near one another without a sustained collaboration mechanism. Thrive Pakistan works with educational institutions — colleges, universities and campus societies — toward workshops, talent pipelines, challenges and applied collaboration that go beyond ceremonial partnership.',
+      'Universities, companies and public departments often operate near one another without a sustained collaboration mechanism. Thrive Pakistan works with educational institutions, including colleges, universities, and campus societies, toward workshops, talent pipelines, challenges and applied collaboration that go beyond ceremonial partnership.',
     outcomes: [
       'Institutional collaborations and memoranda of collaboration',
       'Campus networks, societies and student organizing teams',
@@ -99,14 +99,14 @@ export const PROGRAMS: Program[] = [
     description:
       'Creating meaningful participation, learning and leadership opportunities for young people.',
     details:
-      'Young people may have ability but lack a stage on which to test, present and defend their ideas. This area creates meaningful participation — volunteering, organizing, competing, speaking — so that confidence and capability grow together, with structured ownership and accountability.',
+      'Young people may have ability but lack a stage on which to test, present, and defend their ideas. This area creates meaningful participation, including volunteering, organizing, competing, and speaking, so that confidence and capability grow together with structured ownership and accountability.',
     outcomes: [
       'Volunteer, organizer and ambassador roles with real responsibility',
       'Leadership pathways with accountable ownership',
       'Participation that continues after the event ends',
     ],
     audience: ['Students', 'Young volunteers', 'Campus organizers', 'First-time participants'],
-    impact: 'Youth-led by design — the platform is built and run by young people.',
+    impact: 'Youth-led by design, as the platform is built and run by young people.',
     image: img('galleryA', 1),
     eventSlugs: [],
   },
@@ -119,14 +119,14 @@ export const PROGRAMS: Program[] = [
     description:
       'Increasing meaningful participation and leadership opportunities for women and female students.',
     details:
-      'Inclusion is deliberate, not incidental. This focus area works on participation strategy and support so that women and female students can take part fully — and move into visible leadership roles — across every Thrive Pakistan platform.',
+      'Inclusion is deliberate, not incidental. This focus area works on participation strategy and support so that women and female students can take part fully and move into visible leadership roles across every Thrive Pakistan platform.',
     outcomes: [
       'Women-focused engagement and participation strategy',
       'Support and representation across platforms',
       'Leadership opportunities for female students and young women',
     ],
     audience: ['Female students', 'Young women entering tech & enterprise', 'Educators & mentors', 'Allies & partners'],
-    impact: 'A dedicated functional leadership role — Director Female Affairs — owns this area.',
+    impact: 'A dedicated functional leadership role, Director Female Affairs, owns this area.',
     image: img('galleryA', 5),
     eventSlugs: ['futurex-2026'],
   },

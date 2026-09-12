@@ -39,7 +39,7 @@ export default function BecomePartner() {
   useSeo({
     title: 'Become a Partner',
     description:
-      'Partner with Thrive Pakistan — co-build access across education, technology, careers and entrepreneurship in Hazara and Khyber Pakhtunkhwa. Partnerships@thrivepakistan.com.',
+      'Partner with Thrive Pakistan to co-build access across education, technology, careers, and entrepreneurship in Hazara and Khyber Pakhtunkhwa. Contact partnerships@thrivepakistan.com.',
   });
 
   const [values, setValues] = useState(INITIAL);
@@ -75,7 +75,7 @@ export default function BecomePartner() {
       <PageHero
         eyebrow="Partnership"
         title="Co-build access with us."
-        lead="Partnership with Thrive Pakistan means translating your institutional goals into visible activities — labs, workshops, challenges, mentorship, recruitment and research — with defined ownership and follow-up."
+        lead="Partnership with Thrive Pakistan means translating your institutional goals into visible activities, including labs, workshops, challenges, mentorship, recruitment, and research, with defined ownership and follow-up."
         crumbs={[{ label: 'Partners', to: '/partners' }, { label: 'Become a Partner' }]}
         meta={[
           { icon: 'pin', label: 'Hazara & northern Pakistan' },
@@ -91,7 +91,7 @@ export default function BecomePartner() {
             <SectionHeader
               eyebrow="Why partnership creates value"
               title="What collaboration with Thrive Pakistan offers."
-              lead="We design collaboration as strategic co-building and measurable activation — not passive logo placement."
+              lead="We design collaboration as strategic co-building and measurable activation, not passive logo placement."
             />
           </Reveal>
           <div className="grid grid--4">
@@ -139,7 +139,7 @@ export default function BecomePartner() {
               dark
               eyebrow="FutureX 2026 activations"
               title="What sponsorship can include."
-              lead="Activation directions for FutureX 2026 — final structures are agreed in writing with each partner."
+              lead="Activation directions for FutureX 2026, where final structures are agreed in writing with each partner."
             />
           </Reveal>
           <div className="benefits-grid">
@@ -163,7 +163,7 @@ export default function BecomePartner() {
             <SectionHeader
               center
               eyebrow="How collaboration works"
-              title="Professional collaboration begins with clarity — and ends with evidence."
+              title="Professional collaboration begins with clarity and ends with evidence."
             />
           </Reveal>
           <Reveal delay={90}>
@@ -186,13 +186,12 @@ export default function BecomePartner() {
             <span className="eyebrow">Start a partnership conversation</span>
             <h2>Tell us what you're building toward.</h2>
             <p style={{ color: 'var(--muted-text)' }}>
-              Share your goals and our partnerships lead will come back with a scoped proposal —
-              clear contribution, defined ownership and agreed outcomes.
+              Share your goals and our partnerships lead will come back with a scoped proposal with clear contribution, defined ownership, and agreed outcomes.
             </p>
             <ul className="highlights-list">
               <li><Icon name="mail" size={16} /> <a href="mailto:partnerships@thrivepakistan.com">partnerships@thrivepakistan.com</a></li>
               <li><Icon name="shield" size={16} /> Your details stay with the partnerships team</li>
-              <li><Icon name="handshake" size={16} /> No obligation — conversations first</li>
+              <li><Icon name="handshake" size={16} /> No obligation, conversations first</li>
             </ul>
           </Reveal>
 

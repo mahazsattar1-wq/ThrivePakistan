@@ -36,7 +36,7 @@ const MEDIA_ROLES = [
 export default function Volunteer() {
   useSeo({
     title: 'Volunteers',
-    description: 'Join the Thrive Pakistan volunteer community — event management, marketing, photography, social media, community management, registration desk and technical roles.',
+    description: 'Join the Thrive Pakistan volunteer community, spanning event management, marketing, photography, social media, community management, registration desk, and technical roles.',
   });
 
   const [values, setValues] = useState(INITIAL);
@@ -63,7 +63,7 @@ export default function Volunteer() {
     const res = await submitForm('volunteer', values);
     setMessage(res.message);
     setState('done');
-    push({ title: 'Volunteer application received', message: 'Welcome — onboarding details are on the way.', tone: 'success' });
+    push({ title: 'Volunteer application received', message: 'Welcome, onboarding details are on the way.', tone: 'success' });
   };
 
   return (
@@ -71,7 +71,7 @@ export default function Volunteer() {
       <PageHero
         eyebrow="Volunteer"
         title="Build the platform with us."
-        lead="Thrive Pakistan platforms are run by young people — stages, registration, media, outreach and operations. Volunteering is where responsibility, skills and professional relationships begin."
+        lead="Thrive Pakistan platforms are run by young people across stages, registration, media, outreach, and operations. Volunteering is where responsibility, skills, and professional relationships begin."
         crumbs={[{ label: 'Volunteers' }]}
         meta={[
           { icon: 'users', label: 'Student & community teams' },
@@ -140,13 +140,13 @@ export default function Volunteer() {
             <h2>Raise your hand.</h2>
             <p style={{ color: 'var(--muted-text)' }}>
               Tell us your city, skills and the area you want to try first. Volunteers are onboarded
-              through the People &amp; HR function and attached to a functional owner — not left in an
+              through the People &amp; HR function and attached to a functional owner, not left in an
               unstructured group.
             </p>
             <div className="event-block">
               <h4 style={{ marginBottom: 10 }}>What we ask of volunteers</h4>
               <ul className="highlights-list">
-                <li><Icon name="check" size={15} /> Show up for your assigned shifts — the desk never runs short</li>
+                <li><Icon name="check" size={15} /> Show up for your assigned shifts, ensuring the desk never runs short</li>
                 <li><Icon name="check" size={15} /> One onboarding and one debrief per event cycle</li>
                 <li><Icon name="check" size={15} /> Represent the community code of conduct on and off site</li>
                 <li><Icon name="check" size={15} /> Flag conflicts early so cohorts can rebalance</li>
@@ -198,7 +198,7 @@ export default function Volunteer() {
         <div className="container cta-band__inner">
           <Reveal>
             <h2>Not ready to volunteer yet?</h2>
-            <p style={{ marginTop: 10 }}>Attend an event first — most volunteers say the first visit decided it.</p>
+            <p style={{ marginTop: 10 }}>Attend an event first: most volunteers say the first visit decided it.</p>
             <div className="cta-band__ctas">
               <Button to="/events" icon="arrow-right">Explore events</Button>
             </div>

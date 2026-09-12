@@ -11,7 +11,7 @@ export default function About() {
   useSeo({
     title: 'About',
     description:
-      'Thrive Pakistan is a youth-led technology and ecosystem-development platform based in Hazara, Khyber Pakhtunkhwa — founded in 2025 to connect regional youth with technology, industry, entrepreneurship and opportunity.',
+      'Thrive Pakistan is a youth-led technology and ecosystem-development platform based in Hazara, Khyber Pakhtunkhwa, founded in 2025 to connect regional youth with technology, industry, entrepreneurship and opportunity.',
   });
 
   return (
@@ -82,12 +82,12 @@ export default function About() {
               <div className="event-block">
                 <h3>The distance we work to close</h3>
                 <ul className="highlights-list" style={{ marginTop: 16 }}>
-                  <li><Icon name="eye" size={16} /> <span><strong>Exposure gap</strong> — limited direct contact with founders, technologists, employers, investors and policymakers</span></li>
-                  <li><Icon name="tools" size={16} /> <span><strong>Skills gap</strong> — academic learning not matched by practical experience in AI, software, digital work and entrepreneurship</span></li>
-                  <li><Icon name="users" size={16} /> <span><strong>Network gap</strong> — fewer professional relationships through which information and opportunity travel</span></li>
-                  <li><Icon name="spark" size={16} /> <span><strong>Confidence gap</strong> — ability without a stage on which to test, present and defend ideas</span></li>
-                  <li><Icon name="campus" size={16} /> <span><strong>Institutional gap</strong> — universities, companies and public departments without a sustained collaboration mechanism</span></li>
-                  <li><Icon name="clock" size={16} /> <span><strong>Continuity gap</strong> — one-off seminars create moments; ecosystems require repeated contact and follow-up</span></li>
+                  <li><Icon name="eye" size={16} /> <span><strong>Exposure gap</strong>: limited direct contact with founders, technologists, employers, investors, and policymakers</span></li>
+                  <li><Icon name="tools" size={16} /> <span><strong>Skills gap</strong>: academic learning not matched by practical experience in AI, software, digital work, and entrepreneurship</span></li>
+                  <li><Icon name="users" size={16} /> <span><strong>Network gap</strong>: fewer professional relationships through which information and opportunity travel</span></li>
+                  <li><Icon name="spark" size={16} /> <span><strong>Confidence gap</strong>: ability without a stage on which to test, present, and defend ideas</span></li>
+                  <li><Icon name="campus" size={16} /> <span><strong>Institutional gap</strong>: universities, companies, and public departments without a sustained collaboration mechanism</span></li>
+                  <li><Icon name="clock" size={16} /> <span><strong>Continuity gap</strong>: one-off seminars create moments; ecosystems require repeated contact and follow-up</span></li>
                 </ul>
               </div>
             </Reveal>
@@ -95,11 +95,11 @@ export default function About() {
               <div className="event-block">
                 <h3>What makes us different</h3>
                 <ul className="highlights-list" style={{ marginTop: 16 }}>
-                  <li><Icon name="pin" size={16} /> <span><strong>Regional ownership</strong> — designed with local institutions, not copied in from outside</span></li>
-                  <li><Icon name="spark" size={16} /> <span><strong>Youth leadership</strong> — professionally accountable governance</span></li>
-                  <li><Icon name="chip" size={16} /> <span><strong>Technology-first</strong> — practical programming over passive talk</span></li>
-                  <li><Icon name="handshake" size={16} /> <span><strong>Academia–industry bridge</strong> — sustained collaboration mechanism</span></li>
-                  <li><Icon name="target" size={16} /> <span><strong>Measurable execution</strong> — accountable metrics and continuous follow-up</span></li>
+                  <li><Icon name="pin" size={16} /> <span><strong>Regional ownership</strong>: designed with local institutions, not copied in from outside</span></li>
+                  <li><Icon name="spark" size={16} /> <span><strong>Youth leadership</strong>: professionally accountable governance</span></li>
+                  <li><Icon name="chip" size={16} /> <span><strong>Technology-first</strong>: practical programming over passive talk</span></li>
+                  <li><Icon name="handshake" size={16} /> <span><strong>Academia–industry bridge</strong>: sustained collaboration mechanism</span></li>
+                  <li><Icon name="target" size={16} /> <span><strong>Measurable execution</strong>: accountable metrics and continuous follow-up</span></li>
                 </ul>
                 <p style={{ marginTop: 18, color: 'var(--muted-text)', lineHeight: 1.7 }}>
                   Thrive Pakistan was not created to bring “motivation” to young people. It was created to
@@ -120,7 +120,7 @@ export default function About() {
               center
               eyebrow="Strategic Goals"
               title="What we are working toward."
-              lead="The goal is not to host more events — it is to make regional opportunity more normal, visible and repeatable."
+              lead="The goal is not to host more events, but to make regional opportunity more normal, visible, and repeatable."
             />
           </Reveal>
           <div className="grid grid--2">

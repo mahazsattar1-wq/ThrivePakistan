@@ -8,7 +8,7 @@ export default function Team() {
   useSeo({
     title: 'Leadership',
     description:
-      'The confirmed Thrive Pakistan leadership roster — executive and functional leads accountable for direction, execution, partnerships, events, outreach, inclusion and operations.',
+      'The confirmed Thrive Pakistan leadership roster, featuring executive and functional leads accountable for direction, execution, partnerships, events, outreach, inclusion, and operations.',
   });
 
   const executive = TEAM.filter((m) => m.group === 'executive');
@@ -19,7 +19,7 @@ export default function Team() {
       <PageHero
         eyebrow="Leadership"
         title="Youth-led, professionally accountable."
-        lead="Thrive Pakistan combines the energy of student and community teams with defined executive ownership, reporting and documentation — every major task has one accountable owner."
+        lead="Thrive Pakistan combines the energy of student and community teams with defined executive ownership, reporting, and documentation: every major task has one accountable owner."
         crumbs={[{ label: 'Team' }]}
         meta={[
           { icon: 'users', label: '4 executive leads' },

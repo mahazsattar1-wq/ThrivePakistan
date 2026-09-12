@@ -26,14 +26,14 @@ const RAW_EVENTS: Omit<ThriveEvent, 'status'>[] = [
     date: '2026-09-24',
     endDate: '2026-09-24',
     dateLabel: '24 September 2026',
-    time: 'Full day — schedule to be announced',
+    time: 'Full day, schedule to be announced',
     location: 'Government Post Graduate College, Mansehra',
     city: 'Mansehra',
     description:
-      'Thrive Pakistan\u2019s flagship youth, technology and innovation platform — bringing students, emerging talent, practitioners and institutions into conversations on AI, work, finance and leadership.',
+      'Thrive Pakistan\u2019s flagship youth, technology, and innovation platform, bringing students, emerging talent, practitioners, and institutions into conversations on AI, work, finance, and leadership.',
     about: [
       'FutureX 2026 is Thrive Pakistan\u2019s current flagship platform. It brings students, professionals, employers, founders, educators, speakers and public stakeholders together around one practical question: what does a young person need to understand, build and access in order to succeed in the next economy?',
-      'The event is organized with Government Post Graduate College Mansehra under a Memorandum of Collaboration signed on 6 August 2026. Programme curation, partnerships and campus outreach are currently in progress — final agenda, speakers and registration details will be announced as they are confirmed.',
+      'The event is organized with Government Post Graduate College Mansehra under a Memorandum of Collaboration signed on 6 August 2026. Programme curation, partnerships, and campus outreach are currently in progress, and final agenda, speakers, and registration details will be announced as they are confirmed.',
     ],
     image: img('eventsA', 0),
     featured: true,
@@ -62,7 +62,7 @@ const RAW_EVENTS: Omit<ThriveEvent, 'status'>[] = [
     faqs: [
       {
         q: 'When and where is FutureX 2026?',
-        a: 'FutureX 2026 is planned for 24 September 2026 at Government Post Graduate College, Mansehra, Khyber Pakhtunkhwa — organized in collaboration with the institution.',
+        a: 'FutureX 2026 is planned for 24 September 2026 at Government Post Graduate College, Mansehra, Khyber Pakhtunkhwa, organized in collaboration with the institution.',
       },
       {
         q: 'Is the full programme announced?',
@@ -74,7 +74,7 @@ const RAW_EVENTS: Omit<ThriveEvent, 'status'>[] = [
       },
       {
         q: 'Can our organization take part?',
-        a: 'Yes — institutions, employers and technology practitioners can explore partnership and participation through the Become a Partner page or partnerships@thrivepakistan.com.',
+        a: 'Yes: institutions, employers and technology practitioners can explore partnership and participation through the Become a Partner page or partnerships@thrivepakistan.com.',
       },
     ],
   },
@@ -90,10 +90,10 @@ const RAW_EVENTS: Omit<ThriveEvent, 'status'>[] = [
     location: 'Hazara University, Mansehra',
     city: 'Mansehra',
     description:
-      'The three-day regional technology festival where Thrive Pakistan\u2019s documented public journey began — spanning AI, cybersecurity, entrepreneurship, digital careers, exhibitions and applied competition.',
+      'The three-day regional technology festival where Thrive Pakistan\u2019s documented public journey began, spanning AI, cybersecurity, entrepreneurship, digital careers, exhibitions, and applied competition.',
     about: [
       'Hazara Tech Fiesta 2025 was Thrive Pakistan\u2019s first documented large-scale platform: a three-day festival at Hazara University, Mansehra that brought together students, academia, technology professionals, startups, government and industry within a single regional platform.',
-      'The programme spanned artificial intelligence, cybersecurity, entrepreneurship, digital careers, exhibitions, expert sessions and applied competition — evidence that a regional audience responds when credible, future-focused programming is brought closer to them.',
+      'The programme spanned artificial intelligence, cybersecurity, entrepreneurship, digital careers, exhibitions, expert sessions, and applied competition, demonstrating that a regional audience responds when credible, future-focused programming is brought closer to them.',
     ],
     image: img('eventsA', 5),
     dateConfirmed: true,

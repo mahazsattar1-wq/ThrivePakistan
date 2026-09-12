@@ -24,7 +24,7 @@ export const ENGAGEMENT_MODELS = [
   {
     id: 'education',
     name: 'Education & Future Skills',
-    text: 'Co-develop education and future-skills programming with institutions — from campus collaborations to practical learning experiences.',
+    text: 'Co-develop education and future-skills programming with institutions, ranging from campus collaborations to practical learning experiences.',
   },
   {
     id: 'labs',
@@ -66,7 +66,7 @@ export const COLLABORATION_VALUES = [
   {
     icon: 'target',
     title: 'Purposeful activation',
-    text: 'Every collaboration is designed to create a meaningful role, activation or outcome — not simply another logo.',
+    text: 'Every collaboration is designed to create a meaningful role, activation, or outcome, not simply another logo.',
   },
   {
     icon: 'briefcase',

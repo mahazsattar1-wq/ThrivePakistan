@@ -116,7 +116,11 @@ export function Navbar() {
     <>
       <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
         <div className="nav__inner container container--wide">
+<<<<<<< HEAD
           <Link to="/" className="nav__logo" aria-label="Thrive Pakistan — home">
+=======
+          <Link to="/" className="nav__logo" aria-label="Thrive Pakistan home">
+>>>>>>> d651877 (feat: complete Phase 14 typography cleanup and Phase 15 Thrive Pakistan Events Hub)
             <img
               src={BRAND.logoWhite}
               alt="Thrive Pakistan"
@@ -252,7 +256,11 @@ export function Navbar() {
               aria-label="Mobile navigation"
             >
               <div className="mobile-menu__head">
+<<<<<<< HEAD
                 <Link to="/" onClick={closeMobile} aria-label="Thrive Pakistan — home">
+=======
+                <Link to="/" onClick={closeMobile} aria-label="Thrive Pakistan home">
+>>>>>>> d651877 (feat: complete Phase 14 typography cleanup and Phase 15 Thrive Pakistan Events Hub)
                   <img src={BRAND.logoWhite} alt="Thrive Pakistan" width={140} height={32} decoding="async" />
                 </Link>
                 <button ref={closeBtnRef} type="button" onClick={closeMobile} aria-label="Close navigation" className="mobile-menu__close">
@@ -270,6 +278,7 @@ export function Navbar() {
                     <li key={item.label} className="mnav__group">
                       {item.children ? (
                         <>
+<<<<<<< HEAD
                           <button
                             type="button"
                             className="mnav__parent"
@@ -287,6 +296,29 @@ export function Navbar() {
                                   All {item.label}
                                 </Link>
                               )}
+=======
+                          <div className="mnav__parent-row">
+                            {item.to ? (
+                              <Link to={item.to} onClick={closeMobile} className="mnav__parent-link">
+                                {item.label}
+                              </Link>
+                            ) : (
+                              <span className="mnav__parent-link">{item.label}</span>
+                            )}
+                            <button
+                              type="button"
+                              className="mnav__caret-btn"
+                              aria-label={`Toggle ${item.label} sub-navigation`}
+                              aria-expanded={!!mobileSections[item.label]}
+                              aria-controls={`mnav-${item.label}`}
+                              onClick={() => toggleMobileSection(item.label)}
+                            >
+                              <Icon name="chevron-down" size={16} className={`mnav__caret ${mobileSections[item.label] ? 'mnav__caret--open' : ''}`} />
+                            </button>
+                          </div>
+                          <div id={`mnav-${item.label}`} className={`mnav__children ${mobileSections[item.label] ? 'mnav__children--open' : ''}`}>
+                            <div>
+>>>>>>> d651877 (feat: complete Phase 14 typography cleanup and Phase 15 Thrive Pakistan Events Hub)
                               {item.children.map((c) => (
                                 <Link key={c.to + c.label} to={c.to} onClick={closeMobile}>
                                   {c.label}
@@ -347,7 +379,7 @@ function FooterNewsletter() {
   if (state === 'done') {
     return (
       <p className="footer__news-done">
-        <Icon name="check" size={16} /> You're on the list — see you in your inbox.
+        <Icon name="check" size={16} /> You're on the list, see you in your inbox.
       </p>
     );
   }
@@ -378,7 +410,7 @@ export function Footer() {
       <div className="container container--wide">
         <div className="footer__grid">
           <div className="footer__brand">
-            <Link to="/" aria-label="Thrive Pakistan — home">
+            <Link to="/" aria-label="Thrive Pakistan home">
               <img src={BRAND.logoWhite} alt="Thrive Pakistan" width={176} height={40} decoding="async" loading="lazy" />
             </Link>
             <p className="footer__tagline">{BRAND.tagline}</p>

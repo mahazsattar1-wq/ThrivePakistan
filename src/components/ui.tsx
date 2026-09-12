@@ -234,7 +234,7 @@ export function ImagePlaceholder({ className = '', aspectRatio = '16 / 9' }: { c
 export function Countdown({ targetIso, compact }: { targetIso: string; compact?: boolean }) {
   const { days, hours, minutes, seconds, done } = useCountdown(targetIso);
   if (done) {
-    return <p className="countdown__done">The event is live — see you inside!</p>;
+    return <p className="countdown__done">The event is live, see you inside!</p>;
   }
   const cells = [
     { v: days, l: 'Days' },
@@ -347,7 +347,7 @@ const GLYPH_SHAPES = ['M12 3l8 18H4z', 'M12 3l9 9-9 9-9-9z', 'M4 4h16v16H4z', 'M
 export function PartnerMark({ partner, index, dark }: { partner: Partner; index: number; dark?: boolean }) {
   const initials = partner.name.split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase();
   return (
-    <div className={`partner-mark ${dark ? 'partner-mark--dark' : ''}`} title={`${partner.name} — ${partner.category} partner`}>
+    <div className={`partner-mark ${dark ? 'partner-mark--dark' : ''}`} title={`${partner.name}, ${partner.category} partner`}>
       <svg viewBox="0 0 24 24" className="partner-mark__glyph" aria-hidden="true">
         <path d={GLYPH_SHAPES[index % GLYPH_SHAPES.length]} />
         <text x="12" y="15.5" textAnchor="middle">{initials}</text>

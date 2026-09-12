@@ -49,7 +49,9 @@ export default function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
-            <Route path="/events" element={<Events />} />
+            <Route path="/events" element={<Events mode="overview" />} />
+            <Route path="/events/upcoming" element={<Events mode="upcoming" />} />
+            <Route path="/events/past" element={<Events mode="past" />} />
             <Route path="/events/:slug" element={<EventDetail />} />
             <Route path="/programs" element={<Programs />} />
             <Route path="/programs/:slug" element={<ProgramDetail />} />

@@ -127,9 +127,9 @@ export const HOME_PAGE = {
   hero: {
     id: 'intro',
     visible: true,
-    eyebrow: 'Thrive Pakistan — Youth-led · Founded 2025',
+    eyebrow: 'Thrive Pakistan · Youth-led · Founded 2025',
     title: 'Connecting Young Talent With Knowledge, Industry & Opportunity',
-    lead: 'A youth-centered platform that brings students and emerging talent closer to practical learning, technology, entrepreneurship, industry exposure and meaningful opportunities — with particular relevance to Hazara and Khyber Pakhtunkhwa.',
+    lead: 'A youth-centered platform that brings students and emerging talent closer to practical learning, technology, entrepreneurship, industry exposure, and meaningful opportunities, with particular relevance to Hazara and Khyber Pakhtunkhwa.',
     points: [
       { icon: 'spark', label: 'Youth-led, professionally accountable' },
       { icon: 'pin', label: 'Rooted in Hazara, Khyber Pakhtunkhwa' },
@@ -146,7 +146,7 @@ export const HOME_PAGE = {
     visible: true,
     eyebrow: 'Leadership',
     title: 'Messages from Thrive Pakistan Leadership',
-    lead: 'The people accountable for the platform — on what Thrive Pakistan is building and why.',
+    lead: 'The people accountable for the platform, on what Thrive Pakistan is building and why.',
     footnote: 'Leadership messages are published as they are approved by Thrive Pakistan.',
   } satisfies LeadershipSectionConfig,
 
@@ -155,7 +155,7 @@ export const HOME_PAGE = {
     visible: true,
     title: 'Talent exists everywhere.',
     titleEmphasis: 'Opportunity does not.',
-    body: 'Many students can complete a degree without ever speaking to a founder, seeing a live technology demonstration, meeting a recruiter or pitching an idea. The issue was never a lack of ambition — it was a lack of proximity. Thrive Pakistan exists to narrow that distance.',
+    body: 'Many students can complete a degree without ever speaking to a founder, seeing a live technology demonstration, meeting a recruiter or pitching an idea. The issue was never a lack of ambition, it was a lack of proximity. Thrive Pakistan exists to narrow that distance.',
   } satisfies TalentSectionConfig,
 
   visionMission: {
@@ -182,7 +182,7 @@ export const HOME_PAGE = {
     visible: true,
     eyebrow: 'What we do',
     title: 'Six areas where we open access.',
-    lead: 'Programme directions rooted in our strategic goals — technology, entrepreneurship, industry, education, youth and women\u2019s participation.',
+    lead: 'Programme directions rooted in our strategic goals in technology, entrepreneurship, industry, education, youth, and women\u2019s participation.',
     cta: { id: 'wwd-all', label: 'All focus areas', to: '/programs', variant: 'ghost', icon: 'arrow-right' },
   } satisfies CardGridSectionConfig,
 
@@ -191,7 +191,7 @@ export const HOME_PAGE = {
     visible: true,
     eyebrow: 'Upcoming',
     title: 'The next rooms worth being in.',
-    lead: 'Confirmed platforms open for interest — published only when details are confirmed.',
+    lead: 'Confirmed platforms open for interest, published only when details are confirmed.',
     cta: { id: 'ue-all', label: 'All events', to: '/events', variant: 'outline-light', icon: 'arrow-right' },
     emptyBehavior: 'hide' as const,
   } satisfies CardGridSectionConfig,
@@ -201,7 +201,7 @@ export const HOME_PAGE = {
     visible: true,
     eyebrow: 'Previous referenced work',
     title: 'Where the platform comes from.',
-    lead: 'Our documented public journey began in Hazara — with a festival, an institutional collaboration and a region ready for credible programming.',
+    lead: 'Our documented public journey began in Hazara with a festival, an institutional collaboration, and a region ready for credible programming.',
   } satisfies HomeSectionConfig,
 
   impact: {
@@ -209,7 +209,7 @@ export const HOME_PAGE = {
     visible: true,
     eyebrow: 'Impact',
     title: 'Access with structure.',
-    lead: 'What our platforms are built to produce — measured in opportunities created, not vanity numbers.',
+    lead: 'What our platforms are built to produce, measured in opportunities created, not vanity numbers.',
   } satisfies HomeSectionConfig,
 
   partnership: {
@@ -218,7 +218,7 @@ export const HOME_PAGE = {
     eyebrow: 'Built through collaboration',
     title: 'No platform is built alone.',
     lead: '',
-    body: 'Thrive Pakistan works to develop relationships across educational institutions, industry, government, technology practitioners, founders, community organizations and professional networks. Every collaboration is designed to create a meaningful role, activation or outcome — not simply another logo.',
+    body: 'Thrive Pakistan works to develop relationships across educational institutions, industry, government, technology practitioners, founders, community organizations and professional networks. Every collaboration is designed to create a meaningful role, activation or outcome, not simply another logo.',
     cta: { id: 'p-explore', label: 'Explore Partnership Opportunities', to: '/become-a-partner', variant: 'primary', size: 'lg', icon: 'arrow-right' },
   } satisfies HomeSectionConfig & { body: string; cta: HomeCta },
 
@@ -246,7 +246,7 @@ export const HOME_PAGE = {
     visible: true,
     eyebrow: 'Connect with Thrive Pakistan',
     title: 'Bring opportunity closer to the people who need it.',
-    body: 'Partner your organization, take a stage, volunteer with the team or bring Thrive Pakistan to your institution — there is a role for you in this ecosystem.',
+    body: 'Partner your organization, take a stage, volunteer with the team, or bring Thrive Pakistan to your institution: there is a role for you in this ecosystem.',
     ctas: [
       { id: 'fc-partner', label: 'Email Partnerships', href: 'mailto:partnerships@thrivepakistan.com', variant: 'primary', icon: 'arrow-right' },
       { id: 'fc-volunteer', label: 'Become a Volunteer', to: '/volunteer', variant: 'outline-light' },

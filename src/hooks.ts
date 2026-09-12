@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const DEFAULT_DESCRIPTION =
-  'Thrive Pakistan is a youth-centered platform founded in 2025 that connects students and emerging talent with practical learning, technology, entrepreneurship, industry exposure and meaningful opportunities — with particular relevance to Hazara and Khyber Pakhtunkhwa.';
+  'Thrive Pakistan is a youth-centered platform founded in 2025 that connects students and emerging talent with practical learning, technology, entrepreneurship, industry exposure and meaningful opportunities, with particular relevance to Hazara and Khyber Pakhtunkhwa.';
 
 function setMeta(attr: 'name' | 'property', key: string, content: string): void {
   let el = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
@@ -28,7 +28,7 @@ export function useSeo({ title, description, image, type, jsonLd }: SeoOptions =
   const { pathname } = useLocation();
   const ld = jsonLd ? JSON.stringify(jsonLd) : null;
   useEffect(() => {
-    const full = title ? `${title} | Thrive Pakistan` : 'Thrive Pakistan — Build here. Think global. Together, we thrive.';
+    const full = title ? `${title} | Thrive Pakistan` : 'Thrive Pakistan: Build here. Think global. Together, we thrive.';
     const desc = description ?? DEFAULT_DESCRIPTION;
     const img = image ?? '/img/hero-futurex.jpg';
     document.title = full;

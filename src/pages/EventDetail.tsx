@@ -202,7 +202,7 @@ export default function EventDetail() {
                   <>
                     <p className="muted" style={{ marginBottom: 14 }}>
                       The final agenda has not been confirmed. Below are the programme components being
-                      developed — subject to confirmation.
+                      developed, subject to confirmation.
                     </p>
                     <ul className="highlights-list">
                       {(event.programmeComponents ?? []).map((c) => (

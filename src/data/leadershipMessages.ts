@@ -72,7 +72,7 @@ const MD_MESSAGE = [
 /** Ibrahim Fiaz — Chief Operating Officer, Thrive Pakistan. Approved message (verbatim). */
 const COO_MESSAGE = [
   'At Thrive Pakistan, our mission is to empower the youth of Pakistan with the skills, mindset, and opportunities needed to lead in a rapidly changing world.',
-  'We believe that technology, entrepreneurship, and leadership are the key drivers of progress. Through practical programs, mentorship, and industry connections, we are building an ecosystem where young people from every city — including Hazara Division — can learn, grow, and create impact.',
+  'We believe that technology, entrepreneurship, and leadership are the key drivers of progress. Through practical programs, mentorship, and industry connections, we are building an ecosystem where young people from every city, including Hazara Division, can learn, grow, and create impact.',
   'Pakistan’s future will be built by its people. And we are here to make sure they are ready to build it.',
   'Ibrahim Fiaz',
   'Chief Operating Officer, Thrive Pakistan',

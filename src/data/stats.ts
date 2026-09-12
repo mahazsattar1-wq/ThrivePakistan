@@ -44,13 +44,13 @@ export const TIMELINE: TimelineEntry[] = [
     year: '2025',
     title: 'Thrive Pakistan begins',
     description:
-      'A youth-led team moves from conversations about the opportunity gap to visible ecosystem building — rooted in Hazara, where talent is abundant but access to industry networks is uneven.',
+      'A youth-led team moves from conversations about the opportunity gap to visible ecosystem building, rooted in Hazara, where talent is abundant but access to industry networks is uneven.',
   },
   {
     year: '2025',
     title: 'Hazara Tech Fiesta 2025',
     description:
-      'The documented public journey begins with a three-day regional technology festival at Hazara University, Mansehra — 5,000+ attendees, 50+ speakers, 15+ exhibitors and a 24-hour hackathon.',
+      'The documented public journey begins with a three-day regional technology festival at Hazara University, Mansehra: 5,000+ attendees, 50+ speakers, 15+ exhibitors, and a 24-hour hackathon.',
   },
   {
     year: '2026',
@@ -62,7 +62,7 @@ export const TIMELINE: TimelineEntry[] = [
     year: '2026',
     title: 'FutureX 2026',
     description:
-      'Thrive Pakistan\u2019s flagship youth, technology and innovation platform is planned for 24 September 2026 at Government Post Graduate College, Mansehra — around AI, work, finance and leadership.',
+      'Thrive Pakistan\u2019s flagship youth, technology and innovation platform is planned for 24 September 2026 at Government Post Graduate College, Mansehra, focused on AI, work, finance, and leadership.',
   },
 ];
 
@@ -79,7 +79,7 @@ export const VALUES: ValueItem[] = [
   {
     icon: 'mic',
     title: 'Practitioners over personalities',
-    description: 'We prioritize people who build, hire, research, lead and solve — not only those with public visibility.',
+    description: 'We prioritize people who build, hire, research, lead and solve, not only those with public visibility.',
   },
   {
     icon: 'map',
@@ -94,7 +94,7 @@ export const VALUES: ValueItem[] = [
   {
     icon: 'handshake',
     title: 'Partnership with purpose',
-    description: 'Every collaboration should create a meaningful role, activation or outcome — not simply another logo.',
+    description: 'Every collaboration should create a meaningful role, activation, or outcome, not simply another logo.',
   },
   {
     icon: 'shield',
@@ -145,6 +145,6 @@ export const STRATEGIC_GOALS = [
   {
     id: 'sg-08',
     title: 'Represent regional talent nationally',
-    text: 'Position Hazara and northern Pakistan as a source of technology, creativity, enterprise and leadership — not merely as an audience market.',
+    text: 'Position Hazara and northern Pakistan as a source of technology, creativity, enterprise, and leadership, not merely as an audience market.',
   },
 ] as const;

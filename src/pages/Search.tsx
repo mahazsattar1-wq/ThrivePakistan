@@ -12,7 +12,7 @@ type ResultKey = keyof Omit<SearchResults, 'query' | 'total'>;
 export default function Search() {
   useSeo({
     title: 'Search',
-    description: 'Search Thrive Pakistan — events, focus areas, articles and videos in one place.',
+    description: 'Search Thrive Pakistan: events, focus areas, articles, and videos in one place.',
   });
 
   const [params, setParams] = useSearchParams();
@@ -74,7 +74,7 @@ export default function Search() {
           <span className="eyebrow">Global search</span>
           <h1>Find anything across Thrive Pakistan.</h1>
           <p style={{ color: 'var(--muted-text)', maxWidth: 520 }}>
-            Events, speakers, programs, articles and videos — one query, categorized results.
+            Events, speakers, programs, articles, and videos in one query with categorized results.
           </p>
           <div className="searchbar search-page__input">
             <span className="searchbar__icon"><Icon name="search" size={18} /></span>
@@ -105,7 +105,7 @@ export default function Search() {
           <div style={{ marginTop: 30 }}>
             <EmptyState
               title="Nothing matched that search."
-              message="Try a broader term — or browse the directories directly."
+              message="Try a broader term, or browse the directories directly."
               icon="search"
             />
             <div style={{ display: 'flex', gap: 10, justifyContent: 'center', marginTop: 18, flexWrap: 'wrap' }}>

@@ -13,7 +13,7 @@ export const VOLUNTEER_AREAS = [
 ] as const;
 
 export const VOLUNTEER_BENEFITS = [
-  { icon: 'badge', title: 'Hands-on Experience', text: 'Work inside live platforms — stages, registration, media, outreach and operations.' },
+  { icon: 'badge', title: 'Hands-on Experience', text: 'Work inside live platforms, including stages, registration, media, outreach, and operations.' },
   { icon: 'users', title: 'Real Networks', text: 'Work alongside organizers, institutions, practitioners and peers from across the region.' },
   { icon: 'trend', title: 'Skill Growth', text: 'Operations, media and community roles with feedback from functional leads.' },
   { icon: 'door', title: 'Growth Pathways', text: 'Volunteer roles can progress into team leadership and longer-term responsibilities.' },
@@ -47,7 +47,7 @@ export const PARTNERSHIP_INTERESTS = [
   'Career, recruitment & internship pathways',
   'Entrepreneurship & mentor support',
   'Media, outreach & production',
-  'Not sure yet — let\u2019s talk',
+  'Not sure yet, let\u2019s talk',
 ] as const;
 
 export const ORGANIZATION_TYPES = [

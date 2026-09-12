@@ -13,7 +13,7 @@ export default function Impact() {
   useSeo({
     title: 'Impact',
     description:
-      'Thrive Pakistan impact — qualitative outcomes in connecting, learning, collaboration and opportunity, plus the documented record of Hazara Tech Fiesta 2025.',
+      'Thrive Pakistan impact: qualitative outcomes in connecting, learning, collaboration and opportunity, plus the documented record of Hazara Tech Fiesta 2025.',
   });
 
   return (
@@ -21,7 +21,7 @@ export default function Impact() {
       <PageHero
         eyebrow="Impact"
         title="Access with structure."
-        lead="We measure our work in opportunities created — people connected, capabilities built, collaborations formed — not in vanity numbers."
+        lead="We measure our work in opportunities created: people connected, capabilities built, and collaborations formed, not vanity numbers."
         crumbs={[{ label: 'Impact' }]}
         meta={[{ icon: 'shield', label: 'Published figures come from our documented record only' }]}
       />
@@ -51,7 +51,7 @@ export default function Impact() {
               dark
               eyebrow="Documented record"
               title="Hazara Tech Fiesta 2025."
-              lead="Our first documented large-scale platform — 12–14 December 2025 at Hazara University, Mansehra."
+              lead="Our first documented large-scale platform, held 12–14 December 2025 at Hazara University, Mansehra."
             />
           </Reveal>
           <div className="stats-band band--4">
@@ -72,7 +72,7 @@ export default function Impact() {
           <Reveal delay={120}>
             <p style={{ marginTop: 20, color: 'var(--muted-on-dark)', lineHeight: 1.7, textAlign: 'center' }}>
               The platform demonstrated the ability to coordinate students, academia, technology
-              professionals, startups, government and industry within a single regional platform — and
+              professionals, startups, government and industry within a single regional platform, and
               proved that a regional audience responds when credible, future-focused programming is
               brought closer to them.
             </p>

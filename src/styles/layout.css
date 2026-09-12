@@ -389,6 +389,49 @@
 
 .mnav__group {
   margin-bottom: 2px;
+<<<<<<< HEAD
+=======
+}
+
+.mnav__parent-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.mnav__parent-link {
+  display: block;
+  padding: 12px 14px;
+  color: var(--white);
+  font-weight: 700;
+  font-size: 0.98rem;
+  border-radius: var(--r-sm);
+  text-decoration: none;
+  flex: 1;
+  transition: background var(--t-fast);
+}
+
+.mnav__parent-link:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.mnav__caret-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: none;
+  color: var(--white);
+  cursor: pointer;
+  border-radius: var(--r-sm);
+}
+
+.mnav__caret-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+>>>>>>> d651877 (feat: complete Phase 14 typography cleanup and Phase 15 Thrive Pakistan Events Hub)
 }
 
 .mnav__parent {

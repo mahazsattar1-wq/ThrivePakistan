@@ -14,7 +14,7 @@ const PAGE_SIZE = 6;
 export default function Blog() {
   useSeo({
     title: 'Blog & News',
-    description: 'The Thrive Pakistan newsroom — organizational notes and perspectives on technology, opportunity, education and ecosystem building in Hazara and Khyber Pakhtunkhwa.',
+    description: 'The Thrive Pakistan newsroom, organizational notes and perspectives on technology, opportunity, education, and ecosystem building in Hazara and Khyber Pakhtunkhwa.',
   });
 
   const [params, setParams] = useSearchParams();
@@ -67,11 +67,11 @@ export default function Blog() {
       <PageHero
         eyebrow="Newsroom"
         title="Notes from the build."
-        lead="Organizational notes and perspectives — grounded in what we actually know, do and are building."
+        lead="Organizational notes and perspectives grounded in what we actually know, do, and are building."
         crumbs={[{ label: 'Blog' }]}
         meta={[
           { icon: 'spark', label: 'Organization · FutureX · Perspectives' },
-          { icon: 'shield', label: 'No invented facts — only the documented record' },
+          { icon: 'shield', label: 'No invented facts, only the documented record' },
         ]}
       />
 
@@ -131,7 +131,7 @@ export default function Blog() {
             ) : posts.length === 0 ? (
               <EmptyState
                 title="No articles found."
-                message="Nothing matches this search or category yet — try another topic."
+                message="Nothing matches this search or category yet, try another topic."
                 actionLabel="Clear filters"
                 onAction={() => {
                   setParams(new URLSearchParams(), { replace: true });

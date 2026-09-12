@@ -46,7 +46,7 @@ export default function Contact() {
   useSeo({
     title: 'Contact',
     description:
-      'Contact Thrive Pakistan — partnerships, marketing & media, and direct channels to the Managing Director and CEO. Based in Hazara, Khyber Pakhtunkhwa.',
+      'Contact Thrive Pakistan for partnerships, marketing and media, and direct channels to the Managing Director and CEO. Based in Hazara, Khyber Pakhtunkhwa.',
   });
 
   const [values, setValues] = useState(INITIAL);
@@ -72,7 +72,7 @@ export default function Contact() {
     const res = await submitForm('contact', values);
     setMessage(res.message);
     setState('done');
-    push({ title: 'Message sent', message: 'Thank you for reaching out — the relevant team will follow up.', tone: 'success' });
+    push({ title: 'Message sent', message: 'Thank you for reaching out, the relevant team will follow up.', tone: 'success' });
   };
 
   return (
@@ -80,7 +80,7 @@ export default function Contact() {
       <PageHero
         eyebrow="Contact"
         title="Let's talk about what you're building."
-        lead="Partnerships, media, campus collaboration, volunteering or a question about FutureX 2026 — reach the right team directly."
+        lead="Partnerships, media, campus collaboration, volunteering or a question about FutureX 2026: reach the right team directly."
         crumbs={[{ label: 'Contact' }]}
       />
 

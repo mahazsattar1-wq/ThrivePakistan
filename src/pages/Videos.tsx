@@ -15,7 +15,7 @@ import { Modal } from '../components/feedback';
 export default function Videos() {
   useSeo({
     title: 'Videos',
-    description: 'Official Thrive Pakistan videos — event films and session recordings will be published here as platforms are delivered.',
+    description: 'Official Thrive Pakistan videos: event films and session recordings will be published here as platforms are delivered.',
   });
 
   const [params, setParams] = useSearchParams();
@@ -145,7 +145,7 @@ export default function Videos() {
           ) : videos.length === 0 ? (
             <EmptyState
               title="No videos published yet."
-              message="Official event films and session recordings will be published here as Thrive Pakistan platforms are delivered — starting with FutureX 2026."
+              message="Official event films and session recordings will be published here as Thrive Pakistan platforms are delivered, starting with FutureX 2026."
               actionLabel={category !== 'all' || event !== 'all' || query ? 'Clear filters' : undefined}
               onAction={category !== 'all' || event !== 'all' || query ? () => setParams(new URLSearchParams(), { replace: true }) : undefined}
               icon="play"

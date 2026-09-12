@@ -13,7 +13,7 @@ export default function Speakers() {
   useSeo({
     title: 'Speakers',
     description:
-      'Thrive Pakistan speaker announcements — confirmed FutureX speakers and practitioners will be announced here as the programme is confirmed.',
+      'Thrive Pakistan speaker announcements: confirmed FutureX speakers and practitioners will be announced here as the programme is confirmed.',
   });
 
   const [params, setParams] = useSearchParams();

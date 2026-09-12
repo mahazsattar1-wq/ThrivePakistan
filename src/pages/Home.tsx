@@ -362,7 +362,7 @@ function FeaturedEventBanner({ event }: { event: ThriveEvent }) {
           <img className="feat-ev__logo" src={BRAND.futurexColor} alt={`${event.title} logo`} width={230} height={74} />
           <p className="feat-ev__pillars">{event.tags.join('  ·  ')}</p>
           <ul className="feat-ev__meta">
-            <li><Icon name="calendar" size={16} /> {event.dateLabel} — confirmed</li>
+            <li><Icon name="calendar" size={16} /> {event.dateLabel}, confirmed</li>
             <li><Icon name="pin" size={16} /> {event.location}</li>
           </ul>
           <div className="feat-ev__ctas">

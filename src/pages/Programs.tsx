@@ -7,7 +7,7 @@ import { Button, Reveal } from '../components/ui';
 export default function Programs() {
   useSeo({
     title: 'Focus Areas',
-    description: 'What Thrive Pakistan works on — technology & digital skills, entrepreneurship, industry exposure, education & campus engagement, youth development and women\u2019s participation.',
+    description: 'What Thrive Pakistan works on: technology & digital skills, entrepreneurship, industry exposure, education & campus engagement, youth development, and women\u2019s participation.',
   });
 
   return (
@@ -15,7 +15,7 @@ export default function Programs() {
       <PageHero
         eyebrow="Focus areas"
         title="Six areas where we open access."
-        lead="Programme directions rooted in our strategic goals — shaping the platforms we build and the collaborations we pursue."
+        lead="Programme directions rooted in our strategic goals, shaping the platforms we build and the collaborations we pursue."
         crumbs={[{ label: 'Programs' }]}
         meta={[
           { icon: 'spark', label: '6 focus areas' },

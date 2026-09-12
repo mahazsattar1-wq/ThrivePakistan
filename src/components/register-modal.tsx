@@ -86,7 +86,7 @@ export function RegisterModal({
               onChange={(e) => set('email')(e.target.value)}
             />
           </FieldShell>
-          <FieldShell id="reg-org" label="Organization / University" hint="Optional — helps us reserve community seats.">
+          <FieldShell id="reg-org" label="Organization / University" hint="Optional: helps us reserve community seats.">
             <TextInput
               id="reg-org"
               value={values.organization}

@@ -13,16 +13,16 @@ import { useToast } from '../components/feedback';
 const INITIAL = { name: '', email: '', organization: '', expertise: '', interest: '', profile: '' };
 
 const WHY = [
-  { icon: 'mic' as const, title: 'An audience rarely reached', text: 'Reach students and early professionals outside the country\u2019s usual conference circuit — people making real education and career decisions.' },
+  { icon: 'mic' as const, title: 'An audience rarely reached', text: 'Reach students and early professionals outside the country\u2019s usual conference circuit, including people making real education and career decisions.' },
   { icon: 'users' as const, title: 'One regional ecosystem', text: 'Meet educators, founders, employers, public officials and other practitioners within a single regional platform.' },
-  { icon: 'bulb' as const, title: 'Practical thought leadership', text: 'Turn expertise into practical guidance — through keynotes, panels, talks, workshops, interviews and mentoring.' },
-  { icon: 'shield' as const, title: 'Practitioners first', text: 'We prioritize people who build, hire, research, lead and solve — practical insight grounded in real work.' },
+  { icon: 'bulb' as const, title: 'Practical thought leadership', text: 'Turn expertise into practical guidance through keynotes, panels, talks, workshops, interviews, and mentoring.' },
+  { icon: 'shield' as const, title: 'Practitioners first', text: 'We prioritize people who build, hire, research, lead, and solve, focusing on practical insight grounded in real work.' },
 ];
 
 export default function BecomeSpeaker() {
   useSeo({
     title: 'Become a Speaker',
-    description: 'Express interest in speaking at Thrive Pakistan platforms — including FutureX 2026. Sessions are curated for practical insight grounded in real work.',
+    description: 'Express interest in speaking at Thrive Pakistan platforms, including FutureX 2026. Sessions are curated for practical insight grounded in real work.',
   });
 
   const [values, setValues] = useState(INITIAL);
@@ -106,9 +106,9 @@ export default function BecomeSpeaker() {
               <h3>What a strong contribution looks like</h3>
               <ul className="highlights-list">
                 <li><Icon name="check" size={16} /> Practical insight grounded in work, research or lived experience</li>
-                <li><Icon name="check" size={16} /> Clear examples and honest trade-offs — not recycled motivational language</li>
+                <li><Icon name="check" size={16} /> Clear examples and honest trade-offs rather than recycled motivational language</li>
                 <li><Icon name="check" size={16} /> Actionable next steps participants can use after the session</li>
-                <li><Icon name="check" size={16} /> Willingness to engage beyond the stage — Q&amp;A, mentoring or networking</li>
+                <li><Icon name="check" size={16} /> Willingness to engage beyond the stage through Q&amp;A, mentoring, or networking</li>
                 <li><Icon name="check" size={16} /> Confirm availability, topic and requirements early; respect the schedule and host institution</li>
               </ul>
             </div>
@@ -128,7 +128,7 @@ export default function BecomeSpeaker() {
             <ul className="highlights-list">
               <li><Icon name="check" size={16} /> Keynotes, panels, fireside conversations & workshops</li>
               <li><Icon name="check" size={16} /> Session details confirmed in advance</li>
-              <li><Icon name="check" size={16} /> Relevant, evidence-aware sessions — free from undisclosed sales pitches</li>
+              <li><Icon name="check" size={16} /> Relevant, evidence-aware sessions free from undisclosed sales pitches</li>
             </ul>
           </Reveal>
 

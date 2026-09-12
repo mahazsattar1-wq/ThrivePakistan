@@ -17,8 +17,8 @@ export const NAV_ITEMS: NavItem[] = [
     label: 'Events',
     to: '/events',
     children: [
-      { label: 'Upcoming Events', to: '/events?status=upcoming' },
-      { label: 'Past Events', to: '/events?status=past' },
+      { label: 'Upcoming Events', to: '/events/upcoming' },
+      { label: 'Past Events', to: '/events/past' },
     ],
   },
   { label: 'FutureX', to: '/futurex' },

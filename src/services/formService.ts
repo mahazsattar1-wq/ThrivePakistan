@@ -21,7 +21,7 @@ const ENDPOINTS: Record<FormKind, string> = {
 };
 
 const SUCCESS_MESSAGES: Record<FormKind, string> = {
-  contact: 'Thank you — your message has been received. Our team replies within two working days.',
+  contact: 'Thank you, your message has been received. Our team replies within two working days.',
   newsletter: 'You\'re on the list! Watch your inbox for event waves and community updates.',
   partner: 'Partnership request received. Our partnerships lead will reach out to schedule a conversation.',
   speaker: 'Speaker profile received. Our program team reviews submissions before every event cycle.',
