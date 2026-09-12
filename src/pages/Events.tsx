@@ -341,29 +341,10 @@ function UpcomingEventsView({
             </div>
           ) : events.length === 0 ? (
             <EmptyState
-<<<<<<< HEAD
-              title={
-                status === 'upcoming' && category === 'all' && city === 'all'
-                  ? 'No upcoming events at the moment.'
-                  : status === 'past' && category === 'all' && city === 'all'
-                  ? 'No past events available yet.'
-                  : 'No events match your filters.'
-              }
-              message={
-                status === 'upcoming' && category === 'all' && city === 'all'
-                  ? 'Check back soon for new platform announcements, or explore our past events.'
-                  : status === 'past' && category === 'all' && city === 'all'
-                  ? 'Our documented public journey is just beginning.'
-                  : 'Try adjusting your category or city filters.'
-              }
-              actionLabel={status !== 'all' || category !== 'all' || city !== 'all' ? 'Reset filters' : undefined}
-              onAction={reset}
-=======
               title="No upcoming events at the moment."
               message="New platform dates and convenings will be announced here as details are confirmed. Explore our past events in the interim."
               actionLabel="Explore Past Events"
               onAction={onExplorePast}
->>>>>>> d651877 (feat: complete Phase 14 typography cleanup and Phase 15 Thrive Pakistan Events Hub)
               icon="calendar"
             />
           ) : (

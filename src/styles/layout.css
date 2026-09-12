@@ -389,8 +389,6 @@
 
 .mnav__group {
   margin-bottom: 2px;
-<<<<<<< HEAD
-=======
 }
 
 .mnav__parent-row {
@@ -431,7 +429,6 @@
 
 .mnav__caret-btn:hover {
   background: rgba(255, 255, 255, 0.06);
->>>>>>> d651877 (feat: complete Phase 14 typography cleanup and Phase 15 Thrive Pakistan Events Hub)
 }
 
 .mnav__parent {
