@@ -1,4 +1,5 @@
 import type { ThriveEvent } from '../types';
+import { isEventUpcoming } from '../utils';
 
 /**
  * HOMEPAGE CONTENT CONFIGURATION.
@@ -43,7 +44,13 @@ export interface HomeSectionConfig {
  */
 export function getFeaturedUpcomingEvent(events: ThriveEvent[]): ThriveEvent | undefined {
   return events
-    .filter((e) => e.status === 'upcoming' && e.dateConfirmed && e.venueConfirmed)
+    .filter(
+      (e) =>
+        e.status !== 'past' &&
+        isEventUpcoming(e) &&
+        e.dateConfirmed &&
+        e.venueConfirmed,
+    )
     .sort((a, b) => +new Date(a.date) - +new Date(b.date))[0];
 }
 
@@ -112,7 +119,7 @@ export const HOME_PAGE = {
     countdownLabel: '24 September 2026 · Mansehra',
     note: 'Final agenda, speakers and registration details will be announced as confirmed.',
     ctas: [
-      { id: 'fe-explore', label: 'Explore FutureX', to: '/futurex', variant: 'primary', size: 'lg', icon: 'arrow-right' },
+      { id: 'fe-explore', label: 'Explore FutureX', to: '/events/futurex-2026', variant: 'primary', size: 'lg', icon: 'arrow-right' },
       { id: 'fe-register', label: 'Register Interest', to: '/events/futurex-2026', variant: 'outline-light', size: 'lg' },
     ] as HomeCta[],
   } satisfies FeaturedEventSectionConfig,

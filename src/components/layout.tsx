@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import type { FormEvent } from 'react';
+import { createPortal } from 'react-dom';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { BRAND } from '../brand';
 import { NAV_ITEMS, SOCIAL_LINKS } from '../nav';
@@ -27,7 +28,7 @@ export function Navbar() {
   const scrolled = useScrolled(10);
   const [openDrop, setOpenDrop] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileSection, setMobileSection] = useState<string | null>(null);
+  const [mobileSections, setMobileSections] = useState<Record<string, boolean>>({});
   const location = useLocation();
   const burgerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -45,7 +46,6 @@ export function Navbar() {
 
   const closeMobile = useCallback(() => {
     setMobileOpen(false);
-    setMobileSection(null);
   }, []);
 
   useEffect(() => {
@@ -105,166 +105,178 @@ export function Navbar() {
     };
   }, [mobileOpen]);
 
+  const toggleMobileSection = (label: string) => {
+    setMobileSections((prev) => ({ ...prev, [label]: !prev[label] }));
+  };
+
   return (
-    <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
-      <div className="nav__inner container container--wide">
-        <Link to="/" className="nav__logo" aria-label="Thrive Pakistan — home">
-          <img
-            src={BRAND.logoWhite}
-            alt="Thrive Pakistan"
-            width={168}
-            height={38}
-            decoding="async"
-            fetchPriority="high"
-          />
-        </Link>
-
-        <nav className="nav__links" aria-label="Primary">
-          <ul>
-            {NAV_ITEMS.map((item) => (
-              <li
-                key={item.label}
-                className={`nav__item ${openDrop === item.label ? 'nav__item--open' : ''}`}
-                onMouseEnter={() => item.children && setOpenDrop(item.label)}
-                onMouseLeave={() => item.children && setOpenDrop(null)}
-              >
-                {item.children ? (
-                  <>
-                    <button
-                      type="button"
-                      className={`nav__link nav__link--parent ${parentActive(item) ? 'nav__link--active' : ''}`}
-                      aria-expanded={openDrop === item.label}
-                      aria-haspopup="true"
-                      aria-controls={`drop-${item.label}`}
-                      onClick={() => setOpenDrop(openDrop === item.label ? null : item.label)}
-                    >
-                      {item.label}
-                      <Icon name="chevron-down" size={14} className="nav__caret" />
-                    </button>
-                    <div id={`drop-${item.label}`} className="nav__drop" role="menu" aria-label={`${item.label} submenu`}>
-                      {item.to && (
-                        <Link className="nav__drop-link nav__drop-link--head" to={item.to} role="menuitem">
-                          All {item.label}
-                        </Link>
-                      )}
-                      {item.children.map((child) => (
-                        <Link key={child.to + child.label} className="nav__drop-link" to={child.to} role="menuitem">
-                          {child.label}
-                        </Link>
-                      ))}
-                    </div>
-                  </>
-                ) : (
-                  <NavLink
-                    to={item.to ?? '/'}
-                    className={({ isActive }) => `nav__link ${isActive ? 'nav__link--active' : ''}`}
-                    end={item.to === '/'}
-                  >
-                    {item.label}
-                  </NavLink>
-                )}
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div className="nav__actions">
-          <Link to="/search" className="nav__search" aria-label="Search Thrive Pakistan">
-            <Icon name="search" size={18} />
+    <>
+      <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
+        <div className="nav__inner container container--wide">
+          <Link to="/" className="nav__logo" aria-label="Thrive Pakistan — home">
+            <img
+              src={BRAND.logoWhite}
+              alt="Thrive Pakistan"
+              width={168}
+              height={38}
+              decoding="async"
+              fetchPriority="high"
+            />
           </Link>
-          <Button to="/become-a-partner" size="sm" className="nav__cta">Partner With Us</Button>
-          <button
-            ref={burgerRef}
-            type="button"
-            className={`nav__burger ${mobileOpen ? 'nav__burger--open' : ''}`}
-            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={mobileOpen}
-            aria-controls="mobile-drawer"
-            onClick={() => (mobileOpen ? closeMobile() : setMobileOpen(true))}
-          >
-            <Icon name={mobileOpen ? 'close' : 'menu'} size={22} />
-          </button>
-        </div>
-      </div>
 
-      {/* Mobile drawer — full-height premium sidebar */}
-      <div className={`mobile-menu ${mobileOpen ? 'mobile-menu--open' : ''}`} aria-hidden={!mobileOpen}>
-        <div className="mobile-menu__scrim" onClick={closeMobile} aria-hidden="true" />
-        <div
-          ref={panelRef}
-          id="mobile-drawer"
-          className="mobile-menu__panel"
-          role="dialog"
-          aria-modal="true"
-          aria-label="Mobile navigation"
-        >
-          <div className="mobile-menu__head">
-            <Link to="/" onClick={closeMobile} aria-label="Thrive Pakistan — home">
-              <img src={BRAND.logoWhite} alt="Thrive Pakistan" width={140} height={32} decoding="async" />
-            </Link>
-            <button ref={closeBtnRef} type="button" onClick={closeMobile} aria-label="Close menu" className="mobile-menu__close">
-              <Icon name="close" size={22} />
-            </button>
-          </div>
-          <nav className="mobile-menu__nav" aria-label="Mobile">
+          <nav className="nav__links" aria-label="Primary">
             <ul>
               {NAV_ITEMS.map((item) => (
-                <li key={item.label} className="mnav__group">
+                <li
+                  key={item.label}
+                  className={`nav__item ${openDrop === item.label ? 'nav__item--open' : ''}`}
+                  onMouseEnter={() => item.children && setOpenDrop(item.label)}
+                  onMouseLeave={() => item.children && setOpenDrop(null)}
+                >
                   {item.children ? (
                     <>
                       <button
                         type="button"
-                        className="mnav__parent"
-                        aria-expanded={mobileSection === item.label}
-                        aria-controls={`mnav-${item.label}`}
-                        onClick={() => setMobileSection(mobileSection === item.label ? null : item.label)}
+                        className={`nav__link nav__link--parent ${parentActive(item) ? 'nav__link--active' : ''}`}
+                        aria-expanded={openDrop === item.label}
+                        aria-haspopup="true"
+                        aria-controls={`drop-${item.label}`}
+                        onClick={() => setOpenDrop(openDrop === item.label ? null : item.label)}
                       >
-                        <span>{item.label}</span>
-                        <Icon name="chevron-down" size={16} className={`mnav__caret ${mobileSection === item.label ? 'mnav__caret--open' : ''}`} />
+                        {item.label}
+                        <Icon name="chevron-down" size={14} className="nav__caret" />
                       </button>
-                      <div id={`mnav-${item.label}`} className={`mnav__children ${mobileSection === item.label ? 'mnav__children--open' : ''}`}>
-                        <div>
-                          {item.to && (
-                            <Link to={item.to} onClick={closeMobile}>
-                              All {item.label}
-                            </Link>
-                          )}
-                          {item.children.map((c) => (
-                            <Link key={c.to + c.label} to={c.to} onClick={closeMobile}>
-                              {c.label}
-                            </Link>
-                          ))}
-                        </div>
+                      <div id={`drop-${item.label}`} className="nav__drop" role="menu" aria-label={`${item.label} submenu`}>
+                        {item.to && (
+                          <Link className="nav__drop-link nav__drop-link--head" to={item.to} role="menuitem">
+                            All {item.label}
+                          </Link>
+                        )}
+                        {item.children.map((child) => (
+                          <Link key={child.to + child.label} className="nav__drop-link" to={child.to} role="menuitem">
+                            {child.label}
+                          </Link>
+                        ))}
                       </div>
                     </>
                   ) : (
-                    <Link to={item.to ?? '/'} className="mnav__parent mnav__parent--link" onClick={closeMobile}>
+                    <NavLink
+                      to={item.to ?? '/'}
+                      className={({ isActive }) => `nav__link ${isActive ? 'nav__link--active' : ''}`}
+                      end={item.to === '/'}
+                    >
                       {item.label}
-                    </Link>
+                    </NavLink>
                   )}
                 </li>
               ))}
             </ul>
           </nav>
-          <div className="mobile-menu__foot">
-            <Button to="/become-a-partner" className="btn--block" onClick={closeMobile}>
-              Partner With Us
-            </Button>
-            <Link to="/search" className="mobile-menu__search" onClick={closeMobile}>
-              <Icon name="search" size={16} /> Search events, speakers, stories…
+
+          <div className="nav__actions">
+            <Link to="/search" className="nav__search" aria-label="Search Thrive Pakistan">
+              <Icon name="search" size={18} />
             </Link>
-            <div className="mobile-menu__foot-meta">
-              <a href="mailto:partnerships@thrivepakistan.com">
-                <Icon name="mail" size={14} /> partnerships@thrivepakistan.com
-              </a>
-              <span>
-                <Icon name="pin" size={14} /> Hazara, Khyber Pakhtunkhwa
-              </span>
-            </div>
+            <Button to="/become-a-partner" size="sm" className="nav__cta">Partner With Us</Button>
+            <button
+              ref={burgerRef}
+              type="button"
+              className={`nav__burger ${mobileOpen ? 'nav__burger--open' : ''}`}
+              aria-label={mobileOpen ? 'Close navigation' : 'Open navigation'}
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-drawer"
+              onClick={() => setMobileOpen((prev) => !prev)}
+            >
+              <Icon name={mobileOpen ? 'close' : 'menu'} size={22} />
+            </button>
           </div>
         </div>
-      </div>
-    </header>
+      </header>
+
+      {/* Mobile drawer — portal to body so position: fixed is unconstrained by header backdrop-filter */}
+      {typeof document !== 'undefined' &&
+        createPortal(
+          <div className={`mobile-menu ${mobileOpen ? 'mobile-menu--open' : ''}`} aria-hidden={!mobileOpen}>
+            <div className="mobile-menu__scrim" onClick={closeMobile} aria-hidden="true" />
+            <div
+              ref={panelRef}
+              id="mobile-drawer"
+              className="mobile-menu__panel"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Mobile navigation"
+            >
+              <div className="mobile-menu__head">
+                <Link to="/" onClick={closeMobile} aria-label="Thrive Pakistan — home">
+                  <img src={BRAND.logoWhite} alt="Thrive Pakistan" width={140} height={32} decoding="async" />
+                </Link>
+                <button ref={closeBtnRef} type="button" onClick={closeMobile} aria-label="Close navigation" className="mobile-menu__close">
+                  <Icon name="close" size={22} />
+                </button>
+              </div>
+              <div className="mobile-menu__cta-wrap">
+                <Button to="/become-a-partner" variant="primary" size="md" className="btn--block mobile-menu__cta-btn" onClick={closeMobile}>
+                  Partner With Us
+                </Button>
+              </div>
+              <nav className="mobile-menu__nav" aria-label="Mobile">
+                <ul>
+                  {NAV_ITEMS.map((item) => (
+                    <li key={item.label} className="mnav__group">
+                      {item.children ? (
+                        <>
+                          <button
+                            type="button"
+                            className="mnav__parent"
+                            aria-expanded={!!mobileSections[item.label]}
+                            aria-controls={`mnav-${item.label}`}
+                            onClick={() => toggleMobileSection(item.label)}
+                          >
+                            <span>{item.label}</span>
+                            <Icon name="chevron-down" size={16} className={`mnav__caret ${mobileSections[item.label] ? 'mnav__caret--open' : ''}`} />
+                          </button>
+                          <div id={`mnav-${item.label}`} className={`mnav__children ${mobileSections[item.label] ? 'mnav__children--open' : ''}`}>
+                            <div>
+                              {item.to && (
+                                <Link to={item.to} onClick={closeMobile} className="mnav__child-head">
+                                  All {item.label}
+                                </Link>
+                              )}
+                              {item.children.map((c) => (
+                                <Link key={c.to + c.label} to={c.to} onClick={closeMobile}>
+                                  {c.label}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
+                        </>
+                      ) : (
+                        <Link to={item.to ?? '/'} className="mnav__parent mnav__parent--link" onClick={closeMobile}>
+                          {item.label}
+                        </Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+              <div className="mobile-menu__foot">
+                <Link to="/search" className="mobile-menu__search" onClick={closeMobile}>
+                  <Icon name="search" size={16} /> Search events, speakers, stories…
+                </Link>
+                <div className="mobile-menu__foot-meta">
+                  <a href="mailto:partnerships@thrivepakistan.com">
+                    <Icon name="mail" size={14} /> partnerships@thrivepakistan.com
+                  </a>
+                  <span>
+                    <Icon name="pin" size={14} /> Hazara, Khyber Pakhtunkhwa
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>,
+          document.body,
+        )}
+    </>
   );
 }
 
@@ -364,9 +376,6 @@ export function Footer() {
               </li>
               <li>
                 <Link to="/programs">Focus Areas</Link>
-              </li>
-              <li>
-                <Link to="/futurex">FutureX 2026</Link>
               </li>
               <li>
                 <Link to="/speakers">Speakers</Link>

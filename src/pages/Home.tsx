@@ -11,6 +11,7 @@ import { eventsService } from '../services/eventsService';
 import { blogsService } from '../services/blogsService';
 import { useSeo } from '../hooks';
 import type { BlogPost, ThriveEvent } from '../types';
+import { isEventUpcoming } from '../utils';
 import { Button, Countdown, Icon, Reveal, SectionHeader, CardSkeleton } from '../components/ui';
 import { BlogCard, EventCard, ProgramCard } from '../components/cards';
 import { LeadershipMessages } from '../components/leadership';
@@ -58,7 +59,7 @@ export default function Home() {
 
   /** Upcoming events section excludes the featured one (already showcased above). */
   const otherUpcoming = (upcoming ?? EVENTS).filter(
-    (e) => e.status === 'upcoming' && e.slug !== featuredEvent?.slug,
+    (e) => isEventUpcoming(e) && e.slug !== featuredEvent?.slug,
   );
   const cfg = HOME_PAGE;
 

@@ -19,7 +19,6 @@ export const NAV_ITEMS: NavItem[] = [
     children: [
       { label: 'Upcoming Events', to: '/events?status=upcoming' },
       { label: 'Past Events', to: '/events?status=past' },
-      { label: 'FutureX 2026', to: '/events/futurex-2026' },
     ],
   },
   {
@@ -34,7 +33,6 @@ export const NAV_ITEMS: NavItem[] = [
       { label: 'Women & Female Participation', to: '/programs/women-participation' },
     ],
   },
-  { label: 'FutureX', to: '/futurex' },
   { label: 'Speakers', to: '/speakers' },
   {
     label: 'Media',

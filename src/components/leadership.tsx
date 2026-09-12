@@ -187,13 +187,13 @@ function shortRole(role: string): string {
 
 export function headingForRole(role: string): string {
   const abbr = shortRole(role);
-  return `Message from ${abbr}`;
+  return `Message from the ${abbr}`;
 }
 
 function MessageSlide({ message: m, index, count }: { message: LeadershipMessage; index: number; count: number }) {
   const person = resolveMessagePerson(m);
   const blocks = parseMessage(m.message);
-  const heading = headingForRole(person.role);
+  const heading = m.label ?? headingForRole(person.role);
   return (
     <article
       className="msg-slide"

@@ -65,16 +65,16 @@ const pastOnly = EVENTS.map((e) => ({ ...e, status: 'past' }));
 check('no event when all past', getFeaturedUpcomingEvent(pastOnly) === undefined);
 
 /* ---------- Scenario C ---------- */
-console.log('\nScenario C — orders CEO=1, MD=2 (COO has no approved copy yet)');
+console.log('\nScenario C — orders CEO=1, MD=2, COO=3 (Phase 5A leadership roster)');
 const defaultOrder = getPublishedMessages();
 check(
-  'order is CEO → MD',
+  'order is CEO → MD → COO',
   JSON.stringify(defaultOrder.map(slugOf)) ===
-    JSON.stringify(['hassan-sajjad-khan', 'faraz-khan-sulemani']),
+    JSON.stringify(['hassan-sajjad-khan', 'faraz-khan-sulemani', 'ibrahim-fiaz']),
   defaultOrder.map(slugOf).join(' → '),
 );
-check('displayOrder drives the order', defaultOrder.map((m) => m.displayOrder).join(',') === '1,2');
-check('COO (no approved copy) is hidden', !defaultOrder.some((m) => m.id === 'lm-coo'));
+check('displayOrder drives the order', defaultOrder.map((m) => m.displayOrder).join(',') === '1,2,3');
+check('COO is published', defaultOrder.some((m) => m.id === 'lm-coo'));
 
 /* ---------- Scenario D ---------- */
 console.log('\nScenario D — reordered CEO=3, MD=1, COO=2 (data change only)');

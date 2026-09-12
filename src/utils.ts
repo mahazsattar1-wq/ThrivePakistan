@@ -1,3 +1,5 @@
+import type { EventStatus } from './types';
+
 /** Small shared formatting helpers. */
 
 export function formatDate(iso: string, opts?: Intl.DateTimeFormatOptions): string {
@@ -19,6 +21,28 @@ export function formatViews(n: number): string {
 
 export function isFuture(iso: string): boolean {
   return new Date(iso).getTime() > Date.now();
+}
+
+/** Get the JavaScript Date object representing the end of an event's final day. */
+export function getEventEndDate(event: { date: string; endDate?: string }): Date {
+  const dStr = event.endDate || event.date;
+  if (/^\d{4}-\d{2}-\d{2}$/.test(dStr)) {
+    const [y, m, d] = dStr.split('-').map(Number);
+    return new Date(y, m - 1, d, 23, 59, 59, 999);
+  }
+  const date = new Date(dStr);
+  date.setHours(23, 59, 59, 999);
+  return date;
+}
+
+/** Returns true if the event has not yet concluded relative to `now`. */
+export function isEventUpcoming(event: { date: string; endDate?: string }, now = new Date()): boolean {
+  return now.getTime() <= getEventEndDate(event).getTime();
+}
+
+/** Dynamically computes an event's status based on its end date vs `now`. */
+export function getEventStatus(event: { date: string; endDate?: string }, now = new Date()): EventStatus {
+  return isEventUpcoming(event, now) ? 'upcoming' : 'past';
 }
 
 /** Split an ISO date into day / month / year chips for event cards. */

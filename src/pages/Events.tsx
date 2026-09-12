@@ -120,9 +120,21 @@ export default function Events() {
             </div>
           ) : events.length === 0 ? (
             <EmptyState
-              title="No events match your filters."
-              message="Try a different category or status — FutureX 2026 and Hazara Tech Fiesta 2025 are currently listed."
-              actionLabel="Reset filters"
+              title={
+                status === 'upcoming' && category === 'all' && city === 'all'
+                  ? 'No upcoming events at the moment.'
+                  : status === 'past' && category === 'all' && city === 'all'
+                  ? 'No past events available yet.'
+                  : 'No events match your filters.'
+              }
+              message={
+                status === 'upcoming' && category === 'all' && city === 'all'
+                  ? 'Check back soon for new platform announcements, or explore our past events.'
+                  : status === 'past' && category === 'all' && city === 'all'
+                  ? 'Our documented public journey is just beginning.'
+                  : 'Try adjusting your category or city filters.'
+              }
+              actionLabel={status !== 'all' || category !== 'all' || city !== 'all' ? 'Reset filters' : undefined}
               onAction={reset}
               icon="calendar"
             />

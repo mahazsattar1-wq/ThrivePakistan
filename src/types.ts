@@ -25,7 +25,7 @@ export interface ImageRef {
  * image path in a component — so the future admin panel can swap a photograph
  * by changing a single data value.
  */
-export type PortraitId = 'hassan-sajjad' | 'faraz-khan-sulemani';
+export type PortraitId = 'hassan-sajjad' | 'faraz-khan-sulemani' | 'ibrahim-fiaz';
 
 /** A reference to an approved standalone photograph (not a sprite cell). */
 export interface PhotoRef {
@@ -53,6 +53,8 @@ export interface ThriveEvent {
   category: string;
   /** ISO date of the first day. */
   date: string;
+  /** Optional ISO date of the last day (for multi-day events). */
+  endDate?: string;
   dateLabel: string;
   time: string;
   location: string;
@@ -61,7 +63,8 @@ export interface ThriveEvent {
   about: string[];
   image: ImageRef;
   featured?: boolean;
-  status: EventStatus;
+  /** Dynamically derived from event end date vs current time. */
+  status?: EventStatus;
   /** True only when the date is officially confirmed by the organization. */
   dateConfirmed: boolean;
   /** True only when the venue is officially confirmed by the organization. */

@@ -1,5 +1,6 @@
 import type { ThriveEvent } from '../types';
 import { img } from '../media';
+import { getEventStatus } from '../utils';
 
 /**
  * EVENT DATA — verified organizational record.
@@ -14,13 +15,16 @@ import { img } from '../media';
  * Do not add events, dates, venues, attendance figures, speakers or sponsors
  * that are not confirmed by official Thrive Pakistan material.
  */
-export const EVENTS: ThriveEvent[] = [
+
+/** Raw event data — verified organizational record. */
+const RAW_EVENTS: Omit<ThriveEvent, 'status'>[] = [
   {
     id: 'ev-futurex-2026',
     slug: 'futurex-2026',
     title: 'FutureX 2026',
     category: 'Flagship Platform',
     date: '2026-09-24',
+    endDate: '2026-09-24',
     dateLabel: '24 September 2026',
     time: 'Full day — schedule to be announced',
     location: 'Government Post Graduate College, Mansehra',
@@ -33,7 +37,6 @@ export const EVENTS: ThriveEvent[] = [
     ],
     image: img('eventsA', 0),
     featured: true,
-    status: 'upcoming',
     dateConfirmed: true,
     venueConfirmed: true,
     tags: ['AI', 'Work', 'Finance', 'Leadership'],
@@ -81,6 +84,7 @@ export const EVENTS: ThriveEvent[] = [
     title: 'Hazara Tech Fiesta 2025',
     category: 'Tech Festival',
     date: '2025-12-12',
+    endDate: '2025-12-14',
     dateLabel: '12–14 December 2025',
     time: 'Three days',
     location: 'Hazara University, Mansehra',
@@ -92,7 +96,6 @@ export const EVENTS: ThriveEvent[] = [
       'The programme spanned artificial intelligence, cybersecurity, entrepreneurship, digital careers, exhibitions, expert sessions and applied competition — evidence that a regional audience responds when credible, future-focused programming is brought closer to them.',
     ],
     image: img('eventsA', 5),
-    status: 'past',
     dateConfirmed: true,
     venueConfirmed: true,
     attendees: '5,000+ attendees',
@@ -110,6 +113,17 @@ export const EVENTS: ThriveEvent[] = [
     faqs: [],
   },
 ];
+
+/**
+ * Single source of truth for all events.
+ * The `status` property is dynamically computed on access from the event date.
+ */
+export const EVENTS: ThriveEvent[] = RAW_EVENTS.map((e) => ({
+  ...e,
+  get status() {
+    return getEventStatus(e);
+  },
+}));
 
 export const EVENT_CATEGORIES = ['Flagship Platform', 'Tech Festival'] as const;
 

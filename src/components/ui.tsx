@@ -171,15 +171,16 @@ export function SectionHeader({
 /* ================= Scroll reveal ================= */
 
 export function Reveal({
-  children, delay = 0, className = '', as: Tag = 'div',
+  children, delay = 0, className = '', as: Tag = 'div', style: customStyle,
 }: {
   children: ReactNode;
   delay?: number;
   className?: string;
   as?: 'div' | 'section' | 'li' | 'article' | 'header';
+  style?: CSSProperties;
 }) {
   const { ref, inView } = useInView<HTMLDivElement>(0.12);
-  const style: CSSProperties = { transitionDelay: `${delay}ms` };
+  const style: CSSProperties = { transitionDelay: `${delay}ms`, ...customStyle };
   return (
     <Tag ref={ref as never} className={`reveal ${inView ? 'is-in' : ''} ${className}`.trim()} style={style}>
       {children}

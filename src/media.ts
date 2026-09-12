@@ -60,6 +60,7 @@ export const HERO_RESPONSIVE = {
 export const PORTRAITS: Record<PortraitId, string> = {
   'hassan-sajjad': '/img/portraits/hassan-1200.jpg',
   'faraz-khan-sulemani': '/img/portraits/faraz-1200.jpg',
+  'ibrahim-fiaz': '/img/portraits/ibrahim-1200.jpg',
 };
 
 /** Responsive portrait srcSets — public optimized variants */
@@ -77,6 +78,13 @@ export const PORTRAIT_RESPONSIVE: Record<PortraitId, { avifSrcSet: string; webpS
     jpgSrcSet: '/img/portraits/faraz-400.jpg 400w, /img/portraits/faraz-800.jpg 800w, /img/portraits/faraz-1200.jpg 1200w',
     sizes: '(max-width: 640px) 400px, (max-width: 1024px) 800px, 400px',
     fallback: '/img/portraits/faraz-1200.jpg',
+  },
+  'ibrahim-fiaz': {
+    avifSrcSet: '/img/portraits/ibrahim-400.avif 400w, /img/portraits/ibrahim-800.avif 800w, /img/portraits/ibrahim-1200.avif 1200w',
+    webpSrcSet: '/img/portraits/ibrahim-400.webp 400w, /img/portraits/ibrahim-800.webp 800w, /img/portraits/ibrahim-1200.webp 1200w',
+    jpgSrcSet: '/img/portraits/ibrahim-400.jpg 400w, /img/portraits/ibrahim-800.jpg 800w, /img/portraits/ibrahim-1200.jpg 1200w',
+    sizes: '(max-width: 640px) 400px, (max-width: 1024px) 800px, 400px',
+    fallback: '/img/portraits/ibrahim-1200.jpg',
   },
 };
 

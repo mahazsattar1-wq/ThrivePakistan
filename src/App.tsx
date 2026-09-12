@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { Layout, ScrollToTop } from './components/layout';
 import { ToastProvider } from './components/feedback';
 
@@ -11,7 +11,6 @@ const Events = lazy(() => import('./pages/Events'));
 const EventDetail = lazy(() => import('./pages/EventDetail'));
 const Programs = lazy(() => import('./pages/Programs'));
 const ProgramDetail = lazy(() => import('./pages/ProgramDetail'));
-const FutureX = lazy(() => import('./pages/FutureX'));
 const Speakers = lazy(() => import('./pages/Speakers'));
 const SpeakerDetail = lazy(() => import('./pages/SpeakerDetail'));
 const Team = lazy(() => import('./pages/Team'));
@@ -54,7 +53,7 @@ export default function App() {
             <Route path="/events/:slug" element={<EventDetail />} />
             <Route path="/programs" element={<Programs />} />
             <Route path="/programs/:slug" element={<ProgramDetail />} />
-            <Route path="/futurex" element={<FutureX />} />
+            <Route path="/futurex" element={<Navigate to="/events/futurex-2026" replace />} />
             <Route path="/speakers" element={<Speakers />} />
             <Route path="/speakers/:slug" element={<SpeakerDetail />} />
             <Route path="/team" element={<Team />} />

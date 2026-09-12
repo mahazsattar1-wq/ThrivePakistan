@@ -53,7 +53,7 @@ export interface LeadershipMessage {
 
 /** Hassan Sajjad — CEO, Thrive Pakistan. Approved message (verbatim). */
 const CEO_MESSAGE = [
-  'Thrive Pakistan was built on a simple belief that young people should not have to leave their region to find serious opportunities.',
+  'Thrive Pakistan was built on a simple belief: young people should not have to leave their region to find serious opportunities.',
   'We are creating platforms that bring industry, technology, leadership, and real-world exposure closer to the people who are ready to grow. Our work is about opening doors, building stronger networks, and giving regional talent a place in conversations that usually happen somewhere else.',
   'We want the next generation to think bigger, move faster, and build with confidence.',
   'Hassan Sajjad',
@@ -67,6 +67,15 @@ const MD_MESSAGE = [
   'We are not just organizing events. We are building access, connections, and momentum for the next generation.',
   'Faraz Khan Sulemani',
   'Managing Director, Thrive Pakistan',
+].join('\n\n');
+
+/** Ibrahim Fiaz — Chief Operating Officer, Thrive Pakistan. Approved message (verbatim). */
+const COO_MESSAGE = [
+  'At Thrive Pakistan, our mission is to empower the youth of Pakistan with the skills, mindset, and opportunities needed to lead in a rapidly changing world.',
+  'We believe that technology, entrepreneurship, and leadership are the key drivers of progress. Through practical programs, mentorship, and industry connections, we are building an ecosystem where young people from every city — including Hazara Division — can learn, grow, and create impact.',
+  'Pakistan’s future will be built by its people. And we are here to make sure they are ready to build it.',
+  'Ibrahim Fiaz',
+  'Chief Operating Officer, Thrive Pakistan',
 ].join('\n\n');
 
 export const LEADERSHIP_MESSAGES: LeadershipMessage[] = [
@@ -89,7 +98,7 @@ export const LEADERSHIP_MESSAGES: LeadershipMessage[] = [
     personId: 'faraz-khan-sulemani',
     name: 'Faraz Khan Sulemani',
     role: 'Managing Director, Thrive Pakistan',
-    label: 'Message from the Managing Director',
+    label: 'Message from the MD',
     message: MD_MESSAGE,
     image: { photo: 'faraz-khan-sulemani' },
     imageAlt: 'Faraz Khan Sulemani, Managing Director of Thrive Pakistan',
@@ -99,18 +108,18 @@ export const LEADERSHIP_MESSAGES: LeadershipMessage[] = [
     isPlaceholderCopy: false,
   },
   {
-    // No approved personal statement for this role yet. Kept unpublished so
-    // placeholder copy is never shown on the homepage; the future admin panel
-    // publishes it by adding approved copy and setting `published: true`.
     id: 'lm-coo',
     personId: 'ibrahim-fiaz',
+    name: 'Ibrahim Fiaz',
+    role: 'Chief Operating Officer, Thrive Pakistan',
     label: 'Message from the COO',
-    message: '',
-    image: null,
-    imageAlt: 'Official photograph of the Chief Operating Officer — to be published',
+    message: COO_MESSAGE,
+    image: { photo: 'ibrahim-fiaz' },
+    imageAlt: 'Ibrahim Fiaz, Chief Operating Officer of Thrive Pakistan',
     displayOrder: 3,
-    published: false,
-    isPlaceholderCopy: true,
+    published: true,
+    featured: true,
+    isPlaceholderCopy: false,
   },
 ];
 
