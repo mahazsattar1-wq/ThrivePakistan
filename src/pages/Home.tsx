@@ -114,7 +114,7 @@ export default function Home() {
 
       {/* ============ 4 · TALENT EXISTS EVERYWHERE ============ */}
       {cfg.talent.visible && (
-        <section className="section section--white talent" id={cfg.talent.id} aria-label={cfg.talent.title}>
+        <section className="section section--tight talent" id={cfg.talent.id} aria-label={cfg.talent.title}>
           <div className="container container--narrow">
             <Reveal>
               <h2 className="talent__title">
@@ -131,7 +131,7 @@ export default function Home() {
 
       {/* ============ 5 · VISION + MISSION (balanced cards) ============ */}
       {cfg.visionMission.visible && (
-        <section className="section section--light vm" id={cfg.visionMission.id} aria-label="Vision and mission">
+        <section className="section section--tight vm" id={cfg.visionMission.id} aria-label="Vision and mission">
           <div className="container">
             <div className="vm-grid">
               {cfg.visionMission.cards.map((card, i) => (
@@ -149,7 +149,7 @@ export default function Home() {
 
       {/* ============ 6 · WHAT WE DO ============ */}
       {cfg.whatWeDo.visible && (
-        <section className="section section--white home-programs" id={cfg.whatWeDo.id} aria-label={cfg.whatWeDo.title}>
+        <section className="section home-programs" id={cfg.whatWeDo.id} aria-label={cfg.whatWeDo.title}>
           <div className="container">
             <Reveal>
               <SectionHeader
@@ -196,10 +196,11 @@ export default function Home() {
 
       {/* ============ 8 · WHERE THE PLATFORM COMES FROM ============ */}
       {cfg.previousWork.visible && (
-        <section className="section section--light previous-work" id={cfg.previousWork.id} aria-label={cfg.previousWork.title}>
+        <section className="section section--dark previous-work" id={cfg.previousWork.id} aria-label={cfg.previousWork.title}>
           <div className="container">
             <Reveal>
               <SectionHeader
+                dark
                 eyebrow={cfg.previousWork.eyebrow}
                 title={cfg.previousWork.title}
                 lead={cfg.previousWork.lead}
@@ -209,11 +210,11 @@ export default function Home() {
               {PREVIOUS_WORK.map((w, i) => (
                 <Reveal key={w.id} delay={i * 90}>
                   <article className="event-block work-card">
-                    <span className="eyebrow" style={{ color: 'var(--green-dark)' }}>
+                    <span className="eyebrow" style={{ color: 'var(--primary-green)' }}>
                       {i === 0 ? '2025 · Hazara University, Mansehra' : i === 1 ? '2026 · Institutional collaboration' : 'Regional ecosystem'}
                     </span>
-                    <h3 style={{ marginTop: 10, color: 'var(--dark)' }}>{w.title}</h3>
-                    <p style={{ marginTop: 8, color: '#38423a' }}>{w.detail}</p>
+                    <h3 style={{ marginTop: 10 }}>{w.title}</h3>
+                    <p style={{ marginTop: 8, color: 'var(--muted-on-dark)' }}>{w.detail}</p>
                     {w.id === 'hazara-tech-fiesta' && (
                       <ul className="highlights-list" style={{ marginTop: 14 }}>
                         <li><Icon name="users" size={16} /> 5,000+ attendees</li>
@@ -227,13 +228,13 @@ export default function Home() {
               ))}
             </div>
             <Reveal delay={120}>
-              <p className="home-eco__note" style={{ color: '#38423a' }}>
+              <p className="home-eco__note">
                 Ecosystem engagement has included {PRIOR_ECOSYSTEM_NAMES.slice(0, 5).join(', ')} and others. {PRIOR_ECOSYSTEM_NOTE}
               </p>
             </Reveal>
             <Reveal delay={150}>
               <div className="cta-band__ctas" style={{ marginTop: 22 }}>
-                <Button to="/events/hazara-tech-fiesta-2025" variant="outline" icon="arrow-right">About Hazara Tech Fiesta</Button>
+                <Button to="/events/hazara-tech-fiesta-2025" variant="outline-light" icon="arrow-right">About Hazara Tech Fiesta</Button>
               </div>
             </Reveal>
           </div>
@@ -242,7 +243,7 @@ export default function Home() {
 
       {/* ============ 9 · IMPACT (QUALITATIVE) ============ */}
       {cfg.impact.visible && (
-        <section className="section section--white" id={cfg.impact.id} aria-label={cfg.impact.title}>
+        <section className="section" id={cfg.impact.id} aria-label={cfg.impact.title}>
           <div className="container">
             <Reveal>
               <SectionHeader
@@ -275,7 +276,7 @@ export default function Home() {
               <SectionHeader center eyebrow={cfg.partnership.eyebrow} title={cfg.partnership.title} />
             </Reveal>
             <Reveal delay={90}>
-              <p className="home-intro__text" style={{ color: '#38423a' }}>{cfg.partnership.body}</p>
+              <p className="home-intro__text">{cfg.partnership.body}</p>
             </Reveal>
             <Reveal delay={140}>
               <div className="cta-band__ctas" style={{ justifyContent: 'center', marginTop: 24 }}>
@@ -288,7 +289,7 @@ export default function Home() {
 
       {/* ============ 11 · NEWSROOM ============ */}
       {cfg.newsroom.visible && (
-        <section className="section section--white" id={cfg.newsroom.id} aria-label={cfg.newsroom.title}>
+        <section className="section" id={cfg.newsroom.id} aria-label={cfg.newsroom.title}>
           <div className="container">
             <Reveal>
               <SectionHeader

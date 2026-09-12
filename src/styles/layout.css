@@ -169,7 +169,7 @@
 
 .nav__search:hover {
   background: var(--primary-green);
-  color: var(--dark);
+  color: var(--white);
   border-color: var(--primary-green);
 }
 
