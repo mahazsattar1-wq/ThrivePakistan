@@ -1,76 +1,21 @@
-import type { Award, AwardCategory, AwardWinner } from '../types';
+import type { Award, AwardWinner } from '../types';
 import { img } from '../media';
 
 /**
  * AWARDS DATA — 100% dynamic, database/admin-ready award records.
  *
- * Categories, individual awards, eligibility criteria, and winner records live here.
+ * Awards, eligibility criteria, and winner records live here.
  * Note: Real award names and winners are being finalized by the organization.
- * The entries below represent temporary demo categories and mock winners to demonstrate
- * the frontend architecture.
+ * The entries below represent temporary mock awards to demonstrate the frontend architecture.
  *
  * Winner photos belong exclusively to the AwardWinner record and do NOT appear in Gallery.
  */
 
-export const AWARD_CATEGORIES: AwardCategory[] = [
-  {
-    id: 'cat-tech',
-    slug: 'technology',
-    name: 'Technology',
-    description: 'Recognizing emerging software engineers, AI practitioners, cybersecurity contributors, and digital builders.',
-    displayOrder: 1,
-    isVisible: true,
-  },
-  {
-    id: 'cat-women',
-    slug: 'women',
-    name: 'Women in Tech & Leadership',
-    description: 'Celebrating women leaders, founders, researchers, and mentors driving technological and social impact.',
-    displayOrder: 2,
-    isVisible: true,
-  },
-  {
-    id: 'cat-youth',
-    slug: 'youth',
-    name: 'Youth & Campus Leadership',
-    description: 'Honoring student leaders, campus ambassadors, and young innovators fostering regional tech communities.',
-    displayOrder: 3,
-    isVisible: true,
-  },
-  {
-    id: 'cat-entrepreneurship',
-    slug: 'entrepreneurship',
-    name: 'Entrepreneurship',
-    description: 'Recognizing early-stage founders, startup creators, and business catalysts building scalable ventures.',
-    displayOrder: 4,
-    isVisible: true,
-  },
-  {
-    id: 'cat-innovation',
-    slug: 'innovation',
-    name: 'Applied Innovation',
-    description: 'Celebrating research, open-source projects, applied AI, and technical problem-solving for regional needs.',
-    displayOrder: 5,
-    isVisible: true,
-  },
-  {
-    id: 'cat-community',
-    slug: 'community-impact',
-    name: 'Community Impact',
-    description: 'Honoring ecosystem builders, volunteers, and public sector partners supporting digital talent growth.',
-    displayOrder: 6,
-    isVisible: true,
-  },
-];
-
 export const AWARDS: Award[] = [
-  // Technology
   {
     id: 'award-emerging-tech-leader',
-    categoryId: 'cat-tech',
     slug: 'emerging-technology-leader-award',
     title: 'Emerging Technology Leader Award (Demo)',
-    categoryName: 'Technology',
     description: 'Recognizing outstanding early-career software engineers, system architects, and technical contributors driving digital transformation.',
     coverImage: img('mediaA', 0),
     aboutHeading: 'About the Award',
@@ -98,11 +43,59 @@ export const AWARDS: Award[] = [
     isVisible: true,
   },
   {
+    id: 'award-women-tech-leader',
+    slug: 'women-in-technology-award',
+    title: 'Women in Technology Award (Demo)',
+    description: 'Celebrating female software engineers, researchers, founders, and tech leaders creating career pathways and inspiring female participation.',
+    coverImage: img('galleryA', 2),
+    aboutHeading: 'About the Award',
+    aboutDescription: 'The Women in Technology Award honors female technologists and leaders who excel in technical fields while actively expanding opportunities for women in STEM across Pakistan.',
+    eligibility: {
+      heading: 'Who is Eligible?',
+      description: 'Eligible for female developers, data scientists, researchers, product managers, and technology founders.',
+      criteria: [
+        'Significant professional achievement in technology or engineering',
+        'Advocacy for female inclusion in STEM and digital careers',
+        'Mentorship of emerging female tech talent in universities or industry',
+      ],
+    },
+    highlights: [
+      'Technical leadership and innovation',
+      'Mentorship and pathway creation for women in technology',
+    ],
+    status: 'Annual Recognition',
+    displayOrder: 2,
+    isVisible: true,
+  },
+  {
+    id: 'award-youth-leadership',
+    slug: 'youth-leadership-award',
+    title: 'Youth Leadership Award (Demo)',
+    description: 'Honoring university student catalysts and young leaders organizing hackathons, campus tech clubs, and peer learning networks.',
+    coverImage: img('eventsA', 5),
+    aboutHeading: 'About the Award',
+    aboutDescription: 'Recognizing student catalysts who build thriving technology communities on university campuses across Khyber Pakhtunkhwa and broader regions.',
+    eligibility: {
+      heading: 'Who is Eligible?',
+      description: 'Eligible for currently enrolled university students or recent graduates who lead campus technology initiatives.',
+      criteria: [
+        'Active leadership of a student tech society, coding club, or ambassador network',
+        'Successful execution of campus workshops, hackathons, or learning drives',
+        'Demonstrated commitment to peer empowerment',
+      ],
+    },
+    highlights: [
+      'Campus leadership and community building',
+      'Peer mentorship and technical workshop organizing',
+    ],
+    status: 'Annual Recognition',
+    displayOrder: 3,
+    isVisible: true,
+  },
+  {
     id: 'award-digital-innovation',
-    categoryId: 'cat-tech',
     slug: 'digital-innovation-award',
     title: 'Digital Innovation Award (Demo)',
-    categoryName: 'Technology',
     description: 'Honoring breakthrough digital products, applications, and platforms addressing practical regional challenges.',
     coverImage: img('eventsA', 0),
     aboutHeading: 'About the Award',
@@ -121,94 +114,32 @@ export const AWARDS: Award[] = [
       'Practical utility for Pakistani institutions and communities',
     ],
     status: 'Annual Recognition',
-    displayOrder: 2,
+    displayOrder: 4,
     isVisible: true,
   },
-
-  // Women
   {
-    id: 'award-women-tech-leader',
-    categoryId: 'cat-women',
-    slug: 'women-in-technology-award',
-    title: 'Women in Technology Award (Demo)',
-    categoryName: 'Women in Tech & Leadership',
-    description: 'Celebrating women software engineers, researchers, founders, and tech leaders creating career pathways and inspiring female participation.',
-    coverImage: img('galleryA', 2),
-    aboutHeading: 'About the Award',
-    aboutDescription: 'The Women in Technology Award honors female technologists and leaders who excel in technical fields while actively expanding opportunities for women in STEM across Pakistan.',
-    eligibility: {
-      heading: 'Who is Eligible?',
-      description: 'Eligible for female developers, data scientists, researchers, product managers, and technology founders.',
-      criteria: [
-        'Significant professional achievement in technology or engineering',
-        'Advocacy for female inclusion in STEM and digital careers',
-        'Mentorship of emerging female tech talent in universities or industry',
-      ],
-    },
-    highlights: [
-      'Technical leadership and innovation',
-      'Mentorship and pathway creation for women in technology',
-    ],
-    status: 'Annual Recognition',
-    displayOrder: 1,
-    isVisible: true,
-  },
-
-  // Youth
-  {
-    id: 'award-youth-innovation',
-    categoryId: 'cat-youth',
-    slug: 'youth-campus-innovation-award',
-    title: 'Youth Campus Innovation Award (Demo)',
-    categoryName: 'Youth & Campus Leadership',
-    description: 'Honoring university students and campus leaders organizing hackathons, tech clubs, and peer learning networks.',
-    coverImage: img('eventsA', 5),
-    aboutHeading: 'About the Award',
-    aboutDescription: 'Recognizing student catalysts who build thriving technology communities on university campuses across Khyber Pakhtunkhwa and broader regions.',
-    eligibility: {
-      heading: 'Who is Eligible?',
-      description: 'Eligible for currently enrolled university students or recent graduates who lead campus technology initiatives.',
-      criteria: [
-        'Active leadership of a student tech society, coding club, or ambassador network',
-        'Successful execution of campus workshops, hackathons, or learning drives',
-        'Demonstrated commitment to peer empowerment',
-      ],
-    },
-    highlights: [
-      'Campus leadership and community building',
-      'Peer mentorship and technical workshop organizing',
-    ],
-    status: 'Annual Recognition',
-    displayOrder: 1,
-    isVisible: true,
-  },
-
-  // Entrepreneurship
-  {
-    id: 'award-startup-catalyst',
-    categoryId: 'cat-entrepreneurship',
-    slug: 'startup-catalyst-award',
-    title: 'Startup Catalyst Award (Demo)',
-    categoryName: 'Entrepreneurship',
-    description: 'Celebrating early-stage founders and incubator leaders building resilient tech ventures in regional hubs.',
+    id: 'award-community-impact',
+    slug: 'community-impact-award',
+    title: 'Community Impact Award (Demo)',
+    description: 'Honoring ecosystem builders, volunteers, and mentors supporting digital talent growth and regional skill initiatives.',
     coverImage: img('mediaA', 2),
     aboutHeading: 'About the Award',
-    aboutDescription: 'Honoring founders and ecosystem enablers who build sustainable business models and generate employment for local tech talent.',
+    aboutDescription: 'Honoring community leaders and volunteers who build sustainable impact initiatives and empower regional talent.',
     eligibility: {
       heading: 'Who is Eligible?',
-      description: 'Eligible for early-stage startup founders, incubator directors, and angel mentors based in Pakistan.',
+      description: 'Eligible for community organizers, volunteers, workshop leads, and ecosystem enablers based in Pakistan.',
       criteria: [
-        'Founder or key executive of a technology-driven startup venture',
-        'Demonstrated market traction, revenue growth, or investment capital',
-        'Local job creation and technical skill development',
+        'Demonstrated leadership in digital talent empowerment initiatives',
+        'Volunteer service in organizing regional technology convenings',
+        'Measurable impact on student career pathways and skills',
       ],
     },
     highlights: [
-      'Entrepreneurial resilience and execution',
-      'Ecosystem impact and local talent hiring',
+      'Ecosystem impact and community service',
+      'Local talent empowerment and mentorship',
     ],
     status: 'Annual Recognition',
-    displayOrder: 1,
+    displayOrder: 5,
     isVisible: true,
   },
 ];
@@ -260,7 +191,7 @@ export const AWARD_WINNERS: AwardWinner[] = [
     id: 'winner-2026-women-01',
     awardId: 'award-women-tech-leader',
     year: 2026,
-    name: 'Ayesha Khan (Demo Winner)',
+    name: 'Demo Female Innovator D',
     designation: 'Director of Engineering',
     organization: 'Women in Code Network (Demo)',
     bio: 'Recognized for establishing coding bootcamps that trained over 500 female computer science students across Khyber Pakhtunkhwa.',
@@ -270,17 +201,47 @@ export const AWARD_WINNERS: AwardWinner[] = [
     isVisible: true,
   },
 
-  // Youth Campus Innovation Award winners
+  // Youth Leadership Award winners
   {
     id: 'winner-2026-youth-01',
-    awardId: 'award-youth-innovation',
+    awardId: 'award-youth-leadership',
     year: 2026,
-    name: 'Demo Student Leader D',
+    name: 'Demo Student Leader E',
     designation: 'President, Computer Society',
     organization: 'Hazara University (Demo)',
     bio: 'Recognized for organizing Hazara Tech Fiesta student hackathons and technical bootcamps for 1,000+ attendees.',
     photo: img('eventsA', 5),
-    caption: 'Demo Winner — 2026 Youth Campus Innovation Award',
+    caption: 'Demo Winner — 2026 Youth Leadership Award',
+    displayOrder: 1,
+    isVisible: true,
+  },
+
+  // Digital Innovation Award winners
+  {
+    id: 'winner-2026-innov-01',
+    awardId: 'award-digital-innovation',
+    year: 2026,
+    name: 'Demo Product Designer F',
+    designation: 'Head of Product',
+    organization: 'Innovate Tech (Demo)',
+    bio: 'Recognized for creating accessible digital healthcare scheduling tools utilized across rural health clinics.',
+    photo: img('eventsA', 0),
+    caption: 'Demo Winner — 2026 Digital Innovation Award',
+    displayOrder: 1,
+    isVisible: true,
+  },
+
+  // Community Impact Award winners
+  {
+    id: 'winner-2026-community-01',
+    awardId: 'award-community-impact',
+    year: 2026,
+    name: 'Demo Ecosystem Lead G',
+    designation: 'Community Program Director',
+    organization: 'Talent Catalyst Hub (Demo)',
+    bio: 'Recognized for coordinating volunteer mentoring programs connecting 300+ university graduates with software careers.',
+    photo: img('mediaA', 2),
+    caption: 'Demo Winner — 2026 Community Impact Award',
     displayOrder: 1,
     isVisible: true,
   },

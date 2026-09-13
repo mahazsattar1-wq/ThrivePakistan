@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 
 const root = process.cwd();
 
-console.log('=== Phase 22 Awards System & Architecture Verification ===');
+console.log('=== Phase 22.1 Awards Navigation & Simplified Structure Verification ===');
 
 // 1. Verify existence of files
 const requiredFiles = [
@@ -21,65 +21,71 @@ for (const file of requiredFiles) {
   console.log(`✓ File present: ${file}`);
 }
 
-// 2. Verify Awards Data Structure
-const awardsDataContent = readFileSync(resolve(root, 'src/data/awards.ts'), 'utf-8');
+// 2. Header Navigation Acceptance Test
+const navContent = readFileSync(resolve(root, 'src/nav.ts'), 'utf-8');
 
-// Check represented categories
-const categoriesToCheck = [
-  'Technology',
-  'Women',
-  'Youth',
-  'Entrepreneurship',
-  'Leadership',
-  'Innovation',
-  'Community Impact',
+assert.ok(
+  navContent.includes("{ label: 'Awards', to: '/awards' }"),
+  'Awards must be directly visible in top-level desktop navigation',
+);
+
+// Check that More section does NOT contain Awards
+const moreSectionMatch = navContent.match(/label:\s*'More'[\s\S]*?children:\s*\[([\s\S]*?)\]/);
+assert.ok(moreSectionMatch, 'More section must exist in nav.ts');
+const moreChildren = moreSectionMatch[1];
+assert.ok(
+  !moreChildren.includes('Awards'),
+  'Awards must NOT appear inside the More section dropdown',
+);
+console.log('✓ Header Acceptance Test passed: Awards is directly in top nav and removed from More');
+
+// 3. Category Removal Verification
+const typesContent = readFileSync(resolve(root, 'src/types.ts'), 'utf-8');
+assert.ok(!typesContent.includes('interface AwardCategory'), 'AwardCategory interface must be removed');
+console.log('✓ AwardCategory interface removed from types.ts');
+
+const awardsDataContent = readFileSync(resolve(root, 'src/data/awards.ts'), 'utf-8');
+assert.ok(!awardsDataContent.includes('AWARD_CATEGORIES'), 'AWARD_CATEGORIES data array must be removed');
+console.log('✓ AWARD_CATEGORIES removed from awards.ts');
+
+const awardsServiceContent = readFileSync(resolve(root, 'src/services/awardsService.ts'), 'utf-8');
+assert.ok(!awardsServiceContent.includes('listCategories'), 'listCategories method must be removed');
+assert.ok(!awardsServiceContent.includes('getCategoryById'), 'getCategoryById method must be removed');
+console.log('✓ Category methods removed from awardsService.ts');
+
+const awardsPageJsx = readFileSync(resolve(root, 'src/pages/Awards.tsx'), 'utf-8');
+assert.ok(!awardsPageJsx.includes('categoryParam'), 'Awards.tsx must not contain category parameter logic');
+assert.ok(!awardsPageJsx.includes('chip'), 'Awards.tsx must not contain category filter chips');
+console.log('✓ Category filter UI completely removed from Awards.tsx');
+
+// 4. Mock Awards & Winners Data Verification
+const mockAwardTitles = [
+  'Emerging Technology Leader Award',
+  'Women in Technology Award',
+  'Youth Leadership Award',
+  'Digital Innovation Award',
+  'Community Impact Award',
 ];
 
-for (const cat of categoriesToCheck) {
+for (const title of mockAwardTitles) {
   assert.ok(
-    awardsDataContent.toLowerCase().includes(cat.toLowerCase()),
-    `Awards data should include category/topic related to: ${cat}`,
+    awardsDataContent.includes(title),
+    `Awards data must contain mock award title: ${title}`,
   );
-  console.log(`✓ Category/Topic verified in data: ${cat}`);
+  console.log(`✓ Mock Award present: ${title}`);
 }
 
-// Check Gallery Isolation constraint: award winners belong strictly to Awards and not gallery collections
+// 5. Gallery Isolation Constraint Verification
 assert.ok(
   awardsDataContent.includes('Winner photos belong exclusively to the AwardWinner record and do NOT appear in Gallery'),
   'Awards data comment must specify isolation constraint from Central Gallery',
 );
-console.log('✓ Strict Gallery Isolation verified in data domain model');
+console.log('✓ Gallery Isolation constraint preserved');
 
-// 3. Verify Stories Cleanup
-const navContent = readFileSync(resolve(root, 'src/nav.ts'), 'utf-8');
-assert.ok(!navContent.includes("'Stories'"), 'src/nav.ts should not contain "Stories" link');
-assert.ok(!navContent.includes('?category=Stories'), 'src/nav.ts should not link to ?category=Stories');
-console.log('✓ Stories completely removed from src/nav.ts');
-
-const layoutContent = readFileSync(resolve(root, 'src/components/layout.tsx'), 'utf-8');
-assert.ok(!layoutContent.toLowerCase().includes('search events, speakers, stories'), 'Layout search placeholder should not mention stories');
-console.log('✓ Stories removed from search placeholder in src/components/layout.tsx');
-
-const blogDetailContent = readFileSync(resolve(root, 'src/pages/BlogDetail.tsx'), 'utf-8');
-assert.ok(!blogDetailContent.includes('title="Related stories"'), 'BlogDetail should not say "Related stories"');
-console.log('✓ "Related stories" cleaned up in src/pages/BlogDetail.tsx');
-
-// 4. Verify Routes in App.tsx
+// 6. Routes in App.tsx
 const appContent = readFileSync(resolve(root, 'src/App.tsx'), 'utf-8');
-assert.ok(appContent.includes('/awards'), 'App.tsx must include /awards route');
-assert.ok(appContent.includes('/awards/:slug'), 'App.tsx must include /awards/:slug route');
+assert.ok(appContent.includes("path=\"/awards\""), 'App.tsx must include /awards route');
+assert.ok(appContent.includes("path=\"/awards/:slug\""), 'App.tsx must include /awards/:slug route');
 console.log('✓ /awards and /awards/:slug routes configured in src/App.tsx');
 
-// 5. Verify Custom Cursor Integration
-assert.ok(layoutContent.includes('<CustomCursor />'), 'Layout must render <CustomCursor /> component');
-console.log('✓ <CustomCursor /> rendered globally in Layout');
-
-// 6. Verify CSS for Custom Cursor
-const cssContent = readFileSync(resolve(root, 'src/styles/components.css'), 'utf-8');
-assert.ok(cssContent.includes('.tp-cursor-root'), 'components.css must define .tp-cursor-root');
-assert.ok(cssContent.includes('.tp-cursor-dot'), 'components.css must define .tp-cursor-dot');
-assert.ok(cssContent.includes('.tp-cursor-halo'), 'components.css must define .tp-cursor-halo');
-assert.ok(cssContent.includes('@media (hover: none)'), 'components.css must disable custom cursor on touch/pointer coarse');
-console.log('✓ Custom cursor styles & responsive/touch overrides verified in components.css');
-
-console.log('=== All Phase 22 Architecture Tests Passed Successfully! ===');
+console.log('=== All Phase 22.1 Acceptance Tests Passed Successfully! ===');

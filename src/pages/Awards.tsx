@@ -1,18 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { awardsService } from '../services/awardsService';
 import { useSeo } from '../hooks';
-import type { Award, AwardCategory } from '../types';
+import type { Award } from '../types';
 import { PageHero } from '../components/page-hero';
 import { AwardCard } from '../components/cards';
 import { Button, EmptyState, Reveal, Skeleton } from '../components/ui';
 import { AWARDS_PAGE_CONFIG } from '../data/awardsPage';
 
 export default function Awards() {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const categoryParam = searchParams.get('category') || 'all';
-
-  const [categories, setCategories] = useState<AwardCategory[] | null>(null);
   const [awards, setAwards] = useState<Award[] | null>(null);
 
   const cfg = AWARDS_PAGE_CONFIG;
@@ -24,26 +19,14 @@ export default function Awards() {
 
   useEffect(() => {
     let alive = true;
-    Promise.all([
-      awardsService.listCategories(),
-      awardsService.listAwards(categoryParam),
-    ]).then(([cats, awds]) => {
+    awardsService.listAwards().then((list) => {
       if (!alive) return;
-      setCategories(cats);
-      setAwards(awds);
+      setAwards(list);
     });
     return () => {
       alive = false;
     };
-  }, [categoryParam]);
-
-  const selectCategory = (slug: string) => {
-    if (slug === 'all') {
-      setSearchParams({});
-    } else {
-      setSearchParams({ category: slug });
-    }
-  };
+  }, []);
 
   return (
     <>
@@ -64,31 +47,7 @@ export default function Awards() {
 
       <section className="section section--tight">
         <div className="container">
-          {/* Category Filter Chips */}
-          <div className="filter-bar filter-bar--dark" style={{ marginBottom: 32 }}>
-            <div className="filter-bar__chips" role="group" aria-label="Filter awards by category">
-              <button
-                type="button"
-                className={`chip ${categoryParam === 'all' ? 'chip--active' : ''}`}
-                onClick={() => selectCategory('all')}
-              >
-                {cfg.filters.allCategories}
-              </button>
-              {categories &&
-                categories.map((cat) => (
-                  <button
-                    key={cat.id}
-                    type="button"
-                    className={`chip ${categoryParam === cat.slug || categoryParam === cat.id ? 'chip--active' : ''}`}
-                    onClick={() => selectCategory(cat.slug)}
-                  >
-                    {cat.name}
-                  </button>
-                ))}
-            </div>
-          </div>
-
-          {/* Awards Grid */}
+          {/* Direct Awards Grid — No Categories, No Filters */}
           {awards === null ? (
             <div className="grid grid--3">
               {[0, 1, 2].map((i) => (

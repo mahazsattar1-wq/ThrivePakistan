@@ -310,10 +310,11 @@ export function AwardCard({ award }: { award: Award }) {
               background: 'linear-gradient(180deg, transparent 40%, rgba(10,11,11,0.85))',
             }}
           />
-          <div style={{ position: 'absolute', top: 12, left: 12, right: 12, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Badge tone="green">{award.categoryName}</Badge>
-            {award.status && <Badge tone="light">{award.status}</Badge>}
-          </div>
+          {award.status && (
+            <div style={{ position: 'absolute', top: 12, right: 12 }}>
+              <Badge tone="green">{award.status}</Badge>
+            </div>
+          )}
         </div>
       )}
       <div>

@@ -313,21 +313,10 @@ export interface AwardSection {
   content: string | string[];
 }
 
-export interface AwardCategory {
-  id: string;
-  name: string;
-  slug: string;
-  description: string;
-  displayOrder: number;
-  isVisible: boolean;
-}
-
 export interface Award {
   id: string;
-  categoryId: string;
   slug: string;
   title: string;
-  categoryName: string;
   description: string;
   coverImage?: ImageRef;
   aboutHeading: string;

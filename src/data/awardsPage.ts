@@ -1,7 +1,7 @@
 /**
  * AWARDS PAGE CONFIGURATION — 100% database/admin-ready content configuration.
  *
- * All page headings, hero leads, category section headers, button copy,
+ * All page headings, hero leads, section headers, button copy,
  * empty states, and CTA band copy live here.
  */
 
@@ -18,26 +18,21 @@ export const AWARDS_PAGE_CONFIG = {
   },
   cardLabels: {
     viewAward: 'View Award Details',
-    exploreCategory: 'Explore Category',
+    allAwards: 'All Awards',
     winnersCount: (count: number) => `${count} winners recognized`,
-    categoryAwardsCount: (count: number) => `${count} awards in category`,
-    allCategories: 'All Award Categories',
   },
   sections: {
     aboutHeadingDefault: 'About the Award',
-    eligibilityHeadingDefault: 'Who is Eligible?',
-    highlightsHeadingDefault: 'What We Recognize',
+    eligibilityHeadingDefault: 'Who Is Eligible?',
+    highlightsHeadingDefault: 'Award Criteria',
     winnersHeadingDefault: 'Previous Winners',
   },
   filters: {
-    allCategories: 'All Categories',
     allYears: 'All Years',
   },
   adminWorkflowMock: {
-    addCategoryTitle: 'Add Award Category',
     addAwardTitle: 'Add Award',
     addWinnerTitle: 'Add Winner',
-    selectCategoryLabel: 'Select Category',
     selectAwardLabel: 'Select Award',
     selectYearLabel: 'Select Year',
     winnerPhotoLabel: 'Winner Photo (Separate from Gallery)',
@@ -45,7 +40,7 @@ export const AWARDS_PAGE_CONFIG = {
   emptyStates: {
     noAwards: {
       title: 'No Awards Found',
-      message: 'No award entries are currently published for this category.',
+      message: 'No award programs are currently published.',
     },
     noWinners: {
       title: 'No Winners Published Yet',

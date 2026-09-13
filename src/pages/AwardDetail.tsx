@@ -67,7 +67,7 @@ export default function AwardDetail() {
             icon="spark"
           />
           <p style={{ textAlign: 'center', marginTop: 16 }}>
-            <Link to="/awards" className="btn btn--primary">{cfg.cardLabels.allCategories}</Link>
+            <Link to="/awards" className="btn btn--primary">{cfg.cardLabels.allAwards}</Link>
           </p>
         </div>
       </section>
@@ -79,11 +79,11 @@ export default function AwardDetail() {
       <PageHero
         image={award.coverImage}
         crumbs={[{ label: 'Awards', to: '/awards' }, { label: award.title }]}
-        eyebrow={award.categoryName}
+        eyebrow={cfg.hero.eyebrow}
         title={award.title}
         lead={award.description}
         meta={[
-          { icon: 'spark', label: award.categoryName },
+          { icon: 'spark', label: cfg.hero.title },
           ...(award.status ? [{ icon: 'check' as const, label: award.status }] : []),
         ]}
       />
@@ -93,9 +93,9 @@ export default function AwardDetail() {
           {/* Header Action / Back Link */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
             <Button to="/awards" variant="outline" size="sm" iconLeft="chevron-left">
-              {cfg.cardLabels.allCategories}
+              {cfg.cardLabels.allAwards}
             </Button>
-            <Badge tone="green">{award.categoryName}</Badge>
+            {award.status && <Badge tone="green">{award.status}</Badge>}
           </div>
 
           {/* About Award Section */}
@@ -151,7 +151,7 @@ export default function AwardDetail() {
             )}
           </div>
 
-          {/* Highlights / What We Recognize */}
+          {/* Highlights / Award Criteria */}
           {award.highlights && award.highlights.length > 0 && (
             <div
               className="event-block"
