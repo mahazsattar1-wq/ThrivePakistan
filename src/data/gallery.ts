@@ -5,14 +5,6 @@ import { img } from '../media';
  * CENTRAL MAIN GALLERY COLLECTIONS — single source of truth for platform media.
  *
  * Each collection represents either an Event Gallery (linked to an event.id)
-<<<<<<< HEAD
- * or an independent Random Clicks collection (eventId: null).
- *
- * Architecture:
- * - Event: source of event identity (ONE event = ONE record).
- * - Gallery Collection: references event.id via `eventId` when type === 'event_gallery'.
- * - Gallery Media: normalized media items referencing gallery.id.
-=======
  * or an independent Random Gallery (eventId: null).
  *
  * Architecture:
@@ -21,26 +13,18 @@ import { img } from '../media';
  * - Random Gallery: type === 'random' and eventId === null.
  * - Every Gallery has its own gallery-specific `aboutHeading` and `aboutDescription`.
  * - Gallery Media: normalized media items referencing gallery.id with individual captions.
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
  */
 
 export const GALLERY_COLLECTIONS: GalleryCollection[] = [
   {
     id: 'gal-futurex-2026',
     slug: 'futurex-2026',
-<<<<<<< HEAD
-    type: 'event_gallery',
-    eventId: 'ev-futurex-2026',
-    title: 'FutureX 2026',
-    description: 'A visual collection of moments, theme directions, and platform concepts for FutureX 2026.',
-=======
     type: 'event',
     eventId: 'ev-futurex-2026',
     title: 'FutureX 2026',
     description: 'A visual collection of moments, theme directions, and platform concepts for FutureX 2026.',
     aboutHeading: 'About Gallery',
     aboutDescription: 'FutureX 2026 brings together young people, technology conversations, industry exposure and meaningful connections in Mansehra.',
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
     coverImage: img('eventsA', 0),
     published: true,
     featured: true,
@@ -50,19 +34,12 @@ export const GALLERY_COLLECTIONS: GalleryCollection[] = [
   {
     id: 'gal-hazara-tech-fiesta-2025',
     slug: 'hazara-tech-fiesta-2025',
-<<<<<<< HEAD
-    type: 'event_gallery',
-    eventId: 'ev-hazara-tech-fiesta-2025',
-    title: 'Hazara Tech Fiesta 2025',
-    description: 'Platform artwork, highlights, and visual identity from the three-day regional technology festival in Mansehra.',
-=======
     type: 'event',
     eventId: 'ev-hazara-tech-fiesta-2025',
     title: 'Hazara Tech Fiesta 2025',
     description: 'Platform artwork, highlights, and visual identity from the three-day regional technology festival in Mansehra.',
     aboutHeading: 'About Gallery',
     aboutDescription: 'A multi-day showcase documenting student innovation, hackathons, AI demonstrations and regional industry participation at Hazara University.',
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
     coverImage: img('eventsA', 5),
     published: true,
     featured: true,
@@ -70,14 +47,6 @@ export const GALLERY_COLLECTIONS: GalleryCollection[] = [
     createdAt: '2025-12-14T00:00:00Z',
   },
   {
-<<<<<<< HEAD
-    id: 'gal-random-clicks',
-    slug: 'random-clicks',
-    type: 'random_clicks',
-    eventId: null,
-    title: 'Random Clicks & Ecosystem',
-    description: 'Visual moments reflecting student engagement, learning environments, campus networks, and regional participation.',
-=======
     id: 'gal-visit-university',
     slug: 'todays-visit-to-university',
     type: 'random',
@@ -86,13 +55,10 @@ export const GALLERY_COLLECTIONS: GalleryCollection[] = [
     description: 'A collection of moments from Thrive Pakistan’s visit to a university, including meetings, discussions and interactions with students.',
     aboutHeading: 'About Gallery',
     aboutDescription: 'A collection of moments from Thrive Pakistan’s visit to a university campus, including administrative meetings, faculty discussions, and direct student interactions.',
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
     coverImage: img('galleryA', 0),
     published: true,
     featured: false,
     displayOrder: 3,
-<<<<<<< HEAD
-=======
     createdAt: '2026-02-15T00:00:00Z',
   },
   {
@@ -108,7 +74,6 @@ export const GALLERY_COLLECTIONS: GalleryCollection[] = [
     published: true,
     featured: false,
     displayOrder: 4,
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
     createdAt: '2026-01-01T00:00:00Z',
   },
 ];
@@ -116,31 +81,16 @@ export const GALLERY_COLLECTIONS: GalleryCollection[] = [
 /**
  * NORMALIZED GALLERY MEDIA ITEMS — single source of truth for media items.
  *
-<<<<<<< HEAD
- * - Images support imageSourceType: 'upload' (local/sprite) or 'youtube' (YouTube image source).
-=======
  * - Images support sourceType: 'direct' (upload/sprite) or 'youtube' (YouTube image source).
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
  * - Videos support type: 'video' with youtubeUrl (YouTube video only, no direct video uploads).
  * - Note: In mock data, youtubeUrl is set to null. Real YouTube URLs arrive from the database/admin panel.
  */
 export const GALLERY_MEDIA: GalleryMediaItem[] = [
-<<<<<<< HEAD
-  // FutureX 2026
-=======
   // FutureX 2026 Gallery
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
   {
     id: 'media-fx-01',
     galleryId: 'gal-futurex-2026',
     type: 'image',
-<<<<<<< HEAD
-    imageSourceType: 'upload',
-    image: img('eventsA', 0),
-    title: 'FutureX 2026, illustrative platform artwork',
-    description: 'Main platform visual theme for FutureX 2026.',
-    displayOrder: 1,
-=======
     sourceType: 'direct',
     image: img('eventsA', 0),
     title: 'FutureX 2026 Platform Artwork',
@@ -148,20 +98,12 @@ export const GALLERY_MEDIA: GalleryMediaItem[] = [
     description: 'Main platform visual theme for FutureX 2026.',
     displayOrder: 1,
     isVisible: true,
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
     visibility: true,
   },
   {
     id: 'media-fx-02',
     galleryId: 'gal-futurex-2026',
     type: 'image',
-<<<<<<< HEAD
-    imageSourceType: 'upload',
-    image: img('eventsB', 0),
-    title: 'FutureX 2026, visual direction & AI theme artwork',
-    description: 'Theme artwork representing AI Lab and technology pillars.',
-    displayOrder: 2,
-=======
     sourceType: 'direct',
     image: img('eventsB', 0),
     title: 'AI Lab & Technology Direction',
@@ -169,7 +111,6 @@ export const GALLERY_MEDIA: GalleryMediaItem[] = [
     description: 'Theme artwork representing AI Lab and technology pillars.',
     displayOrder: 2,
     isVisible: true,
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
     visibility: true,
   },
   {
@@ -179,14 +120,6 @@ export const GALLERY_MEDIA: GalleryMediaItem[] = [
     youtubeUrl: null, // Null in mock state — real YouTube URL supplied by future database/admin
     thumb: img('mediaA', 0),
     title: 'FutureX 2026 Launch & Platform Keynote',
-<<<<<<< HEAD
-    description: 'Official preview video introducing FutureX 2026 themes and campus engagement.',
-    displayOrder: 3,
-    visibility: true,
-  },
-
-  // Hazara Tech Fiesta 2025
-=======
     caption: 'Conversation with university representatives at FutureX 2026',
     description: 'Official preview video introducing FutureX 2026 themes and campus engagement.',
     displayOrder: 3,
@@ -195,18 +128,10 @@ export const GALLERY_MEDIA: GalleryMediaItem[] = [
   },
 
   // Hazara Tech Fiesta 2025 Gallery
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
   {
     id: 'media-htf-01',
     galleryId: 'gal-hazara-tech-fiesta-2025',
     type: 'image',
-<<<<<<< HEAD
-    imageSourceType: 'upload',
-    image: img('eventsA', 5),
-    title: 'Hazara Tech Fiesta 2025, illustrative artwork',
-    description: 'Official poster artwork for Hazara Tech Fiesta 2025.',
-    displayOrder: 1,
-=======
     sourceType: 'direct',
     image: img('eventsA', 5),
     title: 'Hazara Tech Fiesta Poster',
@@ -214,20 +139,12 @@ export const GALLERY_MEDIA: GalleryMediaItem[] = [
     description: 'Official poster artwork for Hazara Tech Fiesta 2025.',
     displayOrder: 1,
     isVisible: true,
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
     visibility: true,
   },
   {
     id: 'media-htf-02',
     galleryId: 'gal-hazara-tech-fiesta-2025',
     type: 'image',
-<<<<<<< HEAD
-    imageSourceType: 'upload',
-    image: img('eventsB', 5),
-    title: 'Hazara Tech Fiesta 2025, visual identity',
-    description: 'Branding and regional talent showcase visuals.',
-    displayOrder: 2,
-=======
     sourceType: 'direct',
     image: img('eventsB', 5),
     title: 'Regional Talent Showcase',
@@ -235,7 +152,6 @@ export const GALLERY_MEDIA: GalleryMediaItem[] = [
     description: 'Branding and regional talent showcase visuals.',
     displayOrder: 2,
     isVisible: true,
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
     visibility: true,
   },
   {
@@ -245,14 +161,6 @@ export const GALLERY_MEDIA: GalleryMediaItem[] = [
     youtubeUrl: null, // Null in mock state — real YouTube URL supplied by future database/admin
     thumb: img('eventsA', 5),
     title: 'Hazara Tech Fiesta 2025 Official Film',
-<<<<<<< HEAD
-    description: 'Three-day recap film from Hazara University, Mansehra.',
-    displayOrder: 3,
-    visibility: true,
-  },
-
-  // Random Clicks & Ecosystem
-=======
     caption: 'Three-day event recap film from Hazara University, Mansehra',
     description: 'Three-day recap film from Hazara University, Mansehra.',
     displayOrder: 3,
@@ -302,18 +210,10 @@ export const GALLERY_MEDIA: GalleryMediaItem[] = [
   },
 
   // Random Clicks & Ecosystem Gallery (Random)
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
   {
     id: 'media-rc-01',
     galleryId: 'gal-random-clicks',
     type: 'image',
-<<<<<<< HEAD
-    imageSourceType: 'upload',
-    image: img('galleryA', 0),
-    title: 'Ecosystem, illustrative artwork',
-    description: 'Random capture of student interaction.',
-    displayOrder: 1,
-=======
     sourceType: 'direct',
     image: img('galleryA', 4),
     title: 'Emerging Tech Talent',
@@ -321,20 +221,12 @@ export const GALLERY_MEDIA: GalleryMediaItem[] = [
     description: 'Regional student talent showcase.',
     displayOrder: 1,
     isVisible: true,
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
     visibility: true,
   },
   {
     id: 'media-rc-02',
     galleryId: 'gal-random-clicks',
     type: 'image',
-<<<<<<< HEAD
-    imageSourceType: 'upload',
-    image: img('galleryA', 2),
-    title: 'Learning, illustrative artwork',
-    description: 'Interactive learning session moment.',
-    displayOrder: 2,
-=======
     sourceType: 'direct',
     image: img('mediaA', 2),
     title: 'Startup Pitch Stage',
@@ -342,53 +234,12 @@ export const GALLERY_MEDIA: GalleryMediaItem[] = [
     description: 'Young founders sharing their early prototypes.',
     displayOrder: 2,
     isVisible: true,
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
     visibility: true,
   },
   {
     id: 'media-rc-03',
     galleryId: 'gal-random-clicks',
     type: 'image',
-<<<<<<< HEAD
-    imageSourceType: 'upload',
-    image: img('galleryA', 3),
-    title: 'Participation, illustrative artwork',
-    description: 'Youth participation at regional meetup.',
-    displayOrder: 3,
-    visibility: true,
-  },
-  {
-    id: 'media-rc-04',
-    galleryId: 'gal-random-clicks',
-    type: 'image',
-    imageSourceType: 'upload',
-    image: img('galleryA', 4),
-    title: 'Regional talent, illustrative artwork',
-    description: 'Emerging tech talent in Mansehra.',
-    displayOrder: 4,
-    visibility: true,
-  },
-  {
-    id: 'media-rc-05',
-    galleryId: 'gal-random-clicks',
-    type: 'image',
-    imageSourceType: 'upload',
-    image: img('mediaA', 2),
-    title: 'Entrepreneurship, illustrative artwork',
-    description: 'Startup pitch presentation stage.',
-    displayOrder: 5,
-    visibility: true,
-  },
-  {
-    id: 'media-rc-06',
-    galleryId: 'gal-random-clicks',
-    type: 'image',
-    imageSourceType: 'upload',
-    image: img('mediaA', 4),
-    title: 'Campus networks, illustrative artwork',
-    description: 'Student ambassador campus network.',
-    displayOrder: 6,
-=======
     sourceType: 'direct',
     image: img('mediaA', 4),
     title: 'Campus Ambassador Network',
@@ -396,32 +247,21 @@ export const GALLERY_MEDIA: GalleryMediaItem[] = [
     description: 'Campus network representatives planning local outreach.',
     displayOrder: 3,
     isVisible: true,
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
     visibility: true,
   },
 ];
 
 /** Derived flat gallery list for backwards compatibility across legacy components. */
-<<<<<<< HEAD
-export const GALLERY: GalleryItem[] = GALLERY_MEDIA.filter((m) => m.visibility).map((m) => {
-=======
 export const GALLERY: GalleryItem[] = GALLERY_MEDIA.filter((m) => m.isVisible !== false).map((m) => {
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
   const col = GALLERY_COLLECTIONS.find((c) => c.id === m.galleryId);
   return {
     id: m.id,
     galleryId: m.galleryId,
     type: m.type,
     image: m.image,
-<<<<<<< HEAD
-    imageSource: m.imageSource,
-    youtubeUrl: m.youtubeUrl,
-    caption: m.title,
-=======
     imageSource: m.imageUrl || m.imageSource,
     youtubeUrl: m.youtubeUrl,
     caption: m.caption || m.title,
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
     category: col ? col.title : 'Gallery',
     eventSlug: col ? col.slug : undefined,
   };

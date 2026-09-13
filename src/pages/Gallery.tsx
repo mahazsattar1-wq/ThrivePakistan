@@ -33,11 +33,7 @@ export default function Gallery() {
   const [collections, setCollections] = useState<GalleryCollection[] | null>(null);
   const [activeCollection, setActiveCollection] = useState<GalleryCollection | null | 'not_found'>(null);
   const [associatedEvent, setAssociatedEvent] = useState<ThriveEvent | null>(null);
-<<<<<<< HEAD
-  const [typeFilter, setTypeFilter] = useState<'all' | 'event_gallery' | 'random_clicks'>('all');
-=======
   const [typeFilter, setTypeFilter] = useState<'all' | 'event' | 'random'>('all');
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
   const [mediaTab, setMediaTab] = useState<'all' | 'images' | 'videos'>('all');
   const [openMediaIndex, setOpenIndex] = useState<number | null>(null);
   const [thumbnailErrors, setThumbnailErrors] = useState<Record<string, boolean>>({});
@@ -132,13 +128,8 @@ export default function Gallery() {
     collections === null
       ? null
       : collections.filter((col) => {
-<<<<<<< HEAD
-          if (typeFilter === 'event_gallery') return col.type === 'event_gallery';
-          if (typeFilter === 'random_clicks') return col.type === 'random_clicks';
-=======
           if (typeFilter === 'event') return col.type === 'event' || col.type === 'event_gallery';
           if (typeFilter === 'random') return col.type === 'random' || col.type === 'random_clicks';
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
           return true;
         });
 
@@ -181,16 +172,6 @@ export default function Gallery() {
               <Button variant="outline" size="sm" iconLeft="chevron-left" onClick={clearSelection}>
                 {cfg.cardLabels.allCollections}
               </Button>
-<<<<<<< HEAD
-              {typeof activeCollection === 'object' && associatedEvent && (
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <span style={{ fontSize: '0.88rem', color: 'var(--muted-on-dark)' }}>
-                    {cfg.cardLabels.associatedEvent}: <strong>{associatedEvent.title}</strong>
-                  </span>
-                  <Button to={`/events/${associatedEvent.slug}`} variant="green-ghost" size="sm" icon="arrow-right">
-                    {cfg.cardLabels.viewEvent}
-                  </Button>
-=======
               {typeof activeCollection === 'object' && (
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
                   <Badge tone={activeCollection.type === 'event' || activeCollection.type === 'event_gallery' ? 'green' : 'neon'}>
@@ -204,7 +185,6 @@ export default function Gallery() {
                       </Button>
                     </span>
                   )}
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
                 </div>
               )}
             </div>
@@ -220,29 +200,17 @@ export default function Gallery() {
                 </button>
                 <button
                   type="button"
-<<<<<<< HEAD
-                  className={`chip ${typeFilter === 'event_gallery' ? 'chip--active' : ''}`}
-                  onClick={() => setTypeFilter('event_gallery')}
-=======
                   className={`chip ${typeFilter === 'event' ? 'chip--active' : ''}`}
                   onClick={() => setTypeFilter('event')}
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
                 >
                   {cfg.filters.eventGalleries}
                 </button>
                 <button
                   type="button"
-<<<<<<< HEAD
-                  className={`chip ${typeFilter === 'random_clicks' ? 'chip--active' : ''}`}
-                  onClick={() => setTypeFilter('random_clicks')}
-                >
-                  {cfg.filters.randomClicks}
-=======
                   className={`chip ${typeFilter === 'random' ? 'chip--active' : ''}`}
                   onClick={() => setTypeFilter('random')}
                 >
                   {cfg.filters.randomGalleries}
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
                 </button>
               </div>
             </div>
@@ -258,13 +226,6 @@ export default function Gallery() {
               icon="search"
             />
           ) : typeof activeCollection === 'object' && activeCollection ? (
-<<<<<<< HEAD
-            /* View Mode 2: Collection Media Grid */
-            <div>
-              {/* Media type tabs if collection has both images and videos */}
-              {activeCollection.mediaItems && activeCollection.mediaItems.length > 0 && (
-                <div className="tabs" role="tablist" style={{ marginBottom: 24 }}>
-=======
             /* View Mode 2: Collection Detail View */
             <div style={{ display: 'grid', gap: 32 }}>
               {/* Gallery Specific About Section */}
@@ -288,7 +249,6 @@ export default function Gallery() {
               {/* Media type tabs if collection has both images and videos */}
               {activeCollection.mediaItems && activeCollection.mediaItems.length > 0 && (
                 <div className="tabs" role="tablist" style={{ marginBottom: 8 }}>
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
                   <button
                     type="button"
                     role="tab"
@@ -332,10 +292,7 @@ export default function Gallery() {
                   {activeMediaList.map((m, i) => {
                     const ytThumb = getYouTubeThumbnailUrl(m.youtubeUrl);
                     const useYtThumb = ytThumb && !thumbnailErrors[m.id];
-<<<<<<< HEAD
-=======
                     const itemCaption = m.caption || m.title;
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
 
                     return (
                       <button
@@ -343,20 +300,12 @@ export default function Gallery() {
                         type="button"
                         className={`gallery-tile ${i % 5 === 0 ? 'gallery-tile--wide' : ''} ${i % 7 === 3 ? 'gallery-tile--tall' : ''}`.trim()}
                         onClick={() => handleMediaClick(m, i)}
-<<<<<<< HEAD
-                        aria-label={m.type === 'video' ? `Preview video: ${m.title}` : `Open photo: ${m.title}`}
-=======
                         aria-label={m.type === 'video' ? `Preview video: ${itemCaption}` : `Open photo: ${itemCaption}`}
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
                       >
                         {useYtThumb ? (
                           <img
                             src={ytThumb}
-<<<<<<< HEAD
-                            alt={m.title}
-=======
                             alt={itemCaption}
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
                             className="gallery-tile__img"
                             onError={() => setThumbnailErrors((prev) => ({ ...prev, [m.id]: true }))}
                             style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
@@ -366,11 +315,6 @@ export default function Gallery() {
                         ) : typeof m.thumb === 'object' && m.thumb ? (
                           <div className="gallery-tile__img sprite" style={{ ...spriteStyle(m.thumb), position: 'absolute', inset: 0 }} />
                         ) : typeof m.thumb === 'string' ? (
-<<<<<<< HEAD
-                          <img src={m.thumb} alt={m.title} className="gallery-tile__img" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-                        ) : m.imageSource ? (
-                          <img src={m.imageSource} alt={m.title} className="gallery-tile__img" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-=======
                           <img src={m.thumb} alt={itemCaption} className="gallery-tile__img" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
                         ) : typeof m.thumbnailUrl === 'object' && m.thumbnailUrl ? (
                           <div className="gallery-tile__img sprite" style={{ ...spriteStyle(m.thumbnailUrl), position: 'absolute', inset: 0 }} />
@@ -378,7 +322,6 @@ export default function Gallery() {
                           <img src={m.thumbnailUrl} alt={itemCaption} className="gallery-tile__img" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
                         ) : m.imageUrl || m.imageSource ? (
                           <img src={m.imageUrl || m.imageSource || ''} alt={itemCaption} className="gallery-tile__img" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
                         ) : (
                           <div style={{ position: 'absolute', inset: 0, backgroundColor: 'var(--dark-3)' }} />
                         )}
@@ -393,11 +336,7 @@ export default function Gallery() {
                               <Badge tone="green">Photo</Badge>
                             </span>
                           )}
-<<<<<<< HEAD
-                          <span className="gallery-tile__cap">{m.title}</span>
-=======
                           <span className="gallery-tile__cap">{itemCaption}</span>
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
                         </span>
                       </button>
                     );
@@ -456,11 +395,7 @@ export default function Gallery() {
                 <div>
                   <Badge tone="neon">{cfg.videoNotice.badge}</Badge>
                   <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: 8, color: 'var(--white)' }}>
-<<<<<<< HEAD
-                    {currentMedia.title}
-=======
                     {currentMedia.caption || currentMedia.title}
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
                   </h3>
                   <p style={{ color: 'var(--muted-on-dark)', fontSize: '0.92rem', marginTop: 6, lineHeight: 1.6 }}>
                     {currentMedia.description || cfg.videoNotice.message}
@@ -492,27 +427,16 @@ export default function Gallery() {
                 className="lightbox__img sprite"
                 style={{ ...spriteStyle(currentMedia.image), backgroundColor: 'var(--dark-3)' }}
                 role="img"
-<<<<<<< HEAD
-                aria-label={currentMedia.title}
-              />
-            ) : (
-              <img src={currentMedia.imageSource ?? ''} alt={currentMedia.title} className="lightbox__img" style={{ width: '100%', maxHeight: '70vh', objectFit: 'contain' }} />
-=======
                 aria-label={currentMedia.caption || currentMedia.title}
               />
             ) : (
               <img src={currentMedia.imageUrl || currentMedia.imageSource || ''} alt={currentMedia.caption || currentMedia.title} className="lightbox__img" style={{ width: '100%', maxHeight: '70vh', objectFit: 'contain' }} />
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
             )}
 
             {currentMedia.type !== 'video' && (
               <>
                 <div className="lightbox__cap">
-<<<<<<< HEAD
-                  <strong>{currentMedia.title}</strong>
-=======
                   <strong>{currentMedia.caption || currentMedia.title}</strong>
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
                   {currentMedia.description && <span>{currentMedia.description}</span>}
                 </div>
 

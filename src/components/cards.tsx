@@ -250,13 +250,8 @@ export function GalleryTile({
 /* ================= Gallery Collection Card ================= */
 
 export function GalleryCollectionCard({ collection }: { collection: GalleryCollection }) {
-<<<<<<< HEAD
-  const isEventGallery = collection.type === 'event_gallery';
-  const badgeText = isEventGallery ? GALLERY_PAGE_CONFIG.badges.eventGallery : GALLERY_PAGE_CONFIG.badges.randomClicks;
-=======
   const isEventGallery = collection.type === 'event' || collection.type === 'event_gallery';
   const badgeText = isEventGallery ? GALLERY_PAGE_CONFIG.badges.eventGallery : GALLERY_PAGE_CONFIG.badges.randomGallery;
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
   const itemCount = collection.mediaItems?.length ?? 0;
 
   return (

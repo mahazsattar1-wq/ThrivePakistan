@@ -37,26 +37,16 @@ const check = (name, cond, detail = '') => {
   if (!cond) failures += 1;
 };
 
-<<<<<<< HEAD
-console.log('\n--- Phase 19 & Phase 20 Event & Gallery Architecture Tests ---\n');
-
-// Part 1: Event Identity & Single Source of Truth
-=======
 console.log('\n--- Phase 21 Final Gallery Album & Event Architecture Tests ---\n');
 
 // 1. Event Identity & Single Source of Truth
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
 console.log('1. Event Identity & Single Source of Truth');
 check('All events have stable string IDs', EVENTS.every((e) => typeof e.id === 'string' && e.id.length > 0));
 const eventIds = EVENTS.map((e) => e.id);
 const uniqueEventIds = new Set(eventIds);
 check('ONE EVENT = ONE EVENT RECORD (no duplicate IDs)', eventIds.length === uniqueEventIds.size);
 
-<<<<<<< HEAD
-// Part 2: Upcoming & Past Events
-=======
 // 2. Upcoming and Past Events Architecture
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
 console.log('\n2. Upcoming and Past Events Architecture');
 const upcomingEvents = await eventsService.upcoming();
 const pastEvents = await eventsService.past();
@@ -64,11 +54,7 @@ check('Upcoming events returned dynamically', upcomingEvents.length > 0);
 check('Past events returned dynamically', pastEvents.length > 0);
 check('FutureX 2026 is an upcoming event', upcomingEvents.some((e) => e.slug === 'futurex-2026'));
 
-<<<<<<< HEAD
-// Part 3 & 7: Event -> Gallery Relationship via Stable ID
-=======
 // 3. Event -> Gallery Relationship via Stable ID
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
 console.log('\n3. Event -> Gallery Relationship via Stable ID');
 const futurexEvent = EVENTS.find((e) => e.slug === 'futurex-2026');
 check('FutureX 2026 event has galleryId assigned', futurexEvent?.galleryId === 'gal-futurex-2026');
@@ -77,62 +63,7 @@ const futurexGallery = await eventsService.getGalleryForEvent(futurexEvent.id);
 check('eventsService.getGalleryForEvent resolves gallery by ID', futurexGallery?.id === 'gal-futurex-2026');
 check('Gallery links back to event via eventId', futurexGallery?.eventId === futurexEvent.id);
 
-<<<<<<< HEAD
-// Part 4, 5, 6, 8: Central Gallery Collections & Types
-console.log('\n4. Central Gallery Collections & Type Architecture');
-const collections = await galleryService.listCollections();
-check('Gallery collections loaded from single source of truth', collections.length >= 3);
-
-const eventGalleries = collections.filter((c) => c.type === 'event_gallery');
-check('Event galleries exist and reference event.id', eventGalleries.every((c) => Boolean(c.eventId)));
-
-const randomClicksGallery = collections.find((c) => c.type === 'random_clicks');
-check('Random Clicks gallery exists', randomClicksGallery !== undefined);
-check('Random Clicks has NO event relationship (eventId is null)', randomClicksGallery?.eventId === null);
-
-// Phase 20: No Real YouTube URLs in Mock Gallery Data
-console.log('\n5. Phase 20 Video Cleanup & Mock Data Rules');
-const realYouTubeLinksInMockData = GALLERY_MEDIA.filter(
-  (m) => typeof m.youtubeUrl === 'string' && m.youtubeUrl.length > 0,
-);
-check('No real YouTube video URLs remain in mock gallery data', realYouTubeLinksInMockData.length === 0);
-
-const videoMedia = GALLERY_MEDIA.filter((m) => m.type === 'video');
-check('Mock video items exist with type === video', videoMedia.length > 0);
-check(
-  'Mock video items have youtubeUrl === null (or empty) in mock state',
-  videoMedia.every((m) => m.youtubeUrl === null || m.youtubeUrl === undefined),
-);
-check(
-  'Mock video items possess mock thumbnail images',
-  videoMedia.every((m) => Boolean(m.thumb) || Boolean(m.image)),
-);
-
-// Phase 20: YouTube Thumbnail Derivation & Fallback
-console.log('\n6. YouTube Thumbnail Derivation Helper');
-const derivedThumb = getYouTubeThumbnailUrl('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
-check(
-  'getYouTubeThumbnailUrl derives correct YouTube thumbnail URL',
-  derivedThumb === 'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
-);
-check('getYouTubeThumbnailUrl returns null when given null/undefined', getYouTubeThumbnailUrl(null) === null);
-
-// Part 12, 13, 14: Visibility, Display Order & Dynamic Resolution
-console.log('\n7. Dynamic Resolution, Display Order & Visibility');
-const fxMedia = await galleryService.getMediaForCollection('gal-futurex-2026');
-check('getMediaForCollection returns media items sorted by displayOrder', fxMedia.length > 0);
-const isSorted = fxMedia.every((m, idx) => idx === 0 || m.displayOrder >= fxMedia[idx - 1].displayOrder);
-check('Media items respect displayOrder', isSorted);
-
-// Part 18: Database Copy Configuration
-console.log('\n8. Database/Admin Copy Readiness');
-check('GALLERY_PAGE_CONFIG hero title exists', typeof GALLERY_PAGE_CONFIG.hero.title === 'string');
-check('GALLERY_PAGE_CONFIG empty states exist', typeof GALLERY_PAGE_CONFIG.emptyStates.notFound.title === 'string');
-check('GALLERY_PAGE_CONFIG video notice exists', typeof GALLERY_PAGE_CONFIG.videoNotice.title === 'string');
-
-console.log(failures === 0 ? '\nAll Phase 19 & Phase 20 Event & Gallery tests passed cleanly!\n' : `\n${failures} test(s) FAILED.\n`);
-=======
-// 4. Central Gallery Collections & Random Album Architecture
+// 4. Central Gallery Collections & Unlimited Random Albums
 console.log('\n4. Central Gallery Collections & Unlimited Random Albums');
 const collections = await galleryService.listCollections();
 check('Gallery collections loaded from single source of truth', collections.length >= 4);
@@ -175,5 +106,4 @@ check('GALLERY_PAGE_CONFIG videoNotice exists', typeof GALLERY_PAGE_CONFIG.video
 check('GALLERY_PAGE_CONFIG adminWorkflowMock exists', typeof GALLERY_PAGE_CONFIG.adminWorkflowMock.addGalleryTitle === 'string');
 
 console.log(failures === 0 ? '\nAll Phase 21 Event & Gallery architecture tests passed cleanly!\n' : `\n${failures} test(s) FAILED.\n`);
->>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
 process.exit(failures === 0 ? 0 : 1);
