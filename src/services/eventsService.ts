@@ -52,11 +52,6 @@ export const eventsService = {
   },
 
   async getBySlug(slug: string): Promise<ThriveEvent | undefined> {
-<<<<<<< HEAD
-    await delay(180);
-    const found = EVENTS.find((e) => e.slug === slug);
-    return found ? { ...found, status: getEventStatus(found) } : undefined;
-=======
     return this.getById(slug);
   },
 
@@ -68,7 +63,6 @@ export const eventsService = {
       if (gallery) return gallery;
     }
     return galleryService.getCollectionByEventId(event.id);
->>>>>>> b7c016b (feat(arch): complete event + central gallery architecture rebuild with normalized database models)
   },
 
   async featured(): Promise<ThriveEvent | undefined> {

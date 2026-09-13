@@ -3,17 +3,10 @@ import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { galleryService } from '../services/galleryService';
 import { eventsService } from '../services/eventsService';
 import { useSeo } from '../hooks';
-<<<<<<< HEAD
-import type { GalleryCollection, GalleryItem } from '../types';
-import { spriteStyle } from '../media';
-import { PageHero } from '../components/page-hero';
-import { GalleryTile } from '../components/cards';
-=======
 import type { GalleryCollection, GalleryMediaItem, ThriveEvent } from '../types';
 import { spriteStyle } from '../media';
 import { PageHero } from '../components/page-hero';
 import { GalleryCollectionCard } from '../components/cards';
->>>>>>> b7c016b (feat(arch): complete event + central gallery architecture rebuild with normalized database models)
 import { Badge, Button, EmptyState, Reveal, Skeleton } from '../components/ui';
 import { Modal } from '../components/feedback';
 import { GALLERY_PAGE_CONFIG } from '../data/galleryPage';
@@ -31,14 +24,6 @@ export default function Gallery() {
   const { slug } = useParams();
   const [searchParams] = useSearchParams();
 
-<<<<<<< HEAD
-  // Active collection slug can come from route `/gallery/:slug` or query parameter `?collection=slug`
-  const activeSlug = slug || searchParams.get('collection') || null;
-
-  const [collections, setCollections] = useState<GalleryCollection[] | null>(null);
-  const [activeCollection, setActiveCollection] = useState<GalleryCollection | null>(null);
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-=======
   // Active identifier can come from path `/gallery/:slug` or query parameter `?collection=slug`
   const activeIdentifier = slug || searchParams.get('collection') || null;
 
@@ -61,27 +46,9 @@ export default function Gallery() {
         ? activeCollection.description
         : cfg.hero.lead,
   });
->>>>>>> b7c016b (feat(arch): complete event + central gallery architecture rebuild with normalized database models)
-
-  useSeo({
-    title: activeCollection ? `${activeCollection.title} · Gallery` : 'Central Gallery',
-    description: activeCollection
-      ? activeCollection.description
-      : 'Thrive Pakistan central media archive: explore visual moments and photo collections across flagship platforms and convenings.',
-  });
 
   useEffect(() => {
     let alive = true;
-<<<<<<< HEAD
-    galleryService.listCollections().then((list) => {
-      if (!alive) return;
-      setCollections(list);
-      if (activeSlug) {
-        const found = list.find((c) => c.slug === activeSlug);
-        setActiveCollection(found ?? null);
-      } else {
-        setActiveCollection(null);
-=======
     galleryService.listCollections().then(async (list) => {
       if (!alive) return;
       setCollections(list);
@@ -104,31 +71,11 @@ export default function Gallery() {
       } else {
         setActiveCollection(null);
         setAssociatedEvent(null);
->>>>>>> b7c016b (feat(arch): complete event + central gallery architecture rebuild with normalized database models)
       }
     });
     return () => {
       alive = false;
     };
-<<<<<<< HEAD
-  }, [activeSlug]);
-
-  const mediaItems: GalleryItem[] = activeCollection
-    ? activeCollection.mediaItems.map((m) => ({
-        id: m.id,
-        image: m.image,
-        caption: m.caption,
-        category: activeCollection.title,
-        eventSlug: activeCollection.slug,
-      }))
-    : [];
-
-  const currentMedia = openIndex !== null && mediaItems[openIndex] ? mediaItems[openIndex] : null;
-
-  const step = (dir: 1 | -1) => {
-    if (openIndex === null || mediaItems.length === 0) return;
-    setOpenIndex((openIndex + dir + mediaItems.length) % mediaItems.length);
-=======
   }, [activeIdentifier]);
 
   const activeMediaList: GalleryMediaItem[] =
@@ -146,7 +93,6 @@ export default function Gallery() {
   const stepMedia = (dir: 1 | -1) => {
     if (openMediaIndex === null || activeMediaList.length === 0) return;
     setOpenIndex((openMediaIndex + dir + activeMediaList.length) % activeMediaList.length);
->>>>>>> b7c016b (feat(arch): complete event + central gallery architecture rebuild with normalized database models)
   };
 
   useEffect(() => {
@@ -158,21 +104,11 @@ export default function Gallery() {
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-<<<<<<< HEAD
-  }, [openIndex, mediaItems]);
-
-  const selectCollection = (colSlug: string) => {
-    navigate(`/gallery?collection=${colSlug}`);
-  };
-=======
   }, [openMediaIndex, activeMediaList]);
->>>>>>> b7c016b (feat(arch): complete event + central gallery architecture rebuild with normalized database models)
 
   const clearSelection = () => {
     navigate('/gallery');
   };
-<<<<<<< HEAD
-=======
 
   const filteredCollections =
     collections === null
@@ -182,19 +118,10 @@ export default function Gallery() {
           if (typeFilter === 'random_clicks') return col.type === 'random_clicks';
           return true;
         });
->>>>>>> b7c016b (feat(arch): complete event + central gallery architecture rebuild with normalized database models)
 
   return (
     <>
       <PageHero
-<<<<<<< HEAD
-        eyebrow={activeCollection ? 'Gallery Collection' : 'Central Main Gallery'}
-        title={activeCollection ? activeCollection.title : 'Platform Media Archive'}
-        lead={
-          activeCollection
-            ? activeCollection.description
-            : 'Explore visual moments and verified photo collections across Thrive Pakistan flagship platforms, tech festivals, and community convenings.'
-=======
         eyebrow={activeCollection && activeCollection !== 'not_found' ? cfg.hero.collectionEyebrow : cfg.hero.eyebrow}
         title={
           typeof activeCollection === 'object' && activeCollection
@@ -209,78 +136,22 @@ export default function Gallery() {
             : activeCollection === 'not_found'
             ? cfg.emptyStates.notFound.message
             : cfg.hero.lead
->>>>>>> b7c016b (feat(arch): complete event + central gallery architecture rebuild with normalized database models)
         }
         meta={[
           {
             icon: 'eye',
-<<<<<<< HEAD
-            label: activeCollection
-              ? `${activeCollection.mediaItems.length} photos`
-              : collections === null
-              ? 'Loading collections…'
-              : `${collections.length} media collections`,
-=======
             label:
               typeof activeCollection === 'object' && activeCollection
                 ? cfg.cardLabels.itemsCount(activeCollection.mediaItems?.length ?? 0)
                 : collections === null
                 ? 'Loading collections…'
                 : cfg.cardLabels.itemsCount(collections.length),
->>>>>>> b7c016b (feat(arch): complete event + central gallery architecture rebuild with normalized database models)
           },
         ]}
       />
 
       <section className="section section--tight">
         <div className="container">
-<<<<<<< HEAD
-          {/* Active collection view header with back button */}
-          {activeCollection ? (
-            <div className="listing-head" style={{ marginBottom: 28 }}>
-              <Button variant="outline" size="sm" iconLeft="chevron-left" onClick={clearSelection}>
-                All Gallery Collections
-              </Button>
-              <span className="listing-count">
-                Showing {activeCollection.mediaItems.length} photos in {activeCollection.title}
-              </span>
-            </div>
-          ) : (
-            <div className="listing-head" style={{ marginBottom: 28 }}>
-              <p className="listing-count" role="status">
-                {collections === null
-                  ? 'Loading gallery collections…'
-                  : `${collections.length} verified gallery collections available`}
-              </p>
-            </div>
-          )}
-
-          {/* Collection Detail View: Photo Grid */}
-          {activeCollection ? (
-            mediaItems.length === 0 ? (
-              <EmptyState
-                title="No images in this collection yet."
-                message="Photos are added as event media is processed by our communications team."
-                actionLabel="All collections"
-                onAction={clearSelection}
-                icon="eye"
-              />
-            ) : (
-              <div className="gallery-grid">
-                {mediaItems.map((g, i) => (
-                  <GalleryTile
-                    key={g.id}
-                    item={g}
-                    onOpen={() => setOpenIndex(i)}
-                    wide={i % 5 === 0}
-                    tall={i % 7 === 3}
-                  />
-                ))}
-              </div>
-            )
-          ) : /* All Collections Grid */
-          collections === null ? (
-=======
           {/* Back button or Filter chips */}
           {activeCollection ? (
             <div className="listing-head" style={{ marginBottom: 28, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
@@ -415,7 +286,6 @@ export default function Gallery() {
             </div>
           ) : /* View Mode 3: All Collections Grid */
           filteredCollections === null ? (
->>>>>>> b7c016b (feat(arch): complete event + central gallery architecture rebuild with normalized database models)
             <div className="grid grid--3">
               {[0, 1, 2].map((i) => (
                 <div key={i} style={{ height: 260, borderRadius: 'var(--r-xl)' }}>
@@ -423,71 +293,17 @@ export default function Gallery() {
                 </div>
               ))}
             </div>
-<<<<<<< HEAD
-          ) : collections.length === 0 ? (
-            <EmptyState
-              title="No gallery collections available yet."
-              message="New photo collections will appear as upcoming platforms are delivered."
-=======
           ) : filteredCollections.length === 0 ? (
             <EmptyState
               title={cfg.emptyStates.noCollections.title}
               message={cfg.emptyStates.noCollections.message}
->>>>>>> b7c016b (feat(arch): complete event + central gallery architecture rebuild with normalized database models)
               icon="eye"
             />
           ) : (
             <div className="grid grid--3" style={{ gap: '24px' }}>
-<<<<<<< HEAD
-              {collections.map((col, i) => (
-                <Reveal key={col.id} delay={i * 80}>
-                  <article className="event-block" style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16 }}>
-                    <div
-                      style={{
-                        position: 'relative',
-                        aspectRatio: '16 / 10',
-                        borderRadius: 'var(--r-md)',
-                        overflow: 'hidden',
-                        backgroundColor: 'var(--dark-3)',
-                      }}
-                    >
-                      <div className="sprite" style={{ ...spriteStyle(col.coverImage), position: 'absolute', inset: 0 }} aria-hidden="true" />
-                      <div
-                        style={{
-                          position: 'absolute',
-                          inset: 0,
-                          background: 'linear-gradient(180deg, transparent 40%, rgba(10,11,11,0.85))',
-                        }}
-                      />
-                      <span style={{ position: 'absolute', top: 12, right: 12 }}>
-                        <Badge tone="green">{col.mediaItems.length} photos</Badge>
-                      </span>
-                    </div>
-                    <div>
-                      <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: 8, color: 'var(--white)' }}>
-                        {col.title}
-                      </h3>
-                      <p style={{ color: 'var(--muted-on-dark)', fontSize: '0.9rem', lineHeight: 1.6 }}>
-                        {col.description}
-                      </p>
-                    </div>
-                    <div style={{ marginTop: 'auto', paddingTop: 8 }}>
-                      <Button
-                        variant="primary"
-                        size="sm"
-                        icon="arrow-right"
-                        className="btn--block"
-                        onClick={() => selectCollection(col.slug)}
-                      >
-                        View Gallery
-                      </Button>
-                    </div>
-                  </article>
-=======
               {filteredCollections.map((col, i) => (
                 <Reveal key={col.id} delay={i * 80}>
                   <GalleryCollectionCard collection={col} />
->>>>>>> b7c016b (feat(arch): complete event + central gallery architecture rebuild with normalized database models)
                 </Reveal>
               ))}
             </div>
@@ -495,21 +311,6 @@ export default function Gallery() {
         </div>
       </section>
 
-<<<<<<< HEAD
-      {/* Lightbox Modal */}
-      <Modal open={currentMedia !== null} onClose={() => setOpenIndex(null)} label="Gallery lightbox" size="lg">
-        {currentMedia && (
-          <>
-            <div
-              className="lightbox__img sprite"
-              style={{ ...spriteStyle(currentMedia.image), backgroundColor: 'var(--dark-3)' }}
-              role="img"
-              aria-label={currentMedia.caption}
-            />
-            <div className="lightbox__cap">
-              <strong>{currentMedia.caption}</strong>
-              <span>{currentMedia.category}</span>
-=======
       {/* Lightbox / Video Player Modal */}
       <Modal open={currentMedia !== null} onClose={() => setOpenIndex(null)} label="Media preview" size="lg">
         {currentMedia && (
@@ -538,21 +339,13 @@ export default function Gallery() {
             <div className="lightbox__cap">
               <strong>{currentMedia.title}</strong>
               {currentMedia.description && <span>{currentMedia.description}</span>}
->>>>>>> b7c016b (feat(arch): complete event + central gallery architecture rebuild with normalized database models)
             </div>
 
             <div className="lightbox__nav">
-<<<<<<< HEAD
-              <Button variant="outline" size="sm" iconLeft="chevron-left" onClick={() => step(-1)}>
-                Previous
-              </Button>
-              <Button variant="outline" size="sm" icon="chevron-right" onClick={() => step(1)}>
-=======
               <Button variant="outline" size="sm" iconLeft="chevron-left" onClick={() => stepMedia(-1)}>
                 Previous
               </Button>
               <Button variant="outline" size="sm" icon="chevron-right" onClick={() => stepMedia(1)}>
->>>>>>> b7c016b (feat(arch): complete event + central gallery architecture rebuild with normalized database models)
                 Next
               </Button>
             </div>
@@ -564,16 +357,6 @@ export default function Gallery() {
         <span className="cta-band__glow" aria-hidden="true" />
         <div className="container cta-band__inner">
           <Reveal>
-<<<<<<< HEAD
-            <h2>Want your lens on our stages?</h2>
-            <p style={{ marginTop: 10 }}>The media volunteer team shoots every flagship, so join as a photographer.</p>
-            <div className="cta-band__ctas">
-              <Button to="/volunteer" icon="arrow-right">
-                Volunteer with media
-              </Button>
-              <Button to="/videos" variant="outline-light">
-                Watch the films
-=======
             <h2>{cfg.ctaBand.title}</h2>
             <p style={{ marginTop: 10 }}>{cfg.ctaBand.lead}</p>
             <div className="cta-band__ctas">
@@ -582,7 +365,6 @@ export default function Gallery() {
               </Button>
               <Button to={cfg.ctaBand.secondaryLink} variant="outline-light">
                 {cfg.ctaBand.secondaryBtn}
->>>>>>> b7c016b (feat(arch): complete event + central gallery architecture rebuild with normalized database models)
               </Button>
             </div>
           </Reveal>
