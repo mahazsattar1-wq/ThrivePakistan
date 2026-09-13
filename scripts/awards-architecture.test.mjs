@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 
 const root = process.cwd();
 
-console.log('=== Phase 22.1 Awards Navigation & Simplified Structure Verification ===');
+console.log('=== Phase 22.1 & Phase 23 Navigation Architecture Verification ===');
 
 // 1. Verify existence of files
 const requiredFiles = [
@@ -13,6 +13,7 @@ const requiredFiles = [
   'src/services/awardsService.ts',
   'src/pages/Awards.tsx',
   'src/pages/AwardDetail.tsx',
+  'src/pages/Speakers.tsx',
   'src/components/cursor.tsx',
 ];
 
@@ -29,15 +30,27 @@ assert.ok(
   'Awards must be directly visible in top-level desktop navigation',
 );
 
-// Check that More section does NOT contain Awards
+assert.ok(
+  navContent.includes("{ label: 'Speakers', to: '/speakers' }"),
+  'Speakers must be directly visible in top-level desktop navigation',
+);
+
+// Check that More section does NOT contain Awards or Speakers
 const moreSectionMatch = navContent.match(/label:\s*'More'[\s\S]*?children:\s*\[([\s\S]*?)\]/);
 assert.ok(moreSectionMatch, 'More section must exist in nav.ts');
 const moreChildren = moreSectionMatch[1];
+
 assert.ok(
   !moreChildren.includes('Awards'),
   'Awards must NOT appear inside the More section dropdown',
 );
-console.log('✓ Header Acceptance Test passed: Awards is directly in top nav and removed from More');
+
+assert.ok(
+  !moreChildren.includes('Speakers'),
+  'Speakers must NOT appear inside the More section dropdown',
+);
+
+console.log('✓ Header Acceptance Test passed: Awards & Speakers are directly in top nav and removed from More');
 
 // 3. Category Removal Verification
 const typesContent = readFileSync(resolve(root, 'src/types.ts'), 'utf-8');
@@ -86,6 +99,8 @@ console.log('✓ Gallery Isolation constraint preserved');
 const appContent = readFileSync(resolve(root, 'src/App.tsx'), 'utf-8');
 assert.ok(appContent.includes("path=\"/awards\""), 'App.tsx must include /awards route');
 assert.ok(appContent.includes("path=\"/awards/:slug\""), 'App.tsx must include /awards/:slug route');
-console.log('✓ /awards and /awards/:slug routes configured in src/App.tsx');
+assert.ok(appContent.includes("path=\"/speakers\""), 'App.tsx must include /speakers route');
+assert.ok(appContent.includes("path=\"/speakers/:slug\""), 'App.tsx must include /speakers/:slug route');
+console.log('✓ /awards, /awards/:slug, /speakers, and /speakers/:slug routes configured in src/App.tsx');
 
-console.log('=== All Phase 22.1 Acceptance Tests Passed Successfully! ===');
+console.log('=== All Navigation & Architecture Acceptance Tests Passed Successfully! ===');

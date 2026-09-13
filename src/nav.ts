@@ -35,6 +35,7 @@ export const NAV_ITEMS: NavItem[] = [
   },
   { label: 'FutureX', to: '/futurex' },
   { label: 'Awards', to: '/awards' },
+  { label: 'Speakers', to: '/speakers' },
   {
     label: 'Media',
     children: [
@@ -46,7 +47,6 @@ export const NAV_ITEMS: NavItem[] = [
   {
     label: 'More',
     children: [
-      { label: 'Speakers', to: '/speakers' },
       { label: 'Team', to: '/team' },
       { label: 'Partners', to: '/partners' },
       { label: 'Volunteers', to: '/volunteer' },
