@@ -121,7 +121,7 @@ export default function BlogDetail() {
         <section className="section section--light">
           <div className="container">
             <Reveal>
-              <SectionHeader eyebrow="Keep reading" title="Related stories" />
+              <SectionHeader eyebrow="Keep reading" title="Related articles" />
             </Reveal>
             <div className="grid grid--3">
               {related.map((p, i) => (

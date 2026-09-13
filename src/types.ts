@@ -300,6 +300,61 @@ export interface SearchResults {
   total: number;
 }
 
+/* ================= Awards & Recognition Types ================= */
+
+export interface AwardEligibility {
+  heading: string;
+  description: string;
+  criteria: string[];
+}
+
+export interface AwardSection {
+  title: string;
+  content: string | string[];
+}
+
+export interface AwardCategory {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  displayOrder: number;
+  isVisible: boolean;
+}
+
+export interface Award {
+  id: string;
+  categoryId: string;
+  slug: string;
+  title: string;
+  categoryName: string;
+  description: string;
+  coverImage?: ImageRef;
+  aboutHeading: string;
+  aboutDescription: string | string[];
+  eligibility: AwardEligibility;
+  highlights?: string[];
+  additionalSections?: AwardSection[];
+  status?: string;
+  displayOrder: number;
+  isVisible: boolean;
+}
+
+export interface AwardWinner {
+  id: string;
+  awardId: string;
+  year: number;
+  name: string;
+  designation?: string;
+  organization?: string;
+  bio?: string;
+  photo?: ImageRef;
+  awardImage?: ImageRef;
+  caption?: string;
+  displayOrder: number;
+  isVisible: boolean;
+}
+
 /** Envelope returned by future PHP list endpoints. */
 export interface ApiListResponse<T> {
   ok: boolean;

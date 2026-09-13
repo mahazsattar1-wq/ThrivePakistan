@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
-import type { BlogPost, GalleryCollection, GalleryItem, Program, Speaker, TeamMember, ThriveEvent, VideoItem } from '../types';
+import type { Award, AwardWinner, BlogPost, GalleryCollection, GalleryItem, Program, Speaker, TeamMember, ThriveEvent, VideoItem } from '../types';
 import { dateParts, formatDate, formatViews } from '../utils';
 import { Icon, Badge, SpriteBox, Button } from './ui';
 import type { IconName } from './ui';
 import { EVENTS_PAGE_CONFIG } from '../data/eventsPage';
 import { GALLERY_PAGE_CONFIG } from '../data/galleryPage';
+import { AWARDS_PAGE_CONFIG } from '../data/awardsPage';
 
 /** Initials monogram for people without an approved photograph. */
 function initialsOf(name: string): string {
@@ -250,52 +251,121 @@ export function GalleryTile({
 /* ================= Gallery Collection Card ================= */
 
 export function GalleryCollectionCard({ collection }: { collection: GalleryCollection }) {
-  const isEventGallery = collection.type === 'event' || collection.type === 'event_gallery';
-  const badgeText = isEventGallery ? GALLERY_PAGE_CONFIG.badges.eventGallery : GALLERY_PAGE_CONFIG.badges.randomGallery;
-  const itemCount = collection.mediaItems?.length ?? 0;
+  const cfg = GALLERY_PAGE_CONFIG;
+  const count = collection.mediaItems?.length ?? 0;
+  const coverMedia = collection.mediaItems?.[0];
+
+  return (
+    <article className="event-card event-card--dark" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <Link to={`/gallery/${collection.slug || collection.id}`} className="event-card__media-link" aria-label={`View gallery collection: ${collection.title}`}>
+        <div className="event-card__media" style={{ aspectRatio: '16 / 9' }}>
+          {coverMedia?.image ? (
+            <SpriteBox image={coverMedia.image} label={`${collection.title} cover`} className="event-card__img" />
+          ) : (
+            <div style={{ position: 'absolute', inset: 0, backgroundColor: 'var(--dark-3)' }} />
+          )}
+          <span className="event-card__status event-card__status--upcoming" style={{ background: 'rgba(10,11,11,0.85)', color: 'var(--white)' }}>
+            {collection.type === 'event' || collection.type === 'event_gallery' ? cfg.badges.eventGallery : cfg.badges.randomGallery}
+          </span>
+        </div>
+      </Link>
+      <div className="event-card__body" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+        <h3 className="event-card__title">
+          <Link to={`/gallery/${collection.slug || collection.id}`}>{collection.title}</Link>
+        </h3>
+        <p className="event-card__desc" style={{ flex: 1 }}>{collection.description}</p>
+        <div style={{ marginTop: 'auto', paddingTop: 14, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span style={{ fontSize: '0.85rem', color: 'var(--muted-on-dark)' }}>{cfg.cardLabels.itemsCount(count)}</span>
+          <Button to={`/gallery/${collection.slug || collection.id}`} size="sm" variant="primary" icon="arrow-right">
+            {cfg.cardLabels.viewGallery}
+          </Button>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+/* ================= Award Card ================= */
+
+export function AwardCard({ award }: { award: Award }) {
+  const cfg = AWARDS_PAGE_CONFIG;
 
   return (
     <article className="event-block" style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16 }}>
-      <div
-        style={{
-          position: 'relative',
-          aspectRatio: '16 / 10',
-          borderRadius: 'var(--r-md)',
-          overflow: 'hidden',
-          backgroundColor: 'var(--dark-3)',
-        }}
-      >
-        <SpriteBox image={collection.coverImage} label={`${collection.title} gallery cover`} style={{ position: 'absolute', inset: 0 }} />
+      {award.coverImage && (
         <div
           style={{
-            position: 'absolute',
-            inset: 0,
-            background: 'linear-gradient(180deg, transparent 40%, rgba(10,11,11,0.85))',
+            position: 'relative',
+            aspectRatio: '16 / 9',
+            borderRadius: 'var(--r-md)',
+            overflow: 'hidden',
+            backgroundColor: 'var(--dark-3)',
           }}
-        />
-        <div style={{ position: 'absolute', top: 12, left: 12, right: 12, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Badge tone={isEventGallery ? 'green' : 'neon'}>{badgeText}</Badge>
-          <Badge tone="light">{itemCount} items</Badge>
+        >
+          <SpriteBox image={award.coverImage} label={`${award.title} cover`} style={{ position: 'absolute', inset: 0 }} />
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(180deg, transparent 40%, rgba(10,11,11,0.85))',
+            }}
+          />
+          <div style={{ position: 'absolute', top: 12, left: 12, right: 12, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Badge tone="green">{award.categoryName}</Badge>
+            {award.status && <Badge tone="light">{award.status}</Badge>}
+          </div>
         </div>
-      </div>
+      )}
       <div>
-        <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: 8, color: 'var(--white)' }}>
-          {collection.title}
+        <h3 style={{ fontSize: '1.2rem', fontWeight: 700, marginBottom: 8, color: 'var(--white)' }}>
+          <Link to={`/awards/${award.slug}`} style={{ color: 'inherit' }}>{award.title}</Link>
         </h3>
         <p style={{ color: 'var(--muted-on-dark)', fontSize: '0.9rem', lineHeight: 1.6 }}>
-          {collection.description}
+          {award.description}
         </p>
       </div>
       <div style={{ marginTop: 'auto', paddingTop: 8 }}>
         <Button
-          to={`/gallery/${collection.id}`}
+          to={`/awards/${award.slug}`}
           variant="primary"
           size="sm"
           icon="arrow-right"
           className="btn--block"
         >
-          {GALLERY_PAGE_CONFIG.cardLabels.viewGallery}
+          {cfg.cardLabels.viewAward}
         </Button>
+      </div>
+    </article>
+  );
+}
+
+/* ================= Award Winner Card ================= */
+
+export function AwardWinnerCard({ winner }: { winner: AwardWinner }) {
+  return (
+    <article className="speaker-card" style={{ height: '100%' }}>
+      {winner.photo ? (
+        <SpriteBox image={winner.photo} label={`Photo of ${winner.name}`} className="speaker-card__photo" />
+      ) : (
+        <MonogramAvatar name={winner.name} className="speaker-card__photo" />
+      )}
+      <div className="speaker-card__body">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+          <Badge tone="green">{winner.year} Winner</Badge>
+        </div>
+        <h3 className="speaker-card__name">{winner.name}</h3>
+        {winner.designation && <p className="speaker-card__role">{winner.designation}</p>}
+        {winner.organization && <p className="speaker-card__org">{winner.organization}</p>}
+        {winner.bio && (
+          <p style={{ fontSize: '0.86rem', color: 'var(--muted-on-dark)', marginTop: 8, lineHeight: 1.5 }}>
+            {winner.bio}
+          </p>
+        )}
+        {winner.caption && (
+          <p style={{ fontSize: '0.78rem', color: 'var(--primary-green)', marginTop: 8, fontWeight: 600 }}>
+            {winner.caption}
+          </p>
+        )}
       </div>
     </article>
   );

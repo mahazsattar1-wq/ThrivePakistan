@@ -22,6 +22,8 @@ const Gallery = lazy(() => import('./pages/Gallery'));
 const Videos = lazy(() => import('./pages/Videos'));
 const Blog = lazy(() => import('./pages/Blog'));
 const BlogDetail = lazy(() => import('./pages/BlogDetail'));
+const Awards = lazy(() => import('./pages/Awards'));
+const AwardDetail = lazy(() => import('./pages/AwardDetail'));
 const Impact = lazy(() => import('./pages/Impact'));
 const Contact = lazy(() => import('./pages/Contact'));
 const Search = lazy(() => import('./pages/Search'));
@@ -68,6 +70,8 @@ export default function App() {
             <Route path="/videos" element={<Videos />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:slug" element={<BlogDetail />} />
+            <Route path="/awards" element={<Awards />} />
+            <Route path="/awards/:slug" element={<AwardDetail />} />
             <Route path="/impact" element={<Impact />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/search" element={<Search />} />

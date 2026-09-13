@@ -1775,3 +1775,56 @@
   justify-content: center;
   margin-top: 8px;
 }
+
+/* ---------- Custom Mouse Cursor ---------- */
+.tp-cursor-root {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 250ms var(--ease);
+}
+
+.tp-cursor-root.is-visible {
+  opacity: 1;
+}
+
+.tp-cursor-dot {
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary-green);
+  will-change: transform;
+}
+
+.tp-cursor-halo {
+  position: absolute;
+  top: -18px;
+  left: -18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(67, 183, 73, 0.45);
+  background: rgba(67, 183, 73, 0.06);
+  will-change: transform;
+  transition: width 200ms var(--ease), height 200ms var(--ease), top 200ms var(--ease), left 200ms var(--ease), background 200ms var(--ease), border-color 200ms var(--ease);
+}
+
+.tp-cursor-root.is-hovered .tp-cursor-halo {
+  top: -24px;
+  left: -24px;
+  width: 48px;
+  height: 48px;
+  background: rgba(67, 183, 73, 0.14);
+  border-color: var(--primary-green);
+}
+
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .tp-cursor-root {
+    display: none !important;
+  }
+}

@@ -11,6 +11,7 @@ import type { Errors } from '../services/formService';
 import { Icon, Button } from './ui';
 import { useToast } from './feedback';
 import { FieldShell, TextInput } from './forms';
+import { CustomCursor } from './cursor';
 
 /* ================= Scroll restoration ================= */
 
@@ -300,7 +301,7 @@ export function Navbar() {
               </nav>
               <div className="mobile-menu__foot">
                 <Link to="/search" className="mobile-menu__search" onClick={closeMobile}>
-                  <Icon name="search" size={16} /> Search events, speakers, stories…
+                  <Icon name="search" size={16} /> Search events, speakers, awards…
                 </Link>
                 <div className="mobile-menu__foot-meta">
                   <a href="mailto:partnerships@thrivepakistan.com">
@@ -429,6 +430,9 @@ export function Footer() {
             <h4 className="footer__title">Media</h4>
             <ul className="footer__links">
               <li>
+                <Link to="/awards">Awards</Link>
+              </li>
+              <li>
                 <Link to="/blog">Blog</Link>
               </li>
               <li>
@@ -491,6 +495,7 @@ export function Footer() {
 export function Layout() {
   return (
     <>
+      <CustomCursor />
       <a className="skip-link" href="#main">
         Skip to content
       </a>

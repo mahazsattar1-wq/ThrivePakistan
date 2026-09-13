@@ -41,12 +41,12 @@ export const NAV_ITEMS: NavItem[] = [
       { label: 'Gallery', to: '/gallery' },
       { label: 'Videos', to: '/videos' },
       { label: 'Blog', to: '/blog' },
-      { label: 'Stories', to: '/blog?category=Stories' },
     ],
   },
   {
     label: 'More',
     children: [
+      { label: 'Awards', to: '/awards' },
       { label: 'Team', to: '/team' },
       { label: 'Partners', to: '/partners' },
       { label: 'Volunteers', to: '/volunteer' },
