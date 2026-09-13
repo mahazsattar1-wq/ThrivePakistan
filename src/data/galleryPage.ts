@@ -15,7 +15,11 @@ export const GALLERY_PAGE_CONFIG = {
   },
   badges: {
     eventGallery: 'Event Gallery',
+<<<<<<< HEAD
     randomClicks: 'Random Clicks',
+=======
+    randomGallery: 'Random Gallery',
+>>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
     allMedia: 'All Media',
     photos: 'Photos',
     videos: 'Videos',
@@ -33,7 +37,11 @@ export const GALLERY_PAGE_CONFIG = {
   filters: {
     all: 'All Collections',
     eventGalleries: 'Event Galleries',
+<<<<<<< HEAD
     randomClicks: 'Random Clicks',
+=======
+    randomGalleries: 'Random Galleries',
+>>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
   },
   videoNotice: {
     badge: 'Video Film',
@@ -42,6 +50,18 @@ export const GALLERY_PAGE_CONFIG = {
     watchBtn: 'Watch on YouTube',
     comingSoonBtn: 'YouTube Link Coming Soon',
   },
+<<<<<<< HEAD
+=======
+  adminWorkflowMock: {
+    addGalleryTitle: 'Add Gallery',
+    typeSelectLabel: 'Gallery Type',
+    typeEventOption: 'Event Gallery',
+    typeRandomOption: 'Random Gallery',
+    selectEventLabel: 'Select Event',
+    aboutHeadingLabel: 'About Gallery Heading',
+    aboutDescriptionLabel: 'About Gallery Description',
+  },
+>>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
   emptyStates: {
     noCollections: {
       title: 'No gallery collections available yet.',

@@ -4,11 +4,16 @@ import { apiGet, delay } from './api';
 
 export const galleryService = {
   /** List all published central gallery collections, optionally filtered by gallery type. */
+<<<<<<< HEAD
   async listCollections(typeFilter: 'all' | 'event_gallery' | 'random_clicks' = 'all'): Promise<GalleryCollection[]> {
+=======
+  async listCollections(typeFilter: 'all' | 'event' | 'random' | 'event_gallery' | 'random_clicks' = 'all'): Promise<GalleryCollection[]> {
+>>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
     const remote = await apiGet<GalleryCollection>('gallery_collections.php');
     let source = remote?.data ?? GALLERY_COLLECTIONS;
     await delay();
 
+<<<<<<< HEAD
     source = source.filter((c) => c.published !== false);
 
     if (typeFilter !== 'all') {
@@ -17,6 +22,24 @@ export const galleryService = {
 
     const collectionsWithMedia = source.map((col) => {
       const media = GALLERY_MEDIA.filter((m) => m.galleryId === col.id && m.visibility !== false).sort(
+=======
+    source = source.filter((c) => c.published !== false && c.isVisible !== false);
+
+    if (typeFilter !== 'all') {
+      source = source.filter((c) => {
+        if (typeFilter === 'event' || typeFilter === 'event_gallery') {
+          return c.type === 'event' || c.type === 'event_gallery';
+        }
+        if (typeFilter === 'random' || typeFilter === 'random_clicks') {
+          return c.type === 'random' || c.type === 'random_clicks';
+        }
+        return true;
+      });
+    }
+
+    const collectionsWithMedia = source.map((col) => {
+      const media = GALLERY_MEDIA.filter((m) => m.galleryId === col.id && m.isVisible !== false && m.visibility !== false).sort(
+>>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
         (a, b) => a.displayOrder - b.displayOrder,
       );
       return { ...col, mediaItems: media };
@@ -42,13 +65,21 @@ export const galleryService = {
   async getCollectionByEventId(eventId: string): Promise<GalleryCollection | null> {
     if (!eventId) return null;
     const collections = await this.listCollections();
+<<<<<<< HEAD
     return collections.find((c) => c.type === 'event_gallery' && c.eventId === eventId) ?? null;
+=======
+    return collections.find((c) => (c.type === 'event' || c.type === 'event_gallery') && c.eventId === eventId) ?? null;
+>>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
   },
 
   /** Get all visible media items for a specific gallery collection ID. */
   async getMediaForCollection(galleryId: string): Promise<GalleryMediaItem[]> {
     await delay();
+<<<<<<< HEAD
     return GALLERY_MEDIA.filter((m) => m.galleryId === galleryId && m.visibility !== false).sort(
+=======
+    return GALLERY_MEDIA.filter((m) => m.galleryId === galleryId && m.isVisible !== false && m.visibility !== false).sort(
+>>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
       (a, b) => a.displayOrder - b.displayOrder,
     );
   },
@@ -71,9 +102,15 @@ export const galleryService = {
       galleryId: m.galleryId,
       type: m.type,
       image: m.image,
+<<<<<<< HEAD
       imageSource: m.imageSource,
       youtubeUrl: m.youtubeUrl,
       caption: m.title,
+=======
+      imageSource: m.imageUrl || m.imageSource,
+      youtubeUrl: m.youtubeUrl,
+      caption: m.caption || m.title,
+>>>>>>> 7e01af6 (feat(gallery): implement final gallery album architecture, gallery-specific About sections, and YouTube video redirect rules)
       category: col.title,
       eventSlug: col.slug,
     }));

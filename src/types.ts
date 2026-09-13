@@ -38,39 +38,47 @@ export interface Faq {
   a: string;
 }
 
-export type GalleryType = 'event_gallery' | 'random_clicks';
+export type GalleryType = 'event' | 'random' | 'event_gallery' | 'random_clicks';
 export type MediaType = 'image' | 'video';
-export type ImageSourceType = 'youtube' | 'upload';
+export type ImageSourceType = 'direct' | 'youtube' | 'upload';
 
 export interface GalleryMediaItem {
   id: string;
   galleryId: string;
   type: MediaType;
   title: string;
+  caption: string;
   description?: string;
   displayOrder: number;
-  visibility: boolean;
+  isVisible: boolean;
+  visibility?: boolean; // Backwards compatible alias
   /** Image source configuration for type === 'image' */
-  imageSourceType?: ImageSourceType;
+  sourceType?: ImageSourceType;
+  imageSourceType?: ImageSourceType; // Backwards compatible alias
+  imageUrl?: string | null;
   imageSource?: string | null;
   image?: ImageRef;
   /** Video configuration for type === 'video' (YouTube URL only, no direct video uploads) */
   youtubeUrl?: string | null;
-  thumb?: ImageRef | string;
-  caption?: string; // Backwards compatible alias for title
+  thumbnailUrl?: ImageRef | string | null;
+  thumb?: ImageRef | string | null; // Backwards compatible alias
 }
 
 export interface GalleryCollection {
   id: string;
   slug: string;
   type: GalleryType;
-  /** Stable reference to the event.id if type === 'event_gallery'. null for 'random_clicks' */
+  /** Stable reference to the event.id if type === 'event'. null for 'random' */
   eventId?: string | null;
   title: string;
   description: string;
   coverImage: ImageRef;
+  /** Dynamic gallery-specific about section heading and description */
+  aboutHeading: string;
+  aboutDescription: string;
   mediaItems?: GalleryMediaItem[];
   published: boolean;
+  isVisible?: boolean; // Alias for published
   featured?: boolean;
   displayOrder: number;
   createdAt?: string;
