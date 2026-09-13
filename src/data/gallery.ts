@@ -60,6 +60,7 @@ export const GALLERY_COLLECTIONS: GalleryCollection[] = [
  *
  * - Images support imageSourceType: 'upload' (local/sprite) or 'youtube' (YouTube image source).
  * - Videos support type: 'video' with youtubeUrl (YouTube video only, no direct video uploads).
+ * - Note: In mock data, youtubeUrl is set to null. Real YouTube URLs arrive from the database/admin panel.
  */
 export const GALLERY_MEDIA: GalleryMediaItem[] = [
   // FutureX 2026
@@ -78,8 +79,7 @@ export const GALLERY_MEDIA: GalleryMediaItem[] = [
     id: 'media-fx-02',
     galleryId: 'gal-futurex-2026',
     type: 'image',
-    imageSourceType: 'youtube',
-    imageSource: 'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
+    imageSourceType: 'upload',
     image: img('eventsB', 0),
     title: 'FutureX 2026, visual direction & AI theme artwork',
     description: 'Theme artwork representing AI Lab and technology pillars.',
@@ -90,7 +90,7 @@ export const GALLERY_MEDIA: GalleryMediaItem[] = [
     id: 'media-fx-03',
     galleryId: 'gal-futurex-2026',
     type: 'video',
-    youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    youtubeUrl: null, // Null in mock state — real YouTube URL supplied by future database/admin
     thumb: img('mediaA', 0),
     title: 'FutureX 2026 Launch & Platform Keynote',
     description: 'Official preview video introducing FutureX 2026 themes and campus engagement.',
@@ -125,7 +125,7 @@ export const GALLERY_MEDIA: GalleryMediaItem[] = [
     id: 'media-htf-03',
     galleryId: 'gal-hazara-tech-fiesta-2025',
     type: 'video',
-    youtubeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    youtubeUrl: null, // Null in mock state — real YouTube URL supplied by future database/admin
     thumb: img('eventsA', 5),
     title: 'Hazara Tech Fiesta 2025 Official Film',
     description: 'Three-day recap film from Hazara University, Mansehra.',

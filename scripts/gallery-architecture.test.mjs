@@ -12,7 +12,8 @@ const entry = `
   import { GALLERY_PAGE_CONFIG } from '${join(root, 'src/data/galleryPage.ts')}';
   import { eventsService } from '${join(root, 'src/services/eventsService.ts')}';
   import { galleryService } from '${join(root, 'src/services/galleryService.ts')}';
-  export { EVENTS, GALLERY_COLLECTIONS, GALLERY_MEDIA, GALLERY_PAGE_CONFIG, eventsService, galleryService };
+  import { getYouTubeThumbnailUrl } from '${join(root, 'src/pages/Gallery.tsx')}';
+  export { EVENTS, GALLERY_COLLECTIONS, GALLERY_MEDIA, GALLERY_PAGE_CONFIG, eventsService, galleryService, getYouTubeThumbnailUrl };
 `;
 
 const outDir = mkdtempSync(join(tmpdir(), 'tp-gallery-test-'));
@@ -27,7 +28,7 @@ await build({
   loader: { '.jpeg': 'empty', '.jpg': 'empty', '.png': 'empty', '.avif': 'empty', '.webp': 'empty' },
 });
 
-const { EVENTS, GALLERY_COLLECTIONS, GALLERY_MEDIA, GALLERY_PAGE_CONFIG, eventsService, galleryService } =
+const { EVENTS, GALLERY_COLLECTIONS, GALLERY_MEDIA, GALLERY_PAGE_CONFIG, eventsService, galleryService, getYouTubeThumbnailUrl } =
   await import(pathToFileURL(outFile));
 
 let failures = 0;
@@ -36,7 +37,7 @@ const check = (name, cond, detail = '') => {
   if (!cond) failures += 1;
 };
 
-console.log('\n--- Phase 19 Event & Gallery Architecture Tests ---\n');
+console.log('\n--- Phase 19 & Phase 20 Event & Gallery Architecture Tests ---\n');
 
 // Part 1: Event Identity & Single Source of Truth
 console.log('1. Event Identity & Single Source of Truth');
@@ -74,30 +75,45 @@ const randomClicksGallery = collections.find((c) => c.type === 'random_clicks');
 check('Random Clicks gallery exists', randomClicksGallery !== undefined);
 check('Random Clicks has NO event relationship (eventId is null)', randomClicksGallery?.eventId === null);
 
-// Part 9, 10, 11: Gallery Media Sources (Upload vs YouTube image & YouTube video)
-console.log('\n5. Gallery Media & Source Options');
-check('Media items exist in GALLERY_MEDIA', GALLERY_MEDIA.length > 0);
+// Phase 20: No Real YouTube URLs in Mock Gallery Data
+console.log('\n5. Phase 20 Video Cleanup & Mock Data Rules');
+const realYouTubeLinksInMockData = GALLERY_MEDIA.filter(
+  (m) => typeof m.youtubeUrl === 'string' && m.youtubeUrl.length > 0,
+);
+check('No real YouTube video URLs remain in mock gallery data', realYouTubeLinksInMockData.length === 0);
 
-const imageMediaUpload = GALLERY_MEDIA.find((m) => m.type === 'image' && m.imageSourceType === 'upload');
-check('Image media supports direct upload / sprite reference', imageMediaUpload !== undefined && Boolean(imageMediaUpload.image));
+const videoMedia = GALLERY_MEDIA.filter((m) => m.type === 'video');
+check('Mock video items exist with type === video', videoMedia.length > 0);
+check(
+  'Mock video items have youtubeUrl === null (or empty) in mock state',
+  videoMedia.every((m) => m.youtubeUrl === null || m.youtubeUrl === undefined),
+);
+check(
+  'Mock video items possess mock thumbnail images',
+  videoMedia.every((m) => Boolean(m.thumb) || Boolean(m.image)),
+);
 
-const imageMediaYoutube = GALLERY_MEDIA.find((m) => m.type === 'image' && m.imageSourceType === 'youtube');
-check('Image media supports YouTube image source', imageMediaYoutube !== undefined && Boolean(imageMediaYoutube.imageSource));
-
-const videoMedia = GALLERY_MEDIA.find((m) => m.type === 'video');
-check('Video media uses YouTube URL', videoMedia !== undefined && typeof videoMedia.youtubeUrl === 'string' && videoMedia.youtubeUrl.includes('youtube'));
+// Phase 20: YouTube Thumbnail Derivation & Fallback
+console.log('\n6. YouTube Thumbnail Derivation Helper');
+const derivedThumb = getYouTubeThumbnailUrl('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+check(
+  'getYouTubeThumbnailUrl derives correct YouTube thumbnail URL',
+  derivedThumb === 'https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
+);
+check('getYouTubeThumbnailUrl returns null when given null/undefined', getYouTubeThumbnailUrl(null) === null);
 
 // Part 12, 13, 14: Visibility, Display Order & Dynamic Resolution
-console.log('\n6. Dynamic Resolution, Display Order & Visibility');
+console.log('\n7. Dynamic Resolution, Display Order & Visibility');
 const fxMedia = await galleryService.getMediaForCollection('gal-futurex-2026');
 check('getMediaForCollection returns media items sorted by displayOrder', fxMedia.length > 0);
 const isSorted = fxMedia.every((m, idx) => idx === 0 || m.displayOrder >= fxMedia[idx - 1].displayOrder);
 check('Media items respect displayOrder', isSorted);
 
 // Part 18: Database Copy Configuration
-console.log('\n7. Database/Admin Copy Readiness');
+console.log('\n8. Database/Admin Copy Readiness');
 check('GALLERY_PAGE_CONFIG hero title exists', typeof GALLERY_PAGE_CONFIG.hero.title === 'string');
 check('GALLERY_PAGE_CONFIG empty states exist', typeof GALLERY_PAGE_CONFIG.emptyStates.notFound.title === 'string');
+check('GALLERY_PAGE_CONFIG video notice exists', typeof GALLERY_PAGE_CONFIG.videoNotice.title === 'string');
 
-console.log(failures === 0 ? '\nAll Phase 19 Event & Gallery tests passed cleanly!\n' : `\n${failures} test(s) FAILED.\n`);
+console.log(failures === 0 ? '\nAll Phase 19 & Phase 20 Event & Gallery tests passed cleanly!\n' : `\n${failures} test(s) FAILED.\n`);
 process.exit(failures === 0 ? 0 : 1);

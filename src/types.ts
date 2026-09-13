@@ -52,10 +52,10 @@ export interface GalleryMediaItem {
   visibility: boolean;
   /** Image source configuration for type === 'image' */
   imageSourceType?: ImageSourceType;
-  imageSource?: string;
+  imageSource?: string | null;
   image?: ImageRef;
   /** Video configuration for type === 'video' (YouTube URL only, no direct video uploads) */
-  youtubeUrl?: string;
+  youtubeUrl?: string | null;
   thumb?: ImageRef | string;
   caption?: string; // Backwards compatible alias for title
 }
@@ -81,8 +81,8 @@ export interface GalleryCollection {
 export interface GalleryItem {
   id: string;
   image?: ImageRef;
-  imageSource?: string;
-  youtubeUrl?: string;
+  imageSource?: string | null;
+  youtubeUrl?: string | null;
   caption: string;
   category: string;
   eventSlug?: string;

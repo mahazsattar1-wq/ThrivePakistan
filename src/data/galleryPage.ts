@@ -19,6 +19,7 @@ export const GALLERY_PAGE_CONFIG = {
     allMedia: 'All Media',
     photos: 'Photos',
     videos: 'Videos',
+    videoFilm: 'Video Film',
   },
   cardLabels: {
     viewGallery: 'View Gallery',
@@ -33,6 +34,13 @@ export const GALLERY_PAGE_CONFIG = {
     all: 'All Collections',
     eventGalleries: 'Event Galleries',
     randomClicks: 'Random Clicks',
+  },
+  videoNotice: {
+    badge: 'Video Film',
+    title: 'Official Video Film Preview',
+    message: 'Official video films are published on YouTube as platform media is finalized. When a YouTube link is attached, clicking takes you directly to YouTube.',
+    watchBtn: 'Watch on YouTube',
+    comingSoonBtn: 'YouTube Link Coming Soon',
   },
   emptyStates: {
     noCollections: {

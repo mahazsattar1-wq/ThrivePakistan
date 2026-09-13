@@ -11,12 +11,15 @@ import { Badge, Button, EmptyState, Reveal, Skeleton } from '../components/ui';
 import { Modal } from '../components/feedback';
 import { GALLERY_PAGE_CONFIG } from '../data/galleryPage';
 
-function getYouTubeEmbedUrl(url?: string): string {
-  if (!url) return '';
+/** Derive YouTube thumbnail URL if a valid YouTube URL exists; otherwise returns null. */
+export function getYouTubeThumbnailUrl(youtubeUrl?: string | null): string | null {
+  if (!youtubeUrl) return null;
   const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-  const match = url.match(regExp);
-  const videoId = match && match[2].length === 11 ? match[2] : url;
-  return `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+  const match = youtubeUrl.match(regExp);
+  if (match && match[2] && match[2].length === 11) {
+    return `https://img.youtube.com/vi/${match[2]}/hqdefault.jpg`;
+  }
+  return null;
 }
 
 export default function Gallery() {
@@ -33,6 +36,7 @@ export default function Gallery() {
   const [typeFilter, setTypeFilter] = useState<'all' | 'event_gallery' | 'random_clicks'>('all');
   const [mediaTab, setMediaTab] = useState<'all' | 'images' | 'videos'>('all');
   const [openMediaIndex, setOpenIndex] = useState<number | null>(null);
+  const [thumbnailErrors, setThumbnailErrors] = useState<Record<string, boolean>>({});
 
   const cfg = GALLERY_PAGE_CONFIG;
 
@@ -89,6 +93,16 @@ export default function Gallery() {
 
   const currentMedia =
     openMediaIndex !== null && activeMediaList[openMediaIndex] ? activeMediaList[openMediaIndex] : null;
+
+  const handleMediaClick = (m: GalleryMediaItem, index: number) => {
+    // Rule: When a real YouTube URL is present, open YouTube directly in a new tab.
+    if (m.type === 'video' && m.youtubeUrl) {
+      window.open(m.youtubeUrl, '_blank', 'noopener,noreferrer');
+      return;
+    }
+    // For images or mock videos (youtubeUrl is null/empty), open preview modal.
+    setOpenIndex(index);
+  };
 
   const stepMedia = (dir: 1 | -1) => {
     if (openMediaIndex === null || activeMediaList.length === 0) return;
@@ -197,7 +211,7 @@ export default function Gallery() {
             </div>
           )}
 
-          {/* View Mode 1: Collection Not Found or Empty Event Gallery */}
+          {/* View Mode 1: Collection Not Found */}
           {activeCollection === 'not_found' ? (
             <EmptyState
               title={cfg.emptyStates.notFound.title}
@@ -252,35 +266,53 @@ export default function Gallery() {
                 />
               ) : (
                 <div className="gallery-grid">
-                  {activeMediaList.map((m, i) => (
-                    <button
-                      key={m.id}
-                      type="button"
-                      className={`gallery-tile ${i % 5 === 0 ? 'gallery-tile--wide' : ''} ${i % 7 === 3 ? 'gallery-tile--tall' : ''}`.trim()}
-                      onClick={() => setOpenIndex(i)}
-                      aria-label={`Open media: ${m.title}`}
-                    >
-                      {m.image ? (
-                        <div className="gallery-tile__img sprite" style={{ ...spriteStyle(m.image), position: 'absolute', inset: 0 }} />
-                      ) : m.imageSource ? (
-                        <img src={m.imageSource} alt={m.title} className="gallery-tile__img" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
-                      ) : (
-                        <div style={{ position: 'absolute', inset: 0, backgroundColor: 'var(--dark-3)' }} />
-                      )}
-                      <span className="gallery-tile__overlay">
-                        {m.type === 'video' ? (
-                          <span style={{ marginBottom: 4 }}>
-                            <Badge tone="neon">Video Film</Badge>
-                          </span>
+                  {activeMediaList.map((m, i) => {
+                    const ytThumb = getYouTubeThumbnailUrl(m.youtubeUrl);
+                    const useYtThumb = ytThumb && !thumbnailErrors[m.id];
+
+                    return (
+                      <button
+                        key={m.id}
+                        type="button"
+                        className={`gallery-tile ${i % 5 === 0 ? 'gallery-tile--wide' : ''} ${i % 7 === 3 ? 'gallery-tile--tall' : ''}`.trim()}
+                        onClick={() => handleMediaClick(m, i)}
+                        aria-label={m.type === 'video' ? `Preview video: ${m.title}` : `Open photo: ${m.title}`}
+                      >
+                        {useYtThumb ? (
+                          <img
+                            src={ytThumb}
+                            alt={m.title}
+                            className="gallery-tile__img"
+                            onError={() => setThumbnailErrors((prev) => ({ ...prev, [m.id]: true }))}
+                            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+                          />
+                        ) : m.image ? (
+                          <div className="gallery-tile__img sprite" style={{ ...spriteStyle(m.image), position: 'absolute', inset: 0 }} />
+                        ) : typeof m.thumb === 'object' && m.thumb ? (
+                          <div className="gallery-tile__img sprite" style={{ ...spriteStyle(m.thumb), position: 'absolute', inset: 0 }} />
+                        ) : typeof m.thumb === 'string' ? (
+                          <img src={m.thumb} alt={m.title} className="gallery-tile__img" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+                        ) : m.imageSource ? (
+                          <img src={m.imageSource} alt={m.title} className="gallery-tile__img" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
                         ) : (
-                          <span style={{ marginBottom: 4 }}>
-                            <Badge tone="green">Photo</Badge>
-                          </span>
+                          <div style={{ position: 'absolute', inset: 0, backgroundColor: 'var(--dark-3)' }} />
                         )}
-                        <span className="gallery-tile__cap">{m.title}</span>
-                      </span>
-                    </button>
-                  ))}
+
+                        <span className="gallery-tile__overlay">
+                          {m.type === 'video' ? (
+                            <span style={{ marginBottom: 4, display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+                              <Badge tone="neon">▶ Video Film</Badge>
+                            </span>
+                          ) : (
+                            <span style={{ marginBottom: 4 }}>
+                              <Badge tone="green">Photo</Badge>
+                            </span>
+                          )}
+                          <span className="gallery-tile__cap">{m.title}</span>
+                        </span>
+                      </button>
+                    );
+                  })}
                 </div>
               )}
             </div>
@@ -311,19 +343,56 @@ export default function Gallery() {
         </div>
       </section>
 
-      {/* Lightbox / Video Player Modal */}
+      {/* Lightbox / Mock Video Preview Modal */}
       <Modal open={currentMedia !== null} onClose={() => setOpenIndex(null)} label="Media preview" size="lg">
         {currentMedia && (
           <>
-            {currentMedia.type === 'video' && currentMedia.youtubeUrl ? (
-              <div style={{ position: 'relative', aspectRatio: '16 / 9', width: '100%', borderRadius: 'var(--r-md)', overflow: 'hidden', backgroundColor: '#000' }}>
-                <iframe
-                  src={getYouTubeEmbedUrl(currentMedia.youtubeUrl)}
-                  title={currentMedia.title}
-                  style={{ width: '100%', height: '100%', border: 0 }}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
+            {currentMedia.type === 'video' ? (
+              <div style={{ display: 'grid', gap: 16 }}>
+                <div style={{ position: 'relative', aspectRatio: '16 / 9', width: '100%', borderRadius: 'var(--r-md)', overflow: 'hidden', backgroundColor: 'var(--dark-3)' }}>
+                  {typeof currentMedia.thumb === 'object' && currentMedia.thumb ? (
+                    <div className="sprite" style={{ ...spriteStyle(currentMedia.thumb), position: 'absolute', inset: 0 }} />
+                  ) : currentMedia.image ? (
+                    <div className="sprite" style={{ ...spriteStyle(currentMedia.image), position: 'absolute', inset: 0 }} />
+                  ) : (
+                    <div style={{ position: 'absolute', inset: 0, backgroundColor: 'var(--dark-3)' }} />
+                  )}
+                  <div style={{ position: 'absolute', inset: 0, background: 'rgba(10,11,11,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 64, height: 64, borderRadius: '50%', background: 'var(--primary-green)', color: 'var(--dark)', boxShadow: '0 8px 24px rgba(67,183,73,0.5)' }}>
+                      ▶
+                    </span>
+                  </div>
+                </div>
+
+                <div>
+                  <Badge tone="neon">{cfg.videoNotice.badge}</Badge>
+                  <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginTop: 8, color: 'var(--white)' }}>
+                    {currentMedia.title}
+                  </h3>
+                  <p style={{ color: 'var(--muted-on-dark)', fontSize: '0.92rem', marginTop: 6, lineHeight: 1.6 }}>
+                    {currentMedia.description || cfg.videoNotice.message}
+                  </p>
+                  <p style={{ fontSize: '0.85rem', color: '#9aa59e', marginTop: 10, fontStyle: 'italic' }}>
+                    {cfg.videoNotice.message}
+                  </p>
+                </div>
+
+                <div style={{ display: 'flex', gap: 12, justifyContent: 'flex-end', marginTop: 8 }}>
+                  {currentMedia.youtubeUrl ? (
+                    <Button
+                      href={currentMedia.youtubeUrl}
+                      variant="primary"
+                      size="sm"
+                      icon="external"
+                    >
+                      {cfg.videoNotice.watchBtn}
+                    </Button>
+                  ) : (
+                    <Button variant="outline-light" size="sm" disabled>
+                      {cfg.videoNotice.comingSoonBtn}
+                    </Button>
+                  )}
+                </div>
               </div>
             ) : currentMedia.image ? (
               <div
@@ -333,22 +402,26 @@ export default function Gallery() {
                 aria-label={currentMedia.title}
               />
             ) : (
-              <img src={currentMedia.imageSource} alt={currentMedia.title} className="lightbox__img" style={{ width: '100%', maxHeight: '70vh', objectFit: 'contain' }} />
+              <img src={currentMedia.imageSource ?? ''} alt={currentMedia.title} className="lightbox__img" style={{ width: '100%', maxHeight: '70vh', objectFit: 'contain' }} />
             )}
 
-            <div className="lightbox__cap">
-              <strong>{currentMedia.title}</strong>
-              {currentMedia.description && <span>{currentMedia.description}</span>}
-            </div>
+            {currentMedia.type !== 'video' && (
+              <>
+                <div className="lightbox__cap">
+                  <strong>{currentMedia.title}</strong>
+                  {currentMedia.description && <span>{currentMedia.description}</span>}
+                </div>
 
-            <div className="lightbox__nav">
-              <Button variant="outline" size="sm" iconLeft="chevron-left" onClick={() => stepMedia(-1)}>
-                Previous
-              </Button>
-              <Button variant="outline" size="sm" icon="chevron-right" onClick={() => stepMedia(1)}>
-                Next
-              </Button>
-            </div>
+                <div className="lightbox__nav">
+                  <Button variant="outline" size="sm" iconLeft="chevron-left" onClick={() => stepMedia(-1)}>
+                    Previous
+                  </Button>
+                  <Button variant="outline" size="sm" icon="chevron-right" onClick={() => stepMedia(1)}>
+                    Next
+                  </Button>
+                </div>
+              </>
+            )}
           </>
         )}
       </Modal>
