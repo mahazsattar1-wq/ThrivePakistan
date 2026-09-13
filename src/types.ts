@@ -299,6 +299,19 @@ export type ProgramIcon =
   | 'tools'
   | 'map';
 
+/* ================= Phase 25 Focus Area Extensions ================= */
+
+export interface FocusPoint {
+  title: string;
+  description: string;
+  icon?: string;
+}
+
+export interface ProgramOpportunity {
+  title: string;
+  description: string;
+}
+
 export interface Program {
   id: string;
   slug: string;
@@ -315,6 +328,15 @@ export interface Program {
   impact: string;
   image: ImageRef;
   eventSlugs: string[];
+  relatedEventIds?: string[];
+
+  /* Phase 25 — Focus Area Case Study Extensions */
+  whyThisMatters?: string;
+  focusPoints?: FocusPoint[];
+  opportunities?: ProgramOpportunity[];
+  howThriveContributes?: string;
+  displayOrder?: number;
+  isVisible?: boolean;
 }
 
 export type PartnerCategory =

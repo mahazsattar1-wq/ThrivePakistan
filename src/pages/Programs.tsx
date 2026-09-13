@@ -13,12 +13,12 @@ export default function Programs() {
   return (
     <>
       <PageHero
-        eyebrow="Focus areas"
+        eyebrow="Focus Areas"
         title="Six areas where we open access."
         lead="Programme directions rooted in our strategic goals, shaping the platforms we build and the collaborations we pursue."
-        crumbs={[{ label: 'Programs' }]}
+        crumbs={[{ label: 'Focus Areas' }]}
         meta={[
-          { icon: 'spark', label: '6 focus areas' },
+          { icon: 'spark', label: '6 Focus Areas' },
           { icon: 'pin', label: 'Hazara · Khyber Pakhtunkhwa' },
         ]}
       />
@@ -39,13 +39,13 @@ export default function Programs() {
         <span className="cta-band__glow" aria-hidden="true" />
         <div className="container cta-band__inner">
           <Reveal>
-            <h2>Want to collaborate on a focus area?</h2>
+            <h2>Partner with Thrive Pakistan across our focus areas</h2>
             <p style={{ marginTop: 10 }}>
               We work with universities, colleges, institutions and community organizations across Hazara and Khyber Pakhtunkhwa.
             </p>
             <div className="cta-band__ctas">
-              <Button to="/contact" icon="arrow-right">Start a conversation</Button>
-              <Button to="/become-a-partner" variant="outline-light">Become a partner</Button>
+              <Button to="/become-a-partner" icon="arrow-right">Become a Partner</Button>
+              <Button to="/events" variant="outline-light">Explore Events</Button>
             </div>
           </Reveal>
         </div>
