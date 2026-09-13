@@ -36,8 +36,16 @@ const RAW_EVENTS: Omit<ThriveEvent, 'status'>[] = [
       'The event is organized with Government Post Graduate College Mansehra under a Memorandum of Collaboration signed on 6 August 2026. Programme curation, partnerships, and campus outreach are currently in progress, and final agenda, speakers, and registration details will be announced as they are confirmed.',
     ],
     image: img('eventsA', 0),
+<<<<<<< HEAD
     gallerySlug: 'futurex-2026',
     featured: true,
+=======
+    galleryId: 'gal-futurex-2026',
+    gallerySlug: 'futurex-2026',
+    featured: true,
+    visibility: true,
+    displayOrder: 1,
+>>>>>>> b7c016b (feat(arch): complete event + central gallery architecture rebuild with normalized database models)
     dateConfirmed: true,
     venueConfirmed: true,
     tags: ['AI', 'Work', 'Finance', 'Leadership'],
@@ -97,7 +105,14 @@ const RAW_EVENTS: Omit<ThriveEvent, 'status'>[] = [
       'The programme spanned artificial intelligence, cybersecurity, entrepreneurship, digital careers, exhibitions, expert sessions, and applied competition, demonstrating that a regional audience responds when credible, future-focused programming is brought closer to them.',
     ],
     image: img('eventsA', 5),
+<<<<<<< HEAD
     gallerySlug: 'hazara-tech-fiesta-2025',
+=======
+    galleryId: 'gal-hazara-tech-fiesta-2025',
+    gallerySlug: 'hazara-tech-fiesta-2025',
+    visibility: true,
+    displayOrder: 2,
+>>>>>>> b7c016b (feat(arch): complete event + central gallery architecture rebuild with normalized database models)
     dateConfirmed: true,
     venueConfirmed: true,
     attendees: '5,000+ attendees',

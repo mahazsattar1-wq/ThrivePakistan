@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom';
-import type { BlogPost, GalleryItem, Program, Speaker, TeamMember, ThriveEvent, VideoItem } from '../types';
+import type { BlogPost, GalleryCollection, GalleryItem, Program, Speaker, TeamMember, ThriveEvent, VideoItem } from '../types';
 import { dateParts, formatDate, formatViews } from '../utils';
 import { Icon, Badge, SpriteBox, Button } from './ui';
 import type { IconName } from './ui';
 import { EVENTS_PAGE_CONFIG } from '../data/eventsPage';
+import { GALLERY_PAGE_CONFIG } from '../data/galleryPage';
 
 /** Initials monogram for people without an approved photograph. */
 function initialsOf(name: string): string {
@@ -30,6 +31,7 @@ export function MonogramAvatar({ name, className = '' }: { name: string; classNa
 export function EventCard({ event, dark }: { event: ThriveEvent; dark?: boolean }) {
   const d = dateParts(event.date);
   const labels = EVENTS_PAGE_CONFIG.cardLabels;
+  const galleryTarget = `/gallery/${event.galleryId || event.gallerySlug || event.id}`;
 
   return (
     <article className={`event-card ${dark ? 'event-card--dark' : ''}`}>
@@ -62,11 +64,9 @@ export function EventCard({ event, dark }: { event: ThriveEvent; dark?: boolean 
             <Button to={`/events/${event.slug}`} size="sm" variant={dark ? 'primary' : 'primary'} icon="arrow-right">
               {labels.viewEvent}
             </Button>
-            {event.gallerySlug && (
-              <Button to={`/gallery?collection=${event.gallerySlug}`} size="sm" variant={dark ? 'outline-light' : 'outline'} icon="eye">
-                {labels.viewGallery}
-              </Button>
-            )}
+            <Button to={galleryTarget} size="sm" variant={dark ? 'outline-light' : 'outline'} icon="eye">
+              {labels.viewGallery}
+            </Button>
           </div>
         </div>
       </div>
@@ -229,11 +229,74 @@ export function GalleryTile({
       onClick={() => onOpen(item)}
       aria-label={`Open image: ${item.caption}`}
     >
-      <SpriteBox image={item.image} label={item.caption} className="gallery-tile__img" />
+      {item.image ? (
+        <SpriteBox image={item.image} label={item.caption} className="gallery-tile__img" />
+      ) : (
+        <div style={{ position: 'absolute', inset: 0, backgroundColor: 'var(--dark-3)' }} />
+      )}
       <span className="gallery-tile__overlay">
+        {item.type === 'video' && (
+          <span style={{ marginBottom: 4 }}>
+            <Badge tone="neon">Video Film</Badge>
+          </span>
+        )}
         <span className="gallery-tile__cat">{item.category}</span>
         <span className="gallery-tile__cap">{item.caption}</span>
       </span>
     </button>
+  );
+}
+
+/* ================= Gallery Collection Card ================= */
+
+export function GalleryCollectionCard({ collection }: { collection: GalleryCollection }) {
+  const isEventGallery = collection.type === 'event_gallery';
+  const badgeText = isEventGallery ? GALLERY_PAGE_CONFIG.badges.eventGallery : GALLERY_PAGE_CONFIG.badges.randomClicks;
+  const itemCount = collection.mediaItems?.length ?? 0;
+
+  return (
+    <article className="event-block" style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: 16 }}>
+      <div
+        style={{
+          position: 'relative',
+          aspectRatio: '16 / 10',
+          borderRadius: 'var(--r-md)',
+          overflow: 'hidden',
+          backgroundColor: 'var(--dark-3)',
+        }}
+      >
+        <SpriteBox image={collection.coverImage} label={`${collection.title} gallery cover`} style={{ position: 'absolute', inset: 0 }} />
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'linear-gradient(180deg, transparent 40%, rgba(10,11,11,0.85))',
+          }}
+        />
+        <div style={{ position: 'absolute', top: 12, left: 12, right: 12, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <Badge tone={isEventGallery ? 'green' : 'neon'}>{badgeText}</Badge>
+          <Badge tone="light">{itemCount} items</Badge>
+        </div>
+      </div>
+      <div>
+        <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: 8, color: 'var(--white)' }}>
+          {collection.title}
+        </h3>
+        <p style={{ color: 'var(--muted-on-dark)', fontSize: '0.9rem', lineHeight: 1.6 }}>
+          {collection.description}
+        </p>
+      </div>
+      <div style={{ marginTop: 'auto', paddingTop: 8 }}>
+        <Button
+          to={`/gallery/${collection.id}`}
+          variant="primary"
+          size="sm"
+          icon="arrow-right"
+          className="btn--block"
+        >
+          {GALLERY_PAGE_CONFIG.cardLabels.viewGallery}
+        </Button>
+      </div>
+    </article>
   );
 }

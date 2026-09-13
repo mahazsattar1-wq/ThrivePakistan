@@ -59,7 +59,7 @@ export default function EventDetail() {
       if (!ev) return;
       const [sp, gl, spn, rel] = await Promise.all([
         speakersService.bySlugs(ev.speakerSlugs),
-        galleryService.forEvent(ev.slug),
+        galleryService.forEvent(ev.id),
         partnersService.byIds(ev.sponsorIds),
         eventsService.related(ev.slug),
       ]);
@@ -259,7 +259,9 @@ export default function EventDetail() {
                   Register Interest
                 </Button>
               ) : (
-                <Button className="btn--block" to="/gallery" variant="outline-light">View gallery</Button>
+                <Button className="btn--block" to={`/gallery/${event.galleryId || event.gallerySlug || event.id}`} variant="outline-light">
+                  View gallery
+                </Button>
               )}
             </div>
             <div className="aside-card">
@@ -305,7 +307,11 @@ export default function EventDetail() {
       <Modal open={lightbox !== null} onClose={() => setLightbox(null)} label="Event image" size="lg">
         {lightbox && (
           <>
-            <div className="lightbox__img sprite" style={spriteStyle(lightbox.image)} role="img" aria-label={lightbox.caption} />
+            {lightbox.image ? (
+              <div className="lightbox__img sprite" style={spriteStyle(lightbox.image)} role="img" aria-label={lightbox.caption} />
+            ) : lightbox.imageSource ? (
+              <img src={lightbox.imageSource} alt={lightbox.caption} className="lightbox__img" style={{ width: '100%', maxHeight: '70vh', objectFit: 'contain' }} />
+            ) : null}
             <div className="lightbox__cap">
               <strong>{lightbox.caption}</strong>
               <span>{lightbox.category}</span>

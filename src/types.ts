@@ -46,15 +46,39 @@ export interface Faq {
   a: string;
 }
 
+<<<<<<< HEAD
 export interface GalleryMediaItem {
   id: string;
   image: ImageRef;
   caption: string;
+=======
+export type GalleryType = 'event_gallery' | 'random_clicks';
+export type MediaType = 'image' | 'video';
+export type ImageSourceType = 'youtube' | 'upload';
+
+export interface GalleryMediaItem {
+  id: string;
+  galleryId: string;
+  type: MediaType;
+  title: string;
+  description?: string;
+  displayOrder: number;
+  visibility: boolean;
+  /** Image source configuration for type === 'image' */
+  imageSourceType?: ImageSourceType;
+  imageSource?: string;
+  image?: ImageRef;
+  /** Video configuration for type === 'video' (YouTube URL only, no direct video uploads) */
+  youtubeUrl?: string;
+  thumb?: ImageRef | string;
+  caption?: string; // Backwards compatible alias for title
+>>>>>>> b7c016b (feat(arch): complete event + central gallery architecture rebuild with normalized database models)
 }
 
 export interface GalleryCollection {
   id: string;
   slug: string;
+<<<<<<< HEAD
   title: string;
   description: string;
   coverImage: ImageRef;
@@ -64,10 +88,38 @@ export interface GalleryCollection {
   published: boolean;
   featured?: boolean;
   displayOrder?: number;
+=======
+  type: GalleryType;
+  /** Stable reference to the event.id if type === 'event_gallery'. null for 'random_clicks' */
+  eventId?: string | null;
+  title: string;
+  description: string;
+  coverImage: ImageRef;
+  mediaItems?: GalleryMediaItem[];
+  published: boolean;
+  featured?: boolean;
+  displayOrder: number;
+>>>>>>> b7c016b (feat(arch): complete event + central gallery architecture rebuild with normalized database models)
   createdAt?: string;
   updatedAt?: string;
 }
 
+<<<<<<< HEAD
+=======
+/** Flat item structure used for lightboxes or legacy components */
+export interface GalleryItem {
+  id: string;
+  image?: ImageRef;
+  imageSource?: string;
+  youtubeUrl?: string;
+  caption: string;
+  category: string;
+  eventSlug?: string;
+  galleryId?: string;
+  type?: MediaType;
+}
+
+>>>>>>> b7c016b (feat(arch): complete event + central gallery architecture rebuild with normalized database models)
 export interface ThriveEvent {
   id: string;
   slug: string;
@@ -87,8 +139,19 @@ export interface ThriveEvent {
   featured?: boolean;
   /** Dynamically derived from event end date vs current time. */
   status?: EventStatus;
+<<<<<<< HEAD
   /** Associated central gallery collection slug (if available). */
   gallerySlug?: string;
+=======
+  /** Stable reference to the linked gallery collection (gallery.id). */
+  galleryId?: string | null;
+  /** Associated central gallery collection slug (if available). */
+  gallerySlug?: string;
+  /** Visibility flag for future admin panel toggles. */
+  visibility?: boolean;
+  /** Display order for future admin panel reordering. */
+  displayOrder?: number;
+>>>>>>> b7c016b (feat(arch): complete event + central gallery architecture rebuild with normalized database models)
   /** True only when the date is officially confirmed by the organization. */
   dateConfirmed: boolean;
   /** True only when the venue is officially confirmed by the organization. */
@@ -231,14 +294,6 @@ export interface VideoItem {
   date: string;
   thumb: ImageRef;
   description: string;
-}
-
-export interface GalleryItem {
-  id: string;
-  image: ImageRef;
-  caption: string;
-  category: string;
-  eventSlug?: string;
 }
 
 /** Qualitative impact statement (replaces fabricated numeric statistics). */

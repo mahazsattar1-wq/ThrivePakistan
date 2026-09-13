@@ -2,6 +2,7 @@ import { EVENTS } from '../data/events';
 import type { ThriveEvent } from '../types';
 import { getEventEndDate, getEventStatus } from '../utils';
 import { apiGet, delay } from './api';
+import { galleryService } from './galleryService';
 
 export interface EventFilters {
   status?: 'all' | 'upcoming' | 'past';
@@ -44,10 +45,30 @@ export const eventsService = {
     return [...out].sort((a, b) => +new Date(a.date) - +new Date(b.date));
   },
 
+  async getById(idOrSlug: string): Promise<ThriveEvent | undefined> {
+    await delay(120);
+    const found = EVENTS.find((e) => e.id === idOrSlug || e.slug === idOrSlug);
+    return found ? { ...found, status: getEventStatus(found) } : undefined;
+  },
+
   async getBySlug(slug: string): Promise<ThriveEvent | undefined> {
+<<<<<<< HEAD
     await delay(180);
     const found = EVENTS.find((e) => e.slug === slug);
     return found ? { ...found, status: getEventStatus(found) } : undefined;
+=======
+    return this.getById(slug);
+  },
+
+  async getGalleryForEvent(eventIdOrSlug: string) {
+    const event = await this.getById(eventIdOrSlug);
+    if (!event) return null;
+    if (event.galleryId) {
+      const gallery = await galleryService.getCollectionById(event.galleryId);
+      if (gallery) return gallery;
+    }
+    return galleryService.getCollectionByEventId(event.id);
+>>>>>>> b7c016b (feat(arch): complete event + central gallery architecture rebuild with normalized database models)
   },
 
   async featured(): Promise<ThriveEvent | undefined> {
