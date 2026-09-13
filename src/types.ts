@@ -98,10 +98,99 @@ export interface GalleryItem {
   type?: MediaType;
 }
 
+/* ================= Phase 24 Event Detail / Case Study Sub-Interfaces ================= */
+
+export interface EventMetric {
+  id: string;
+  label: string;
+  value: string;
+  displayOrder?: number;
+  isVisible?: boolean;
+}
+
+export interface EventFocusArea {
+  id: string;
+  title: string;
+  description?: string;
+  icon?: string;
+  displayOrder?: number;
+  isVisible?: boolean;
+}
+
+export interface EventSession {
+  id?: string;
+  time?: string;
+  title: string;
+  description?: string;
+  speakerIds?: string[];
+}
+
+export interface EventTrack {
+  id: string;
+  title: string;
+  description?: string;
+  sessions?: EventSession[];
+  displayOrder?: number;
+  isVisible?: boolean;
+}
+
+export interface EventGuest {
+  id: string;
+  name: string;
+  role: string;
+  organization: string;
+  photo?: ImageRef | string;
+  bio?: string;
+  displayOrder?: number;
+  isVisible?: boolean;
+}
+
+export interface EventImpactItem {
+  id: string;
+  title: string;
+  description: string;
+  icon?: string;
+  displayOrder?: number;
+  isVisible?: boolean;
+}
+
+export interface EventTestimonial {
+  id: string;
+  quote: string;
+  name: string;
+  role: string;
+  organization: string;
+  photo?: ImageRef | string;
+  displayOrder?: number;
+  isVisible?: boolean;
+}
+
+export interface EventPressItem {
+  id: string;
+  publication: string;
+  logo?: ImageRef | string;
+  title: string;
+  url?: string;
+  date?: string;
+  description?: string;
+  displayOrder?: number;
+  isVisible?: boolean;
+}
+
+export interface EventCTA {
+  heading?: string;
+  description?: string;
+  primaryBtnText?: string;
+  primaryBtnLink?: string;
+  secondaryBtnText?: string;
+  secondaryBtnLink?: string;
+}
+
 export interface ThriveEvent {
   id: string;
   slug: string;
   title: string;
+  tagline?: string;
   category: string;
   /** ISO date of the first day. */
   date: string;
@@ -132,6 +221,7 @@ export interface ThriveEvent {
   attendees?: string;
   tags: string[];
   speakerSlugs: string[];
+  speakerIds?: string[];
   agenda: AgendaItem[];
   /**
    * Programme directions being developed for the event. These are NOT
@@ -141,6 +231,18 @@ export interface ThriveEvent {
   highlights: string[];
   sponsorIds: string[];
   faqs: Faq[];
+
+  /* Phase 24 — Past Event Detail / Case Study System Extension */
+  metrics?: EventMetric[];
+  focusAreas?: EventFocusArea[];
+  tracks?: EventTrack[];
+  chiefGuests?: EventGuest[];
+  impactItems?: EventImpactItem[];
+  testimonials?: EventTestimonial[];
+  pressCoverage?: EventPressItem[];
+  reportUrl?: string | null;
+  reportLabel?: string;
+  cta?: EventCTA;
 }
 
 export type Expertise =
