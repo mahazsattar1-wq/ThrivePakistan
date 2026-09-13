@@ -52,10 +52,13 @@ export default function App() {
             <Route path="/events" element={<Events mode="overview" />} />
             <Route path="/events/upcoming" element={<Events mode="upcoming" />} />
             <Route path="/events/past" element={<Events mode="past" />} />
+<<<<<<< HEAD
             <Route path="/events/seminars" element={<Events mode="seminars" />} />
             <Route path="/events/workshops" element={<Events mode="workshops" />} />
             <Route path="/events/tours-trips" element={<Events mode="tours-trips" />} />
             <Route path="/events/tours" element={<Events mode="tours-trips" />} />
+=======
+>>>>>>> 5f69977 (feat: complete Phase 17 events section cleanup, text visibility, and strict database-ready architecture)
             <Route path="/events/:slug" element={<EventDetail />} />
             <Route path="/programs" element={<Programs />} />
             <Route path="/programs/:slug" element={<ProgramDetail />} />

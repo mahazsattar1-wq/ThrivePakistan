@@ -46,9 +46,8 @@ check('FutureX nav target is /futurex', futurexTopNav?.to === '/futurex');
 const eventsNav = NAV_ITEMS.find((item) => item.label === 'Events');
 const eventsSubmenu = eventsNav?.children ?? [];
 check(
-  'Events dropdown has categories',
-  JSON.stringify(eventsSubmenu.map((c) => c.label)) ===
-    JSON.stringify(['Upcoming Events', 'Past Events', 'Seminars', 'Workshops', 'Tours & Trips']),
+  'Events dropdown has exactly Upcoming and Past',
+  JSON.stringify(eventsSubmenu.map((c) => c.label)) === JSON.stringify(['Upcoming Events', 'Past Events']),
   eventsSubmenu.map((c) => c.label).join(', '),
 );
 const futurexSubNav = eventsSubmenu.find((c) => c.label.includes('FutureX'));

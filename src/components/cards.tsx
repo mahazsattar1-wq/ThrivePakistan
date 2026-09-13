@@ -3,6 +3,7 @@ import type { BlogPost, GalleryItem, Program, Speaker, TeamMember, ThriveEvent, 
 import { dateParts, formatDate, formatViews } from '../utils';
 import { Icon, Badge, SpriteBox, Button } from './ui';
 import type { IconName } from './ui';
+import { EVENTS_PAGE_CONFIG } from '../data/eventsPage';
 
 /** Initials monogram for people without an approved photograph. */
 function initialsOf(name: string): string {
@@ -28,6 +29,8 @@ export function MonogramAvatar({ name, className = '' }: { name: string; classNa
 
 export function EventCard({ event, dark }: { event: ThriveEvent; dark?: boolean }) {
   const d = dateParts(event.date);
+  const labels = EVENTS_PAGE_CONFIG.cardLabels;
+
   return (
     <article className={`event-card ${dark ? 'event-card--dark' : ''}`}>
       <div className="event-card__inner">
@@ -40,7 +43,11 @@ export function EventCard({ event, dark }: { event: ThriveEvent; dark?: boolean 
               <span>{d.year}</span>
             </span>
             <span className={`event-card__status event-card__status--${event.status}`}>
+<<<<<<< HEAD
               {event.status === 'upcoming' ? 'Upcoming' : 'Past'}
+=======
+              {event.status === 'upcoming' ? labels.statusUpcoming : labels.statusPast}
+>>>>>>> 5f69977 (feat: complete Phase 17 events section cleanup, text visibility, and strict database-ready architecture)
             </span>
           </div>
         </Link>
@@ -57,11 +64,19 @@ export function EventCard({ event, dark }: { event: ThriveEvent; dark?: boolean 
           <p className="event-card__desc">{event.description}</p>
           <div className="event-card__actions" style={{ marginTop: 'auto', paddingTop: 14, display: 'flex', gap: 10, flexWrap: 'wrap' }}>
             <Button to={`/events/${event.slug}`} size="sm" variant={dark ? 'primary' : 'primary'} icon="arrow-right">
+<<<<<<< HEAD
               View Event
             </Button>
             {event.gallerySlug && (
               <Button to={`/gallery?collection=${event.gallerySlug}`} size="sm" variant={dark ? 'outline-light' : 'outline'} icon="eye">
                 View Gallery
+=======
+              {labels.viewEvent}
+            </Button>
+            {event.gallerySlug && (
+              <Button to={`/gallery?collection=${event.gallerySlug}`} size="sm" variant={dark ? 'outline-light' : 'outline'} icon="eye">
+                {labels.viewGallery}
+>>>>>>> 5f69977 (feat: complete Phase 17 events section cleanup, text visibility, and strict database-ready architecture)
               </Button>
             )}
           </div>

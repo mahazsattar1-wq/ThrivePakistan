@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+<<<<<<< HEAD
 import { EVENTS_PAGE_CONFIG, CategoryCardConfig } from '../data/eventsPage';
+=======
+import { EVENTS_PAGE_CONFIG } from '../data/eventsPage';
+>>>>>>> 5f69977 (feat: complete Phase 17 events section cleanup, text visibility, and strict database-ready architecture)
 import { useSeo } from '../hooks';
 import { eventsService } from '../services/eventsService';
 import type { ThriveEvent } from '../types';
@@ -8,7 +12,11 @@ import { PageHero } from '../components/page-hero';
 import { EventCard } from '../components/cards';
 import { Button, CardSkeleton, EmptyState, Icon, Reveal, SectionHeader } from '../components/ui';
 
+<<<<<<< HEAD
 export type EventsMode = 'overview' | 'upcoming' | 'past' | 'seminars' | 'workshops' | 'tours-trips';
+=======
+export type EventsMode = 'overview' | 'upcoming' | 'past';
+>>>>>>> 5f69977 (feat: complete Phase 17 events section cleanup, text visibility, and strict database-ready architecture)
 
 export interface EventsProps {
   mode?: EventsMode;
@@ -24,6 +32,7 @@ export default function Events({ mode }: EventsProps) {
     const path = location.pathname;
     if (path.endsWith('/upcoming')) return 'upcoming';
     if (path.endsWith('/past')) return 'past';
+<<<<<<< HEAD
     if (path.endsWith('/seminars')) return 'seminars';
     if (path.endsWith('/workshops')) return 'workshops';
     if (path.endsWith('/tours-trips') || path.endsWith('/tours')) return 'tours-trips';
@@ -33,22 +42,33 @@ export default function Events({ mode }: EventsProps) {
     if (typeParam === 'seminars') return 'seminars';
     if (typeParam === 'workshops') return 'workshops';
     if (typeParam === 'tours-trips' || typeParam === 'tours') return 'tours-trips';
+=======
+    const statusParam = params.get('status') || params.get('type');
+    if (statusParam === 'upcoming') return 'upcoming';
+    if (statusParam === 'past') return 'past';
+>>>>>>> 5f69977 (feat: complete Phase 17 events section cleanup, text visibility, and strict database-ready architecture)
     return 'overview';
   })();
 
   const [upcomingEvents, setUpcomingEvents] = useState<ThriveEvent[] | null>(null);
   const [pastEvents, setPastEvents] = useState<ThriveEvent[] | null>(null);
+<<<<<<< HEAD
   const [seminarEvents, setSeminarEvents] = useState<ThriveEvent[] | null>(null);
   const [workshopEvents, setWorkshopEvents] = useState<ThriveEvent[] | null>(null);
   const [tourEvents, setTourEvents] = useState<ThriveEvent[] | null>(null);
+=======
+>>>>>>> 5f69977 (feat: complete Phase 17 events section cleanup, text visibility, and strict database-ready architecture)
 
   useEffect(() => {
     let alive = true;
     eventsService.list({ type: 'upcoming' }).then((list) => alive && setUpcomingEvents(list));
     eventsService.list({ type: 'past' }).then((list) => alive && setPastEvents(list));
+<<<<<<< HEAD
     eventsService.list({ type: 'seminars' }).then((list) => alive && setSeminarEvents(list));
     eventsService.list({ type: 'workshops' }).then((list) => alive && setWorkshopEvents(list));
     eventsService.list({ type: 'tours-trips' }).then((list) => alive && setTourEvents(list));
+=======
+>>>>>>> 5f69977 (feat: complete Phase 17 events section cleanup, text visibility, and strict database-ready architecture)
     return () => {
       alive = false;
     };
@@ -59,6 +79,7 @@ export default function Events({ mode }: EventsProps) {
   if (activeMode === 'upcoming') {
     return (
       <CategoryListingView
+<<<<<<< HEAD
         title="Upcoming Events"
         eyebrow="Scheduled Platforms"
         lead="Confirmed platforms and convenings scheduled and open for interest. Details are published as confirmed."
@@ -66,6 +87,11 @@ export default function Events({ mode }: EventsProps) {
         emptyTitle="No upcoming events at the moment."
         emptyMessage="New platform dates and convenings will be announced here as details are confirmed. Explore our past events in the interim."
         onExplorePast={() => navigate('/events/past')}
+=======
+        cfg={cfg.upcomingView}
+        events={upcomingEvents}
+        onAction={() => navigate('/events/past')}
+>>>>>>> 5f69977 (feat: complete Phase 17 events section cleanup, text visibility, and strict database-ready architecture)
       />
     );
   }
@@ -73,6 +99,7 @@ export default function Events({ mode }: EventsProps) {
   if (activeMode === 'past') {
     return (
       <CategoryListingView
+<<<<<<< HEAD
         title="Past Events"
         eyebrow="Documented Record"
         lead="Completed events and regional technology festivals delivered by Thrive Pakistan. Our documented record reflects real experience and verified outcomes."
@@ -122,6 +149,11 @@ export default function Events({ mode }: EventsProps) {
         emptyTitle="No educational or exposure tours scheduled at the moment."
         emptyMessage="Industry exposure and learning visits will be posted here as details are finalized."
         onExplorePast={() => navigate('/events')}
+=======
+        cfg={cfg.pastView}
+        events={pastEvents}
+        onAction={() => navigate('/events/upcoming')}
+>>>>>>> 5f69977 (feat: complete Phase 17 events section cleanup, text visibility, and strict database-ready architecture)
       />
     );
   }
@@ -131,10 +163,13 @@ export default function Events({ mode }: EventsProps) {
       cfg={cfg}
       upcomingCount={upcomingEvents ? upcomingEvents.length : 0}
       pastCount={pastEvents ? pastEvents.length : 0}
+<<<<<<< HEAD
       seminarsCount={seminarEvents ? seminarEvents.length : 0}
       workshopsCount={workshopEvents ? workshopEvents.length : 0}
       toursCount={tourEvents ? tourEvents.length : 0}
       allEvents={[...(upcomingEvents ?? []), ...(pastEvents ?? [])]}
+=======
+>>>>>>> 5f69977 (feat: complete Phase 17 events section cleanup, text visibility, and strict database-ready architecture)
     />
   );
 }
@@ -145,23 +180,30 @@ function EventsOverviewView({
   cfg,
   upcomingCount,
   pastCount,
+<<<<<<< HEAD
   seminarsCount,
   workshopsCount,
   toursCount,
   allEvents,
+=======
+>>>>>>> 5f69977 (feat: complete Phase 17 events section cleanup, text visibility, and strict database-ready architecture)
 }: {
   cfg: typeof EVENTS_PAGE_CONFIG;
   upcomingCount: number;
   pastCount: number;
+<<<<<<< HEAD
   seminarsCount: number;
   workshopsCount: number;
   toursCount: number;
   allEvents: ThriveEvent[];
+=======
+>>>>>>> 5f69977 (feat: complete Phase 17 events section cleanup, text visibility, and strict database-ready architecture)
 }) {
   useSeo({
     title: 'Events',
     description: cfg.hero.lead,
   });
+<<<<<<< HEAD
 
   const categoriesList: { key: string; config: CategoryCardConfig; count: number }[] = [
     { key: 'upcoming', config: cfg.categories.upcoming, count: upcomingCount },
@@ -170,6 +212,8 @@ function EventsOverviewView({
     { key: 'workshops', config: cfg.categories.workshops, count: workshopsCount },
     { key: 'toursTrips', config: cfg.categories.toursTrips, count: toursCount },
   ];
+=======
+>>>>>>> 5f69977 (feat: complete Phase 17 events section cleanup, text visibility, and strict database-ready architecture)
 
   return (
     <>
@@ -178,14 +222,195 @@ function EventsOverviewView({
         title={cfg.hero.title}
         lead={cfg.hero.lead}
         meta={[
-          { icon: 'calendar', label: 'FutureX 2026 · 24 September 2026' },
-          { icon: 'pin', label: 'Mansehra, Khyber Pakhtunkhwa' },
+          { icon: 'calendar', label: cfg.hero.metaDate },
+          { icon: 'pin', label: cfg.hero.metaLocation },
+        ]}
+      />
+
+      {/* Two Primary Event Categories Entry Points */}
+      <section className="section section--tight">
+        <div className="container">
+          <Reveal>
+            <SectionHeader
+              eyebrow={cfg.categoriesSection.eyebrow}
+              title={cfg.categoriesSection.title}
+              lead={cfg.categoriesSection.lead}
+            />
+          </Reveal>
+          <div className="grid grid--2" style={{ gap: '24px' }}>
+            <Reveal>
+              <div className="event-cat-card">
+                <div>
+                  <span className="eyebrow" style={{ color: 'var(--primary-green)' }}>
+                    {cfg.categories.upcoming.kicker}
+                  </span>
+                  <h3 className="event-cat-card__title">{cfg.categories.upcoming.title}</h3>
+                  <p className="event-cat-card__desc">{cfg.categories.upcoming.description}</p>
+                  <p className="event-cat-card__count">
+                    <Icon name="calendar" size={15} />
+                    <span>
+                      {upcomingCount}{' '}
+                      {upcomingCount === 1
+                        ? cfg.categories.upcoming.countLabelSingular
+                        : cfg.categories.upcoming.countLabelPlural}
+                    </span>
+                  </p>
+                </div>
+                <div style={{ marginTop: 22 }}>
+                  <Button to={cfg.categories.upcoming.ctaTo} variant="primary" size="md" icon="arrow-right" className="btn--block">
+                    {cfg.categories.upcoming.ctaLabel}
+                  </Button>
+                </div>
+              </div>
+            </Reveal>
+
+            <Reveal delay={90}>
+              <div className="event-cat-card event-cat-card--dark">
+                <div>
+                  <span className="eyebrow" style={{ color: 'var(--primary-green)' }}>
+                    {cfg.categories.past.kicker}
+                  </span>
+                  <h3 className="event-cat-card__title">{cfg.categories.past.title}</h3>
+                  <p className="event-cat-card__desc">{cfg.categories.past.description}</p>
+                  <p className="event-cat-card__count">
+                    <Icon name="check" size={15} />
+                    <span>
+                      {pastCount}{' '}
+                      {pastCount === 1
+                        ? cfg.categories.past.countLabelSingular
+                        : cfg.categories.past.countLabelPlural}
+                    </span>
+                  </p>
+                </div>
+                <div style={{ marginTop: 22 }}>
+                  <Button to={cfg.categories.past.ctaTo} variant="outline-light" size="md" icon="arrow-right" className="btn--block">
+                    {cfg.categories.past.ctaLabel}
+                  </Button>
+                </div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* HOW WE CONDUCT OUR EVENTS */}
+      <section className="section section--dark">
+        <div className="container">
+          <Reveal>
+            <SectionHeader
+              dark
+              eyebrow={cfg.process.eyebrow}
+              title={cfg.process.title}
+              lead={cfg.process.lead}
+            />
+          </Reveal>
+          <div className="grid grid--3" style={{ gap: '20px' }}>
+            {cfg.process.steps.map((step, i) => (
+              <Reveal key={step.id} delay={i * 70}>
+                <div className="event-process-card">
+                  <span className="event-process-card__num">{step.num}</span>
+                  <h3 className="event-process-card__title">{step.title}</h3>
+                  <p className="event-process-card__text">{step.text}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* EVENT FORMATS */}
+      <section className="section section--light">
+        <div className="container">
+          <Reveal>
+            <SectionHeader
+              eyebrow={cfg.formats.eyebrow}
+              title={cfg.formats.title}
+              lead={cfg.formats.lead}
+            />
+          </Reveal>
+          <div className="grid grid--3">
+            {cfg.formats.items.map((fmt, i) => (
+              <Reveal key={fmt.id} delay={(i % 3) * 70}>
+                <div className="event-format-card">
+                  <span className="event-format-card__icon">
+                    <Icon name={fmt.icon as never} size={20} />
+                  </span>
+                  <h3>{fmt.title}</h3>
+                  <p>{fmt.description}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* WHY EVENTS MATTER */}
+      <section className="section">
+        <div className="container">
+          <Reveal>
+            <SectionHeader
+              center
+              eyebrow={cfg.whyEventsMatter.eyebrow}
+              title={cfg.whyEventsMatter.title}
+              lead={cfg.whyEventsMatter.lead}
+            />
+          </Reveal>
+          <div className="grid grid--3">
+            {cfg.whyEventsMatter.points.map((pt, i) => (
+              <Reveal key={pt.id} delay={(i % 3) * 70}>
+                <div className="value-card" style={{ height: '100%' }}>
+                  <span className="value-card__icon">
+                    <Icon name={pt.icon as never} size={20} />
+                  </span>
+                  <h3>{pt.title}</h3>
+                  <p>{pt.text}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+/* ================= Category Listing View ================= */
+
+function CategoryListingView({
+  cfg,
+  events,
+  onAction,
+}: {
+  cfg: typeof EVENTS_PAGE_CONFIG['upcomingView'] | typeof EVENTS_PAGE_CONFIG['pastView'];
+  events: ThriveEvent[] | null;
+  onAction: () => void;
+}) {
+  useSeo({
+    title: cfg.title,
+    description: cfg.lead,
+  });
+
+  return (
+    <>
+      <PageHero
+        eyebrow={cfg.eyebrow}
+        title={cfg.title}
+        lead={cfg.lead}
+        meta={[
+          {
+            icon: 'calendar',
+            label:
+              events === null
+                ? 'Loading platforms…'
+                : `${events.length} ${events.length === 1 ? cfg.listingCountSingular : cfg.listingCountPlural}`,
+          },
         ]}
       />
 
       {/* 5 Primary Event Categories Entry Points */}
       <section className="section section--tight">
         <div className="container">
+<<<<<<< HEAD
           <Reveal>
             <SectionHeader
               eyebrow="Event Ecosystem"
@@ -377,6 +602,16 @@ function CategoryListingView({
             </p>
             <Button variant="ghost" size="sm" to="/events">
               All Events Overview
+=======
+          <div className="listing-head" style={{ marginBottom: 24 }}>
+            <p className="listing-count" role="status">
+              {events === null
+                ? 'Loading platforms…'
+                : `${events.length} ${events.length === 1 ? cfg.listingCountSingular : cfg.listingCountPlural}`}
+            </p>
+            <Button variant="ghost" size="sm" to="/events">
+              {cfg.overviewCtaLabel}
+>>>>>>> 5f69977 (feat: complete Phase 17 events section cleanup, text visibility, and strict database-ready architecture)
             </Button>
           </div>
 
@@ -388,10 +623,17 @@ function CategoryListingView({
             </div>
           ) : events.length === 0 ? (
             <EmptyState
+<<<<<<< HEAD
               title={emptyTitle}
               message={emptyMessage}
               actionLabel="All Events Overview"
               onAction={onExplorePast}
+=======
+              title={cfg.emptyTitle}
+              message={cfg.emptyMessage}
+              actionLabel={cfg.emptyCtaLabel}
+              onAction={onAction}
+>>>>>>> 5f69977 (feat: complete Phase 17 events section cleanup, text visibility, and strict database-ready architecture)
               icon="calendar"
             />
           ) : (

@@ -5,6 +5,7 @@ import { apiGet, delay } from './api';
 
 export interface EventFilters {
   status?: 'all' | 'upcoming' | 'past';
+  type?: 'all' | 'upcoming' | 'past';
   category?: string;
   type?: 'all' | 'upcoming' | 'past' | 'seminars' | 'workshops' | 'tours-trips';
   city?: string;
@@ -16,6 +17,7 @@ export const eventsService = {
     const remote = await apiGet<ThriveEvent>('events.php');
     let source = remote?.data ?? EVENTS;
     await delay();
+<<<<<<< HEAD
     const { status = 'all', category = 'all', type = 'all', city = 'all', query = '' } = filters;
     let out = source.map((e) => ({ ...e, status: getEventStatus(e) }));
 
@@ -41,6 +43,22 @@ export const eventsService = {
     if (status !== 'all') out = out.filter((e) => e.status === status);
     if (category !== 'all') out = out.filter((e) => e.category === category);
     if (city !== 'all') out = out.filter((e) => e.city === city);
+=======
+    const { status = 'all', type = 'all', category = 'all', city = 'all', query = '' } = filters;
+    let out = source.map((e) => ({ ...e, status: getEventStatus(e) }));
+
+    const activeStatus = type !== 'all' ? type : status;
+
+    if (activeStatus !== 'all') {
+      out = out.filter((e) => e.status === activeStatus);
+    }
+    if (category !== 'all') {
+      out = out.filter((e) => e.category === category);
+    }
+    if (city !== 'all') {
+      out = out.filter((e) => e.city === city);
+    }
+>>>>>>> 5f69977 (feat: complete Phase 17 events section cleanup, text visibility, and strict database-ready architecture)
     if (query.trim()) {
       const q = query.trim().toLowerCase();
       out = out.filter((e) => `${e.title} ${e.category} ${e.city} ${e.description}`.toLowerCase().includes(q));
@@ -49,7 +67,11 @@ export const eventsService = {
     // Sorting:
     // Past events: most recently completed first (descending by end date)
     // Upcoming / all events: nearest upcoming date first (ascending by start date)
+<<<<<<< HEAD
     if (status === 'past' || type === 'past') {
+=======
+    if (activeStatus === 'past') {
+>>>>>>> 5f69977 (feat: complete Phase 17 events section cleanup, text visibility, and strict database-ready architecture)
       return [...out].sort((a, b) => +getEventEndDate(b) - +getEventEndDate(a));
     }
     return [...out].sort((a, b) => +new Date(a.date) - +new Date(b.date));
@@ -69,6 +91,10 @@ export const eventsService = {
 
   async upcoming(): Promise<ThriveEvent[]> {
     return this.list({ status: 'upcoming' });
+  },
+
+  async past(): Promise<ThriveEvent[]> {
+    return this.list({ status: 'past' });
   },
 
   async related(slug: string, count = 3): Promise<ThriveEvent[]> {
