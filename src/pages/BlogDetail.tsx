@@ -6,15 +6,17 @@ import type { BlogPost } from '../types';
 import { formatDate, formatViews } from '../utils';
 import { PageHero } from '../components/page-hero';
 import { BlogCard } from '../components/cards';
-import { Badge, EmptyState, Reveal, SectionHeader, SpriteBox } from '../components/ui';
+import { Badge, Button, EmptyState, Icon, Reveal, SectionHeader, SpriteBox } from '../components/ui';
+import { useToast } from '../components/feedback';
 
 export default function BlogDetail() {
   const { slug = '' } = useParams();
   const [post, setPost] = useState<BlogPost | null | undefined>(undefined);
   const [related, setRelated] = useState<BlogPost[]>([]);
+  const { push } = useToast();
 
   useSeo({
-    title: post ? post.title : 'Article',
+    title: post ? `${post.title} · Thrive Pakistan Newsroom` : 'Article Details',
     description: post?.excerpt,
     type: 'article',
     jsonLd: post
@@ -49,6 +51,13 @@ export default function BlogDetail() {
     };
   }, [slug]);
 
+  const handleCopyLink = () => {
+    if (typeof navigator !== 'undefined' && navigator.clipboard) {
+      navigator.clipboard.writeText(window.location.href);
+      push({ title: 'Link Copied', message: 'Article link copied to clipboard.', tone: 'success' });
+    }
+  };
+
   if (post === undefined) {
     return <PageHero title="Loading article…" crumbs={[{ label: 'Blog', to: '/blog' }, { label: '…' }]} />;
   }
@@ -67,6 +76,7 @@ export default function BlogDetail() {
   }
 
   const initials = post.author.split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase();
+  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
 
   return (
     <>
@@ -101,14 +111,46 @@ export default function BlogDetail() {
                 <p key={i}>{para}</p>
               ))}
             </div>
-            <div className="article__author">
-              <span className="article__author-avatar" aria-hidden="true">{initials}</span>
-              <div>
-                <strong>{post.author}</strong>
-                <span>{post.authorRole}</span>
+
+            {/* Author details & Social sharing */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16, marginTop: 32, paddingTop: 20, borderTop: '1px solid var(--border-dark)' }}>
+              <div className="article__author" style={{ marginTop: 0 }}>
+                <span className="article__author-avatar" aria-hidden="true">{initials}</span>
+                <div>
+                  <strong>{post.author}</strong>
+                  <span>{post.authorRole}</span>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                <span style={{ fontSize: '0.84rem', color: 'var(--muted-on-dark)' }}>Share article:</span>
+                <a
+                  href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn--outline-light btn--sm"
+                  aria-label="Share on LinkedIn"
+                  style={{ padding: '6px 12px' }}
+                >
+                  <Icon name="linkedin" size={15} />
+                </a>
+                <a
+                  href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(post.title)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn--outline-light btn--sm"
+                  aria-label="Share on X"
+                  style={{ padding: '6px 12px' }}
+                >
+                  <Icon name="x" size={14} />
+                </a>
+                <Button variant="outline-light" size="sm" onClick={handleCopyLink} icon="globe">
+                  Copy Link
+                </Button>
               </div>
             </div>
-            <div className="article__tags">
+
+            <div className="article__tags" style={{ marginTop: 20 }}>
               {post.tags.map((t) => (
                 <Badge key={t} tone="outline">{t}</Badge>
               ))}

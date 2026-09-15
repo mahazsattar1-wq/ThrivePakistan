@@ -125,9 +125,21 @@ export function SpeakerCard({ speaker }: { speaker: Speaker }) {
 
 /* ================= Team card ================= */
 
-export function TeamCard({ member }: { member: TeamMember }) {
+export function TeamCard({ member, onClick }: { member: TeamMember; onClick?: (m: TeamMember) => void }) {
   return (
-    <article className="team-card">
+    <article
+      className="team-card"
+      onClick={() => onClick && onClick(member)}
+      style={{ cursor: onClick ? 'pointer' : 'default' }}
+      role={onClick ? 'button' : 'article'}
+      tabIndex={onClick ? 0 : undefined}
+      onKeyDown={(e) => {
+        if (onClick && (e.key === 'Enter' || e.key === ' ')) {
+          e.preventDefault();
+          onClick(member);
+        }
+      }}
+    >
       {member.portrait ? (
         <SpriteBox image={member.portrait} label={`Portrait of ${member.name}`} className="team-card__photo" />
       ) : (

@@ -7,6 +7,7 @@ import { PageHero } from '../components/page-hero';
 import { AwardWinnerCard } from '../components/cards';
 import { Badge, Button, EmptyState, Icon, Reveal, SectionHeader, Skeleton } from '../components/ui';
 import { AWARDS_PAGE_CONFIG } from '../data/awardsPage';
+import { NominationModal } from '../components/nomination-modal';
 
 export default function AwardDetail() {
   const { slug = '' } = useParams();
@@ -14,6 +15,7 @@ export default function AwardDetail() {
   const [winners, setWinners] = useState<AwardWinner[]>([]);
   const [years, setYears] = useState<number[]>([]);
   const [selectedYear, setSelectedYear] = useState<number | 'all'>('all');
+  const [nominateOpen, setNominateOpen] = useState(false);
 
   const cfg = AWARDS_PAGE_CONFIG;
 
@@ -95,7 +97,12 @@ export default function AwardDetail() {
             <Button to="/awards" variant="outline" size="sm" iconLeft="chevron-left">
               {cfg.cardLabels.allAwards}
             </Button>
-            {award.status && <Badge tone="green">{award.status}</Badge>}
+            <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
+              <Button size="sm" variant="primary" icon="send" onClick={() => setNominateOpen(true)}>
+                Nominate for this Award
+              </Button>
+              {award.status && <Badge tone="green">{award.status}</Badge>}
+            </div>
           </div>
 
           {/* About Award Section */}
@@ -227,6 +234,12 @@ export default function AwardDetail() {
           </div>
         </div>
       </section>
+
+      <NominationModal
+        open={nominateOpen}
+        onClose={() => setNominateOpen(false)}
+        defaultAwardSlug={award.slug}
+      />
     </>
   );
 }

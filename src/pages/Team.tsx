@@ -1,10 +1,15 @@
+import { useState } from 'react';
 import { TEAM } from '../data/team';
 import { useSeo } from '../hooks';
+import type { TeamMember } from '../types';
 import { PageHero } from '../components/page-hero';
-import { TeamCard } from '../components/cards';
-import { Button, Reveal, SectionHeader } from '../components/ui';
+import { MonogramAvatar, TeamCard } from '../components/cards';
+import { Badge, Button, Reveal, SectionHeader, SpriteBox } from '../components/ui';
+import { Modal } from '../components/feedback';
 
 export default function Team() {
+  const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
+
   useSeo({
     title: 'Leadership',
     description:
@@ -35,7 +40,7 @@ export default function Team() {
           <div className="grid grid--4">
             {executive.map((m, i) => (
               <Reveal key={m.id} delay={(i % 4) * 80}>
-                <TeamCard member={m} />
+                <TeamCard member={m} onClick={setSelectedMember} />
               </Reveal>
             ))}
           </div>
@@ -50,7 +55,7 @@ export default function Team() {
           <div className="grid grid--3">
             {functional.map((m, i) => (
               <Reveal key={m.id} delay={(i % 3) * 70}>
-                <TeamCard member={m} />
+                <TeamCard member={m} onClick={setSelectedMember} />
               </Reveal>
             ))}
           </div>
@@ -77,6 +82,50 @@ export default function Team() {
           </Reveal>
         </div>
       </section>
+
+      {/* Team Member Profile Modal */}
+      <Modal open={selectedMember !== null} onClose={() => setSelectedMember(null)} label="Leadership profile" size="md">
+        {selectedMember && (
+          <div style={{ display: 'grid', gap: 16 }}>
+            <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+              {selectedMember.portrait ? (
+                <SpriteBox image={selectedMember.portrait} label={`Portrait of ${selectedMember.name}`} style={{ width: 72, height: 72, borderRadius: '50%', flexShrink: 0 }} />
+              ) : (
+                <MonogramAvatar name={selectedMember.name} className="person-hero__photo" />
+              )}
+              <div>
+                <Badge tone="green">{selectedMember.group === 'executive' ? 'Executive Lead' : 'Functional Lead'}</Badge>
+                <h3 style={{ fontSize: '1.3rem', fontWeight: 700, color: 'var(--white)', marginTop: 4 }}>
+                  {selectedMember.name}
+                </h3>
+                <p style={{ color: 'var(--primary-green)', fontSize: '0.92rem', fontWeight: 600 }}>
+                  {selectedMember.role}
+                </p>
+              </div>
+            </div>
+
+            <div style={{ borderTop: '1px solid var(--border-dark)', paddingTop: 14 }}>
+              <strong style={{ color: 'var(--white)', fontSize: '0.92rem', display: 'block', marginBottom: 4 }}>
+                Functional Focus:
+              </strong>
+              <p style={{ color: 'var(--muted-on-dark)', fontSize: '0.9rem' }}>{selectedMember.focus}</p>
+            </div>
+
+            <div style={{ borderTop: '1px solid var(--border-dark)', paddingTop: 14 }}>
+              <strong style={{ color: 'var(--white)', fontSize: '0.92rem', display: 'block', marginBottom: 4 }}>
+                Accountability & Responsibilities:
+              </strong>
+              <p style={{ color: '#d4dddc', fontSize: '0.9rem', lineHeight: 1.6 }}>{selectedMember.bio}</p>
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 8 }}>
+              <Button onClick={() => setSelectedMember(null)} variant="outline-light" size="sm">
+                Close Profile
+              </Button>
+            </div>
+          </div>
+        )}
+      </Modal>
     </>
   );
 }

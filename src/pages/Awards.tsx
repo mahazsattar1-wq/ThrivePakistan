@@ -6,9 +6,11 @@ import { PageHero } from '../components/page-hero';
 import { AwardCard } from '../components/cards';
 import { Button, EmptyState, Reveal, Skeleton } from '../components/ui';
 import { AWARDS_PAGE_CONFIG } from '../data/awardsPage';
+import { NominationModal } from '../components/nomination-modal';
 
 export default function Awards() {
   const [awards, setAwards] = useState<Award[] | null>(null);
+  const [nominateOpen, setNominateOpen] = useState(false);
 
   const cfg = AWARDS_PAGE_CONFIG;
 
@@ -81,7 +83,7 @@ export default function Awards() {
             <h2>{cfg.ctaBand.title}</h2>
             <p style={{ marginTop: 10 }}>{cfg.ctaBand.lead}</p>
             <div className="cta-band__ctas">
-              <Button to={cfg.ctaBand.primaryLink} icon="arrow-right">
+              <Button onClick={() => setNominateOpen(true)} icon="arrow-right">
                 {cfg.ctaBand.primaryBtn}
               </Button>
               <Button to={cfg.ctaBand.secondaryLink} variant="outline-light">
@@ -91,6 +93,8 @@ export default function Awards() {
           </Reveal>
         </div>
       </section>
+
+      <NominationModal open={nominateOpen} onClose={() => setNominateOpen(false)} />
     </>
   );
 }

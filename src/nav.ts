@@ -33,7 +33,13 @@ export const NAV_ITEMS: NavItem[] = [
       { label: 'Women & Female Participation', to: '/programs/women-participation' },
     ],
   },
-  { label: 'FutureX', to: '/futurex' },
+  {
+    label: 'FutureX',
+    to: '/futurex',
+    children: [
+      { label: 'FutureX 2026', to: '/events/futurex-2026' },
+    ],
+  },
   { label: 'Awards', to: '/awards' },
   { label: 'Speakers', to: '/speakers' },
   {

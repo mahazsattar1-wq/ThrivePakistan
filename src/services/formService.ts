@@ -9,7 +9,7 @@
 import { apiPost, delay } from './api';
 import type { ApiFormResponse } from '../types';
 
-export type FormKind = 'contact' | 'newsletter' | 'partner' | 'speaker' | 'volunteer' | 'registration';
+export type FormKind = 'contact' | 'newsletter' | 'partner' | 'speaker' | 'volunteer' | 'registration' | 'nomination';
 
 const ENDPOINTS: Record<FormKind, string> = {
   contact: 'contact.php',
@@ -18,6 +18,7 @@ const ENDPOINTS: Record<FormKind, string> = {
   speaker: 'speaker.php',
   volunteer: 'volunteer.php',
   registration: 'registration.php',
+  nomination: 'nomination.php',
 };
 
 const SUCCESS_MESSAGES: Record<FormKind, string> = {
@@ -27,6 +28,7 @@ const SUCCESS_MESSAGES: Record<FormKind, string> = {
   speaker: 'Speaker profile received. Our program team reviews submissions before every event cycle.',
   volunteer: 'Welcome aboard! The volunteer community lead will contact you with onboarding details.',
   registration: 'Registration interest recorded. Pass details and wave-one codes will reach you by email.',
+  nomination: 'Nomination received! Our awards evaluation committee will review the submission details.',
 };
 
 export async function submitForm(kind: FormKind, payload: Record<string, unknown>): Promise<ApiFormResponse> {
